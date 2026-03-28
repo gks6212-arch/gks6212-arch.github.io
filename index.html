@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>더썸테라피 | 프리미엄 뷰티 코팅 케어</title>
+  <title>The Thumb Therapy | Pi Beauty Shop</title>
   <style>
     * {
       box-sizing: border-box;
@@ -13,188 +13,513 @@
     }
 
     body {
-      background: #f3f1f5;
-      color: #333;
-      line-height: 1.7;
+      background: #f5f2ee;
+      color: #4b3f38;
+      line-height: 1.5;
     }
 
-    .container {
-      max-width: 720px;
+    .appbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255,255,255,0.94);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid #e7dfd7;
+    }
+
+    .appbar-inner {
+      max-width: 920px;
       margin: 0 auto;
-      padding: 40px 20px 80px;
+      padding: 14px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .brand-wrap {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo {
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, #8a6a3f, #b99763);
+      position: relative;
+      box-shadow: 0 8px 18px rgba(138,106,63,0.22);
+      overflow: hidden;
+      flex: 0 0 42px;
+    }
+
+    .logo::before {
+      content: "";
+      position: absolute;
+      left: 10px;
+      top: 18px;
+      width: 16px;
+      height: 11px;
+      background: #fff;
+      border-radius: 8px;
+      transform: rotate(-8deg);
+    }
+
+    .logo::after {
+      content: "";
+      position: absolute;
+      left: 22px;
+      top: 7px;
+      width: 7px;
+      height: 14px;
+      background: #fff;
+      border-radius: 7px;
+      transform: rotate(24deg);
+    }
+
+    .brand-title {
+      font-size: 17px;
+      font-weight: 800;
+      color: #2d2520;
+    }
+
+    .brand-sub {
+      font-size: 11px;
+      color: #8f8073;
+      margin-top: 2px;
+    }
+
+    .app-icons {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: #7d6855;
+      font-size: 20px;
     }
 
     .hero {
-      text-align: center;
-      padding: 40px 20px 20px;
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 18px 16px 10px;
     }
 
-    .hero h1 {
-      font-size: 52px;
-      color: #8f169b;
-      font-weight: 800;
-      margin-bottom: 24px;
+    .hero-card {
+      background: linear-gradient(135deg, #fffaf5, #f7f2ec);
+      border: 1px solid #eadfd3;
+      border-radius: 28px;
+      padding: 22px 18px;
+      box-shadow: 0 16px 34px rgba(90,72,53,0.08);
     }
 
-    .hero h2 {
+    .hero-title {
       font-size: 28px;
-      color: #555;
-      font-weight: 500;
-      margin-bottom: 24px;
+      font-weight: 900;
+      color: #3f332b;
+      margin-bottom: 8px;
     }
 
-    .hero p {
-      font-size: 18px;
-      color: #666;
+    .hero-desc {
+      font-size: 14px;
+      color: #7b6f64;
       max-width: 560px;
-      margin: 0 auto 36px;
+    }
+
+    .pi-badge {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(138,106,63,0.10);
+      color: #8a6a3f;
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .notice-box {
+      margin-top: 18px;
+      background: #fff8f0;
+      border: 1px solid #e7cda7;
+      color: #7a5a2f;
+      padding: 16px;
+      border-radius: 20px;
+      box-shadow: 0 8px 18px rgba(122,90,47,0.06);
+    }
+
+    .notice-title {
+      font-size: 15px;
+      font-weight: 900;
+      margin-bottom: 8px;
+    }
+
+    .notice-text {
+      font-size: 14px;
+      line-height: 1.7;
     }
 
     .button-group {
       display: flex;
       flex-direction: column;
-      gap: 18px;
-      margin: 10px auto 40px;
-      max-width: 560px;
+      gap: 12px;
+      margin-top: 18px;
+      max-width: 420px;
     }
 
     .btn {
       display: block;
+      width: 100%;
       text-align: center;
       text-decoration: none;
-      font-size: 20px;
-      font-weight: 700;
-      padding: 22px 20px;
-      border-radius: 22px;
-      transition: 0.2s ease;
+      padding: 16px 14px;
+      border-radius: 18px;
+      font-size: 16px;
+      font-weight: 900;
+      user-select: none;
     }
 
-    .btn-primary {
-      background: linear-gradient(135deg, #a100b3, #7f1589);
-      color: #fff;
-      box-shadow: 0 8px 18px rgba(127, 21, 137, 0.2);
+    .btn-disabled-primary {
+      background: #cbc3cb;
+      color: #ffffff;
+      pointer-events: none;
+      box-shadow: none;
+      cursor: not-allowed;
     }
 
-    .btn-secondary {
-      border: 3px solid #8f169b;
-      color: #8f169b;
+    .btn-disabled-secondary {
+      background: #f7f5f7;
+      color: #9b939d;
+      border: 2px solid #ddd6df;
+      pointer-events: none;
+      cursor: not-allowed;
+    }
+
+    .ticker {
+      margin-top: 18px;
       background: #fff;
+      border: 1px solid #eadfd3;
+      border-radius: 22px;
+      padding: 16px;
+    }
+
+    .ticker-label {
+      font-size: 12px;
+      color: #9a8a7a;
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.7px;
+    }
+
+    .ticker-price {
+      font-size: 24px;
+      font-weight: 900;
+      color: #8a6a3f;
+    }
+
+    .ticker-meta {
+      font-size: 13px;
+      color: #7e7368;
+      margin-top: 4px;
+    }
+
+    .grid-wrap {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 14px 16px 70px;
+    }
+
+    .section-title {
+      font-size: 20px;
+      font-weight: 900;
+      color: #4a3e35;
+      margin: 16px 0 14px;
+    }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
     }
 
     .card {
       background: #fff;
-      border-radius: 28px;
-      padding: 34px 26px;
-      margin-top: 28px;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.04);
+      border: 1px solid #eadfd3;
+      border-radius: 26px;
+      overflow: hidden;
+      box-shadow: 0 10px 22px rgba(94,76,58,0.08);
     }
 
-    .card h3 {
-      font-size: 34px;
-      color: #8f169b;
-      margin-bottom: 24px;
-      font-weight: 800;
+    .card-thumb {
+      height: 180px;
+      background: linear-gradient(135deg, #eee8e2, #d9d0c8);
+      position: relative;
     }
 
-    .card p {
+    .thumb-glow {
+      position: absolute;
+      inset: 18px;
+      border-radius: 22px;
+      background:
+        radial-gradient(circle at 30% 30%, rgba(255,255,255,0.95), transparent 32%),
+        radial-gradient(circle at 70% 35%, rgba(255,255,255,0.55), transparent 24%),
+        linear-gradient(135deg, #f4ede6, #d8cec6);
+    }
+
+    .card-body {
+      padding: 16px 16px 18px;
+    }
+
+    .product-name {
+      font-size: 16px;
+      font-weight: 900;
+      color: #5a493f;
+      margin-bottom: 10px;
+      word-break: keep-all;
+    }
+
+    .rating {
+      color: #6b5748;
+      font-size: 13px;
+      margin-bottom: 8px;
+      font-weight: 700;
+    }
+
+    .price-krw {
+      color: #9a8a7a;
+      font-size: 16px;
+      margin-bottom: 4px;
+    }
+
+    .price-pi {
+      color: #8a6a3f;
       font-size: 18px;
-      color: #444;
-      margin-bottom: 14px;
+      font-weight: 900;
+      margin-bottom: 12px;
     }
 
-    .feature-list {
-      display: grid;
-      gap: 14px;
-      margin-top: 10px;
-    }
-
-    .feature-item {
-      background: #faf7fb;
-      border-radius: 18px;
-      padding: 16px 18px;
-      font-size: 17px;
-      color: #444;
-      border: 1px solid #eee2f2;
-    }
-
-    .footer-note {
+    .buy-btn-disabled {
+      display: block;
+      width: 100%;
       text-align: center;
-      margin-top: 36px;
-      color: #777;
-      font-size: 15px;
+      background: #d8d1cb;
+      color: #ffffff;
+      padding: 13px 12px;
+      border-radius: 16px;
+      font-size: 14px;
+      font-weight: 900;
+      border: none;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+
+    .note {
+      margin-top: 16px;
+      font-size: 13px;
+      color: #8b8076;
+      line-height: 1.65;
+    }
+
+    .footer-box {
+      margin-top: 20px;
+      background: #fff;
+      border: 1px solid #eadfd3;
+      border-radius: 24px;
+      padding: 18px;
+    }
+
+    .footer-box h3 {
+      font-size: 18px;
+      color: #5b4a3e;
+      margin-bottom: 8px;
+      font-weight: 900;
+    }
+
+    .footer-box p {
+      font-size: 14px;
+      color: #796f66;
+      margin-bottom: 8px;
     }
 
     @media (max-width: 640px) {
-      .hero h1 {
-        font-size: 42px;
+      .product-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
       }
 
-      .hero h2 {
+      .card-thumb {
+        height: 150px;
+      }
+
+      .hero-title {
+        font-size: 24px;
+      }
+
+      .ticker-price {
         font-size: 22px;
       }
 
-      .hero p,
-      .card p,
-      .feature-item {
-        font-size: 16px;
+      .product-name {
+        font-size: 15px;
       }
 
-      .card h3 {
-        font-size: 28px;
-      }
-
-      .btn {
-        font-size: 18px;
-        padding: 20px 16px;
+      .button-group {
+        max-width: 100%;
       }
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <section class="hero">
-      <h1>더썸테라피</h1>
-      <h2>프리미엄 뷰티 코팅 케어</h2>
-      <p>
-        자연스러운 윤광 표현과 세련된 이미지 연출을 위한
-        맞춤형 뷰티 서비스를 제공합니다.
-      </p>
+  <header class="appbar">
+    <div class="appbar-inner">
+      <div class="brand-wrap">
+        <div class="logo"></div>
+        <div>
+          <div class="brand-title">The Thumb Therapy</div>
+          <div class="brand-sub">Preparation Stage · Domain Verification</div>
+        </div>
+      </div>
+      <div class="app-icons">
+        <span>⌕</span>
+        <span>♡</span>
+        <span>🛒</span>
+        <span>☰</span>
+      </div>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="hero-card">
+      <div class="hero-title">프리미엄 뷰티 코팅 스토어</div>
+      <div class="hero-desc">
+        한국 가격과 현재 PI 시세를 함께 표시하는 테스트용 쇼핑 화면입니다.
+      </div>
+      <div class="pi-badge">도메인 인증 및 오픈 준비 중</div>
+
+      <div class="notice-box">
+        <div class="notice-title">현재 서비스 준비 중입니다</div>
+        <div class="notice-text">
+          현재 본 사이트는 도메인 인증 및 정식 오픈 준비 단계로 운영되고 있습니다.<br>
+          테스트 페이지이므로 전화 문의, 카카오 상담, 예약 및 결제 기능은 아직 진행하지 않습니다.<br>
+          정식 오픈 후 정상적으로 안내드리겠습니다.
+        </div>
+      </div>
 
       <div class="button-group">
-        <a href="tel:01012345678" class="btn btn-primary">상담 예약</a>
-        <a href="https://open.kakao.com/o/sqB6lDni" class="btn btn-secondary" target="_blank">카카오 상담</a>
+        <a href="javascript:void(0)" class="btn btn-disabled-primary">카카오 상담 준비중</a>
+        <a href="javascript:void(0)" class="btn btn-disabled-secondary">전화 상담 준비중</a>
       </div>
-    </section>
 
-    <section class="card">
-      <h3>브랜드 소개</h3>
-      <p>
-        더썸테라피는 피부 표현의 완성도와 전체적인 이미지 조화를 높이는
-        프리미엄 뷰티 케어 서비스를 제공합니다.
-      </p>
-      <p>
-        고객의 분위기와 스타일에 맞춘 상담을 통해 자연스럽고 세련된 인상을
-        연출할 수 있도록 돕습니다.
-      </p>
-      <p>
-        깔끔한 표현, 윤광 코팅 느낌, 부드러운 이미지 완성을 원하는 분들을 위한
-        맞춤형 케어를 지향합니다.
-      </p>
-    </section>
-
-    <section class="card">
-      <h3>서비스 안내</h3>
-      <div class="feature-list">
-        <div class="feature-item">프리미엄 뷰티 코팅 상담</div>
-        <div class="feature-item">이미지 스타일링 가이드</div>
-        <div class="feature-item">자연스러운 윤광 표현 케어</div>
-        <div class="feature-item">맞춤형 뷰티 컨설팅</div>
+      <div class="ticker">
+        <div class="ticker-label">Kraken PI Live Price</div>
+        <div class="ticker-price" id="piPriceText">불러오는 중…</div>
+        <div class="ticker-meta" id="piMetaText">Kraken 공개 시세 확인 중</div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <p class="footer-note">
-      예약 및 상담은 전화 또는 카카오톡으로 편하게 문의해 주세요.
-    </p>
-  </div>
+  <main class="grid-wrap">
+    <div class="section-title">테스트 상품 안내</div>
+    <div class="product-grid" id="productGrid"></div>
+
+    <div class="note" id="priceNote">
+      PI 환산값은 실시간 PI/USD 시세를 기준으로 계산되는 참고용 표시입니다.
+    </div>
+
+    <div class="footer-box">
+      <h3>안내 사항</h3>
+      <p>현재 페이지는 도메인 인증 및 디자인 점검을 위한 테스트 화면입니다.</p>
+      <p>상담, 예약, 결제 기능은 정식 오픈 전까지 비활성 상태로 유지됩니다.</p>
+      <p>표시되는 상품 구성 및 가격 정보는 테스트 목적에 따라 변경될 수 있습니다.</p>
+    </div>
+  </main>
+
+  <script>
+    const USD_KRW = 1508.4;
+
+    const products = [
+      { name: "노라보떼 윤광 세럼", rating: 4.9, priceKRW: 180000 },
+      { name: "노라보떼 벨벳 쿠션", rating: 4.8, priceKRW: 198000 },
+      { name: "노라보떼 옥시젯 케어", rating: 4.8, priceKRW: 160000 },
+      { name: "노라보떼 인텐트 코팅", rating: 4.9, priceKRW: 250000 },
+      { name: "글로우 리커버 앰플", rating: 4.7, priceKRW: 129000 },
+      { name: "시그니처 립 글로우", rating: 4.9, priceKRW: 89000 }
+    ];
+
+    function won(v) {
+      return "₩" + new Intl.NumberFormat("ko-KR").format(Math.round(v));
+    }
+
+    function pi(v) {
+      return "π " + Number(v).toFixed(2);
+    }
+
+    function usd(v) {
+      return "$" + Number(v).toFixed(4);
+    }
+
+    async function findKrakenPiPair() {
+      const res = await fetch("https://api.kraken.com/0/public/AssetPairs");
+      const data = await res.json();
+      const entries = Object.entries(data.result || {});
+      const match = entries.find(([k, info]) => {
+        const alt = (info.altname || "").toUpperCase();
+        const ws = (info.wsname || "").toUpperCase();
+        return alt === "PIUSD" || ws === "PI/USD" || k.toUpperCase().includes("PIUSD");
+      });
+      if (!match) throw new Error("PI/USD pair not found");
+      return match[0];
+    }
+
+    async function fetchPiPrice() {
+      const pairKey = await findKrakenPiPair();
+      const res = await fetch(`https://api.kraken.com/0/public/Ticker?pair=${encodeURIComponent(pairKey)}`);
+      const data = await res.json();
+      const ticker = data.result[pairKey];
+      return { pairKey, priceUSD: Number(ticker.c[0]) };
+    }
+
+    function renderProducts(piUsdPrice) {
+      const grid = document.getElementById("productGrid");
+      grid.innerHTML = "";
+
+      products.forEach((item) => {
+        const priceUsd = item.priceKRW / USD_KRW;
+        const pricePi = priceUsd / piUsdPrice;
+
+        const card = document.createElement("article");
+        card.className = "card";
+        card.innerHTML = `
+          <div class="card-thumb">
+            <div class="thumb-glow"></div>
+          </div>
+          <div class="card-body">
+            <div class="product-name">${item.name}</div>
+            <div class="rating">⭐ ${item.rating}</div>
+            <div class="price-krw">${won(item.priceKRW)}</div>
+            <div class="price-pi">${pi(pricePi)}</div>
+            <button class="buy-btn-disabled">결제 준비중</button>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+
+      document.getElementById("priceNote").textContent =
+        `Kraken 실시간 PI/USD 시세와 기준 환율(1 USD ≈ ${USD_KRW.toLocaleString("ko-KR")} KRW)로 계산한 참고용 표시입니다. 현재는 테스트 단계로 결제가 비활성화되어 있습니다.`;
+    }
+
+    async function init() {
+      try {
+        const { pairKey, priceUSD } = await fetchPiPrice();
+        document.getElementById("piPriceText").textContent = `1 PI = ${usd(priceUSD)}`;
+        document.getElementById("piMetaText").textContent = `Kraken 기준 · ${pairKey}`;
+        renderProducts(priceUSD);
+      } catch (e) {
+        document.getElementById("piPriceText").textContent = "시세 연결 실패";
+        document.getElementById("piMetaText").textContent = "기본 참고값으로 표시 중";
+        renderProducts(0.18);
+      }
+    }
+
+    init();
+  </script>
 </body>
 </html>
