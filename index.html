@@ -23,6 +23,8 @@
       --soft: #fff8f0;
       --soft-border: #e7cda7;
       --disabled: #cfc8c2;
+      --danger: #8f4e2e;
+      --ok: #1f7a45;
     }
 
     body {
@@ -41,7 +43,7 @@
     }
 
     .appbar-inner {
-      max-width: 960px;
+      max-width: 980px;
       margin: 0 auto;
       padding: 14px 16px;
       display: flex;
@@ -54,6 +56,7 @@
       display: flex;
       align-items: center;
       gap: 12px;
+      min-width: 0;
     }
 
     .logo {
@@ -95,12 +98,14 @@
       font-size: 18px;
       font-weight: 900;
       color: #2d2520;
+      word-break: keep-all;
     }
 
     .brand-sub {
       font-size: 11px;
       color: #8f8073;
       margin-top: 2px;
+      word-break: keep-all;
     }
 
     .app-icons {
@@ -109,10 +114,11 @@
       gap: 10px;
       font-size: 18px;
       color: #7d6855;
+      flex: 0 0 auto;
     }
 
     .hero {
-      max-width: 960px;
+      max-width: 980px;
       margin: 0 auto;
       padding: 18px 16px 12px;
     }
@@ -123,14 +129,6 @@
       border-radius: 28px;
       padding: 24px 18px 20px;
       box-shadow: 0 16px 34px rgba(90,72,53,0.08);
-    }
-
-    .hero-top {
-      display: flex;
-      justify-content: space-between;
-      gap: 18px;
-      flex-wrap: wrap;
-      align-items: flex-start;
     }
 
     .hero-title {
@@ -178,6 +176,7 @@
     .notice-text {
       font-size: 14px;
       line-height: 1.7;
+      word-break: keep-all;
     }
 
     .button-group {
@@ -198,6 +197,19 @@
       font-size: 16px;
       font-weight: 900;
       user-select: none;
+      border: none;
+    }
+
+    .btn-main {
+      background: linear-gradient(135deg, #8a6a3f, #a98758);
+      color: #fff;
+      box-shadow: 0 10px 20px rgba(138,106,63,0.18);
+    }
+
+    .btn-line {
+      background: #fff;
+      color: var(--main);
+      border: 2px solid #dccfbf;
     }
 
     .btn-disabled-primary {
@@ -205,6 +217,7 @@
       color: #fff;
       pointer-events: none;
       cursor: not-allowed;
+      box-shadow: none;
     }
 
     .btn-disabled-secondary {
@@ -255,7 +268,7 @@
     }
 
     .grid-wrap {
-      max-width: 960px;
+      max-width: 980px;
       margin: 0 auto;
       padding: 14px 16px 70px;
     }
@@ -329,6 +342,20 @@
       margin-bottom: 12px;
     }
 
+    .buy-btn {
+      display: block;
+      width: 100%;
+      text-align: center;
+      background: linear-gradient(135deg, #8a6a3f, #a98758);
+      color: #ffffff;
+      padding: 13px 12px;
+      border-radius: 16px;
+      font-size: 14px;
+      font-weight: 900;
+      border: none;
+      cursor: pointer;
+    }
+
     .buy-btn-disabled {
       display: block;
       width: 100%;
@@ -349,6 +376,7 @@
       font-size: 13px;
       color: #8b8076;
       line-height: 1.65;
+      word-break: keep-all;
     }
 
     .footer-box {
@@ -371,6 +399,114 @@
       color: #796f66;
       margin-bottom: 8px;
       word-break: keep-all;
+    }
+
+    /* 관리자 모드 */
+    .admin-fab {
+      position: fixed;
+      right: 16px;
+      bottom: 18px;
+      z-index: 200;
+      width: 58px;
+      height: 58px;
+      border-radius: 50%;
+      border: none;
+      background: linear-gradient(135deg, #4e3c2d, #8a6a3f);
+      color: #fff;
+      font-size: 13px;
+      font-weight: 900;
+      box-shadow: 0 14px 24px rgba(78,60,45,0.25);
+      cursor: pointer;
+    }
+
+    .admin-panel {
+      position: fixed;
+      right: 16px;
+      bottom: 86px;
+      z-index: 210;
+      width: min(92vw, 360px);
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      box-shadow: 0 18px 36px rgba(44,34,25,0.18);
+      padding: 16px;
+      display: none;
+    }
+
+    .admin-panel.show {
+      display: block;
+    }
+
+    .admin-title {
+      font-size: 16px;
+      font-weight: 900;
+      color: #3e322a;
+      margin-bottom: 12px;
+    }
+
+    .admin-row {
+      display: grid;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .admin-input {
+      width: 100%;
+      border: 1px solid #ddd3c8;
+      border-radius: 14px;
+      padding: 12px;
+      font-size: 14px;
+      outline: none;
+    }
+
+    .admin-actions {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .admin-btn {
+      border: none;
+      border-radius: 12px;
+      padding: 10px 8px;
+      font-size: 13px;
+      font-weight: 900;
+      cursor: pointer;
+    }
+
+    .admin-btn-main {
+      background: #8a6a3f;
+      color: #fff;
+    }
+
+    .admin-btn-soft {
+      background: #f4eee8;
+      color: #6c5847;
+    }
+
+    .admin-btn-danger {
+      background: #f7ebe5;
+      color: var(--danger);
+    }
+
+    .admin-info {
+      font-size: 13px;
+      line-height: 1.6;
+      color: #7b6d61;
+      margin-top: 10px;
+      word-break: keep-all;
+    }
+
+    .admin-mode-badge {
+      display: inline-block;
+      margin-top: 8px;
+      font-size: 12px;
+      font-weight: 800;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(31,122,69,0.10);
+      color: var(--ok);
     }
 
     @media (max-width: 640px) {
@@ -398,6 +534,10 @@
       .button-group {
         max-width: 100%;
       }
+
+      .admin-actions {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
@@ -408,7 +548,7 @@
         <div class="logo"></div>
         <div>
           <div class="brand-title">The Thumb Therapy</div>
-          <div class="brand-sub">Preparation Stage · Domain Verification</div>
+          <div class="brand-sub" id="brandSub">Preparation Stage · Domain Verification</div>
         </div>
       </div>
       <div class="app-icons">
@@ -422,20 +562,16 @@
 
   <section class="hero">
     <div class="hero-card">
-      <div class="hero-top">
-        <div>
-          <div class="hero-title">프리미엄 뷰티 코팅 스토어</div>
-          <div class="hero-desc">
-            한국 가격과 현재 PI 시세를 함께 표시하는 테스트용 쇼핑 화면입니다.
-            현재는 도메인 인증 및 정식 오픈 준비 단계입니다.
-          </div>
-          <div class="pi-badge">도메인 인증 및 오픈 준비 중</div>
-        </div>
+      <div class="hero-title">프리미엄 뷰티 코팅 스토어</div>
+      <div class="hero-desc" id="heroDesc">
+        한국 가격과 현재 PI 시세를 함께 표시하는 테스트용 쇼핑 화면입니다.
+        현재는 도메인 인증 및 정식 오픈 준비 단계입니다.
       </div>
+      <div class="pi-badge" id="stageBadge">도메인 인증 및 오픈 준비 중</div>
 
-      <div class="notice-box">
-        <div class="notice-title">현재 서비스 준비 중입니다</div>
-        <div class="notice-text">
+      <div class="notice-box" id="noticeBox">
+        <div class="notice-title" id="noticeTitle">현재 서비스 준비 중입니다</div>
+        <div class="notice-text" id="noticeText">
           현재 본 사이트는 도메인 인증 및 정식 오픈 준비 단계로 운영되고 있습니다.<br>
           테스트 페이지이므로 전화 문의, 카카오 상담, 예약 및 결제 기능은 아직 진행하지 않습니다.<br>
           정식 오픈 후 정상적으로 안내드리겠습니다.
@@ -443,8 +579,8 @@
       </div>
 
       <div class="button-group">
-        <a href="javascript:void(0)" class="btn btn-disabled-primary">카카오 상담 준비중</a>
-        <a href="javascript:void(0)" class="btn btn-disabled-secondary">전화 상담 준비중</a>
+        <a id="kakaoBtn" href="javascript:void(0)" class="btn btn-disabled-primary">카카오 상담 준비중</a>
+        <a id="phoneBtn" href="javascript:void(0)" class="btn btn-disabled-secondary">전화 상담 준비중</a>
       </div>
 
       <div class="ticker">
@@ -457,23 +593,60 @@
   </section>
 
   <main class="grid-wrap">
-    <div class="section-title">테스트 상품 안내</div>
+    <div class="section-title">상품 안내</div>
     <div class="product-grid" id="productGrid"></div>
 
     <div class="note" id="priceNote">
       PI 환산값은 실시간 PI/USD 시세를 기준으로 계산되는 참고용 표시입니다.
     </div>
 
-    <div class="footer-box">
+    <div class="footer-box" id="footerBox">
       <h3>안내 사항</h3>
-      <p>현재 페이지는 도메인 인증 및 디자인 점검을 위한 테스트 화면입니다.</p>
-      <p>상담, 예약, 결제 기능은 정식 오픈 전까지 비활성 상태로 유지됩니다.</p>
-      <p>표시되는 상품 구성 및 가격 정보는 테스트 목적에 따라 변경될 수 있습니다.</p>
+      <p id="footerLine1">현재 페이지는 도메인 인증 및 디자인 점검을 위한 테스트 화면입니다.</p>
+      <p id="footerLine2">상담, 예약, 결제 기능은 정식 오픈 전까지 비활성 상태로 유지됩니다.</p>
+      <p id="footerLine3">표시되는 상품 구성 및 가격 정보는 테스트 목적에 따라 변경될 수 있습니다.</p>
     </div>
   </main>
 
+  <button class="admin-fab" id="adminFab">관리자</button>
+
+  <div class="admin-panel" id="adminPanel">
+    <div class="admin-title">관리자 모드</div>
+
+    <div id="loginArea" class="admin-row">
+      <input id="adminPassword" class="admin-input" type="password" placeholder="비밀번호 입력" />
+      <button class="admin-btn admin-btn-main" onclick="loginAdmin()">로그인</button>
+    </div>
+
+    <div id="controlArea" style="display:none;">
+      <div class="admin-mode-badge" id="adminModeBadge">현재 모드: 1단계 준비중</div>
+
+      <div class="admin-actions">
+        <button class="admin-btn admin-btn-soft" onclick="setStage(1)">1단계</button>
+        <button class="admin-btn admin-btn-soft" onclick="setStage(2)">2단계</button>
+        <button class="admin-btn admin-btn-soft" onclick="setStage(3)">3단계</button>
+      </div>
+
+      <div class="admin-actions" style="margin-top:8px;">
+        <button class="admin-btn admin-btn-main" onclick="showNotice()">공지 보이기</button>
+        <button class="admin-btn admin-btn-soft" onclick="hideNotice()">공지 숨기기</button>
+        <button class="admin-btn admin-btn-danger" onclick="logoutAdmin()">로그아웃</button>
+      </div>
+
+      <div class="admin-info">
+        1단계: 공지 표시 / 상담 비활성 / 결제 비활성<br>
+        2단계: 공지 축소 / 상담 활성 / 결제 비활성<br>
+        3단계: 공지 숨김 / 상담 활성 / 결제 버튼 활성화 UI
+      </div>
+    </div>
+  </div>
+
   <script>
     const USD_KRW = 1508.4;
+    const ADMIN_PASSWORD = "1234";
+    const STORAGE_STAGE_KEY = "thumbtherapy_stage";
+    const STORAGE_NOTICE_KEY = "thumbtherapy_notice";
+    const STORAGE_ADMIN_KEY = "thumbtherapy_admin";
 
     const products = [
       { name: "노라보떼 윤광 세럼", rating: 4.9, priceKRW: 180000 },
@@ -483,6 +656,8 @@
       { name: "글로우 리커버 앰플", rating: 4.7, priceKRW: 129000 },
       { name: "시그니처 립 글로우", rating: 4.9, priceKRW: 89000 }
     ];
+
+    let currentPiPriceUSD = 0.18;
 
     function won(v) {
       return "₩" + new Intl.NumberFormat("ko-KR").format(Math.round(v));
@@ -494,6 +669,156 @@
 
     function usd(v) {
       return "$" + Number(v).toFixed(4);
+    }
+
+    function getSavedStage() {
+      return Number(localStorage.getItem(STORAGE_STAGE_KEY) || "1");
+    }
+
+    function getSavedNotice() {
+      const value = localStorage.getItem(STORAGE_NOTICE_KEY);
+      return value === null ? true : value === "true";
+    }
+
+    function saveStage(value) {
+      localStorage.setItem(STORAGE_STAGE_KEY, String(value));
+    }
+
+    function saveNotice(value) {
+      localStorage.setItem(STORAGE_NOTICE_KEY, String(value));
+    }
+
+    function updateAdminBadge(stage) {
+      const names = {
+        1: "현재 모드: 1단계 준비중",
+        2: "현재 모드: 2단계 오픈직전",
+        3: "현재 모드: 3단계 운영모드"
+      };
+      document.getElementById("adminModeBadge").textContent = names[stage];
+    }
+
+    function applyStage(stage) {
+      const brandSub = document.getElementById("brandSub");
+      const heroDesc = document.getElementById("heroDesc");
+      const stageBadge = document.getElementById("stageBadge");
+      const noticeTitle = document.getElementById("noticeTitle");
+      const noticeText = document.getElementById("noticeText");
+      const kakaoBtn = document.getElementById("kakaoBtn");
+      const phoneBtn = document.getElementById("phoneBtn");
+      const footerLine1 = document.getElementById("footerLine1");
+      const footerLine2 = document.getElementById("footerLine2");
+      const footerLine3 = document.getElementById("footerLine3");
+
+      if (stage === 1) {
+        brandSub.textContent = "Preparation Stage · Domain Verification";
+        heroDesc.textContent = "한국 가격과 현재 PI 시세를 함께 표시하는 테스트용 쇼핑 화면입니다. 현재는 도메인 인증 및 정식 오픈 준비 단계입니다.";
+        stageBadge.textContent = "도메인 인증 및 오픈 준비 중";
+        noticeTitle.textContent = "현재 서비스 준비 중입니다";
+        noticeText.innerHTML =
+          "현재 본 사이트는 도메인 인증 및 정식 오픈 준비 단계로 운영되고 있습니다.<br>테스트 페이지이므로 전화 문의, 카카오 상담, 예약 및 결제 기능은 아직 진행하지 않습니다.<br>정식 오픈 후 정상적으로 안내드리겠습니다.";
+        kakaoBtn.className = "btn btn-disabled-primary";
+        kakaoBtn.textContent = "카카오 상담 준비중";
+        kakaoBtn.href = "javascript:void(0)";
+        phoneBtn.className = "btn btn-disabled-secondary";
+        phoneBtn.textContent = "전화 상담 준비중";
+        phoneBtn.href = "javascript:void(0)";
+        footerLine1.textContent = "현재 페이지는 도메인 인증 및 디자인 점검을 위한 테스트 화면입니다.";
+        footerLine2.textContent = "상담, 예약, 결제 기능은 정식 오픈 전까지 비활성 상태로 유지됩니다.";
+        footerLine3.textContent = "표시되는 상품 구성 및 가격 정보는 테스트 목적에 따라 변경될 수 있습니다.";
+      }
+
+      if (stage === 2) {
+        brandSub.textContent = "Opening Soon · Pre-Launch Stage";
+        heroDesc.textContent = "오픈 직전 안내 단계입니다. 상담은 가능하지만 결제 기능은 아직 준비 중입니다.";
+        stageBadge.textContent = "오픈 직전 · 상담 가능";
+        noticeTitle.textContent = "정식 오픈 직전 안내";
+        noticeText.innerHTML =
+          "현재 본 사이트는 정식 오픈 직전 단계입니다.<br>전화 및 카카오 상담은 가능하지만 결제 기능은 아직 준비 중입니다.<br>최종 점검 완료 후 정상 오픈됩니다.";
+        kakaoBtn.className = "btn btn-main";
+        kakaoBtn.textContent = "카카오 상담";
+        kakaoBtn.href = "https://open.kakao.com/o/sqB6lDni";
+        phoneBtn.className = "btn btn-line";
+        phoneBtn.textContent = "전화 상담";
+        phoneBtn.href = "tel:01012345678";
+        footerLine1.textContent = "현재 페이지는 오픈 직전 단계입니다.";
+        footerLine2.textContent = "상담 기능은 활성화되며 결제 기능은 아직 준비 중입니다.";
+        footerLine3.textContent = "표시되는 PI 환산값은 참고용입니다.";
+      }
+
+      if (stage === 3) {
+        brandSub.textContent = "Live Mode · Beauty Shop";
+        heroDesc.textContent = "한국 가격과 현재 PI 시세를 함께 확인할 수 있는 운영 모드 화면입니다.";
+        stageBadge.textContent = "운영중 · 상담 가능";
+        noticeTitle.textContent = "정상 운영 중";
+        noticeText.innerHTML =
+          "현재 본 사이트는 운영 모드입니다.<br>상담 기능이 활성화되어 있으며 상품 안내를 확인하실 수 있습니다.<br>실제 Pi 결제는 서버 연동 후 최종 활성화하는 것이 안전합니다.";
+        kakaoBtn.className = "btn btn-main";
+        kakaoBtn.textContent = "카카오 상담";
+        kakaoBtn.href = "https://open.kakao.com/o/sqB6lDni";
+        phoneBtn.className = "btn btn-line";
+        phoneBtn.textContent = "전화 상담";
+        phoneBtn.href = "tel:01012345678";
+        footerLine1.textContent = "현재 페이지는 운영 모드입니다.";
+        footerLine2.textContent = "상담 기능이 활성화되어 있습니다.";
+        footerLine3.textContent = "실결제는 Pi SDK와 백엔드 검증 연결 후 최종 활성화하는 것을 권장합니다.";
+      }
+
+      updateAdminBadge(stage);
+      renderProducts(currentPiPriceUSD, stage);
+    }
+
+    function showNotice() {
+      document.getElementById("noticeBox").style.display = "block";
+      saveNotice(true);
+    }
+
+    function hideNotice() {
+      document.getElementById("noticeBox").style.display = "none";
+      saveNotice(false);
+    }
+
+    function setStage(stage) {
+      saveStage(stage);
+      applyStage(stage);
+    }
+
+    function renderProducts(piUsdPrice, stage = getSavedStage()) {
+      currentPiPriceUSD = piUsdPrice;
+      const grid = document.getElementById("productGrid");
+      grid.innerHTML = "";
+
+      products.forEach((item) => {
+        const priceUsd = item.priceKRW / USD_KRW;
+        const pricePi = priceUsd / piUsdPrice;
+
+        const isPaymentLive = stage === 3;
+        const buttonHtml = isPaymentLive
+          ? `<button class="buy-btn" onclick="paymentGuide('${item.name}', '${Number(pricePi).toFixed(2)}')">PI로 결제</button>`
+          : `<button class="buy-btn-disabled">결제 준비중</button>`;
+
+        const card = document.createElement("article");
+        card.className = "card";
+        card.innerHTML = `
+          <div class="card-thumb">
+            <div class="thumb-glow"></div>
+          </div>
+          <div class="card-body">
+            <div class="product-name">${item.name}</div>
+            <div class="rating">⭐ ${item.rating}</div>
+            <div class="price-krw">${won(item.priceKRW)}</div>
+            <div class="price-pi">${pi(pricePi)}</div>
+            ${buttonHtml}
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+
+      document.getElementById("priceNote").textContent =
+        `Kraken 실시간 PI/USD 시세와 기준 환율(1 USD ≈ ${USD_KRW.toLocaleString("ko-KR")} KRW)로 계산한 참고용 표시입니다.`;
+    }
+
+    function paymentGuide(name, amount) {
+      alert(`${name}\n예상 결제 금액: π ${amount}\n\n현재는 운영 UI 단계입니다.\n실제 100% Pi 결제 완료 처리는 Pi SDK + 백엔드 검증 연결 후 활성화하는 것이 안전합니다.`);
     }
 
     async function findKrakenPiPair() {
@@ -517,51 +842,71 @@
       return { pairKey, priceUSD: Number(ticker.c[0]) };
     }
 
-    function renderProducts(piUsdPrice) {
-      const grid = document.getElementById("productGrid");
-      grid.innerHTML = "";
+    function loginAdmin() {
+      const input = document.getElementById("adminPassword").value;
+      if (input === ADMIN_PASSWORD) {
+        localStorage.setItem(STORAGE_ADMIN_KEY, "true");
+        document.getElementById("loginArea").style.display = "none";
+        document.getElementById("controlArea").style.display = "block";
+      } else {
+        alert("비밀번호가 맞지 않습니다.");
+      }
+    }
 
-      products.forEach((item) => {
-        const priceUsd = item.priceKRW / USD_KRW;
-        const pricePi = priceUsd / piUsdPrice;
+    function logoutAdmin() {
+      localStorage.removeItem(STORAGE_ADMIN_KEY);
+      document.getElementById("loginArea").style.display = "grid";
+      document.getElementById("controlArea").style.display = "none";
+      document.getElementById("adminPassword").value = "";
+    }
 
-        const card = document.createElement("article");
-        card.className = "card";
-        card.innerHTML = `
-          <div class="card-thumb">
-            <div class="thumb-glow"></div>
-          </div>
-          <div class="card-body">
-            <div class="product-name">${item.name}</div>
-            <div class="rating">⭐ ${item.rating}</div>
-            <div class="price-krw">${won(item.priceKRW)}</div>
-            <div class="price-pi">${pi(pricePi)}</div>
-            <button class="buy-btn-disabled">결제 준비중</button>
-          </div>
-        `;
-        grid.appendChild(card);
+    function restoreAdmin() {
+      const isAdmin = localStorage.getItem(STORAGE_ADMIN_KEY) === "true";
+      document.getElementById("loginArea").style.display = isAdmin ? "none" : "grid";
+      document.getElementById("controlArea").style.display = isAdmin ? "block" : "none";
+    }
+
+    function setupAdminPanel() {
+      const fab = document.getElementById("adminFab");
+      const panel = document.getElementById("adminPanel");
+
+      fab.addEventListener("click", () => {
+        panel.classList.toggle("show");
       });
 
-      document.getElementById("priceNote").textContent =
-        `Kraken 실시간 PI/USD 시세와 기준 환율(1 USD ≈ ${USD_KRW.toLocaleString("ko-KR")} KRW)로 계산한 참고용 표시입니다. 현재는 테스트 단계로 결제가 비활성화되어 있습니다.`;
+      document.addEventListener("click", (e) => {
+        if (!panel.contains(e.target) && !fab.contains(e.target)) {
+          panel.classList.remove("show");
+        }
+      });
     }
 
     async function init() {
-      const priceText = document.getElementById("piPriceText");
-      const metaText = document.getElementById("piMetaText");
-      const statusText = document.getElementById("piStatus");
+      setupAdminPanel();
+      restoreAdmin();
+
+      const savedStage = getSavedStage();
+      const noticeVisible = getSavedNotice();
 
       try {
         const { pairKey, priceUSD } = await fetchPiPrice();
-        priceText.textContent = `1 PI = ${usd(priceUSD)}`;
-        metaText.textContent = `Kraken 기준 · ${pairKey}`;
-        statusText.textContent = "실시간 시세 연결 완료";
-        renderProducts(priceUSD);
+        document.getElementById("piPriceText").textContent = `1 PI = ${usd(priceUSD)}`;
+        document.getElementById("piMetaText").textContent = `Kraken 기준 · ${pairKey}`;
+        document.getElementById("piStatus").textContent = "실시간 시세 연결 완료";
+        currentPiPriceUSD = priceUSD;
       } catch (e) {
-        priceText.textContent = "시세 연결 실패";
-        metaText.textContent = "기본 참고값으로 표시 중";
-        statusText.textContent = "수동 확인 필요";
-        renderProducts(0.18);
+        document.getElementById("piPriceText").textContent = "시세 연결 실패";
+        document.getElementById("piMetaText").textContent = "기본 참고값으로 표시 중";
+        document.getElementById("piStatus").textContent = "수동 확인 필요";
+        currentPiPriceUSD = 0.18;
+      }
+
+      applyStage(savedStage);
+
+      if (noticeVisible) {
+        showNotice();
+      } else {
+        hideNotice();
       }
     }
 
