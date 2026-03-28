@@ -1,38 +1,247 @@
 <!DOCTYPE html>
-<html>
+<html lang="ko">
 <head>
   <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>The Thumb Therapy</title>
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
-      font-family: Arial;
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f7f4f8;
+      color: #222;
+      line-height: 1.6;
+    }
+
+    .wrap {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 24px;
+    }
+
+    .hero {
       text-align: center;
-      background: #f5f5f5;
-      padding: 50px;
+      padding: 48px 20px 32px;
     }
-    h1 {
-      color: purple;
+
+    .hero h1 {
+      margin: 0;
+      font-size: 42px;
+      color: #8a008a;
     }
-    button {
-      padding: 15px 30px;
+
+    .hero p {
+      margin-top: 14px;
+      font-size: 22px;
+      color: #444;
+    }
+
+    .hero .sub {
+      margin-top: 10px;
+      font-size: 16px;
+      color: #666;
+    }
+
+    .btn-group {
+      margin-top: 28px;
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 14px 26px;
+      border-radius: 12px;
+      text-decoration: none;
       font-size: 18px;
-      background: purple;
-      color: white;
+      font-weight: bold;
       border: none;
-      border-radius: 10px;
       cursor: pointer;
+    }
+
+    .btn-primary {
+      background: #8a008a;
+      color: white;
+    }
+
+    .btn-secondary {
+      background: white;
+      color: #8a008a;
+      border: 2px solid #8a008a;
+    }
+
+    .card {
+      background: white;
+      border-radius: 18px;
+      padding: 22px;
+      margin-top: 18px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.06);
+    }
+
+    h2 {
+      margin-top: 0;
+      color: #8a008a;
+      font-size: 26px;
+    }
+
+    .service-list {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 14px;
+    }
+
+    .service-item {
+      background: #faf8fb;
+      border: 1px solid #eee;
+      border-radius: 14px;
+      padding: 16px;
+    }
+
+    .service-item h3 {
+      margin: 0 0 8px;
+      font-size: 20px;
+      color: #333;
+    }
+
+    .price-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+
+    .price-table th,
+    .price-table td {
+      border-bottom: 1px solid #eee;
+      padding: 12px 8px;
+      text-align: left;
+      font-size: 16px;
+    }
+
+    .price-table th {
+      color: #8a008a;
+    }
+
+    .notice {
+      font-size: 15px;
+      color: #666;
+      margin-top: 12px;
+    }
+
+    .footer {
+      text-align: center;
+      color: #777;
+      font-size: 14px;
+      padding: 28px 0 40px;
+    }
+
+    @media (max-width: 600px) {
+      .hero h1 {
+        font-size: 34px;
+      }
+
+      .hero p {
+        font-size: 19px;
+      }
+
+      .btn {
+        width: 100%;
+      }
     }
   </style>
 </head>
-
 <body>
+  <div class="wrap">
+    <section class="hero">
+      <h1>더썸테라피</h1>
+      <p>프리미엄 힐링 케어</p>
+      <div class="sub">편안한 휴식과 맞춤 케어를 제공하는 테라피 서비스</div>
 
-<h1>더썸테라피</h1>
-<p>프리미엄 힐링 케어</p>
+      <div class="btn-group">
+        <a class="btn btn-primary" href="tel:010-0000-0000">전화 예약</a>
+        <a class="btn btn-secondary" href="https://open.kakao.com/" target="_blank">카톡 문의</a>
+      </div>
+    </section>
 
-<button onclick="alert('예약 준비중입니다')">
+    <section class="card">
+      <h2>브랜드 소개</h2>
+      <p>
+        더썸테라피는 바쁜 일상 속에서 몸과 마음의 균형을 되찾을 수 있도록
+        편안한 공간과 섬세한 케어를 제공합니다.
+        고객 맞춤형 관리로 깊은 휴식과 만족을 드리는 것을 목표로 합니다.
+      </p>
+    </section>
+
+    <section class="card">
+      <h2>대표 서비스</h2>
+      <div class="service-list">
+        <div class="service-item">
+          <h3>아로마 테라피</h3>
+          <p>은은한 향과 부드러운 관리로 긴장 완화와 편안한 휴식을 돕습니다.</p>
+        </div>
+        <div class="service-item">
+          <h3>프리미엄 힐링 케어</h3>
+          <p>피로가 누적된 부위를 중심으로 집중 케어를 진행합니다.</p>
+        </div>
+        <div class="service-item">
+          <h3>맞춤 관리 프로그램</h3>
+          <p>고객 컨디션에 맞춘 프로그램으로 보다 만족도 높은 케어를 제공합니다.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>가격 안내</h2>
+      <table class="price-table">
+        <thead>
+          <tr>
+            <th>서비스</th>
+            <th>시간</th>
+            <th>가격</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>기본 케어</td>
+            <td>60분</td>
+            <td>문의</td>
+          </tr>
+          <tr>
+            <td>프리미엄 케어</td>
+            <td>90분</td>
+            <td>문의</td>
+          </tr>
+          <tr>
+            <td>스페셜 프로그램</td>
+            <td>120분</td>
+            <td>문의</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="notice">상세 가격 및 이벤트는 전화 또는 카카오톡으로 문의해 주세요.</div>
+    </section>
+
+    <section class="card">
+  <h2>예약 및 문의</h2>
+
+  <p><strong>전화:</strong> 010-8464-7771</p>
+
+  <p><strong>카카오톡:</strong> 
+    <a href="https://open.kakao.com/o/sqB6lDni" target="_blank">
+      카카오 상담하기
+    </a>
+  </p>
+<button onclick="window.open('https://open.kakao.com/o/sqB6lDni','_blank')">
 예약하기
 </button>
-
+<p><strong>위치:</strong> 서울 강남구 청담동 </p>
+  <p><strong>운영시간:</strong> 오전 10시 ~ 오후 10시</p>
+  <p><strong>안내:</strong> 사전 예약 우선으로 운영됩니다.</p>
+</section>
 </body>
 </html>
