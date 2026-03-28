@@ -1,247 +1,200 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>The Thumb Therapy</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>더썸테라피 | 프리미엄 뷰티 코팅 케어</title>
   <style>
     * {
       box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
     }
 
     body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f7f4f8;
-      color: #222;
-      line-height: 1.6;
+      background: #f3f1f5;
+      color: #333;
+      line-height: 1.7;
     }
 
-    .wrap {
-      max-width: 860px;
+    .container {
+      max-width: 720px;
       margin: 0 auto;
-      padding: 24px;
+      padding: 40px 20px 80px;
     }
 
     .hero {
       text-align: center;
-      padding: 48px 20px 32px;
+      padding: 40px 20px 20px;
     }
 
     .hero h1 {
-      margin: 0;
-      font-size: 42px;
-      color: #8a008a;
+      font-size: 52px;
+      color: #8f169b;
+      font-weight: 800;
+      margin-bottom: 24px;
+    }
+
+    .hero h2 {
+      font-size: 28px;
+      color: #555;
+      font-weight: 500;
+      margin-bottom: 24px;
     }
 
     .hero p {
-      margin-top: 14px;
-      font-size: 22px;
-      color: #444;
-    }
-
-    .hero .sub {
-      margin-top: 10px;
-      font-size: 16px;
+      font-size: 18px;
       color: #666;
+      max-width: 560px;
+      margin: 0 auto 36px;
     }
 
-    .btn-group {
-      margin-top: 28px;
+    .button-group {
       display: flex;
-      gap: 12px;
-      justify-content: center;
-      flex-wrap: wrap;
+      flex-direction: column;
+      gap: 18px;
+      margin: 10px auto 40px;
+      max-width: 560px;
     }
 
     .btn {
-      display: inline-block;
-      padding: 14px 26px;
-      border-radius: 12px;
+      display: block;
+      text-align: center;
       text-decoration: none;
-      font-size: 18px;
-      font-weight: bold;
-      border: none;
-      cursor: pointer;
+      font-size: 20px;
+      font-weight: 700;
+      padding: 22px 20px;
+      border-radius: 22px;
+      transition: 0.2s ease;
     }
 
     .btn-primary {
-      background: #8a008a;
-      color: white;
+      background: linear-gradient(135deg, #a100b3, #7f1589);
+      color: #fff;
+      box-shadow: 0 8px 18px rgba(127, 21, 137, 0.2);
     }
 
     .btn-secondary {
-      background: white;
-      color: #8a008a;
-      border: 2px solid #8a008a;
+      border: 3px solid #8f169b;
+      color: #8f169b;
+      background: #fff;
     }
 
     .card {
-      background: white;
-      border-radius: 18px;
-      padding: 22px;
-      margin-top: 18px;
-      box-shadow: 0 4px 14px rgba(0,0,0,0.06);
+      background: #fff;
+      border-radius: 28px;
+      padding: 34px 26px;
+      margin-top: 28px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.04);
     }
 
-    h2 {
-      margin-top: 0;
-      color: #8a008a;
-      font-size: 26px;
+    .card h3 {
+      font-size: 34px;
+      color: #8f169b;
+      margin-bottom: 24px;
+      font-weight: 800;
     }
 
-    .service-list {
+    .card p {
+      font-size: 18px;
+      color: #444;
+      margin-bottom: 14px;
+    }
+
+    .feature-list {
       display: grid;
-      grid-template-columns: 1fr;
       gap: 14px;
-    }
-
-    .service-item {
-      background: #faf8fb;
-      border: 1px solid #eee;
-      border-radius: 14px;
-      padding: 16px;
-    }
-
-    .service-item h3 {
-      margin: 0 0 8px;
-      font-size: 20px;
-      color: #333;
-    }
-
-    .price-table {
-      width: 100%;
-      border-collapse: collapse;
       margin-top: 10px;
     }
 
-    .price-table th,
-    .price-table td {
-      border-bottom: 1px solid #eee;
-      padding: 12px 8px;
-      text-align: left;
-      font-size: 16px;
+    .feature-item {
+      background: #faf7fb;
+      border-radius: 18px;
+      padding: 16px 18px;
+      font-size: 17px;
+      color: #444;
+      border: 1px solid #eee2f2;
     }
 
-    .price-table th {
-      color: #8a008a;
-    }
-
-    .notice {
-      font-size: 15px;
-      color: #666;
-      margin-top: 12px;
-    }
-
-    .footer {
+    .footer-note {
       text-align: center;
+      margin-top: 36px;
       color: #777;
-      font-size: 14px;
-      padding: 28px 0 40px;
+      font-size: 15px;
     }
 
-    @media (max-width: 600px) {
+    @media (max-width: 640px) {
       .hero h1 {
-        font-size: 34px;
+        font-size: 42px;
       }
 
-      .hero p {
-        font-size: 19px;
+      .hero h2 {
+        font-size: 22px;
+      }
+
+      .hero p,
+      .card p,
+      .feature-item {
+        font-size: 16px;
+      }
+
+      .card h3 {
+        font-size: 28px;
       }
 
       .btn {
-        width: 100%;
+        font-size: 18px;
+        padding: 20px 16px;
       }
     }
   </style>
 </head>
 <body>
-  <div class="wrap">
+  <div class="container">
     <section class="hero">
       <h1>더썸테라피</h1>
-      <p>프리미엄 힐링 케어</p>
-      <div class="sub">편안한 휴식과 맞춤 케어를 제공하는 테라피 서비스</div>
+      <h2>프리미엄 뷰티 코팅 케어</h2>
+      <p>
+        자연스러운 윤광 표현과 세련된 이미지 연출을 위한
+        맞춤형 뷰티 서비스를 제공합니다.
+      </p>
 
-      <div class="btn-group">
-        <a class="btn btn-primary" href="tel:010-0000-0000">전화 예약</a>
-        <a class="btn btn-secondary" href="https://open.kakao.com/" target="_blank">카톡 문의</a>
+      <div class="button-group">
+        <a href="tel:01012345678" class="btn btn-primary">상담 예약</a>
+        <a href="https://open.kakao.com/o/sqB6lDni" class="btn btn-secondary" target="_blank">카카오 상담</a>
       </div>
     </section>
 
     <section class="card">
-      <h2>브랜드 소개</h2>
+      <h3>브랜드 소개</h3>
       <p>
-        더썸테라피는 바쁜 일상 속에서 몸과 마음의 균형을 되찾을 수 있도록
-        편안한 공간과 섬세한 케어를 제공합니다.
-        고객 맞춤형 관리로 깊은 휴식과 만족을 드리는 것을 목표로 합니다.
+        더썸테라피는 피부 표현의 완성도와 전체적인 이미지 조화를 높이는
+        프리미엄 뷰티 케어 서비스를 제공합니다.
+      </p>
+      <p>
+        고객의 분위기와 스타일에 맞춘 상담을 통해 자연스럽고 세련된 인상을
+        연출할 수 있도록 돕습니다.
+      </p>
+      <p>
+        깔끔한 표현, 윤광 코팅 느낌, 부드러운 이미지 완성을 원하는 분들을 위한
+        맞춤형 케어를 지향합니다.
       </p>
     </section>
 
     <section class="card">
-      <h2>대표 서비스</h2>
-      <div class="service-list">
-        <div class="service-item">
-          <h3>아로마 테라피</h3>
-          <p>은은한 향과 부드러운 관리로 긴장 완화와 편안한 휴식을 돕습니다.</p>
-        </div>
-        <div class="service-item">
-          <h3>프리미엄 힐링 케어</h3>
-          <p>피로가 누적된 부위를 중심으로 집중 케어를 진행합니다.</p>
-        </div>
-        <div class="service-item">
-          <h3>맞춤 관리 프로그램</h3>
-          <p>고객 컨디션에 맞춘 프로그램으로 보다 만족도 높은 케어를 제공합니다.</p>
-        </div>
+      <h3>서비스 안내</h3>
+      <div class="feature-list">
+        <div class="feature-item">프리미엄 뷰티 코팅 상담</div>
+        <div class="feature-item">이미지 스타일링 가이드</div>
+        <div class="feature-item">자연스러운 윤광 표현 케어</div>
+        <div class="feature-item">맞춤형 뷰티 컨설팅</div>
       </div>
     </section>
 
-    <section class="card">
-      <h2>가격 안내</h2>
-      <table class="price-table">
-        <thead>
-          <tr>
-            <th>서비스</th>
-            <th>시간</th>
-            <th>가격</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>기본 케어</td>
-            <td>60분</td>
-            <td>문의</td>
-          </tr>
-          <tr>
-            <td>프리미엄 케어</td>
-            <td>90분</td>
-            <td>문의</td>
-          </tr>
-          <tr>
-            <td>스페셜 프로그램</td>
-            <td>120분</td>
-            <td>문의</td>
-          </tr>
-        </tbody>
-      </table>
-      <div class="notice">상세 가격 및 이벤트는 전화 또는 카카오톡으로 문의해 주세요.</div>
-    </section>
-
-    <section class="card">
-  <h2>예약 및 문의</h2>
-
-  <p><strong>전화:</strong> 010-8464-7771</p>
-
-  <p><strong>카카오톡:</strong> 
-    <a href="https://open.kakao.com/o/sqB6lDni" target="_blank">
-      카카오 상담하기
-    </a>
-  </p>
-<button onclick="window.open('https://open.kakao.com/o/sqB6lDni','_blank')">
-예약하기
-</button>
-<p><strong>위치:</strong> 서울 강남구 청담동 </p>
-  <p><strong>운영시간:</strong> 오전 10시 ~ 오후 10시</p>
-  <p><strong>안내:</strong> 사전 예약 우선으로 운영됩니다.</p>
-</section>
+    <p class="footer-note">
+      예약 및 상담은 전화 또는 카카오톡으로 편하게 문의해 주세요.
+    </p>
+  </div>
 </body>
 </html>
