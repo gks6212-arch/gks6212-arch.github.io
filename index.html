@@ -1,211 +1,2027 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>더썸테라피 | 프리미엄 뷰티 스토어</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>더썸테라피 | 프리미엄 뷰티 스토어</title>
+  <meta name="theme-color" content="#7a3cff" />
+  <style>
+    :root {
+      --bg: #f7f3ee;
+      --surface: #ffffff;
+      --surface-2: #f3ede6;
+      --text: #2f2a26;
+      --muted: #7d746d;
+      --line: #e8ddd1;
+      --primary: #8a2be2;
+      --primary-dark: #6f1fc0;
+      --gold: #b5965b;
+      --danger: #c0392b;
+      --success: #1f8b4c;
+      --shadow: 0 12px 34px rgba(30, 20, 10, 0.08);
+      --radius: 20px;
+      --radius-sm: 14px;
+      --max: 1200px;
+      --header-h: 76px;
+    }
 
-<style>
-body {
-    margin:0;
-    font-family: Arial;
-    background:#f6f3ef;
-}
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Arial, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+      background: linear-gradient(180deg, #faf7f3 0%, #f6f2ec 100%);
+      color: var(--text);
+    }
 
-/* 헤더 */
-.header {
-    background:#fff;
-    padding:15px;
-    font-weight:bold;
-    font-size:20px;
-}
+    a { color: inherit; text-decoration: none; }
+    img { display: block; width: 100%; }
+    button, input, textarea, select { font: inherit; }
 
-/* 브랜드 메뉴 */
-.menu {
-    display:flex;
-    overflow-x:auto;
-    gap:10px;
-    padding:10px;
-    background:#fff;
-}
+    .container {
+      width: min(100% - 24px, var(--max));
+      margin: 0 auto;
+    }
 
-.menu button {
-    padding:8px 15px;
-    border:none;
-    background:#ddd;
-    border-radius:20px;
-    cursor:pointer;
-}
+    .top-banner {
+      background: linear-gradient(90deg, #efe3ff, #f8f0ff);
+      color: #5a338c;
+      border-bottom: 1px solid #e8d9ff;
+      padding: 10px 14px;
+      text-align: center;
+      font-size: 14px;
+      font-weight: 700;
+    }
 
-/* 섹션 */
-.section {
-    padding:20px;
-}
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      height: var(--header-h);
+      background: rgba(255,255,255,.92);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--line);
+    }
 
-.title {
-    font-size:22px;
-    font-weight:bold;
-    margin-bottom:15px;
-}
+    .header-inner {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+    }
 
-/* 상품 카드 */
-.grid {
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:15px;
-}
+    .brand-wrap {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+    }
 
-.card {
-    background:#fff;
-    padding:15px;
-    border-radius:15px;
-}
+    .logo-mark {
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, #9b4dff, #7727d8);
+      color: #fff;
+      font-size: 18px;
+      font-weight: 800;
+      box-shadow: 0 8px 20px rgba(122,60,255,.25);
+      flex-shrink: 0;
+    }
 
-.price {
-    color:#999;
-}
+    .brand-title {
+      font-size: 22px;
+      font-weight: 800;
+      line-height: 1.15;
+    }
 
-.pi {
-    color:#8a2be2;
-    font-weight:bold;
-}
-</style>
+    .brand-subtitle {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 2px;
+    }
 
-<script>
-function go(id){
-    document.getElementById(id).scrollIntoView({behavior:"smooth"});
-}
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-shrink: 0;
+    }
 
-function calcPi(price){
-    const piRate = 215; // 임시 PI 시세
-    return (price / piRate).toFixed(2);
-}
-</script>
+    .btn, .btn-outline, .btn-soft, .btn-danger {
+      border: none;
+      cursor: pointer;
+      border-radius: 999px;
+      padding: 12px 16px;
+      font-weight: 800;
+      transition: .2s ease;
+    }
 
+    .btn {
+      background: var(--primary);
+      color: #fff;
+      box-shadow: var(--shadow);
+    }
+
+    .btn:hover { background: var(--primary-dark); }
+
+    .btn-outline {
+      background: #fff;
+      color: var(--primary);
+      border: 2px solid var(--primary);
+    }
+
+    .btn-soft {
+      background: var(--surface-2);
+      color: var(--text);
+    }
+
+    .btn-danger {
+      background: #fff0ee;
+      color: var(--danger);
+      border: 1px solid #f3c2bc;
+    }
+
+    .hero {
+      padding: 24px 0 18px;
+    }
+
+    .hero-card {
+      background: linear-gradient(135deg, #fff 0%, #fcf8ff 40%, #fffaf4 100%);
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      display: grid;
+      gap: 0;
+    }
+
+    .hero-main, .hero-side {
+      padding: 24px;
+    }
+
+    .hero-main {
+      display: grid;
+      gap: 14px;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      width: fit-content;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: #f2e8ff;
+      color: #5a338c;
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .hero h1 {
+      margin: 0;
+      font-size: clamp(30px, 5vw, 46px);
+      line-height: 1.18;
+      font-weight: 900;
+      letter-spacing: -0.02em;
+    }
+
+    .hero p {
+      margin: 0;
+      color: #5b544c;
+      line-height: 1.75;
+      font-size: 15px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 4px;
+    }
+
+    .hero-side {
+      border-top: 1px solid var(--line);
+      background: rgba(255,255,255,.65);
+      display: grid;
+      gap: 14px;
+      align-content: start;
+    }
+
+    .rate-card, .mini-info, .contact-card {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      box-shadow: var(--shadow);
+      padding: 18px;
+    }
+
+    .rate-card h3, .mini-info h3, .contact-card h3 {
+      margin: 0 0 8px;
+      font-size: 19px;
+    }
+
+    .rate-big {
+      font-size: 34px;
+      font-weight: 900;
+      color: var(--gold);
+      margin: 6px 0;
+    }
+
+    .rate-sub {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .rate-actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 12px;
+    }
+
+    .input-inline {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 10px;
+    }
+
+    .input-inline input {
+      flex: 1;
+      min-width: 140px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 12px;
+      background: #fff;
+    }
+
+    .nav-wrap {
+      position: sticky;
+      top: var(--header-h);
+      z-index: 40;
+      background: rgba(247,243,238,.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid #eee4d9;
+    }
+
+    .nav-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      padding: 10px 0;
+    }
+
+    .nav-chip {
+      border: none;
+      background: #ece5dd;
+      color: var(--text);
+      border-radius: 999px;
+      padding: 10px 15px;
+      font-weight: 800;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .nav-chip.active,
+    .nav-chip:hover {
+      background: #dbc8fb;
+      color: #52258c;
+    }
+
+    .section {
+      padding: 28px 0;
+    }
+
+    .section-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .title {
+      margin: 0;
+      font-size: 30px;
+      line-height: 1.15;
+      font-weight: 900;
+      letter-spacing: -0.02em;
+    }
+
+    .section-note {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .grid {
+      display: grid;
+      gap: 14px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .card {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .thumb {
+      aspect-ratio: 1/1;
+      background: #eae2d9;
+    }
+
+    .thumb img {
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .card-body {
+      padding: 16px;
+      display: grid;
+      gap: 8px;
+      flex: 1;
+    }
+
+    .product-brand {
+      font-size: 12px;
+      color: var(--muted);
+      font-weight: 800;
+    }
+
+    .product-name {
+      font-size: 17px;
+      font-weight: 900;
+      line-height: 1.35;
+      min-height: 46px;
+    }
+
+    .product-desc {
+      font-size: 13px;
+      color: #665e56;
+      line-height: 1.6;
+      min-height: 40px;
+    }
+
+    .price {
+      color: #867c74;
+      font-size: 15px;
+    }
+
+    .pi {
+      color: var(--primary);
+      font-weight: 900;
+      font-size: 17px;
+    }
+
+    .card-actions {
+      display: flex;
+      gap: 8px;
+      margin-top: 6px;
+    }
+
+    .mini-btn {
+      flex: 1;
+      border-radius: 12px;
+      border: none;
+      padding: 11px 10px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .mini-btn.primary {
+      background: var(--primary);
+      color: #fff;
+    }
+
+    .mini-btn.secondary {
+      background: #f3ede6;
+      color: var(--text);
+    }
+
+    .list-grid {
+      display: grid;
+      gap: 12px;
+    }
+
+    .notice-item, .review-item, .event-item, .contact-box {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      box-shadow: var(--shadow);
+      padding: 18px;
+    }
+
+    .notice-title, .event-title, .review-title {
+      font-size: 18px;
+      font-weight: 900;
+      margin-bottom: 8px;
+    }
+
+    .notice-meta, .event-meta {
+      color: var(--muted);
+      font-size: 13px;
+      margin-bottom: 8px;
+    }
+
+    .notice-content, .event-content, .review-content {
+      color: #5e5650;
+      line-height: 1.75;
+      font-size: 14px;
+    }
+
+    .stars {
+      color: #f6a600;
+      font-size: 16px;
+      margin-bottom: 6px;
+      letter-spacing: 1px;
+    }
+
+    .cart-fab {
+      position: fixed;
+      right: 16px;
+      bottom: 100px;
+      z-index: 70;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      border: none;
+      background: linear-gradient(135deg, #9b4dff, #7a3cff);
+      color: #fff;
+      font-size: 22px;
+      font-weight: 900;
+      cursor: pointer;
+      box-shadow: 0 16px 28px rgba(122,60,255,.3);
+    }
+
+    .cart-count {
+      position: absolute;
+      right: -2px;
+      top: -2px;
+      min-width: 22px;
+      height: 22px;
+      padding: 0 6px;
+      border-radius: 999px;
+      display: grid;
+      place-items: center;
+      background: #ff6b57;
+      color: #fff;
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    .floating-bar {
+      position: fixed;
+      left: 50%;
+      bottom: 10px;
+      transform: translateX(-50%);
+      width: min(100% - 16px, 860px);
+      z-index: 60;
+      display: flex;
+      gap: 10px;
+      background: rgba(255,255,255,.96);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      box-shadow: var(--shadow);
+      padding: 10px;
+      backdrop-filter: blur(10px);
+    }
+
+    .floating-bar button {
+      flex: 1;
+      border: none;
+      border-radius: 14px;
+      padding: 14px 12px;
+      font-weight: 900;
+      cursor: pointer;
+    }
+
+    .floating-bar .call-btn {
+      background: var(--primary);
+      color: #fff;
+    }
+
+    .floating-bar .kakao-btn {
+      background: #f4ede7;
+      color: var(--text);
+    }
+
+    .drawer,
+    .modal {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      display: none;
+    }
+
+    .drawer.open,
+    .modal.open {
+      display: block;
+    }
+
+    .overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(20, 16, 12, 0.5);
+      backdrop-filter: blur(2px);
+    }
+
+    .drawer-panel {
+      position: absolute;
+      right: 0;
+      top: 0;
+      width: min(100%, 420px);
+      height: 100%;
+      background: #fff;
+      box-shadow: -10px 0 30px rgba(0,0,0,.16);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .modal-panel {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: min(100% - 16px, 980px);
+      max-height: 90vh;
+      overflow: auto;
+      background: #fff;
+      border-radius: 24px;
+      box-shadow: 0 24px 60px rgba(0,0,0,.2);
+      padding: 20px;
+    }
+
+    .drawer-head, .modal-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 18px 18px 12px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .drawer-head h3, .modal-head h3 {
+      margin: 0;
+      font-size: 22px;
+      font-weight: 900;
+    }
+
+    .icon-btn {
+      border: none;
+      background: #f2ece4;
+      border-radius: 12px;
+      width: 40px;
+      height: 40px;
+      cursor: pointer;
+      font-size: 18px;
+      font-weight: 900;
+    }
+
+    .drawer-body {
+      padding: 14px 18px 18px;
+      overflow: auto;
+      flex: 1;
+      display: grid;
+      gap: 12px;
+    }
+
+    .cart-item {
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 14px;
+      display: grid;
+      gap: 8px;
+      background: #fffdfb;
+    }
+
+    .cart-item-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: start;
+    }
+
+    .cart-item-name {
+      font-weight: 900;
+      line-height: 1.4;
+    }
+
+    .cart-item-brand {
+      color: var(--muted);
+      font-size: 13px;
+      margin-bottom: 4px;
+    }
+
+    .qty-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .qty-btn {
+      width: 34px;
+      height: 34px;
+      border: none;
+      border-radius: 10px;
+      background: #f1ebe3;
+      cursor: pointer;
+      font-weight: 900;
+    }
+
+    .remove-link {
+      color: var(--danger);
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .cart-summary {
+      border-top: 1px solid var(--line);
+      margin-top: auto;
+      padding: 16px 18px 18px;
+      display: grid;
+      gap: 10px;
+      background: #fff;
+    }
+
+    .sum-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      font-size: 15px;
+    }
+
+    .sum-row strong {
+      font-size: 18px;
+    }
+
+    .order-actions {
+      display: grid;
+      gap: 10px;
+      margin-top: 6px;
+    }
+
+    .admin-login {
+      display: grid;
+      gap: 12px;
+      max-width: 400px;
+      margin: 20px auto;
+    }
+
+    .admin-login input,
+    .admin-field input,
+    .admin-field textarea,
+    .admin-field select {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 12px 14px;
+      background: #fff;
+    }
+
+    .admin-field textarea {
+      min-height: 100px;
+      resize: vertical;
+    }
+
+    .admin-grid {
+      display: grid;
+      gap: 18px;
+      grid-template-columns: 1fr;
+      margin-top: 10px;
+    }
+
+    .admin-card {
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 16px;
+      background: #fffefc;
+      box-shadow: var(--shadow);
+    }
+
+    .admin-card h4 {
+      margin: 0 0 12px;
+      font-size: 18px;
+    }
+
+    .admin-field {
+      display: grid;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .admin-field label {
+      font-size: 13px;
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    .admin-actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 8px;
+    }
+
+    .admin-product-list,
+    .admin-simple-list {
+      display: grid;
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .admin-item {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 12px;
+      background: #fff;
+      display: grid;
+      gap: 8px;
+    }
+
+    .small-muted {
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .footer-space {
+      height: 92px;
+    }
+
+    .detail-layout {
+      display: grid;
+      gap: 18px;
+    }
+
+    .detail-image {
+      border-radius: 20px;
+      overflow: hidden;
+      background: #eee5db;
+    }
+
+    .detail-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .detail-info {
+      display: grid;
+      gap: 10px;
+    }
+
+    .detail-brand {
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .detail-title {
+      font-size: 28px;
+      font-weight: 900;
+      line-height: 1.3;
+    }
+
+    .detail-desc {
+      color: #615951;
+      line-height: 1.8;
+    }
+
+    .detail-price {
+      font-size: 18px;
+      color: #6f675f;
+    }
+
+    .detail-pi {
+      font-size: 22px;
+      font-weight: 900;
+      color: var(--primary);
+    }
+
+    @media (min-width: 768px) {
+      .hero-card {
+        grid-template-columns: 1.25fr 0.95fr;
+      }
+
+      .hero-side {
+        border-top: none;
+        border-left: 1px solid var(--line);
+      }
+
+      .grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .list-grid.two {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .admin-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .detail-layout {
+        grid-template-columns: 1fr 1fr;
+        align-items: start;
+      }
+    }
+
+    @media (min-width: 1100px) {
+      .grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 640px) {
+      .header-actions {
+        display: none;
+      }
+
+      .title {
+        font-size: 24px;
+      }
+
+      .brand-title {
+        font-size: 19px;
+      }
+
+      .hero-main, .hero-side {
+        padding: 18px;
+      }
+
+      .cart-fab {
+        right: 12px;
+        bottom: 92px;
+      }
+    }
+  </style>
 </head>
-
 <body>
+  <div class="top-banner" id="pi-rate-banner"></div>
 
-<div class="header">더썸테라피</div>
-
-<!-- 브랜드 메뉴 -->
-<div class="menu">
-<button onclick="go('nora')">노라보데</button>
-<button onclick="go('alchemia')">알케미아</button>
-<button onclick="go('guinot')">기노</button>
-<button onclick="go('thala')">탈라</button>
-<button onclick="go('sothys')">쏘티스</button>
-</div>
-
-<!-- ===================== -->
-<!-- 노라보데 -->
-<div class="section" id="nora">
-<div class="title">노라보데</div>
-<div class="grid">
-
-<script>
-for(let i=1;i<=10;i++){
-    let price = 120000 + i*10000;
-    document.write(`
-    <div class="card">
-        <div>노라보데 제품 ${i}</div>
-        <div class="price">₩${price.toLocaleString()}</div>
-        <div class="pi">π ${calcPi(price)}</div>
+  <header class="header">
+    <div class="container header-inner">
+      <div class="brand-wrap">
+        <div class="logo-mark">썸</div>
+        <div>
+          <div class="brand-title">더썸테라피</div>
+          <div class="brand-subtitle">프리미엄 뷰티 · 에스테틱 셀렉트 스토어</div>
+        </div>
+      </div>
+      <div class="header-actions">
+        <button class="btn-soft" onclick="goToSection('notice')">공지</button>
+        <button class="btn-soft" onclick="goToSection('event')">이벤트</button>
+        <button class="btn-soft" onclick="goToSection('review')">후기</button>
+        <button class="btn-outline" onclick="openKakao()">카카오 문의</button>
+        <button class="btn" onclick="openAdmin()">관리자</button>
+      </div>
     </div>
-    `);
-}
-</script>
+  </header>
 
-</div>
-</div>
+  <main>
+    <section class="hero">
+      <div class="container">
+        <div class="hero-card">
+          <div class="hero-main">
+            <div class="hero-badge">PI 결제 안내 · 프리미엄 상담형 쇼핑몰</div>
+            <h1>더썸테라피<br>프리미엄 뷰티 스토어</h1>
+            <p>
+              프리미엄 에스테틱 브랜드를 한 곳에서 보고, 원화 가격과 PI 환산 금액까지
+              함께 확인할 수 있는 상담형 뷰티 스토어입니다. 상품 문의, 전화 상담,
+              카카오 문의, 장바구니 주문 요청까지 한 번에 연결할 수 있습니다.
+            </p>
+            <div class="hero-actions">
+              <button class="btn" onclick="callNow()">전화 예약</button>
+              <button class="btn-outline" onclick="openKakao()">카카오 문의</button>
+              <button class="btn-soft" onclick="goToSection('brand-intro')">브랜드 소개</button>
+              <button class="btn-soft" onclick="openCart()">장바구니 보기</button>
+            </div>
+          </div>
 
-<!-- ===================== -->
-<!-- 알케미아 -->
-<div class="section" id="alchemia">
-<div class="title">알케미아</div>
-<div class="grid">
+          <div class="hero-side">
+            <div class="rate-card">
+              <h3>PI 환산 기준</h3>
+              <div class="rate-big" id="rate-big">1 PI = 215원</div>
+              <div class="rate-sub" id="rate-desc">
+                현재 적용 환산 기준입니다. 상품의 PI 표시는 참고용이며 실제 상담·결제 시 변동될 수 있습니다.
+              </div>
+              <div class="input-inline">
+                <input type="number" id="pi-rate-input" placeholder="예: 215" />
+                <button class="btn-soft" onclick="manualRateUpdate()">수동 반영</button>
+              </div>
+              <div class="rate-actions">
+                <button class="btn-soft" onclick="simulateRateFetch()">실시간 연동 테스트</button>
+                <button class="btn-soft" onclick="resetStore()">초기화</button>
+              </div>
+            </div>
 
-<script>
-for(let i=1;i<=10;i++){
-    let price = 130000 + i*10000;
-    document.write(`
-    <div class="card">
-        <div>알케미아 제품 ${i}</div>
-        <div class="price">₩${price.toLocaleString()}</div>
-        <div class="pi">π ${calcPi(price)}</div>
+            <div class="mini-info">
+              <h3>구매 안내</h3>
+              <div class="small-muted">
+                · 본 페이지는 상담형 주문 구조입니다.<br>
+                · 장바구니에 담은 뒤 주문 메시지를 카카오로 전송할 수 있습니다.<br>
+                · 실제 실시간 PI 시세는 별도 API/서버 연동 시 자동 반영할 수 있습니다.
+              </div>
+            </div>
+
+            <div class="contact-card">
+              <h3>빠른 문의</h3>
+              <div class="small-muted" id="contact-text">
+                전화와 카카오톡을 통해 상품 상담 및 주문 문의가 가능합니다.
+              </div>
+              <div class="rate-actions">
+                <button class="btn" onclick="callNow()">전화 문의</button>
+                <button class="btn-outline" onclick="openKakao()">카카오 문의</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="shop-tools" style="padding-top:10px;">
+      <div class="container">
+        <div class="notice-item" style="display:grid; gap:12px;">
+          <div style="display:flex; gap:10px; flex-wrap:wrap;">
+            <input
+              id="search-input"
+              type="text"
+              placeholder="상품명 또는 설명 검색"
+              style="flex:1; min-width:220px; border:1px solid #e8ddd1; border-radius:14px; padding:12px 14px;"
+            />
+            <select
+              id="brand-filter"
+              style="min-width:180px; border:1px solid #e8ddd1; border-radius:14px; padding:12px 14px;"
+            >
+              <option value="all">전체 브랜드</option>
+            </select>
+            <button class="btn-soft" onclick="resetFilters()">필터 초기화</button>
+          </div>
+          <div class="small-muted">상품명, 설명, 브랜드 기준으로 빠르게 찾을 수 있습니다.</div>
+        </div>
+      </div>
+    </section>
+
+    <div class="nav-wrap">
+      <div class="container">
+        <div class="nav-row" id="nav-row"></div>
+      </div>
     </div>
-    `);
-}
-</script>
 
-</div>
-</div>
+    <section class="section" id="brand-intro">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2 class="title">브랜드 소개</h2>
+            <div class="section-note">프리미엄 케어 루틴에 맞춘 브랜드 셀렉션</div>
+          </div>
+        </div>
+        <div class="notice-item" id="brand-intro-text">
+          더썸테라피는 프리미엄 뷰티와 홈에스테틱 관리를 보다 쉽게 경험할 수 있도록
+          브랜드를 선별해 제안합니다. 피부 상태와 관리 목적에 따라 제품 상담이 가능하며,
+          원화 가격과 PI 환산 금액을 함께 제공해 결제 상담도 편리하게 돕습니다.
+        </div>
+      </div>
+    </section>
 
-<!-- ===================== -->
-<!-- 기노 -->
-<div class="section" id="guinot">
-<div class="title">기노</div>
-<div class="grid">
+    <div id="product-sections"></div>
 
-<script>
-for(let i=1;i<=10;i++){
-    let price = 140000 + i*10000;
-    document.write(`
-    <div class="card">
-        <div>기노 제품 ${i}</div>
-        <div class="price">₩${price.toLocaleString()}</div>
-        <div class="pi">π ${calcPi(price)}</div>
+    <section class="section" id="notice">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2 class="title">공지사항</h2>
+            <div class="section-note">운영 공지, 배송 안내, 결제 안내</div>
+          </div>
+        </div>
+        <div class="list-grid" id="notice-list"></div>
+      </div>
+    </section>
+
+    <section class="section" id="event">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2 class="title">이벤트</h2>
+            <div class="section-note">할인, 신규 혜택, PI 결제 프로모션</div>
+          </div>
+        </div>
+        <div class="list-grid two" id="event-list"></div>
+      </div>
+    </section>
+
+    <section class="section" id="review">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2 class="title">고객 후기</h2>
+            <div class="section-note">상담 만족도와 제품 경험 후기</div>
+          </div>
+        </div>
+        <div class="list-grid two" id="review-list"></div>
+      </div>
+    </section>
+
+    <section class="section" id="contact">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2 class="title">문의 / 상담</h2>
+            <div class="section-note">전화, 카카오, 운영시간 안내</div>
+          </div>
+        </div>
+        <div class="contact-box">
+          <div class="notice-title">더썸테라피 상담 안내</div>
+          <div class="notice-content" id="contact-desc">
+            전화 상담 및 카카오 문의로 제품 추천, 주문 요청, PI 결제 상담이 가능합니다.
+          </div>
+          <div class="admin-actions" style="margin-top:14px;">
+            <button class="btn" onclick="callNow()">전화 문의</button>
+            <button class="btn-outline" onclick="openKakao()">카카오 문의</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="footer-space"></div>
+  </main>
+
+  <button class="cart-fab" onclick="openCart()">
+    🛒
+    <span class="cart-count" id="cart-count">0</span>
+  </button>
+
+  <div class="floating-bar">
+    <button class="call-btn" onclick="callNow()">📞 전화 문의</button>
+    <button class="kakao-btn" onclick="openKakao()">💬 카카오 문의</button>
+  </div>
+
+  <div class="drawer" id="cartDrawer">
+    <div class="overlay" onclick="closeCart()"></div>
+    <div class="drawer-panel">
+      <div class="drawer-head">
+        <h3>장바구니</h3>
+        <button class="icon-btn" onclick="closeCart()">✕</button>
+      </div>
+
+      <div class="drawer-body" id="cart-items"></div>
+
+      <div class="cart-summary">
+        <div class="notice-item" style="box-shadow:none; border-radius:16px; margin-bottom:8px;">
+          <div class="notice-title" style="font-size:16px;">주문자 정보</div>
+          <div style="display:grid; gap:10px;">
+            <input id="order-name" placeholder="이름" style="border:1px solid #e8ddd1; border-radius:12px; padding:12px;">
+            <input id="order-phone" placeholder="연락처" style="border:1px solid #e8ddd1; border-radius:12px; padding:12px;">
+            <textarea id="order-memo" placeholder="문의 내용 / 배송 요청사항" style="border:1px solid #e8ddd1; border-radius:12px; padding:12px; min-height:90px;"></textarea>
+          </div>
+        </div>
+
+        <div class="sum-row"><span>상품 합계</span><span id="cart-total-krw">₩0</span></div>
+        <div class="sum-row"><span>PI 환산</span><span id="cart-total-pi">π 0.00</span></div>
+        <div class="sum-row"><strong>최종 합계</strong><strong id="cart-total-krw-strong">₩0</strong></div>
+
+        <div class="order-actions">
+          <button class="btn" onclick="checkoutToKakao()">카카오로 주문 요청</button>
+          <button class="btn-outline" onclick="callNow()">전화로 주문 상담</button>
+          <button class="btn-soft" onclick="clearCart()">장바구니 비우기</button>
+        </div>
+      </div>
     </div>
-    `);
-}
-</script>
+  </div>
 
-</div>
-</div>
-
-<!-- ===================== -->
-<!-- 탈라 -->
-<div class="section" id="thala">
-<div class="title">탈라</div>
-<div class="grid">
-
-<script>
-for(let i=1;i<=10;i++){
-    let price = 150000 + i*10000;
-    document.write(`
-    <div class="card">
-        <div>탈라 제품 ${i}</div>
-        <div class="price">₩${price.toLocaleString()}</div>
-        <div class="pi">π ${calcPi(price)}</div>
+  <div class="modal" id="productModal">
+    <div class="overlay" onclick="closeProductModal()"></div>
+    <div class="modal-panel" style="max-width:760px;">
+      <div class="modal-head">
+        <h3>상품 상세보기</h3>
+        <button class="icon-btn" onclick="closeProductModal()">✕</button>
+      </div>
+      <div id="product-modal-body" style="padding:10px 6px 6px;"></div>
     </div>
-    `);
-}
-</script>
+  </div>
 
-</div>
-</div>
+  <div class="modal" id="adminModal">
+    <div class="overlay" onclick="closeAdmin()"></div>
+    <div class="modal-panel">
+      <div class="modal-head">
+        <h3>관리자 모드</h3>
+        <button class="icon-btn" onclick="closeAdmin()">✕</button>
+      </div>
 
-<!-- ===================== -->
-<!-- 쏘티스 -->
-<div class="section" id="sothys">
-<div class="title">쏘티스</div>
-<div class="grid">
+      <div id="admin-login-box" class="admin-login">
+        <div class="small-muted">기본 비밀번호는 코드 상단 설정값으로 바꿀 수 있습니다. 현재 데모용 비밀번호가 적용되어 있습니다.</div>
+        <input type="password" id="admin-password" placeholder="관리자 비밀번호 입력" />
+        <button class="btn" onclick="adminLogin()">관리자 로그인</button>
+      </div>
 
-<script>
-for(let i=1;i<=10;i++){
-    let price = 160000 + i*10000;
-    document.write(`
-    <div class="card">
-        <div>쏘티스 제품 ${i}</div>
-        <div class="price">₩${price.toLocaleString()}</div>
-        <div class="pi">π ${calcPi(price)}</div>
+      <div id="admin-content" style="display:none;">
+        <div class="admin-actions" style="margin-top:14px;">
+          <button class="btn-soft" onclick="closeAdmin()">닫기</button>
+          <button class="btn-danger" onclick="adminLogout()">로그아웃</button>
+        </div>
+
+        <div class="admin-grid">
+          <div class="admin-card">
+            <h4>기본 설정</h4>
+            <div class="admin-field">
+              <label>전화번호</label>
+              <input id="admin-phone" />
+            </div>
+            <div class="admin-field">
+              <label>카카오 오픈채팅 링크</label>
+              <input id="admin-kakao" />
+            </div>
+            <div class="admin-field">
+              <label>PI 환산 기준 (1 PI = ? 원)</label>
+              <input id="admin-rate" type="number" />
+            </div>
+            <div class="admin-field">
+              <label>브랜드 소개</label>
+              <textarea id="admin-brand-intro"></textarea>
+            </div>
+            <div class="admin-field">
+              <label>문의 안내 문구</label>
+              <textarea id="admin-contact-desc"></textarea>
+            </div>
+            <div class="admin-actions">
+              <button class="btn" onclick="saveBasicSettings()">기본 설정 저장</button>
+            </div>
+          </div>
+
+          <div class="admin-card">
+            <h4>상품 추가</h4>
+            <div class="admin-field">
+              <label>브랜드</label>
+              <select id="new-product-brand"></select>
+            </div>
+            <div class="admin-field">
+              <label>상품명</label>
+              <input id="new-product-name" />
+            </div>
+            <div class="admin-field">
+              <label>설명</label>
+              <textarea id="new-product-desc"></textarea>
+            </div>
+            <div class="admin-field">
+              <label>가격(원)</label>
+              <input id="new-product-price" type="number" />
+            </div>
+            <div class="admin-field">
+              <label>이미지 URL</label>
+              <input id="new-product-image" />
+            </div>
+            <div class="admin-actions">
+              <button class="btn" onclick="addProduct()">상품 추가</button>
+            </div>
+          </div>
+
+          <div class="admin-card">
+            <h4>공지사항 관리</h4>
+            <div class="admin-field">
+              <label>제목</label>
+              <input id="new-notice-title" />
+            </div>
+            <div class="admin-field">
+              <label>날짜</label>
+              <input id="new-notice-date" placeholder="예: 2026-03-28" />
+            </div>
+            <div class="admin-field">
+              <label>내용</label>
+              <textarea id="new-notice-content"></textarea>
+            </div>
+            <div class="admin-actions">
+              <button class="btn" onclick="addNotice()">공지 추가</button>
+            </div>
+            <div class="admin-simple-list" id="admin-notice-list"></div>
+          </div>
+
+          <div class="admin-card">
+            <h4>이벤트 관리</h4>
+            <div class="admin-field">
+              <label>제목</label>
+              <input id="new-event-title" />
+            </div>
+            <div class="admin-field">
+              <label>기간</label>
+              <input id="new-event-date" placeholder="예: 2026-03-01 ~ 2026-03-31" />
+            </div>
+            <div class="admin-field">
+              <label>내용</label>
+              <textarea id="new-event-content"></textarea>
+            </div>
+            <div class="admin-actions">
+              <button class="btn" onclick="addEvent()">이벤트 추가</button>
+            </div>
+            <div class="admin-simple-list" id="admin-event-list"></div>
+          </div>
+
+          <div class="admin-card">
+            <h4>후기 관리</h4>
+            <div class="admin-field">
+              <label>작성자</label>
+              <input id="new-review-title" />
+            </div>
+            <div class="admin-field">
+              <label>별점 (1~5)</label>
+              <input id="new-review-stars" type="number" min="1" max="5" />
+            </div>
+            <div class="admin-field">
+              <label>후기 내용</label>
+              <textarea id="new-review-content"></textarea>
+            </div>
+            <div class="admin-actions">
+              <button class="btn" onclick="addReview()">후기 추가</button>
+            </div>
+            <div class="admin-simple-list" id="admin-review-list"></div>
+          </div>
+
+          <div class="admin-card">
+            <h4>상품 목록 관리</h4>
+            <div class="small-muted">현재 등록된 상품을 확인하고 삭제할 수 있습니다.</div>
+            <div class="admin-product-list" id="admin-product-list"></div>
+          </div>
+
+          <div class="admin-card">
+            <h4>백업 / 복원</h4>
+            <div class="small-muted">현재 상품, 공지, 이벤트, 후기, 기본 설정을 JSON 파일로 백업하거나 복원할 수 있습니다.</div>
+            <div class="admin-actions" style="margin-top:12px;">
+              <button class="btn" onclick="exportStoreData()">JSON 백업</button>
+              <button class="btn-outline" onclick="document.getElementById('import-json-file').click()">JSON 불러오기</button>
+              <input type="file" id="import-json-file" accept=".json" style="display:none;" onchange="importStoreData(event)">
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-    `);
-}
-</script>
+  </div>
 
-</div>
-</div>
+  <script>
+    const STORAGE_KEY = "thumbtherapy_store_v2";
+    const ADMIN_PASSWORD = "thumb2026";
+    const placeholderImage = "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=900&q=80";
 
+    function uid() {
+      return "id_" + Math.random().toString(36).slice(2, 10);
+    }
+
+    const defaultState = {
+      piRate: 215,
+      phone: "010-1234-5678",
+      kakaoUrl: "https://open.kakao.com/o/sqB6lDni",
+      brandIntro: "더썸테라피는 프리미엄 뷰티와 홈에스테틱 관리를 보다 쉽게 경험할 수 있도록 브랜드를 선별해 제안합니다. 피부 상태와 관리 목적에 따라 제품 상담이 가능하며, 원화 가격과 PI 환산 금액을 함께 제공해 결제 상담도 편리하게 돕습니다.",
+      contactDesc: "전화 상담 및 카카오 문의로 제품 추천, 주문 요청, PI 결제 상담이 가능합니다.",
+      brands: [
+        {
+          id: "nora",
+          title: "노라보데",
+          note: "민감 피부와 집중 보습을 위한 셀렉션",
+          items: [
+            { id: uid(), name: "노라보데 수딩 앰플", price: 128000, desc: "민감 피부 진정과 수분 밸런스 케어", image: placeholderImage },
+            { id: uid(), name: "노라보데 리페어 크림", price: 145000, desc: "건조하고 예민한 피부 장벽 집중 케어", image: placeholderImage },
+            { id: uid(), name: "노라보데 에센스 토너", price: 98000, desc: "첫 단계 수분 충전과 피부결 정돈", image: placeholderImage },
+            { id: uid(), name: "노라보데 밸런싱 세럼", price: 156000, desc: "유수분 밸런스와 피부 컨디션 정리", image: placeholderImage }
+          ]
+        },
+        {
+          id: "alchemia",
+          title: "알케미아",
+          note: "탄력과 윤기를 위한 프리미엄 홈케어",
+          items: [
+            { id: uid(), name: "알케미아 골드 세럼", price: 162000, desc: "탄력과 광채를 동시에 케어하는 세럼", image: placeholderImage },
+            { id: uid(), name: "알케미아 리프팅 크림", price: 178000, desc: "피부 탄력과 밀도를 위한 고보습 크림", image: placeholderImage },
+            { id: uid(), name: "알케미아 브라이트 마스크", price: 112000, desc: "칙칙한 피부 톤을 화사하게 정리", image: placeholderImage }
+          ]
+        },
+        {
+          id: "guinot",
+          title: "기노",
+          note: "에스테틱 전문 관리 중심 브랜드",
+          items: [
+            { id: uid(), name: "기노 하이드라 세럼", price: 171000, desc: "깊은 수분 공급과 피부 컨디션 회복", image: placeholderImage },
+            { id: uid(), name: "기노 아이 컨투어 젤", price: 119000, desc: "눈가 집중 케어와 탄력 관리", image: placeholderImage },
+            { id: uid(), name: "기노 뉴트리 크림", price: 184000, desc: "건조 피부 집중 영양 공급", image: placeholderImage }
+          ]
+        },
+        {
+          id: "thala",
+          title: "탈라",
+          note: "프랑스 감성의 바디·스킨 케어",
+          items: [
+            { id: uid(), name: "탈라 마린 세럼", price: 149000, desc: "촉촉하고 매끈한 피부결 관리", image: placeholderImage },
+            { id: uid(), name: "탈라 리치 크림", price: 165000, desc: "영양과 윤기를 더하는 데일리 크림", image: placeholderImage },
+            { id: uid(), name: "탈라 클레이 마스크", price: 108000, desc: "모공과 피지 정돈에 적합한 팩", image: placeholderImage }
+          ]
+        },
+        {
+          id: "sothys",
+          title: "쏘티스",
+          note: "프리미엄 홈에스테틱 루틴 제안",
+          items: [
+            { id: uid(), name: "쏘티스 하이드레이팅 세럼", price: 176000, desc: "수분 부족 피부를 위한 집중 세럼", image: placeholderImage },
+            { id: uid(), name: "쏘티스 유스 크림", price: 198000, desc: "탄력과 윤기를 위한 프리미엄 크림", image: placeholderImage },
+            { id: uid(), name: "쏘티스 밸런스 토너", price: 94000, desc: "매일 사용하는 산뜻한 토너", image: placeholderImage }
+          ]
+        }
+      ],
+      notices: [
+        { id: uid(), title: "PI 결제 상담 안내", date: "2026-03-28", content: "PI 결제는 상담 후 진행되며, 적용 환산 기준은 변동될 수 있습니다." },
+        { id: uid(), title: "배송 안내", date: "2026-03-28", content: "일반 배송은 평균 2~3일 소요되며 재고 상황에 따라 달라질 수 있습니다." }
+      ],
+      events: [
+        { id: uid(), title: "신규 고객 10% 할인", date: "2026-03-01 ~ 2026-03-31", content: "첫 상담 및 첫 주문 고객 대상 특별 할인 이벤트를 진행합니다." },
+        { id: uid(), title: "PI 결제 이벤트", date: "상시 진행", content: "PI 결제 상담 고객에게 추가 혜택을 안내해드립니다." }
+      ],
+      reviews: [
+        { id: uid(), title: "김OO 고객님", stars: 5, content: "상담이 친절하고 제품 추천이 잘 맞아서 만족합니다." },
+        { id: uid(), title: "박OO 고객님", stars: 5, content: "피부 타입에 맞는 제품을 추천받아 재구매 예정입니다." }
+      ],
+      cart: []
+    };
+
+    function loadState() {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) return JSON.parse(JSON.stringify(defaultState));
+      try {
+        const parsed = JSON.parse(raw);
+        return { ...JSON.parse(JSON.stringify(defaultState)), ...parsed };
+      } catch {
+        return JSON.parse(JSON.stringify(defaultState));
+      }
+    }
+
+    let state = loadState();
+    let adminAuthenticated = false;
+    let currentKeyword = "";
+    let currentBrandFilter = "all";
+
+    function saveState() {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    }
+
+    function formatKRW(value) {
+      return `₩${Number(value || 0).toLocaleString()}`;
+    }
+
+    function calcPi(price) {
+      return (Number(price) / Number(state.piRate || 1)).toFixed(2);
+    }
+
+    function goToSection(id) {
+      const el = document.getElementById(id);
+      if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+
+    function callNow() {
+      window.location.href = `tel:${state.phone}`;
+    }
+
+    function openKakao() {
+      window.open(state.kakaoUrl, "_blank");
+    }
+
+    function escapeHtml(str) {
+      return String(str)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#39;");
+    }
+
+    function renderTop() {
+      document.getElementById("pi-rate-banner").textContent =
+        `현재 PI 환산 기준: 1 PI = ${Number(state.piRate).toLocaleString()}원 · 환산 금액은 참고용이며 실제 결제 시 변동될 수 있습니다.`;
+      document.getElementById("rate-big").textContent = `1 PI = ${Number(state.piRate).toLocaleString()}원`;
+      document.getElementById("rate-desc").textContent =
+        "현재 적용 환산 기준입니다. 상품의 PI 표시는 참고용이며 실제 상담·결제 시 변동될 수 있습니다.";
+      document.getElementById("brand-intro-text").textContent = state.brandIntro;
+      document.getElementById("contact-desc").textContent = state.contactDesc;
+      document.getElementById("contact-text").textContent = state.contactDesc;
+      document.getElementById("pi-rate-input").value = state.piRate;
+    }
+
+    function renderNav() {
+      const baseMenus = [
+        { label: "브랜드 소개", id: "brand-intro" },
+        ...state.brands.map(b => ({ label: b.title, id: b.id })),
+        { label: "공지", id: "notice" },
+        { label: "이벤트", id: "event" },
+        { label: "후기", id: "review" },
+        { label: "문의", id: "contact" }
+      ];
+
+      document.getElementById("nav-row").innerHTML = baseMenus.map((m, i) => `
+        <button class="nav-chip ${i === 0 ? "active" : ""}" data-id="${m.id}">${m.label}</button>
+      `).join("");
+
+      document.querySelectorAll(".nav-chip").forEach(btn => {
+        btn.addEventListener("click", () => {
+          document.querySelectorAll(".nav-chip").forEach(b => b.classList.remove("active"));
+          btn.classList.add("active");
+          goToSection(btn.dataset.id);
+        });
+      });
+    }
+
+    function renderBrandFilterOptions() {
+      const select = document.getElementById("brand-filter");
+      if (!select) return;
+      select.innerHTML = `
+        <option value="all">전체 브랜드</option>
+        ${state.brands.map(b => `<option value="${b.id}">${b.title}</option>`).join("")}
+      `;
+      select.value = currentBrandFilter;
+    }
+
+    function bindSearchEvents() {
+      const searchInput = document.getElementById("search-input");
+      const brandFilter = document.getElementById("brand-filter");
+
+      if (searchInput) {
+        searchInput.value = currentKeyword;
+        searchInput.oninput = (e) => {
+          currentKeyword = e.target.value.trim().toLowerCase();
+          renderProducts();
+        };
+      }
+
+      if (brandFilter) {
+        brandFilter.onchange = (e) => {
+          currentBrandFilter = e.target.value;
+          renderProducts();
+        };
+      }
+    }
+
+    function resetFilters() {
+      currentKeyword = "";
+      currentBrandFilter = "all";
+      const searchInput = document.getElementById("search-input");
+      const brandFilter = document.getElementById("brand-filter");
+      if (searchInput) searchInput.value = "";
+      if (brandFilter) brandFilter.value = "all";
+      renderProducts();
+    }
+
+    function renderProducts() {
+      const root = document.getElementById("product-sections");
+
+      const filteredBrands = state.brands
+        .filter(brand => currentBrandFilter === "all" || brand.id === currentBrandFilter)
+        .map(brand => {
+          const filteredItems = brand.items.filter(item => {
+            const keyword = currentKeyword;
+            if (!keyword) return true;
+            return (
+              item.name.toLowerCase().includes(keyword) ||
+              (item.desc || "").toLowerCase().includes(keyword) ||
+              brand.title.toLowerCase().includes(keyword)
+            );
+          });
+          return { ...brand, items: filteredItems };
+        })
+        .filter(brand => brand.items.length > 0);
+
+      if (!filteredBrands.length) {
+        root.innerHTML = `
+          <section class="section">
+            <div class="container">
+              <div class="notice-item">
+                검색 결과가 없습니다. 다른 검색어로 다시 시도해 주세요.
+              </div>
+            </div>
+          </section>
+        `;
+        return;
+      }
+
+      root.innerHTML = filteredBrands.map(brand => `
+        <section class="section" id="${brand.id}">
+          <div class="container">
+            <div class="section-head">
+              <div>
+                <h2 class="title">${brand.title}</h2>
+                <div class="section-note">${brand.note}</div>
+              </div>
+            </div>
+            <div class="grid">
+              ${brand.items.map(item => `
+                <article class="card">
+                  <div class="thumb">
+                    <img src="${item.image || placeholderImage}" alt="${escapeHtml(item.name)}" loading="lazy" onerror="this.src='${placeholderImage}'">
+                  </div>
+                  <div class="card-body">
+                    <div class="product-brand">${brand.title}</div>
+                    <div class="product-name">${escapeHtml(item.name)}</div>
+                    <div class="product-desc">${escapeHtml(item.desc || "")}</div>
+                    <div class="price">${formatKRW(item.price)}</div>
+                    <div class="pi">π ${calcPi(item.price)}</div>
+                    <div class="card-actions">
+                      <button class="mini-btn secondary" onclick="openProductModal('${brand.id}','${item.id}')">상세보기</button>
+                      <button class="mini-btn primary" onclick="addToCart('${brand.id}', '${item.id}')">담기</button>
+                    </div>
+                  </div>
+                </article>
+              `).join("")}
+            </div>
+          </div>
+        </section>
+      `).join("");
+    }
+
+    function renderNotices() {
+      const root = document.getElementById("notice-list");
+      root.innerHTML = state.notices.map(item => `
+        <article class="notice-item">
+          <div class="notice-title">${escapeHtml(item.title)}</div>
+          <div class="notice-meta">${escapeHtml(item.date || "")}</div>
+          <div class="notice-content">${escapeHtml(item.content || "")}</div>
+        </article>
+      `).join("");
+    }
+
+    function renderEvents() {
+      const root = document.getElementById("event-list");
+      root.innerHTML = state.events.map(item => `
+        <article class="event-item">
+          <div class="event-title">${escapeHtml(item.title)}</div>
+          <div class="event-meta">${escapeHtml(item.date || "")}</div>
+          <div class="event-content">${escapeHtml(item.content || "")}</div>
+        </article>
+      `).join("");
+    }
+
+    function renderReviews() {
+      const root = document.getElementById("review-list");
+      root.innerHTML = state.reviews.map(item => `
+        <article class="review-item">
+          <div class="stars">${"★".repeat(Number(item.stars || 5))}${"☆".repeat(5 - Number(item.stars || 5))}</div>
+          <div class="review-title">${escapeHtml(item.title)}</div>
+          <div class="review-content">${escapeHtml(item.content || "")}</div>
+        </article>
+      `).join("");
+    }
+
+    function findProduct(brandId, productId) {
+      const brand = state.brands.find(b => b.id === brandId);
+      if (!brand) return null;
+      const item = brand.items.find(i => i.id === productId);
+      if (!item) return null;
+      return { brand, item };
+    }
+
+    function addToCart(brandId, productId) {
+      const found = findProduct(brandId, productId);
+      if (!found) return;
+      const existing = state.cart.find(c => c.brandId === brandId && c.productId === productId);
+      if (existing) {
+        existing.qty += 1;
+      } else {
+        state.cart.push({ brandId, productId, qty: 1 });
+      }
+      saveState();
+      renderCart();
+      openCart();
+    }
+
+    function renderCart() {
+      const count = state.cart.reduce((sum, cur) => sum + cur.qty, 0);
+      document.getElementById("cart-count").textContent = count;
+
+      const root = document.getElementById("cart-items");
+      if (!state.cart.length) {
+        root.innerHTML = `<div class="small-muted">장바구니가 비어 있습니다. 상품을 담아보세요.</div>`;
+      } else {
+        root.innerHTML = state.cart.map(row => {
+          const found = findProduct(row.brandId, row.productId);
+          if (!found) return "";
+          const total = found.item.price * row.qty;
+          return `
+            <div class="cart-item">
+              <div class="cart-item-top">
+                <div>
+                  <div class="cart-item-brand">${found.brand.title}</div>
+                  <div class="cart-item-name">${escapeHtml(found.item.name)}</div>
+                </div>
+                <div class="remove-link" onclick="removeFromCart('${row.brandId}', '${row.productId}')">삭제</div>
+              </div>
+              <div>${formatKRW(found.item.price)} / π ${calcPi(found.item.price)}</div>
+              <div class="qty-row">
+                <button class="qty-btn" onclick="changeQty('${row.brandId}','${row.productId}',-1)">-</button>
+                <strong>${row.qty}</strong>
+                <button class="qty-btn" onclick="changeQty('${row.brandId}','${row.productId}',1)">+</button>
+              </div>
+              <div><strong>${formatKRW(total)}</strong> · π ${(Number(calcPi(found.item.price)) * row.qty).toFixed(2)}</div>
+            </div>
+          `;
+        }).join("");
+      }
+
+      const totals = getCartTotals();
+      document.getElementById("cart-total-krw").textContent = formatKRW(totals.krw);
+      document.getElementById("cart-total-pi").textContent = `π ${totals.pi.toFixed(2)}`;
+      document.getElementById("cart-total-krw-strong").textContent = formatKRW(totals.krw);
+    }
+
+    function getCartTotals() {
+      let krw = 0;
+      let pi = 0;
+      state.cart.forEach(row => {
+        const found = findProduct(row.brandId, row.productId);
+        if (!found) return;
+        krw += found.item.price * row.qty;
+        pi += Number(calcPi(found.item.price)) * row.qty;
+      });
+      return { krw, pi };
+    }
+
+    function changeQty(brandId, productId, delta) {
+      const item = state.cart.find(c => c.brandId === brandId && c.productId === productId);
+      if (!item) return;
+      item.qty += delta;
+      if (item.qty <= 0) {
+        state.cart = state.cart.filter(c => !(c.brandId === brandId && c.productId === productId));
+      }
+      saveState();
+      renderCart();
+    }
+
+    function removeFromCart(brandId, productId) {
+      state.cart = state.cart.filter(c => !(c.brandId === brandId && c.productId === productId));
+      saveState();
+      renderCart();
+    }
+
+    function clearCart() {
+      if (!confirm("장바구니를 비우시겠습니까?")) return;
+      state.cart = [];
+      saveState();
+      renderCart();
+    }
+
+    function checkoutToKakao() {
+      if (!state.cart.length) {
+        alert("장바구니가 비어 있습니다.");
+        return;
+      }
+
+      const name = (document.getElementById("order-name")?.value || "").trim();
+      const phone = (document.getElementById("order-phone")?.value || "").trim();
+      const memo = (document.getElementById("order-memo")?.value || "").trim();
+
+      const lines = [];
+      lines.push("[더썸테라피 주문 문의]");
+      lines.push("");
+
+      if (name) lines.push(`주문자명: ${name}`);
+      if (phone) lines.push(`연락처: ${phone}`);
+      if (memo) lines.push(`요청사항: ${memo}`);
+      if (name || phone || memo) lines.push("");
+
+      state.cart.forEach(row => {
+        const found = findProduct(row.brandId, row.productId);
+        if (!found) return;
+        const totalPrice = found.item.price * row.qty;
+        const totalPi = (Number(calcPi(found.item.price)) * row.qty).toFixed(2);
+
+        lines.push(`- 브랜드: ${found.brand.title}`);
+        lines.push(`  상품명: ${found.item.name}`);
+        lines.push(`  수량: ${row.qty}`);
+        lines.push(`  금액: ${formatKRW(totalPrice)}`);
+        lines.push(`  PI 환산: π ${totalPi}`);
+        lines.push("");
+      });
+
+      const totals = getCartTotals();
+      lines.push(`총액: ${formatKRW(totals.krw)}`);
+      lines.push(`총 PI 환산: π ${totals.pi.toFixed(2)}`);
+      lines.push(`적용 기준: 1 PI = ${Number(state.piRate).toLocaleString()}원`);
+
+      const message = encodeURIComponent(lines.join("\n"));
+      window.open(`${state.kakaoUrl}?text=${message}`, "_blank");
+    }
+
+    function openCart() {
+      document.getElementById("cartDrawer").classList.add("open");
+    }
+
+    function closeCart() {
+      document.getElementById("cartDrawer").classList.remove("open");
+    }
+
+    function openProductModal(brandId, productId) {
+      const found = findProduct(brandId, productId);
+      if (!found) return;
+
+      const { brand, item } = found;
+      const root = document.getElementById("product-modal-body");
+      root.innerHTML = `
+        <div class="detail-layout">
+          <div class="detail-image">
+            <img src="${item.image || placeholderImage}" alt="${escapeHtml(item.name)}" onerror="this.src='${placeholderImage}'">
+          </div>
+          <div class="detail-info">
+            <div class="detail-brand">${brand.title}</div>
+            <div class="detail-title">${escapeHtml(item.name)}</div>
+            <div class="detail-desc">${escapeHtml(item.desc || "")}</div>
+            <div class="detail-price">${formatKRW(item.price)}</div>
+            <div class="detail-pi">π ${calcPi(item.price)}</div>
+            <div class="small-muted">현재 환산 기준: 1 PI = ${Number(state.piRate).toLocaleString()}원</div>
+            <div class="admin-actions" style="margin-top:8px;">
+              <button class="btn" onclick="addToCart('${brand.id}','${item.id}')">장바구니 담기</button>
+              <button class="btn-outline" onclick="openKakao()">카카오 문의</button>
+            </div>
+          </div>
+        </div>
+      `;
+      document.getElementById("productModal").classList.add("open");
+    }
+
+    function closeProductModal() {
+      document.getElementById("productModal").classList.remove("open");
+    }
+
+    function openAdmin() {
+      document.getElementById("adminModal").classList.add("open");
+      renderAdmin();
+    }
+
+    function closeAdmin() {
+      document.getElementById("adminModal").classList.remove("open");
+    }
+
+    function adminLogin() {
+      const input = document.getElementById("admin-password").value;
+      if (input !== ADMIN_PASSWORD) {
+        alert("비밀번호가 올바르지 않습니다.");
+        return;
+      }
+      adminAuthenticated = true;
+      renderAdmin();
+    }
+
+    function adminLogout() {
+      adminAuthenticated = false;
+      document.getElementById("admin-password").value = "";
+      renderAdmin();
+    }
+
+    function renderAdmin() {
+      document.getElementById("admin-login-box").style.display = adminAuthenticated ? "none" : "grid";
+      document.getElementById("admin-content").style.display = adminAuthenticated ? "block" : "none";
+      if (!adminAuthenticated) return;
+
+      document.getElementById("admin-phone").value = state.phone;
+      document.getElementById("admin-kakao").value = state.kakaoUrl;
+      document.getElementById("admin-rate").value = state.piRate;
+      document.getElementById("admin-brand-intro").value = state.brandIntro;
+      document.getElementById("admin-contact-desc").value = state.contactDesc;
+
+      document.getElementById("new-product-brand").innerHTML = state.brands.map(b => `<option value="${b.id}">${b.title}</option>`).join("");
+
+      document.getElementById("admin-notice-list").innerHTML = state.notices.map(n => `
+        <div class="admin-item">
+          <strong>${escapeHtml(n.title)}</strong>
+          <div class="small-muted">${escapeHtml(n.date || "")}</div>
+          <div>${escapeHtml(n.content || "")}</div>
+          <div class="admin-actions">
+            <button class="btn-danger" onclick="removeNotice('${n.id}')">삭제</button>
+          </div>
+        </div>
+      `).join("");
+
+      document.getElementById("admin-event-list").innerHTML = state.events.map(n => `
+        <div class="admin-item">
+          <strong>${escapeHtml(n.title)}</strong>
+          <div class="small-muted">${escapeHtml(n.date || "")}</div>
+          <div>${escapeHtml(n.content || "")}</div>
+          <div class="admin-actions">
+            <button class="btn-danger" onclick="removeEvent('${n.id}')">삭제</button>
+          </div>
+        </div>
+      `).join("");
+
+      document.getElementById("admin-review-list").innerHTML = state.reviews.map(n => `
+        <div class="admin-item">
+          <strong>${escapeHtml(n.title)}</strong>
+          <div class="small-muted">별점 ${n.stars}</div>
+          <div>${escapeHtml(n.content || "")}</div>
+          <div class="admin-actions">
+            <button class="btn-danger" onclick="removeReview('${n.id}')">삭제</button>
+          </div>
+        </div>
+      `).join("");
+
+      const allProducts = state.brands.flatMap(brand => brand.items.map(item => ({ brand, item })));
+      document.getElementById("admin-product-list").innerHTML = allProducts.map(({ brand, item }) => `
+        <div class="admin-item">
+          <strong>${escapeHtml(item.name)}</strong>
+          <div class="small-muted">${brand.title} · ${formatKRW(item.price)} · π ${calcPi(item.price)}</div>
+          <div>${escapeHtml(item.desc || "")}</div>
+          <div class="admin-actions">
+            <button class="btn-danger" onclick="removeProduct('${brand.id}', '${item.id}')">삭제</button>
+          </div>
+        </div>
+      `).join("");
+    }
+
+    function saveBasicSettings() {
+      state.phone = document.getElementById("admin-phone").value.trim() || state.phone;
+      state.kakaoUrl = document.getElementById("admin-kakao").value.trim() || state.kakaoUrl;
+      state.piRate = Number(document.getElementById("admin-rate").value) || state.piRate;
+      state.brandIntro = document.getElementById("admin-brand-intro").value.trim() || state.brandIntro;
+      state.contactDesc = document.getElementById("admin-contact-desc").value.trim() || state.contactDesc;
+      saveState();
+      renderAll();
+      alert("기본 설정이 저장되었습니다.");
+    }
+
+    function addProduct() {
+      const brandId = document.getElementById("new-product-brand").value;
+      const name = document.getElementById("new-product-name").value.trim();
+      const desc = document.getElementById("new-product-desc").value.trim();
+      const price = Number(document.getElementById("new-product-price").value);
+      const image = document.getElementById("new-product-image").value.trim() || placeholderImage;
+
+      if (!brandId || !name || !price) {
+        alert("브랜드, 상품명, 가격은 필수입니다.");
+        return;
+      }
+
+      const brand = state.brands.find(b => b.id === brandId);
+      if (!brand) return;
+
+      brand.items.push({ id: uid(), name, desc, price, image });
+      saveState();
+      renderAll();
+      renderAdmin();
+
+      document.getElementById("new-product-name").value = "";
+      document.getElementById("new-product-desc").value = "";
+      document.getElementById("new-product-price").value = "";
+      document.getElementById("new-product-image").value = "";
+
+      alert("상품이 추가되었습니다.");
+    }
+
+    function removeProduct(brandId, productId) {
+      if (!confirm("상품을 삭제하시겠습니까?")) return;
+      const brand = state.brands.find(b => b.id === brandId);
+      if (!brand) return;
+      brand.items = brand.items.filter(i => i.id !== productId);
+      state.cart = state.cart.filter(c => !(c.brandId === brandId && c.productId === productId));
+      saveState();
+      renderAll();
+      renderAdmin();
+    }
+
+    function addNotice() {
+      const title = document.getElementById("new-notice-title").value.trim();
+      const date = document.getElementById("new-notice-date").value.trim();
+      const content = document.getElementById("new-notice-content").value.trim();
+      if (!title || !content) return alert("공지 제목과 내용을 입력하세요.");
+
+      state.notices.unshift({ id: uid(), title, date, content });
+      saveState();
+      renderAll();
+      renderAdmin();
+
+      document.getElementById("new-notice-title").value = "";
+      document.getElementById("new-notice-date").value = "";
+      document.getElementById("new-notice-content").value = "";
+    }
+
+    function removeNotice(id) {
+      state.notices = state.notices.filter(i => i.id !== id);
+      saveState();
+      renderAll();
+      renderAdmin();
+    }
+
+    function addEvent() {
+      const title = document.getElementById("new-event-title").value.trim();
+      const date = document.getElementById("new-event-date").value.trim();
+      const content = document.getElementById("new-event-content").value.trim();
+      if (!title || !content) return alert("이벤트 제목과 내용을 입력하세요.");
+
+      state.events.unshift({ id: uid(), title, date, content });
+      saveState();
+      renderAll();
+      renderAdmin();
+
+      document.getElementById("new-event-title").value = "";
+      document.getElementById("new-event-date").value = "";
+      document.getElementById("new-event-content").value = "";
+    }
+
+    function removeEvent(id) {
+      state.events = state.events.filter(i => i.id !== id);
+      saveState();
+      renderAll();
+      renderAdmin();
+    }
+
+    function addReview() {
+      const title = document.getElementById("new-review-title").value.trim();
+      const stars = Number(document.getElementById("new-review-stars").value) || 5;
+      const content = document.getElementById("new-review-content").value.trim();
+      if (!title || !content) return alert("후기 작성자와 내용을 입력하세요.");
+
+      state.reviews.unshift({ id: uid(), title, stars: Math.max(1, Math.min(5, stars)), content });
+      saveState();
+      renderAll();
+      renderAdmin();
+
+      document.getElementById("new-review-title").value = "";
+      document.getElementById("new-review-stars").value = "";
+      document.getElementById("new-review-content").value = "";
+    }
+
+    function removeReview(id) {
+      state.reviews = state.reviews.filter(i => i.id !== id);
+      saveState();
+      renderAll();
+      renderAdmin();
+    }
+
+    function manualRateUpdate() {
+      const input = Number(document.getElementById("pi-rate-input").value);
+      if (!input || input <= 0) return alert("올바른 PI 환산 기준을 입력하세요.");
+      state.piRate = input;
+      saveState();
+      renderAll();
+      alert("PI 환산 기준이 반영되었습니다.");
+    }
+
+    function simulateRateFetch() {
+      const simulated = 190 + Math.floor(Math.random() * 70);
+      state.piRate = simulated;
+      saveState();
+      renderAll();
+      alert(`테스트용 PI 환산 기준이 ${simulated}원으로 반영되었습니다.`);
+    }
+
+    function resetStore() {
+      if (!confirm("전체 데이터를 초기 상태로 되돌릴까요?")) return;
+      localStorage.removeItem(STORAGE_KEY);
+      state = JSON.parse(JSON.stringify(defaultState));
+      saveState();
+      renderAll();
+      alert("초기화가 완료되었습니다.");
+    }
+
+    function exportStoreData() {
+      const blob = new Blob([JSON.stringify(state, null, 2)], { type: "application/json" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "thumbtherapy-backup.json";
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+
+    function importStoreData(event) {
+      const file = event.target.files?.[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        try {
+          const imported = JSON.parse(e.target.result);
+          state = { ...state, ...imported };
+          saveState();
+          renderAll();
+          renderAdmin();
+          alert("JSON 복원이 완료되었습니다.");
+        } catch (err) {
+          alert("JSON 파일 형식이 올바르지 않습니다.");
+        }
+      };
+      reader.readAsText(file);
+    }
+
+    function renderAll() {
+      renderTop();
+      renderNav();
+      renderBrandFilterOptions();
+      bindSearchEvents();
+      renderProducts();
+      renderNotices();
+      renderEvents();
+      renderReviews();
+      renderCart();
+    }
+
+    renderAll();
+  </script>
 </body>
 </html>
