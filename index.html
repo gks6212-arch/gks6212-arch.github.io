@@ -3,541 +3,260 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>The Thumb Therapy | Pi Beauty Shop</title>
+  <title>The Thumb Therapy | Premium Beauty Shop</title>
   <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: "Apple SD Gothic Neo","Malgun Gothic",sans-serif; }
+    :root{
+      --bg:#f6f1eb;
+      --card:#ffffff;
+      --line:#eadfd3;
+      --text:#4b3f38;
+      --sub:#7d7067;
+      --main:#8a6a3f;
+      --main2:#b18a57;
+      --soft:#fff8f0;
+      --soft-border:#e7cda7;
+      --disabled:#cfc8c2;
+      --danger:#a14e44;
+      --ok:#2a7a4c;
+      --shadow:0 16px 34px rgba(90,72,53,0.08);
     }
 
-    :root {
-      --bg: #f6f1eb;
-      --card: #ffffff;
-      --line: #eadfd3;
-      --text: #4b3f38;
-      --sub: #7d7067;
-      --main: #8a6a3f;
-      --main-dark: #6d5130;
-      --soft: #fff8f0;
-      --soft-border: #e7cda7;
-      --disabled: #cfc8c2;
-      --danger: #8f4e2e;
-      --ok: #1f7a45;
-    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); line-height: 1.5; }
 
-    body {
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.5;
-    }
-
-    .appbar {
-      position: sticky;
-      top: 0;
-      z-index: 100;
+    .appbar{
+      position: sticky; top: 0; z-index: 100;
       background: rgba(255,255,255,0.94);
       backdrop-filter: blur(8px);
       border-bottom: 1px solid var(--line);
     }
-
-    .appbar-inner {
-      max-width: 980px;
-      margin: 0 auto;
-      padding: 14px 16px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
+    .appbar-inner{
+      max-width: 1280px; margin: 0 auto; padding: 14px 16px;
+      display:flex; align-items:center; justify-content:space-between; gap:12px;
     }
-
-    .brand-wrap {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      min-width: 0;
-    }
-
-    .logo {
-      width: 46px;
-      height: 46px;
-      border-radius: 16px;
+    .brand-wrap{ display:flex; align-items:center; gap:12px; min-width:0; }
+    .logo{
+      width:48px; height:48px; border-radius:16px;
       background: linear-gradient(135deg, #8a6a3f, #ba9967);
-      position: relative;
-      box-shadow: 0 10px 20px rgba(138,106,63,0.22);
-      overflow: hidden;
-      flex: 0 0 46px;
+      position:relative; box-shadow: 0 10px 20px rgba(138,106,63,0.22);
+      overflow:hidden; flex:0 0 48px;
     }
-
-    .logo::before {
-      content: "";
-      position: absolute;
-      left: 11px;
-      top: 20px;
-      width: 18px;
-      height: 12px;
-      background: #fff;
-      border-radius: 10px;
+    .logo::before{
+      content:""; position:absolute; left:11px; top:20px;
+      width:18px; height:12px; background:#fff; border-radius:10px;
       transform: rotate(-8deg);
     }
-
-    .logo::after {
-      content: "";
-      position: absolute;
-      left: 24px;
-      top: 8px;
-      width: 8px;
-      height: 16px;
-      background: #fff;
-      border-radius: 8px;
+    .logo::after{
+      content:""; position:absolute; left:24px; top:8px;
+      width:8px; height:16px; background:#fff; border-radius:8px;
       transform: rotate(24deg);
     }
+    .brand-title{ font-size:18px; font-weight:900; color:#2d2520; }
+    .brand-sub{ font-size:11px; color:#8f8073; margin-top:2px; }
+    .top-icons{ color:#7d6855; font-size:14px; font-weight:700; }
 
-    .brand-title {
-      font-size: 18px;
-      font-weight: 900;
-      color: #2d2520;
-      word-break: keep-all;
+    .hero{
+      max-width:1280px; margin:0 auto; padding:18px 16px 10px;
     }
-
-    .brand-sub {
-      font-size: 11px;
-      color: #8f8073;
-      margin-top: 2px;
-      word-break: keep-all;
-    }
-
-    .app-icons {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 18px;
-      color: #7d6855;
-      flex: 0 0 auto;
-    }
-
-    .hero {
-      max-width: 980px;
-      margin: 0 auto;
-      padding: 18px 16px 12px;
-    }
-
-    .hero-card {
+    .hero-card{
       background: linear-gradient(135deg, #fffaf5, #f7f1ea);
-      border: 1px solid var(--line);
-      border-radius: 28px;
-      padding: 24px 18px 20px;
-      box-shadow: 0 16px 34px rgba(90,72,53,0.08);
+      border:1px solid var(--line);
+      border-radius:28px;
+      padding:24px 18px 20px;
+      box-shadow: var(--shadow);
+    }
+    .hero-title{
+      font-size:32px; font-weight:900; color:#3f332b;
+      margin-bottom:8px; word-break:keep-all;
+    }
+    .hero-desc{
+      font-size:14px; color:#7b6f64; max-width:760px; word-break:keep-all;
+    }
+    .pi-badge{
+      display:inline-block; margin-top:12px; padding:8px 12px; border-radius:999px;
+      background: rgba(138,106,63,0.10); color:var(--main); font-size:12px; font-weight:900;
     }
 
-    .hero-title {
-      font-size: 30px;
-      font-weight: 900;
-      color: #3f332b;
-      margin-bottom: 8px;
-      word-break: keep-all;
+    .notice-box{
+      margin-top:18px; background:var(--soft); border:1px solid var(--soft-border);
+      color:#7a5a2f; padding:16px; border-radius:20px;
+      box-shadow:0 8px 18px rgba(122,90,47,0.06);
     }
+    .notice-title{ font-size:15px; font-weight:900; margin-bottom:8px; }
+    .notice-text{ font-size:14px; line-height:1.7; word-break:keep-all; }
 
-    .hero-desc {
-      font-size: 14px;
-      color: #7b6f64;
-      max-width: 560px;
-      word-break: keep-all;
+    .button-group{
+      display:flex; flex-wrap:wrap; gap:12px; margin-top:18px; max-width:720px;
     }
-
-    .pi-badge {
-      display: inline-block;
-      margin-top: 12px;
-      padding: 8px 12px;
-      border-radius: 999px;
-      background: rgba(138,106,63,0.10);
-      color: var(--main);
-      font-size: 12px;
-      font-weight: 900;
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      min-width:180px; text-align:center; text-decoration:none;
+      padding:15px 14px; border-radius:18px; font-size:15px; font-weight:900; border:none;
     }
-
-    .notice-box {
-      margin-top: 18px;
-      background: var(--soft);
-      border: 1px solid var(--soft-border);
-      color: #7a5a2f;
-      padding: 16px;
-      border-radius: 20px;
-      box-shadow: 0 8px 18px rgba(122,90,47,0.06);
-    }
-
-    .notice-title {
-      font-size: 15px;
-      font-weight: 900;
-      margin-bottom: 8px;
-    }
-
-    .notice-text {
-      font-size: 14px;
-      line-height: 1.7;
-      word-break: keep-all;
-    }
-
-    .button-group {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      margin-top: 18px;
-      max-width: 420px;
-    }
-
-    .btn {
-      display: block;
-      width: 100%;
-      text-align: center;
-      text-decoration: none;
-      padding: 16px 14px;
-      border-radius: 18px;
-      font-size: 16px;
-      font-weight: 900;
-      user-select: none;
-      border: none;
-    }
-
-    .btn-main {
+    .btn-main{
       background: linear-gradient(135deg, #8a6a3f, #a98758);
-      color: #fff;
-      box-shadow: 0 10px 20px rgba(138,106,63,0.18);
+      color:#fff; box-shadow:0 10px 20px rgba(138,106,63,0.18);
+    }
+    .btn-line{
+      background:#fff; color:var(--main); border:2px solid #dccfbf;
+    }
+    .btn-disabled-primary{
+      background:#c9c1bb; color:#fff; pointer-events:none; cursor:not-allowed; box-shadow:none;
+    }
+    .btn-disabled-secondary{
+      background:#f8f6f4; color:#a09790; border:2px solid #ddd6d0; pointer-events:none; cursor:not-allowed;
     }
 
-    .btn-line {
-      background: #fff;
-      color: var(--main);
-      border: 2px solid #dccfbf;
+    .ticker{
+      margin-top:18px; background:#fff; border:1px solid var(--line);
+      border-radius:22px; padding:16px;
+    }
+    .ticker-label{
+      font-size:12px; color:#9a8a7a; margin-bottom:6px;
+      text-transform:uppercase; letter-spacing:0.7px;
+    }
+    .ticker-price{ font-size:24px; font-weight:900; color:var(--main); }
+    .ticker-meta{ font-size:13px; color:#7e7368; margin-top:4px; }
+    .ticker-note{ font-size:12px; color:#8b8076; margin-top:8px; }
+
+    .brand-menu-wrap{
+      max-width:1280px; margin:0 auto; padding:8px 16px 0;
+      position: sticky; top: 77px; z-index: 90;
+      background: linear-gradient(to bottom, rgba(246,241,235,0.98), rgba(246,241,235,0.90));
+      backdrop-filter: blur(4px);
+    }
+    .brand-menu{
+      display:flex; overflow-x:auto; gap:10px; padding-bottom:8px;
+      scrollbar-width: none;
+    }
+    .brand-menu::-webkit-scrollbar{ display:none; }
+    .brand-chip{
+      white-space:nowrap; border:none; cursor:pointer;
+      background:#fff; color:#6d5a49; border:1px solid #dfd3c7;
+      padding:10px 16px; border-radius:999px; font-size:14px; font-weight:900;
+      box-shadow: 0 4px 10px rgba(90,72,53,0.05);
     }
 
-    .btn-disabled-primary {
-      background: #c9c1bb;
-      color: #fff;
-      pointer-events: none;
-      cursor: not-allowed;
-      box-shadow: none;
+    .content{
+      max-width:1280px; margin:0 auto; padding:14px 16px 70px;
     }
 
-    .btn-disabled-secondary {
-      background: #f8f6f4;
-      color: #a09790;
-      border: 2px solid #ddd6d0;
-      pointer-events: none;
-      cursor: not-allowed;
+    .brand-section{
+      margin-top:22px; background:#fff; border:1px solid var(--line);
+      border-radius:28px; padding:22px 16px 18px; box-shadow:var(--shadow);
+    }
+    .brand-section-head{
+      display:flex; align-items:end; justify-content:space-between; gap:12px; margin-bottom:16px;
+      flex-wrap: wrap;
+    }
+    .brand-section-title{ font-size:24px; font-weight:900; color:#4a3e35; }
+    .brand-section-sub{ font-size:13px; color:#8b8076; margin-top:6px; }
+
+    .product-grid{
+      display:grid; grid-template-columns:repeat(5, minmax(0, 1fr)); gap:16px;
     }
 
-    .ticker {
-      margin-top: 18px;
-      background: #fff;
-      border: 1px solid var(--line);
-      border-radius: 22px;
-      padding: 16px;
+    .card{
+      background:#fff; border:1px solid var(--line); border-radius:24px; overflow:hidden;
+      box-shadow:0 10px 22px rgba(94,76,58,0.08);
     }
-
-    .ticker-label {
-      font-size: 12px;
-      color: #9a8a7a;
-      margin-bottom: 6px;
-      text-transform: uppercase;
-      letter-spacing: 0.7px;
+    .card.hide { display:none; }
+    .card-thumb{
+      height:190px; background:linear-gradient(135deg,#eee8e2,#d9d0c8);
+      position:relative; overflow:hidden;
     }
-
-    .ticker-price {
-      font-size: 24px;
-      font-weight: 900;
-      color: var(--main);
-    }
-
-    .ticker-meta {
-      font-size: 13px;
-      color: #7e7368;
-      margin-top: 4px;
-    }
-
-    .status {
-      display: inline-block;
-      margin-top: 8px;
-      font-size: 12px;
-      font-weight: 800;
-      padding: 6px 10px;
-      border-radius: 999px;
-      background: rgba(138,106,63,0.10);
-      color: var(--main);
-    }
-
-    .grid-wrap {
-      max-width: 980px;
-      margin: 0 auto;
-      padding: 14px 16px 70px;
-    }
-
-    .section-title {
-      font-size: 21px;
-      font-weight: 900;
-      color: #4a3e35;
-      margin: 16px 0 14px;
-    }
-
-    .product-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 16px;
-    }
-
-    .card {
-      background: #fff;
-      border: 1px solid var(--line);
-      border-radius: 26px;
-      overflow: hidden;
-      box-shadow: 0 10px 22px rgba(94,76,58,0.08);
-    }
-
-    .card-thumb {
-      height: 180px;
-      background: linear-gradient(135deg, #eee8e2, #d9d0c8);
-      position: relative;
-    }
-
-    .thumb-glow {
-      position: absolute;
-      inset: 18px;
-      border-radius: 22px;
+    .card-thumb img{ width:100%; height:100%; object-fit:cover; display:block; }
+    .thumb-glow{
+      position:absolute; inset:18px; border-radius:22px;
       background:
         radial-gradient(circle at 30% 30%, rgba(255,255,255,0.95), transparent 32%),
         radial-gradient(circle at 70% 35%, rgba(255,255,255,0.55), transparent 24%),
         linear-gradient(135deg, #f4ede6, #d8cec6);
     }
 
-    .card-body {
-      padding: 16px 16px 18px;
+    .card-body{ padding:14px 14px 16px; }
+    .product-name{
+      font-size:15px; font-weight:900; color:#5a493f;
+      margin-bottom:8px; word-break:keep-all; min-height:42px;
+    }
+    .rating{ color:#6b5748; font-size:13px; margin-bottom:6px; font-weight:700; }
+    .price-krw{ color:#9a8a7a; font-size:15px; margin-bottom:4px; }
+    .price-pi{ color:var(--main); font-size:18px; font-weight:900; margin-bottom:10px; }
+    .buy-btn-disabled{
+      display:block; width:100%; text-align:center;
+      background:#d6cfc9; color:#ffffff; padding:12px 10px;
+      border-radius:14px; font-size:13px; font-weight:900; border:none;
+      cursor:not-allowed; pointer-events:none;
     }
 
-    .product-name {
-      font-size: 16px;
-      font-weight: 900;
-      color: #5a493f;
-      margin-bottom: 10px;
-      word-break: keep-all;
+    .note{
+      margin-top:16px; font-size:13px; color:#8b8076; line-height:1.65; word-break:keep-all;
     }
 
-    .rating {
-      color: #6b5748;
-      font-size: 13px;
-      margin-bottom: 8px;
-      font-weight: 700;
+    .footer-box{
+      margin-top:20px; background:#fff; border:1px solid var(--line);
+      border-radius:24px; padding:18px;
+    }
+    .footer-box h3{ font-size:18px; color:#5b4a3e; margin-bottom:8px; font-weight:900; }
+    .footer-box p{ font-size:14px; color:#796f66; margin-bottom:8px; word-break:keep-all; }
+
+    .admin-fab{
+      position:fixed; right:16px; bottom:18px; z-index:200;
+      width:58px; height:58px; border-radius:50%; border:none;
+      background:linear-gradient(135deg,#4e3c2d,#8a6a3f);
+      color:#fff; font-size:13px; font-weight:900;
+      box-shadow:0 14px 24px rgba(78,60,45,0.25);
+      cursor:pointer;
+    }
+    .admin-panel{
+      position:fixed; right:16px; bottom:86px; z-index:210;
+      width:min(96vw, 470px); max-height:82vh; overflow:auto;
+      background:#fff; border:1px solid var(--line); border-radius:22px;
+      box-shadow:0 18px 36px rgba(44,34,25,0.18); padding:16px; display:none;
+    }
+    .admin-panel.show{ display:block; }
+    .admin-title{ font-size:16px; font-weight:900; color:#3e322a; margin-bottom:12px; }
+    .admin-subtitle{ font-size:13px; font-weight:900; color:#6d5c4b; margin:14px 0 8px; }
+    .admin-input,.admin-textarea,.admin-select{
+      width:100%; border:1px solid #ddd3c8; border-radius:14px; padding:12px;
+      font-size:14px; outline:none; margin-bottom:8px; background:#fff;
+    }
+    .admin-textarea{ min-height:90px; resize:vertical; }
+    .admin-actions{ display:grid; gap:8px; margin-top:10px; }
+    .admin-btn{
+      border:none; border-radius:12px; padding:11px 10px;
+      font-size:13px; font-weight:900; cursor:pointer;
+    }
+    .admin-btn-main{ background:#8a6a3f; color:#fff; }
+    .admin-btn-soft{ background:#f4eee8; color:#6c5847; }
+    .admin-btn-danger{ background:#f7ebe5; color:var(--danger); }
+    .toggle-row{ display:flex; gap:8px; margin-bottom:8px; }
+    .toggle-chip{
+      flex:1; text-align:center; padding:10px 8px; border-radius:12px;
+      font-size:13px; font-weight:900; border:1px solid #ddd3c8; background:#fff; cursor:pointer;
+    }
+    .toggle-chip.active{ background:#8a6a3f; color:#fff; border-color:#8a6a3f; }
+    .product-editor{
+      border:1px solid #eee4da; border-radius:16px; padding:12px; background:#fcfaf8; margin-bottom:10px;
+    }
+    .admin-help{ font-size:12px; color:#7a7169; line-height:1.6; margin-top:8px; }
+    .small-check{
+      display:flex; align-items:center; gap:8px; font-size:13px; color:#6d5c4b; margin:6px 0 8px;
     }
 
-    .price-krw {
-      color: #9a8a7a;
-      font-size: 16px;
-      margin-bottom: 4px;
+    @media (max-width: 1180px){
+      .product-grid{ grid-template-columns:repeat(4, minmax(0, 1fr)); }
     }
-
-    .price-pi {
-      color: var(--main);
-      font-size: 18px;
-      font-weight: 900;
-      margin-bottom: 12px;
+    @media (max-width: 980px){
+      .product-grid{ grid-template-columns:repeat(3, minmax(0, 1fr)); }
     }
-
-    .buy-btn {
-      display: block;
-      width: 100%;
-      text-align: center;
-      background: linear-gradient(135deg, #8a6a3f, #a98758);
-      color: #ffffff;
-      padding: 13px 12px;
-      border-radius: 16px;
-      font-size: 14px;
-      font-weight: 900;
-      border: none;
-      cursor: pointer;
-    }
-
-    .buy-btn-disabled {
-      display: block;
-      width: 100%;
-      text-align: center;
-      background: #d6cfc9;
-      color: #ffffff;
-      padding: 13px 12px;
-      border-radius: 16px;
-      font-size: 14px;
-      font-weight: 900;
-      border: none;
-      cursor: not-allowed;
-      pointer-events: none;
-    }
-
-    .note {
-      margin-top: 16px;
-      font-size: 13px;
-      color: #8b8076;
-      line-height: 1.65;
-      word-break: keep-all;
-    }
-
-    .footer-box {
-      margin-top: 20px;
-      background: #fff;
-      border: 1px solid var(--line);
-      border-radius: 24px;
-      padding: 18px;
-    }
-
-    .footer-box h3 {
-      font-size: 18px;
-      color: #5b4a3e;
-      margin-bottom: 8px;
-      font-weight: 900;
-    }
-
-    .footer-box p {
-      font-size: 14px;
-      color: #796f66;
-      margin-bottom: 8px;
-      word-break: keep-all;
-    }
-
-    /* 관리자 모드 */
-    .admin-fab {
-      position: fixed;
-      right: 16px;
-      bottom: 18px;
-      z-index: 200;
-      width: 58px;
-      height: 58px;
-      border-radius: 50%;
-      border: none;
-      background: linear-gradient(135deg, #4e3c2d, #8a6a3f);
-      color: #fff;
-      font-size: 13px;
-      font-weight: 900;
-      box-shadow: 0 14px 24px rgba(78,60,45,0.25);
-      cursor: pointer;
-    }
-
-    .admin-panel {
-      position: fixed;
-      right: 16px;
-      bottom: 86px;
-      z-index: 210;
-      width: min(92vw, 360px);
-      background: #fff;
-      border: 1px solid var(--line);
-      border-radius: 22px;
-      box-shadow: 0 18px 36px rgba(44,34,25,0.18);
-      padding: 16px;
-      display: none;
-    }
-
-    .admin-panel.show {
-      display: block;
-    }
-
-    .admin-title {
-      font-size: 16px;
-      font-weight: 900;
-      color: #3e322a;
-      margin-bottom: 12px;
-    }
-
-    .admin-row {
-      display: grid;
-      gap: 10px;
-      margin-bottom: 12px;
-    }
-
-    .admin-input {
-      width: 100%;
-      border: 1px solid #ddd3c8;
-      border-radius: 14px;
-      padding: 12px;
-      font-size: 14px;
-      outline: none;
-    }
-
-    .admin-actions {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 8px;
-      margin-top: 10px;
-    }
-
-    .admin-btn {
-      border: none;
-      border-radius: 12px;
-      padding: 10px 8px;
-      font-size: 13px;
-      font-weight: 900;
-      cursor: pointer;
-    }
-
-    .admin-btn-main {
-      background: #8a6a3f;
-      color: #fff;
-    }
-
-    .admin-btn-soft {
-      background: #f4eee8;
-      color: #6c5847;
-    }
-
-    .admin-btn-danger {
-      background: #f7ebe5;
-      color: var(--danger);
-    }
-
-    .admin-info {
-      font-size: 13px;
-      line-height: 1.6;
-      color: #7b6d61;
-      margin-top: 10px;
-      word-break: keep-all;
-    }
-
-    .admin-mode-badge {
-      display: inline-block;
-      margin-top: 8px;
-      font-size: 12px;
-      font-weight: 800;
-      padding: 6px 10px;
-      border-radius: 999px;
-      background: rgba(31,122,69,0.10);
-      color: var(--ok);
-    }
-
-    @media (max-width: 640px) {
-      .hero-title {
-        font-size: 24px;
-      }
-
-      .product-grid {
-        grid-template-columns: 1fr 1fr;
-        gap: 12px;
-      }
-
-      .card-thumb {
-        height: 150px;
-      }
-
-      .ticker-price {
-        font-size: 22px;
-      }
-
-      .product-name {
-        font-size: 15px;
-      }
-
-      .button-group {
-        max-width: 100%;
-      }
-
-      .admin-actions {
-        grid-template-columns: 1fr;
-      }
+    @media (max-width: 700px){
+      .product-grid{ grid-template-columns:repeat(2, minmax(0, 1fr)); }
+      .hero-title{ font-size:24px; }
+      .ticker-price{ font-size:22px; }
+      .product-name{ font-size:14px; min-height:38px; }
+      .card-thumb{ height:150px; }
     }
   </style>
 </head>
@@ -551,18 +270,13 @@
           <div class="brand-sub" id="brandSub">Preparation Stage · Domain Verification</div>
         </div>
       </div>
-      <div class="app-icons">
-        <span>⌕</span>
-        <span>♡</span>
-        <span>🛒</span>
-        <span>☰</span>
-      </div>
+      <div class="top-icons">Beauty & Pi</div>
     </div>
   </header>
 
   <section class="hero">
     <div class="hero-card">
-      <div class="hero-title">프리미엄 뷰티 스토어</div>
+      <div class="hero-title" id="heroTitle">프리미엄 뷰티 스토어</div>
       <div class="hero-desc" id="heroDesc">
         한국 가격과 현재 PI 시세를 함께 표시하는 테스트용 쇼핑 화면입니다.
         현재는 도메인 인증 및 정식 오픈 준비 단계입니다.
@@ -587,20 +301,19 @@
         <div class="ticker-label">Kraken PI Live Price</div>
         <div class="ticker-price" id="piPriceText">불러오는 중…</div>
         <div class="ticker-meta" id="piMetaText">Kraken 공개 시세 확인 중</div>
-        <div class="status" id="piStatus">시세 로딩 중</div>
+        <div class="ticker-note" id="priceNote">PI 환산값은 실시간 PI/USD 시세를 기준으로 계산되는 참고용 표시입니다.</div>
       </div>
     </div>
   </section>
 
-  <main class="grid-wrap">
-    <div class="section-title">상품 안내</div>
-    <div class="product-grid" id="productGrid"></div>
+  <div class="brand-menu-wrap">
+    <div class="brand-menu" id="brandMenu"></div>
+  </div>
 
-    <div class="note" id="priceNote">
-      PI 환산값은 실시간 PI/USD 시세를 기준으로 계산되는 참고용 표시입니다.
-    </div>
+  <main class="content">
+    <div id="brandSections"></div>
 
-    <div class="footer-box" id="footerBox">
+    <div class="footer-box">
       <h3>안내 사항</h3>
       <p id="footerLine1">현재 페이지는 도메인 인증 및 디자인 점검을 위한 테스트 화면입니다.</p>
       <p id="footerLine2">상담, 예약, 결제 기능은 정식 오픈 전까지 비활성 상태로 유지됩니다.</p>
@@ -611,53 +324,109 @@
   <button class="admin-fab" id="adminFab">관리자</button>
 
   <div class="admin-panel" id="adminPanel">
-    <div class="admin-title">관리자 모드</div>
+    <div class="admin-title">100% 편집 관리자</div>
 
-    <div id="loginArea" class="admin-row">
+    <div id="loginArea">
       <input id="adminPassword" class="admin-input" type="password" placeholder="비밀번호 입력" />
-      <button class="admin-btn admin-btn-main" onclick="loginAdmin()">로그인</button>
+      <div class="admin-actions">
+        <button class="admin-btn admin-btn-main" onclick="loginAdmin()">로그인</button>
+      </div>
     </div>
 
-    <div id="controlArea" style="display:none;">
-      <div class="admin-mode-badge" id="adminModeBadge">현재 모드: 1단계 준비중</div>
+    <div id="editArea" style="display:none;">
+      <div class="admin-subtitle">기본 정보</div>
+      <input id="editHeroTitle" class="admin-input" type="text" placeholder="메인 제목" />
+      <textarea id="editHeroDesc" class="admin-textarea" placeholder="소개글"></textarea>
+
+      <div class="admin-subtitle">공지 설정</div>
+      <div class="toggle-row">
+        <button type="button" id="noticeOnBtn" class="toggle-chip" onclick="setNoticeToggle(true)">공지 ON</button>
+        <button type="button" id="noticeOffBtn" class="toggle-chip" onclick="setNoticeToggle(false)">공지 OFF</button>
+      </div>
+      <input id="editNoticeTitle" class="admin-input" type="text" placeholder="공지 제목" />
+      <textarea id="editNoticeText" class="admin-textarea" placeholder="공지 내용"></textarea>
+
+      <div class="admin-subtitle">상담 버튼 / 링크</div>
+      <input id="editKakaoText" class="admin-input" type="text" placeholder="카카오 버튼 문구" />
+      <input id="editKakaoLink" class="admin-input" type="text" placeholder="카카오 링크" />
+      <input id="editPhoneText" class="admin-input" type="text" placeholder="전화 버튼 문구" />
+      <input id="editPhoneNumber" class="admin-input" type="text" placeholder="전화번호 (예: 01012345678)" />
+
+      <div class="admin-subtitle">하단 안내 문구</div>
+      <input id="editFooter1" class="admin-input" type="text" placeholder="하단 문구 1" />
+      <input id="editFooter2" class="admin-input" type="text" placeholder="하단 문구 2" />
+      <input id="editFooter3" class="admin-input" type="text" placeholder="하단 문구 3" />
+
+      <div class="admin-subtitle">브랜드/상품 전체 관리</div>
+      <div id="productEditors"></div>
 
       <div class="admin-actions">
-        <button class="admin-btn admin-btn-soft" onclick="setStage(1)">1단계</button>
-        <button class="admin-btn admin-btn-soft" onclick="setStage(2)">2단계</button>
-        <button class="admin-btn admin-btn-soft" onclick="setStage(3)">3단계</button>
+        <button class="admin-btn admin-btn-main" onclick="saveAdminData()">저장</button>
+        <button class="admin-btn admin-btn-soft" onclick="loadAdminInputs()">불러오기</button>
+        <button class="admin-btn admin-btn-danger" onclick="resetAdminData()">초기화</button>
+        <button class="admin-btn admin-btn-soft" onclick="logoutAdmin()">로그아웃</button>
       </div>
 
-      <div class="admin-actions" style="margin-top:8px;">
-        <button class="admin-btn admin-btn-main" onclick="showNotice()">공지 보이기</button>
-        <button class="admin-btn admin-btn-soft" onclick="hideNotice()">공지 숨기기</button>
-        <button class="admin-btn admin-btn-danger" onclick="logoutAdmin()">로그아웃</button>
-      </div>
-
-      <div class="admin-info">
-        1단계: 공지 표시 / 상담 비활성 / 결제 비활성<br>
-        2단계: 공지 축소 / 상담 활성 / 결제 비활성<br>
-        3단계: 공지 숨김 / 상담 활성 / 결제 버튼 활성화 UI
+      <div class="admin-help">
+        이미지 주소를 넣으면 상품 카드에 이미지가 표시됩니다.<br>
+        예: https://...jpg 또는 /images/item1.jpg<br>
+        상품 숨기기를 체크하면 해당 상품은 메인에서 보이지 않습니다.
       </div>
     </div>
   </div>
 
   <script>
-    const USD_KRW = 1508.4;
     const ADMIN_PASSWORD = "1234";
-    const STORAGE_STAGE_KEY = "thumbtherapy_stage";
-    const STORAGE_NOTICE_KEY = "thumbtherapy_notice";
-    const STORAGE_ADMIN_KEY = "thumbtherapy_admin";
+    const USD_KRW = 1508.4;
+    const STORAGE_ADMIN_KEY = "full_admin_logged_in";
+    const STORAGE_CONTENT_KEY = "full_admin_content";
 
-    const products = [
-      { name: "노라보떼 윤광 세럼", rating: 4.9, priceKRW: 180000 },
-      { name: "노라보떼 벨벳 쿠션", rating: 4.8, priceKRW: 198000 },
-      { name: "노라보떼 옥시젯 케어", rating: 4.8, priceKRW: 160000 },
-      { name: "노라보떼 인텐트 코팅", rating: 4.9, priceKRW: 250000 },
-      { name: "글로우 리커버 앰플", rating: 4.7, priceKRW: 129000 },
-      { name: "시그니처 립 글로우", rating: 4.9, priceKRW: 89000 }
+    const BRAND_KEYS = [
+      { key: "norabode", label: "노라보데" },
+      { key: "alchemy", label: "알케미아" },
+      { key: "guinot", label: "기노" },
+      { key: "thalgo", label: "탈라" },
+      { key: "sothys", label: "쏘티스" }
     ];
 
+    function makeProducts(prefix, basePrice) {
+      return Array.from({ length: 10 }, (_, i) => ({
+        name: `${prefix} 상품 ${String(i + 1).padStart(2, "0")}`,
+        priceKRW: basePrice + i * 10000,
+        rating: Number((4.7 + (i % 3) * 0.1).toFixed(1)),
+        image: "",
+        visible: true
+      }));
+    }
+
+    const defaultContent = {
+      heroTitle: "프리미엄 뷰티 스토어",
+      heroDesc: "한국 가격과 현재 PI 시세를 함께 표시하는 테스트용 쇼핑 화면입니다. 현재는 도메인 인증 및 정식 오픈 준비 단계입니다.",
+      noticeEnabled: true,
+      noticeTitle: "현재 서비스 준비 중입니다",
+      noticeText: "현재 본 사이트는 도메인 인증 및 정식 오픈 준비 단계로 운영되고 있습니다.\n테스트 페이지이므로 전화 문의, 카카오 상담, 예약 및 결제 기능은 아직 진행하지 않습니다.\n정식 오픈 후 정상적으로 안내드리겠습니다.",
+      kakaoText: "카카오 상담 준비중",
+      kakaoLink: "https://open.kakao.com/o/sqB6lDni",
+      phoneText: "전화 상담 준비중",
+      phoneNumber: "01012345678",
+      footer1: "현재 페이지는 도메인 인증 및 디자인 점검을 위한 테스트 화면입니다.",
+      footer2: "상담, 예약, 결제 기능은 정식 오픈 전까지 비활성 상태로 유지됩니다.",
+      footer3: "표시되는 상품 구성 및 가격 정보는 테스트 목적에 따라 변경될 수 있습니다.",
+      brands: {
+        norabode: { label: "노라보데", desc: "프리미엄 스킨케어 라인", products: makeProducts("노라보데", 120000) },
+        alchemy:  { label: "알케미아", desc: "자연 유래 케어 라인", products: makeProducts("알케미아", 130000) },
+        guinot:   { label: "기노", desc: "전문 에스테틱 케어 라인", products: makeProducts("기노", 140000) },
+        thalgo:   { label: "탈라", desc: "해양 성분 기반 케어 라인", products: makeProducts("탈라", 150000) },
+        sothys:   { label: "쏘티스", desc: "럭셔리 뷰티 케어 라인", products: makeProducts("쏘티스", 160000) }
+      }
+    };
+
     let currentPiPriceUSD = 0.18;
+    let currentNoticeEnabled = true;
+
+    function deepClone(obj) {
+      return JSON.parse(JSON.stringify(obj));
+    }
 
     function won(v) {
       return "₩" + new Intl.NumberFormat("ko-KR").format(Math.round(v));
@@ -671,154 +440,284 @@
       return "$" + Number(v).toFixed(4);
     }
 
-    function getSavedStage() {
-      return Number(localStorage.getItem(STORAGE_STAGE_KEY) || "1");
+    function getContent() {
+      const saved = localStorage.getItem(STORAGE_CONTENT_KEY);
+      if (!saved) return deepClone(defaultContent);
+      try {
+        return JSON.parse(saved);
+      } catch {
+        return deepClone(defaultContent);
+      }
     }
 
-    function getSavedNotice() {
-      const value = localStorage.getItem(STORAGE_NOTICE_KEY);
-      return value === null ? true : value === "true";
+    function setContent(data) {
+      localStorage.setItem(STORAGE_CONTENT_KEY, JSON.stringify(data));
     }
 
-    function saveStage(value) {
-      localStorage.setItem(STORAGE_STAGE_KEY, String(value));
+    function updateNoticeToggleUI() {
+      document.getElementById("noticeOnBtn").classList.toggle("active", currentNoticeEnabled === true);
+      document.getElementById("noticeOffBtn").classList.toggle("active", currentNoticeEnabled === false);
     }
 
-    function saveNotice(value) {
-      localStorage.setItem(STORAGE_NOTICE_KEY, String(value));
+    function setNoticeToggle(value) {
+      currentNoticeEnabled = value;
+      updateNoticeToggleUI();
     }
 
-    function updateAdminBadge(stage) {
-      const names = {
-        1: "현재 모드: 1단계 준비중",
-        2: "현재 모드: 2단계 오픈직전",
-        3: "현재 모드: 3단계 운영모드"
-      };
-      document.getElementById("adminModeBadge").textContent = names[stage];
+    function renderBrandMenu(data) {
+      const menu = document.getElementById("brandMenu");
+      menu.innerHTML = "";
+      BRAND_KEYS.forEach(({ key }) => {
+        const label = data.brands[key]?.label || key;
+        const btn = document.createElement("button");
+        btn.className = "brand-chip";
+        btn.textContent = label;
+        btn.onclick = () => {
+          document.getElementById(`section-${key}`).scrollIntoView({ behavior: "smooth", block: "start" });
+        };
+        menu.appendChild(btn);
+      });
     }
 
-    function applyStage(stage) {
-      const brandSub = document.getElementById("brandSub");
-      const heroDesc = document.getElementById("heroDesc");
-      const stageBadge = document.getElementById("stageBadge");
-      const noticeTitle = document.getElementById("noticeTitle");
-      const noticeText = document.getElementById("noticeText");
+    function renderBrandSections(data) {
+      const wrap = document.getElementById("brandSections");
+      wrap.innerHTML = "";
+
+      BRAND_KEYS.forEach(({ key }) => {
+        const brand = data.brands[key];
+        const visibleProducts = brand.products.filter(p => p.visible !== false);
+
+        const section = document.createElement("section");
+        section.className = "brand-section";
+        section.id = `section-${key}`;
+
+        let cards = "";
+        visibleProducts.forEach((item) => {
+          const priceUsd = item.priceKRW / USD_KRW;
+          const pricePi = priceUsd / currentPiPriceUSD;
+
+          const imagePart = item.image && item.image.trim() !== ""
+            ? `<img src="${item.image}" alt="${item.name}" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"><div class="thumb-glow" style="display:none;"></div>`
+            : `<div class="thumb-glow"></div>`;
+
+          cards += `
+            <article class="card">
+              <div class="card-thumb">
+                ${imagePart}
+              </div>
+              <div class="card-body">
+                <div class="product-name">${item.name}</div>
+                <div class="rating">⭐ ${Number(item.rating).toFixed(1)}</div>
+                <div class="price-krw">${won(item.priceKRW)}</div>
+                <div class="price-pi">${pi(pricePi)}</div>
+                <button class="buy-btn-disabled">결제 준비중</button>
+              </div>
+            </article>
+          `;
+        });
+
+        section.innerHTML = `
+          <div class="brand-section-head">
+            <div>
+              <div class="brand-section-title">${brand.label}</div>
+              <div class="brand-section-sub">${brand.desc || ""}</div>
+            </div>
+            <div class="brand-section-sub">상품 ${visibleProducts.length}개</div>
+          </div>
+          <div class="product-grid">${cards}</div>
+        `;
+
+        wrap.appendChild(section);
+      });
+    }
+
+    function applyContent() {
+      const data = getContent();
+
+      document.getElementById("heroTitle").textContent = data.heroTitle;
+      document.getElementById("heroDesc").textContent = data.heroDesc;
+      document.getElementById("noticeTitle").textContent = data.noticeTitle;
+      document.getElementById("noticeText").innerHTML = data.noticeText.replace(/\n/g, "<br>");
+      document.getElementById("noticeBox").style.display = data.noticeEnabled ? "block" : "none";
+
       const kakaoBtn = document.getElementById("kakaoBtn");
       const phoneBtn = document.getElementById("phoneBtn");
-      const footerLine1 = document.getElementById("footerLine1");
-      const footerLine2 = document.getElementById("footerLine2");
-      const footerLine3 = document.getElementById("footerLine3");
 
-      if (stage === 1) {
-        brandSub.textContent = "Preparation Stage · Domain Verification";
-        heroDesc.textContent = "한국 가격과 현재 PI 시세를 함께 표시하는 테스트용 쇼핑 화면입니다. 현재는 도메인 인증 및 정식 오픈 준비 단계입니다.";
-        stageBadge.textContent = "도메인 인증 및 오픈 준비 중";
-        noticeTitle.textContent = "현재 서비스 준비 중입니다";
-        noticeText.innerHTML =
-          "현재 본 사이트는 도메인 인증 및 정식 오픈 준비 단계로 운영되고 있습니다.<br>테스트 페이지이므로 전화 문의, 카카오 상담, 예약 및 결제 기능은 아직 진행하지 않습니다.<br>정식 오픈 후 정상적으로 안내드리겠습니다.";
+      kakaoBtn.textContent = data.kakaoText;
+      phoneBtn.textContent = data.phoneText;
+
+      const kakaoReady = !data.kakaoText.includes("준비중") && data.kakaoLink.trim() !== "";
+      const phoneReady = !data.phoneText.includes("준비중") && data.phoneNumber.trim() !== "";
+
+      if (kakaoReady) {
+        kakaoBtn.className = "btn btn-main";
+        kakaoBtn.href = data.kakaoLink;
+        kakaoBtn.target = "_blank";
+      } else {
         kakaoBtn.className = "btn btn-disabled-primary";
-        kakaoBtn.textContent = "카카오 상담 준비중";
         kakaoBtn.href = "javascript:void(0)";
+        kakaoBtn.removeAttribute("target");
+      }
+
+      if (phoneReady) {
+        phoneBtn.className = "btn btn-line";
+        phoneBtn.href = `tel:${data.phoneNumber}`;
+      } else {
         phoneBtn.className = "btn btn-disabled-secondary";
-        phoneBtn.textContent = "전화 상담 준비중";
         phoneBtn.href = "javascript:void(0)";
-        footerLine1.textContent = "현재 페이지는 도메인 인증 및 디자인 점검을 위한 테스트 화면입니다.";
-        footerLine2.textContent = "상담, 예약, 결제 기능은 정식 오픈 전까지 비활성 상태로 유지됩니다.";
-        footerLine3.textContent = "표시되는 상품 구성 및 가격 정보는 테스트 목적에 따라 변경될 수 있습니다.";
       }
 
-      if (stage === 2) {
-        brandSub.textContent = "Opening Soon · Pre-Launch Stage";
-        heroDesc.textContent = "오픈 직전 안내 단계입니다. 상담은 가능하지만 결제 기능은 아직 준비 중입니다.";
-        stageBadge.textContent = "오픈 직전 · 상담 가능";
-        noticeTitle.textContent = "정식 오픈 직전 안내";
-        noticeText.innerHTML =
-          "현재 본 사이트는 정식 오픈 직전 단계입니다.<br>전화 및 카카오 상담은 가능하지만 결제 기능은 아직 준비 중입니다.<br>최종 점검 완료 후 정상 오픈됩니다.";
-        kakaoBtn.className = "btn btn-main";
-        kakaoBtn.textContent = "카카오 상담";
-        kakaoBtn.href = "https://open.kakao.com/o/sqB6lDni";
-        phoneBtn.className = "btn btn-line";
-        phoneBtn.textContent = "전화 상담";
-        phoneBtn.href = "tel:01012345678";
-        footerLine1.textContent = "현재 페이지는 오픈 직전 단계입니다.";
-        footerLine2.textContent = "상담 기능은 활성화되며 결제 기능은 아직 준비 중입니다.";
-        footerLine3.textContent = "표시되는 PI 환산값은 참고용입니다.";
-      }
+      document.getElementById("footerLine1").textContent = data.footer1;
+      document.getElementById("footerLine2").textContent = data.footer2;
+      document.getElementById("footerLine3").textContent = data.footer3;
 
-      if (stage === 3) {
-        brandSub.textContent = "Live Mode · Beauty Shop";
-        heroDesc.textContent = "한국 가격과 현재 PI 시세를 함께 확인할 수 있는 운영 모드 화면입니다.";
-        stageBadge.textContent = "운영중 · 상담 가능";
-        noticeTitle.textContent = "정상 운영 중";
-        noticeText.innerHTML =
-          "현재 본 사이트는 운영 모드입니다.<br>상담 기능이 활성화되어 있으며 상품 안내를 확인하실 수 있습니다.<br>실제 Pi 결제는 서버 연동 후 최종 활성화하는 것이 안전합니다.";
-        kakaoBtn.className = "btn btn-main";
-        kakaoBtn.textContent = "카카오 상담";
-        kakaoBtn.href = "https://open.kakao.com/o/sqB6lDni";
-        phoneBtn.className = "btn btn-line";
-        phoneBtn.textContent = "전화 상담";
-        phoneBtn.href = "tel:01012345678";
-        footerLine1.textContent = "현재 페이지는 운영 모드입니다.";
-        footerLine2.textContent = "상담 기능이 활성화되어 있습니다.";
-        footerLine3.textContent = "실결제는 Pi SDK와 백엔드 검증 연결 후 최종 활성화하는 것을 권장합니다.";
-      }
-
-      updateAdminBadge(stage);
-      renderProducts(currentPiPriceUSD, stage);
-    }
-
-    function showNotice() {
-      document.getElementById("noticeBox").style.display = "block";
-      saveNotice(true);
-    }
-
-    function hideNotice() {
-      document.getElementById("noticeBox").style.display = "none";
-      saveNotice(false);
-    }
-
-    function setStage(stage) {
-      saveStage(stage);
-      applyStage(stage);
-    }
-
-    function renderProducts(piUsdPrice, stage = getSavedStage()) {
-      currentPiPriceUSD = piUsdPrice;
-      const grid = document.getElementById("productGrid");
-      grid.innerHTML = "";
-
-      products.forEach((item) => {
-        const priceUsd = item.priceKRW / USD_KRW;
-        const pricePi = priceUsd / piUsdPrice;
-
-        const isPaymentLive = stage === 3;
-        const buttonHtml = isPaymentLive
-          ? `<button class="buy-btn" onclick="paymentGuide('${item.name}', '${Number(pricePi).toFixed(2)}')">PI로 결제</button>`
-          : `<button class="buy-btn-disabled">결제 준비중</button>`;
-
-        const card = document.createElement("article");
-        card.className = "card";
-        card.innerHTML = `
-          <div class="card-thumb">
-            <div class="thumb-glow"></div>
-          </div>
-          <div class="card-body">
-            <div class="product-name">${item.name}</div>
-            <div class="rating">⭐ ${item.rating}</div>
-            <div class="price-krw">${won(item.priceKRW)}</div>
-            <div class="price-pi">${pi(pricePi)}</div>
-            ${buttonHtml}
-          </div>
-        `;
-        grid.appendChild(card);
-      });
+      renderBrandMenu(data);
+      renderBrandSections(data);
 
       document.getElementById("priceNote").textContent =
         `Kraken 실시간 PI/USD 시세와 기준 환율(1 USD ≈ ${USD_KRW.toLocaleString("ko-KR")} KRW)로 계산한 참고용 표시입니다.`;
     }
 
-    function paymentGuide(name, amount) {
-      alert(`${name}\n예상 결제 금액: π ${amount}\n\n현재는 운영 UI 단계입니다.\n실제 100% Pi 결제 완료 처리는 Pi SDK + 백엔드 검증 연결 후 활성화하는 것이 안전합니다.`);
+    function createProductEditors() {
+      const wrap = document.getElementById("productEditors");
+      wrap.innerHTML = "";
+
+      BRAND_KEYS.forEach(({ key, label }) => {
+        const block = document.createElement("div");
+        block.className = "product-editor";
+
+        let html = `
+          <div class="admin-subtitle" style="margin-top:0;">${label} 브랜드 설정</div>
+          <input id="brandLabel-${key}" class="admin-input" type="text" placeholder="브랜드명" />
+          <input id="brandDesc-${key}" class="admin-input" type="text" placeholder="브랜드 설명" />
+        `;
+
+        for (let i = 0; i < 10; i++) {
+          html += `
+            <div class="admin-subtitle">${label} 상품 ${i + 1}</div>
+            <input id="${key}-name-${i}" class="admin-input" type="text" placeholder="상품명" />
+            <input id="${key}-price-${i}" class="admin-input" type="number" placeholder="가격" />
+            <input id="${key}-rating-${i}" class="admin-input" type="number" step="0.1" min="0" max="5" placeholder="평점 (예: 4.9)" />
+            <input id="${key}-image-${i}" class="admin-input" type="text" placeholder="이미지 주소" />
+            <label class="small-check">
+              <input id="${key}-visible-${i}" type="checkbox" />
+              상품 보이기
+            </label>
+          `;
+        }
+
+        block.innerHTML = html;
+        wrap.appendChild(block);
+      });
+    }
+
+    function loadAdminInputs() {
+      const data = getContent();
+
+      document.getElementById("editHeroTitle").value = data.heroTitle;
+      document.getElementById("editHeroDesc").value = data.heroDesc;
+      currentNoticeEnabled = !!data.noticeEnabled;
+      updateNoticeToggleUI();
+
+      document.getElementById("editNoticeTitle").value = data.noticeTitle;
+      document.getElementById("editNoticeText").value = data.noticeText;
+      document.getElementById("editKakaoText").value = data.kakaoText;
+      document.getElementById("editKakaoLink").value = data.kakaoLink;
+      document.getElementById("editPhoneText").value = data.phoneText;
+      document.getElementById("editPhoneNumber").value = data.phoneNumber;
+      document.getElementById("editFooter1").value = data.footer1;
+      document.getElementById("editFooter2").value = data.footer2;
+      document.getElementById("editFooter3").value = data.footer3;
+
+      BRAND_KEYS.forEach(({ key }) => {
+        document.getElementById(`brandLabel-${key}`).value = data.brands[key].label || "";
+        document.getElementById(`brandDesc-${key}`).value = data.brands[key].desc || "";
+
+        data.brands[key].products.forEach((p, i) => {
+          document.getElementById(`${key}-name-${i}`).value = p.name || "";
+          document.getElementById(`${key}-price-${i}`).value = p.priceKRW || "";
+          document.getElementById(`${key}-rating-${i}`).value = p.rating || "";
+          document.getElementById(`${key}-image-${i}`).value = p.image || "";
+          document.getElementById(`${key}-visible-${i}`).checked = p.visible !== false;
+        });
+      });
+    }
+
+    function saveAdminData() {
+      const old = getContent();
+
+      const newData = {
+        heroTitle: document.getElementById("editHeroTitle").value.trim() || old.heroTitle,
+        heroDesc: document.getElementById("editHeroDesc").value.trim() || old.heroDesc,
+        noticeEnabled: currentNoticeEnabled,
+        noticeTitle: document.getElementById("editNoticeTitle").value.trim() || old.noticeTitle,
+        noticeText: document.getElementById("editNoticeText").value.trim() || old.noticeText,
+        kakaoText: document.getElementById("editKakaoText").value.trim() || old.kakaoText,
+        kakaoLink: document.getElementById("editKakaoLink").value.trim() || old.kakaoLink,
+        phoneText: document.getElementById("editPhoneText").value.trim() || old.phoneText,
+        phoneNumber: document.getElementById("editPhoneNumber").value.trim() || old.phoneNumber,
+        footer1: document.getElementById("editFooter1").value.trim() || old.footer1,
+        footer2: document.getElementById("editFooter2").value.trim() || old.footer2,
+        footer3: document.getElementById("editFooter3").value.trim() || old.footer3,
+        brands: {}
+      };
+
+      BRAND_KEYS.forEach(({ key }) => {
+        newData.brands[key] = {
+          label: document.getElementById(`brandLabel-${key}`).value.trim() || old.brands[key].label,
+          desc: document.getElementById(`brandDesc-${key}`).value.trim() || old.brands[key].desc,
+          products: []
+        };
+
+        for (let i = 0; i < 10; i++) {
+          const oldProduct = old.brands[key].products[i];
+          newData.brands[key].products.push({
+            name: document.getElementById(`${key}-name-${i}`).value.trim() || oldProduct.name,
+            priceKRW: Number(document.getElementById(`${key}-price-${i}`).value) || oldProduct.priceKRW,
+            rating: Number(document.getElementById(`${key}-rating-${i}`).value) || oldProduct.rating,
+            image: document.getElementById(`${key}-image-${i}`).value.trim() || "",
+            visible: document.getElementById(`${key}-visible-${i}`).checked
+          });
+        }
+      });
+
+      setContent(newData);
+      applyContent();
+      alert("저장되었습니다.");
+    }
+
+    function resetAdminData() {
+      localStorage.removeItem(STORAGE_CONTENT_KEY);
+      currentNoticeEnabled = true;
+      applyContent();
+      loadAdminInputs();
+      alert("초기값으로 되돌렸습니다.");
+    }
+
+    function loginAdmin() {
+      const pw = document.getElementById("adminPassword").value;
+      if (pw === ADMIN_PASSWORD) {
+        localStorage.setItem(STORAGE_ADMIN_KEY, "true");
+        document.getElementById("loginArea").style.display = "none";
+        document.getElementById("editArea").style.display = "block";
+        loadAdminInputs();
+      } else {
+        alert("비밀번호가 맞지 않습니다.");
+      }
+    }
+
+    function logoutAdmin() {
+      localStorage.removeItem(STORAGE_ADMIN_KEY);
+      document.getElementById("loginArea").style.display = "block";
+      document.getElementById("editArea").style.display = "none";
+      document.getElementById("adminPassword").value = "";
+    }
+
+    function restoreAdmin() {
+      const loggedIn = localStorage.getItem(STORAGE_ADMIN_KEY) === "true";
+      document.getElementById("loginArea").style.display = loggedIn ? "none" : "block";
+      document.getElementById("editArea").style.display = loggedIn ? "block" : "none";
+      if (loggedIn) loadAdminInputs();
     }
 
     async function findKrakenPiPair() {
@@ -842,30 +741,6 @@
       return { pairKey, priceUSD: Number(ticker.c[0]) };
     }
 
-    function loginAdmin() {
-      const input = document.getElementById("adminPassword").value;
-      if (input === ADMIN_PASSWORD) {
-        localStorage.setItem(STORAGE_ADMIN_KEY, "true");
-        document.getElementById("loginArea").style.display = "none";
-        document.getElementById("controlArea").style.display = "block";
-      } else {
-        alert("비밀번호가 맞지 않습니다.");
-      }
-    }
-
-    function logoutAdmin() {
-      localStorage.removeItem(STORAGE_ADMIN_KEY);
-      document.getElementById("loginArea").style.display = "grid";
-      document.getElementById("controlArea").style.display = "none";
-      document.getElementById("adminPassword").value = "";
-    }
-
-    function restoreAdmin() {
-      const isAdmin = localStorage.getItem(STORAGE_ADMIN_KEY) === "true";
-      document.getElementById("loginArea").style.display = isAdmin ? "none" : "grid";
-      document.getElementById("controlArea").style.display = isAdmin ? "block" : "none";
-    }
-
     function setupAdminPanel() {
       const fab = document.getElementById("adminFab");
       const panel = document.getElementById("adminPanel");
@@ -882,32 +757,22 @@
     }
 
     async function init() {
+      createProductEditors();
       setupAdminPanel();
       restoreAdmin();
 
-      const savedStage = getSavedStage();
-      const noticeVisible = getSavedNotice();
-
       try {
         const { pairKey, priceUSD } = await fetchPiPrice();
+        currentPiPriceUSD = priceUSD;
         document.getElementById("piPriceText").textContent = `1 PI = ${usd(priceUSD)}`;
         document.getElementById("piMetaText").textContent = `Kraken 기준 · ${pairKey}`;
-        document.getElementById("piStatus").textContent = "실시간 시세 연결 완료";
-        currentPiPriceUSD = priceUSD;
       } catch (e) {
+        currentPiPriceUSD = 0.18;
         document.getElementById("piPriceText").textContent = "시세 연결 실패";
         document.getElementById("piMetaText").textContent = "기본 참고값으로 표시 중";
-        document.getElementById("piStatus").textContent = "수동 확인 필요";
-        currentPiPriceUSD = 0.18;
       }
 
-      applyStage(savedStage);
-
-      if (noticeVisible) {
-        showNotice();
-      } else {
-        hideNotice();
-      }
+      applyContent();
     }
 
     init();
