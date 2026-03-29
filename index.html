@@ -3,1653 +3,959 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>더썸테라피 | 프리미엄 뷰티 스토어</title>
-  <meta name="theme-color" content="#7a3cff" />
+  <title>The Thumb Therapy | Advanced Admin Shop</title>
   <style>
-    :root {
-      --bg: #f7f3ee;
-      --surface: #ffffff;
-      --surface-2: #f3ede6;
-      --text: #2f2a26;
-      --muted: #7d746d;
-      --line: #e8ddd1;
-      --primary: #8a2be2;
-      --primary-dark: #6f1fc0;
-      --gold: #b5965b;
-      --danger: #c0392b;
-      --success: #1f8b4c;
-      --shadow: 0 12px 34px rgba(30, 20, 10, 0.08);
-      --radius: 20px;
-      --radius-sm: 14px;
-      --max: 1200px;
-      --header-h: 76px;
-    }
-
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body {
+    * {
+      box-sizing: border-box;
       margin: 0;
-      font-family: Arial, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
-      background: linear-gradient(180deg, #faf7f3 0%, #f6f2ec 100%);
+      padding: 0;
+      font-family: "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+    }
+
+    :root {
+      --bg: #f6f1eb;
+      --card: #ffffff;
+      --line: #eadfd3;
+      --text: #4b3f38;
+      --sub: #7d7067;
+      --main: #8a6a3f;
+      --main-dark: #6d5130;
+      --soft: #fff8f0;
+      --soft-border: #e7cda7;
+      --disabled: #cfc8c2;
+      --danger: #a14e44;
+      --ok: #2a7a4c;
+    }
+
+    body {
+      background: var(--bg);
       color: var(--text);
-    }
-    a { color: inherit; text-decoration: none; }
-    img { display: block; width: 100%; }
-    button, input, textarea, select { font: inherit; }
-    .container {
-      width: min(100% - 24px, var(--max));
-      margin: 0 auto;
+      line-height: 1.5;
     }
 
-    .top-banner {
-      background: linear-gradient(90deg, #efe3ff, #f8f0ff);
-      color: #5a338c;
-      border-bottom: 1px solid #e8d9ff;
-      padding: 10px 14px;
-      text-align: center;
-      font-size: 14px;
-      font-weight: 700;
-    }
-
-    .header {
+    .appbar {
       position: sticky;
       top: 0;
-      z-index: 50;
-      height: var(--header-h);
-      background: rgba(255,255,255,.92);
-      backdrop-filter: blur(14px);
+      z-index: 100;
+      background: rgba(255,255,255,0.94);
+      backdrop-filter: blur(8px);
       border-bottom: 1px solid var(--line);
     }
-    .header-inner {
-      height: 100%;
+
+    .appbar-inner {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 14px 16px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 14px;
+      gap: 12px;
     }
+
     .brand-wrap {
       display: flex;
       align-items: center;
       gap: 12px;
       min-width: 0;
     }
-    .logo-mark {
+
+    .logo {
       width: 46px;
       height: 46px;
-      border-radius: 50%;
-      display: grid;
-      place-items: center;
-      background: linear-gradient(135deg, #9b4dff, #7727d8);
-      color: #fff;
-      font-size: 18px;
-      font-weight: 800;
-      box-shadow: 0 8px 20px rgba(122,60,255,.25);
-      flex-shrink: 0;
-    }
-    .brand-title {
-      font-size: 22px;
-      font-weight: 800;
-      line-height: 1.15;
-    }
-    .brand-subtitle {
-      font-size: 12px;
-      color: var(--muted);
-      margin-top: 2px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, #8a6a3f, #ba9967);
+      position: relative;
+      box-shadow: 0 10px 20px rgba(138,106,63,0.22);
+      overflow: hidden;
+      flex: 0 0 46px;
     }
 
-    .header-actions {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      flex-shrink: 0;
-    }
-
-    .btn, .btn-outline, .btn-soft, .btn-danger {
-      border: none;
-      cursor: pointer;
-      border-radius: 999px;
-      padding: 12px 16px;
-      font-weight: 800;
-      transition: .2s ease;
-    }
-    .btn {
-      background: var(--primary);
-      color: #fff;
-      box-shadow: var(--shadow);
-    }
-    .btn:hover { background: var(--primary-dark); }
-    .btn-outline {
+    .logo::before {
+      content: "";
+      position: absolute;
+      left: 11px;
+      top: 20px;
+      width: 18px;
+      height: 12px;
       background: #fff;
-      color: var(--primary);
-      border: 2px solid var(--primary);
+      border-radius: 10px;
+      transform: rotate(-8deg);
     }
-    .btn-soft {
-      background: var(--surface-2);
-      color: var(--text);
+
+    .logo::after {
+      content: "";
+      position: absolute;
+      left: 24px;
+      top: 8px;
+      width: 8px;
+      height: 16px;
+      background: #fff;
+      border-radius: 8px;
+      transform: rotate(24deg);
     }
-    .btn-danger {
-      background: #fff0ee;
-      color: var(--danger);
-      border: 1px solid #f3c2bc;
+
+    .brand-title {
+      font-size: 18px;
+      font-weight: 900;
+      color: #2d2520;
+      word-break: keep-all;
+    }
+
+    .brand-sub {
+      font-size: 11px;
+      color: #8f8073;
+      margin-top: 2px;
+      word-break: keep-all;
     }
 
     .hero {
-      padding: 24px 0 18px;
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 18px 16px 12px;
     }
+
     .hero-card {
-      background: linear-gradient(135deg, #fff 0%, #fcf8ff 40%, #fffaf4 100%);
+      background: linear-gradient(135deg, #fffaf5, #f7f1ea);
       border: 1px solid var(--line);
       border-radius: 28px;
-      box-shadow: var(--shadow);
-      overflow: hidden;
-      display: grid;
-      gap: 0;
+      padding: 24px 18px 20px;
+      box-shadow: 0 16px 34px rgba(90,72,53,0.08);
     }
-    .hero-main, .hero-side {
-      padding: 24px;
+
+    .hero-title {
+      font-size: 30px;
+      font-weight: 900;
+      color: #3f332b;
+      margin-bottom: 8px;
+      word-break: keep-all;
     }
-    .hero-main {
-      display: grid;
-      gap: 14px;
+
+    .hero-desc {
+      font-size: 14px;
+      color: #7b6f64;
+      max-width: 700px;
+      word-break: keep-all;
     }
-    .hero-badge {
-      display: inline-flex;
-      width: fit-content;
+
+    .pi-badge {
+      display: inline-block;
+      margin-top: 12px;
       padding: 8px 12px;
       border-radius: 999px;
-      background: #f2e8ff;
-      color: #5a338c;
-      font-size: 13px;
-      font-weight: 800;
-    }
-    .hero h1 {
-      margin: 0;
-      font-size: clamp(30px, 5vw, 46px);
-      line-height: 1.18;
+      background: rgba(138,106,63,0.10);
+      color: var(--main);
+      font-size: 12px;
       font-weight: 900;
-      letter-spacing: -0.02em;
     }
-    .hero p {
-      margin: 0;
-      color: #5b544c;
-      line-height: 1.75;
+
+    .notice-box {
+      margin-top: 18px;
+      background: var(--soft);
+      border: 1px solid var(--soft-border);
+      color: #7a5a2f;
+      padding: 16px;
+      border-radius: 20px;
+      box-shadow: 0 8px 18px rgba(122,90,47,0.06);
+    }
+
+    .notice-title {
       font-size: 15px;
+      font-weight: 900;
+      margin-bottom: 8px;
     }
-    .hero-actions {
+
+    .notice-text {
+      font-size: 14px;
+      line-height: 1.7;
+      word-break: keep-all;
+    }
+
+    .button-group {
       display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 18px;
+      max-width: 420px;
+    }
+
+    .btn {
+      display: block;
+      width: 100%;
+      text-align: center;
+      text-decoration: none;
+      padding: 16px 14px;
+      border-radius: 18px;
+      font-size: 16px;
+      font-weight: 900;
+      user-select: none;
+      border: none;
+    }
+
+    .btn-main {
+      background: linear-gradient(135deg, #8a6a3f, #a98758);
+      color: #fff;
+      box-shadow: 0 10px 20px rgba(138,106,63,0.18);
+    }
+
+    .btn-line {
+      background: #fff;
+      color: var(--main);
+      border: 2px solid #dccfbf;
+    }
+
+    .btn-disabled-primary {
+      background: #c9c1bb;
+      color: #fff;
+      pointer-events: none;
+      cursor: not-allowed;
+      box-shadow: none;
+    }
+
+    .btn-disabled-secondary {
+      background: #f8f6f4;
+      color: #a09790;
+      border: 2px solid #ddd6d0;
+      pointer-events: none;
+      cursor: not-allowed;
+    }
+
+    .ticker {
+      margin-top: 18px;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      padding: 16px;
+    }
+
+    .ticker-label {
+      font-size: 12px;
+      color: #9a8a7a;
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.7px;
+    }
+
+    .ticker-price {
+      font-size: 24px;
+      font-weight: 900;
+      color: var(--main);
+    }
+
+    .ticker-meta {
+      font-size: 13px;
+      color: #7e7368;
       margin-top: 4px;
     }
-    .hero-side {
-      border-top: 1px solid var(--line);
-      background: rgba(255,255,255,.65);
-      display: grid;
-      gap: 14px;
-      align-content: start;
+
+    .grid-wrap {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 14px 16px 70px;
     }
-    .rate-card, .mini-info, .contact-card {
-      background: #fff;
-      border: 1px solid var(--line);
-      border-radius: 20px;
-      box-shadow: var(--shadow);
-      padding: 18px;
-    }
-    .rate-card h3, .mini-info h3, .contact-card h3 {
-      margin: 0 0 8px;
-      font-size: 19px;
-    }
-    .rate-big {
-      font-size: 34px;
+
+    .section-title {
+      font-size: 21px;
       font-weight: 900;
-      color: var(--gold);
-      margin: 6px 0;
-    }
-    .rate-sub {
-      color: var(--muted);
-      font-size: 13px;
-      line-height: 1.6;
-    }
-    .rate-actions {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-      margin-top: 12px;
-    }
-    .input-inline {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-      margin-top: 10px;
-    }
-    .input-inline input {
-      flex: 1;
-      min-width: 140px;
-      border: 1px solid var(--line);
-      border-radius: 12px;
-      padding: 12px;
-      background: #fff;
+      color: #4a3e35;
+      margin: 16px 0 14px;
     }
 
-    .nav-wrap {
-      position: sticky;
-      top: var(--header-h);
-      z-index: 40;
-      background: rgba(247,243,238,.95);
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid #eee4d9;
-    }
-    .nav-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      padding: 10px 0;
-    }
-    .nav-chip {
-      border: none;
-      background: #ece5dd;
-      color: var(--text);
-      border-radius: 999px;
-      padding: 10px 15px;
-      font-weight: 800;
-      cursor: pointer;
-      white-space: nowrap;
-    }
-    .nav-chip.active,
-    .nav-chip:hover {
-      background: #dbc8fb;
-      color: #52258c;
-    }
-
-    .section {
-      padding: 28px 0;
-    }
-    .section-head {
-      display: flex;
-      align-items: end;
-      justify-content: space-between;
-      gap: 12px;
-      margin-bottom: 16px;
-    }
-    .title {
-      margin: 0;
-      font-size: 30px;
-      line-height: 1.15;
-      font-weight: 900;
-      letter-spacing: -0.02em;
-    }
-    .section-note {
-      color: var(--muted);
-      font-size: 14px;
-      line-height: 1.6;
-    }
-
-    .grid {
+    .product-grid {
       display: grid;
-      gap: 14px;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 16px;
     }
+
     .card {
       background: #fff;
       border: 1px solid var(--line);
-      border-radius: 20px;
-      box-shadow: var(--shadow);
+      border-radius: 26px;
       overflow: hidden;
-      display: flex;
-      flex-direction: column;
+      box-shadow: 0 10px 22px rgba(94,76,58,0.08);
     }
-    .thumb {
-      aspect-ratio: 1/1;
-      background: #eae2d9;
+
+    .card-thumb {
+      height: 190px;
+      background: linear-gradient(135deg, #eee8e2, #d9d0c8);
+      position: relative;
+      overflow: hidden;
     }
-    .thumb img {
+
+    .card-thumb img {
+      width: 100%;
       height: 100%;
       object-fit: cover;
-    }
-    .card-body {
-      padding: 16px;
-      display: grid;
-      gap: 8px;
-      flex: 1;
-    }
-    .product-brand {
-      font-size: 12px;
-      color: var(--muted);
-      font-weight: 800;
-    }
-    .product-name {
-      font-size: 17px;
-      font-weight: 900;
-      line-height: 1.35;
-      min-height: 46px;
-    }
-    .product-desc {
-      font-size: 13px;
-      color: #665e56;
-      line-height: 1.6;
-      min-height: 40px;
-    }
-    .price {
-      color: #867c74;
-      font-size: 15px;
-    }
-    .pi {
-      color: var(--primary);
-      font-weight: 900;
-      font-size: 17px;
-    }
-    .card-actions {
-      display: flex;
-      gap: 8px;
-      margin-top: 6px;
-    }
-    .mini-btn {
-      flex: 1;
-      border-radius: 12px;
-      border: none;
-      padding: 11px 10px;
-      font-weight: 800;
-      cursor: pointer;
-    }
-    .mini-btn.primary {
-      background: var(--primary);
-      color: #fff;
-    }
-    .mini-btn.secondary {
-      background: #f3ede6;
-      color: var(--text);
-    }
-
-    .list-grid {
-      display: grid;
-      gap: 12px;
-    }
-    .notice-item, .review-item, .event-item, .contact-box {
-      background: #fff;
-      border: 1px solid var(--line);
-      border-radius: 20px;
-      box-shadow: var(--shadow);
-      padding: 18px;
-    }
-    .notice-title, .event-title, .review-title {
-      font-size: 18px;
-      font-weight: 900;
-      margin-bottom: 8px;
-    }
-    .notice-meta, .event-meta {
-      color: var(--muted);
-      font-size: 13px;
-      margin-bottom: 8px;
-    }
-    .notice-content, .event-content, .review-content {
-      color: #5e5650;
-      line-height: 1.75;
-      font-size: 14px;
-    }
-    .stars {
-      color: #f6a600;
-      font-size: 16px;
-      margin-bottom: 6px;
-      letter-spacing: 1px;
-    }
-
-    .cart-fab {
-      position: fixed;
-      right: 16px;
-      bottom: 100px;
-      z-index: 70;
-      width: 60px;
-      height: 60px;
-      border-radius: 50%;
-      border: none;
-      background: linear-gradient(135deg, #9b4dff, #7a3cff);
-      color: #fff;
-      font-size: 22px;
-      font-weight: 900;
-      cursor: pointer;
-      box-shadow: 0 16px 28px rgba(122,60,255,.3);
-    }
-    .cart-count {
-      position: absolute;
-      right: -2px;
-      top: -2px;
-      min-width: 22px;
-      height: 22px;
-      padding: 0 6px;
-      border-radius: 999px;
-      display: grid;
-      place-items: center;
-      background: #ff6b57;
-      color: #fff;
-      font-size: 12px;
-      font-weight: 900;
-    }
-
-    .floating-bar {
-      position: fixed;
-      left: 50%;
-      bottom: 10px;
-      transform: translateX(-50%);
-      width: min(100% - 16px, 860px);
-      z-index: 60;
-      display: flex;
-      gap: 10px;
-      background: rgba(255,255,255,.96);
-      border: 1px solid var(--line);
-      border-radius: 20px;
-      box-shadow: var(--shadow);
-      padding: 10px;
-      backdrop-filter: blur(10px);
-    }
-    .floating-bar button {
-      flex: 1;
-      border: none;
-      border-radius: 14px;
-      padding: 14px 12px;
-      font-weight: 900;
-      cursor: pointer;
-    }
-    .floating-bar .call-btn {
-      background: var(--primary);
-      color: #fff;
-    }
-    .floating-bar .kakao-btn {
-      background: #f4ede7;
-      color: var(--text);
-    }
-
-    .drawer,
-    .modal {
-      position: fixed;
-      inset: 0;
-      z-index: 100;
-      display: none;
-    }
-    .drawer.open,
-    .modal.open {
       display: block;
     }
-    .overlay {
+
+    .thumb-glow {
       position: absolute;
-      inset: 0;
-      background: rgba(20, 16, 12, 0.5);
-      backdrop-filter: blur(2px);
-    }
-    .drawer-panel {
-      position: absolute;
-      right: 0;
-      top: 0;
-      width: min(100%, 420px);
-      height: 100%;
-      background: #fff;
-      box-shadow: -10px 0 30px rgba(0,0,0,.16);
-      display: flex;
-      flex-direction: column;
-    }
-    .modal-panel {
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%);
-      width: min(100% - 16px, 980px);
-      max-height: 90vh;
-      overflow: auto;
-      background: #fff;
-      border-radius: 24px;
-      box-shadow: 0 24px 60px rgba(0,0,0,.2);
-      padding: 20px;
+      inset: 18px;
+      border-radius: 22px;
+      background:
+        radial-gradient(circle at 30% 30%, rgba(255,255,255,0.95), transparent 32%),
+        radial-gradient(circle at 70% 35%, rgba(255,255,255,0.55), transparent 24%),
+        linear-gradient(135deg, #f4ede6, #d8cec6);
     }
 
-    .drawer-head, .modal-head {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-      padding: 18px 18px 12px;
-      border-bottom: 1px solid var(--line);
-    }
-    .drawer-head h3, .modal-head h3 {
-      margin: 0;
-      font-size: 22px;
-      font-weight: 900;
-    }
-    .icon-btn {
-      border: none;
-      background: #f2ece4;
-      border-radius: 12px;
-      width: 40px;
-      height: 40px;
-      cursor: pointer;
-      font-size: 18px;
-      font-weight: 900;
+    .card-body {
+      padding: 16px 16px 18px;
     }
 
-    .drawer-body {
-      padding: 14px 18px 18px;
-      overflow: auto;
-      flex: 1;
-      display: grid;
-      gap: 12px;
+    .product-name {
+      font-size: 16px;
+      font-weight: 900;
+      color: #5a493f;
+      margin-bottom: 10px;
+      word-break: keep-all;
+      min-height: 42px;
     }
 
-    .cart-item {
-      border: 1px solid var(--line);
-      border-radius: 16px;
-      padding: 14px;
-      display: grid;
-      gap: 8px;
-      background: #fffdfb;
-    }
-    .cart-item-top {
-      display: flex;
-      justify-content: space-between;
-      gap: 12px;
-      align-items: start;
-    }
-    .cart-item-name {
-      font-weight: 900;
-      line-height: 1.4;
-    }
-    .cart-item-brand {
-      color: var(--muted);
+    .rating {
+      color: #6b5748;
       font-size: 13px;
+      margin-bottom: 8px;
+      font-weight: 700;
+    }
+
+    .price-krw {
+      color: #9a8a7a;
+      font-size: 16px;
       margin-bottom: 4px;
     }
-    .qty-row {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .qty-btn {
-      width: 34px;
-      height: 34px;
-      border: none;
-      border-radius: 10px;
-      background: #f1ebe3;
-      cursor: pointer;
-      font-weight: 900;
-    }
-    .remove-link {
-      color: var(--danger);
-      font-size: 13px;
-      font-weight: 700;
-      cursor: pointer;
-    }
-    .cart-summary {
-      border-top: 1px solid var(--line);
-      margin-top: auto;
-      padding: 16px 18px 18px;
-      display: grid;
-      gap: 10px;
-      background: #fff;
-    }
-    .sum-row {
-      display: flex;
-      justify-content: space-between;
-      gap: 10px;
-      font-size: 15px;
-    }
-    .sum-row strong {
-      font-size: 18px;
-    }
-    .order-actions {
-      display: grid;
-      gap: 10px;
-      margin-top: 6px;
-    }
 
-    .admin-login {
-      display: grid;
-      gap: 12px;
-      max-width: 400px;
-      margin: 20px auto;
-    }
-    .admin-login input,
-    .admin-field input,
-    .admin-field textarea,
-    .admin-field select {
-      width: 100%;
-      border: 1px solid var(--line);
-      border-radius: 14px;
-      padding: 12px 14px;
-      background: #fff;
-    }
-    .admin-field textarea {
-      min-height: 100px;
-      resize: vertical;
-    }
-    .admin-grid {
-      display: grid;
-      gap: 18px;
-      grid-template-columns: 1fr;
-      margin-top: 10px;
-    }
-    .admin-card {
-      border: 1px solid var(--line);
-      border-radius: 18px;
-      padding: 16px;
-      background: #fffefc;
-      box-shadow: var(--shadow);
-    }
-    .admin-card h4 {
-      margin: 0 0 12px;
+    .price-pi {
+      color: var(--main);
       font-size: 18px;
-    }
-    .admin-field {
-      display: grid;
-      gap: 8px;
+      font-weight: 900;
       margin-bottom: 12px;
     }
-    .admin-field label {
+
+    .buy-btn-disabled {
+      display: block;
+      width: 100%;
+      text-align: center;
+      background: #d6cfc9;
+      color: #ffffff;
+      padding: 13px 12px;
+      border-radius: 16px;
+      font-size: 14px;
+      font-weight: 900;
+      border: none;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+
+    .note {
+      margin-top: 16px;
       font-size: 13px;
-      color: var(--muted);
-      font-weight: 700;
+      color: #8b8076;
+      line-height: 1.65;
+      word-break: keep-all;
     }
-    .admin-actions {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-      margin-top: 8px;
-    }
-    .admin-product-list,
-    .admin-simple-list {
-      display: grid;
-      gap: 10px;
-      margin-top: 12px;
-    }
-    .admin-item {
+
+    .footer-box {
+      margin-top: 20px;
+      background: #fff;
       border: 1px solid var(--line);
+      border-radius: 24px;
+      padding: 18px;
+    }
+
+    .footer-box h3 {
+      font-size: 18px;
+      color: #5b4a3e;
+      margin-bottom: 8px;
+      font-weight: 900;
+    }
+
+    .footer-box p {
+      font-size: 14px;
+      color: #796f66;
+      margin-bottom: 8px;
+      word-break: keep-all;
+    }
+
+    .admin-fab {
+      position: fixed;
+      right: 16px;
+      bottom: 18px;
+      z-index: 200;
+      width: 58px;
+      height: 58px;
+      border-radius: 50%;
+      border: none;
+      background: linear-gradient(135deg, #4e3c2d, #8a6a3f);
+      color: #fff;
+      font-size: 13px;
+      font-weight: 900;
+      box-shadow: 0 14px 24px rgba(78,60,45,0.25);
+      cursor: pointer;
+    }
+
+    .admin-panel {
+      position: fixed;
+      right: 16px;
+      bottom: 86px;
+      z-index: 210;
+      width: min(95vw, 430px);
+      max-height: 80vh;
+      overflow: auto;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      box-shadow: 0 18px 36px rgba(44,34,25,0.18);
+      padding: 16px;
+      display: none;
+    }
+
+    .admin-panel.show {
+      display: block;
+    }
+
+    .admin-title {
+      font-size: 16px;
+      font-weight: 900;
+      color: #3e322a;
+      margin-bottom: 12px;
+    }
+
+    .admin-subtitle {
+      font-size: 13px;
+      font-weight: 900;
+      color: #6d5c4b;
+      margin: 14px 0 8px;
+    }
+
+    .admin-input,
+    .admin-textarea,
+    .admin-select {
+      width: 100%;
+      border: 1px solid #ddd3c8;
       border-radius: 14px;
       padding: 12px;
+      font-size: 14px;
+      outline: none;
+      margin-bottom: 8px;
       background: #fff;
+    }
+
+    .admin-textarea {
+      min-height: 90px;
+      resize: vertical;
+    }
+
+    .admin-actions {
       display: grid;
       gap: 8px;
+      margin-top: 10px;
     }
-    .small-muted {
+
+    .admin-btn {
+      border: none;
+      border-radius: 12px;
+      padding: 11px 10px;
+      font-size: 13px;
+      font-weight: 900;
+      cursor: pointer;
+    }
+
+    .admin-btn-main {
+      background: #8a6a3f;
+      color: #fff;
+    }
+
+    .admin-btn-soft {
+      background: #f4eee8;
+      color: #6c5847;
+    }
+
+    .admin-btn-danger {
+      background: #f7ebe5;
+      color: var(--danger);
+    }
+
+    .admin-help {
       font-size: 12px;
-      color: var(--muted);
+      color: #7a7169;
       line-height: 1.6;
+      margin-top: 8px;
     }
 
-    .footer-space {
-      height: 92px;
+    .product-editor {
+      border: 1px solid #eee4da;
+      border-radius: 16px;
+      padding: 12px;
+      background: #fcfaf8;
+      margin-bottom: 10px;
     }
 
-    @media (min-width: 768px) {
-      .hero-card {
-        grid-template-columns: 1.25fr 0.95fr;
-      }
-      .hero-side {
-        border-top: none;
-        border-left: 1px solid var(--line);
-      }
-      .grid {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-      }
-      .list-grid.two {
+    .toggle-row {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+
+    .toggle-chip {
+      flex: 1;
+      text-align: center;
+      padding: 10px 8px;
+      border-radius: 12px;
+      font-size: 13px;
+      font-weight: 900;
+      border: 1px solid #ddd3c8;
+      background: #fff;
+      cursor: pointer;
+    }
+
+    .toggle-chip.active {
+      background: #8a6a3f;
+      color: #fff;
+      border-color: #8a6a3f;
+    }
+
+    @media (max-width: 980px) {
+      .product-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-      .admin-grid {
-        grid-template-columns: 1fr 1fr;
-      }
-    }
-
-    @media (min-width: 1100px) {
-      .grid {
-        grid-template-columns: repeat(4, minmax(0, 1fr));
       }
     }
 
     @media (max-width: 640px) {
-      .header-actions {
-        display: none;
-      }
-      .title {
+      .hero-title {
         font-size: 24px;
       }
-      .brand-title {
-        font-size: 19px;
+
+      .product-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
       }
-      .hero-main, .hero-side {
-        padding: 18px;
+
+      .card-thumb {
+        height: 150px;
       }
-      .cart-fab {
-        right: 12px;
-        bottom: 92px;
+
+      .ticker-price {
+        font-size: 22px;
+      }
+
+      .product-name {
+        font-size: 15px;
+        min-height: 38px;
       }
     }
   </style>
 </head>
 <body>
-  <div class="top-banner" id="pi-rate-banner"></div>
-
-  <header class="header">
-    <div class="container header-inner">
+  <header class="appbar">
+    <div class="appbar-inner">
       <div class="brand-wrap">
-        <div class="logo-mark">썸</div>
+        <div class="logo"></div>
         <div>
-          <div class="brand-title">더썸테라피</div>
-          <div class="brand-subtitle">프리미엄 뷰티 · 에스테틱 셀렉트 스토어</div>
+          <div class="brand-title">The Thumb Therapy</div>
+          <div class="brand-sub" id="brandSub">Preparation Stage · Domain Verification</div>
         </div>
-      </div>
-      <div class="header-actions">
-        <button class="btn-soft" onclick="goToSection('notice')">공지</button>
-        <button class="btn-soft" onclick="goToSection('event')">이벤트</button>
-        <button class="btn-soft" onclick="goToSection('review')">후기</button>
-        <button class="btn-outline" onclick="openKakao()">카카오 문의</button>
-        <button class="btn" onclick="openAdmin()">관리자</button>
       </div>
     </div>
   </header>
 
-  <main>
-    <section class="hero">
-      <div class="container">
-        <div class="hero-card">
-          <div class="hero-main">
-            <div class="hero-badge">PI 결제 안내 · 프리미엄 상담형 쇼핑몰</div>
-            <h1>더썸테라피<br>프리미엄 뷰티 스토어</h1>
-            <p>
-              프리미엄 에스테틱 브랜드를 한 곳에서 보고, 원화 가격과 PI 환산 금액까지
-              함께 확인할 수 있는 상담형 뷰티 스토어입니다. 상품 문의, 전화 상담,
-              카카오 문의, 장바구니 주문 요청까지 한 번에 연결할 수 있습니다.
-            </p>
-            <div class="hero-actions">
-              <button class="btn" onclick="callNow()">전화 예약</button>
-              <button class="btn-outline" onclick="openKakao()">카카오 문의</button>
-              <button class="btn-soft" onclick="goToSection('brand-intro')">브랜드 소개</button>
-              <button class="btn-soft" onclick="openCart()">장바구니 보기</button>
-            </div>
-          </div>
+  <section class="hero">
+    <div class="hero-card">
+      <div class="hero-title" id="heroTitle">프리미엄 뷰티 코팅 스토어</div>
+      <div class="hero-desc" id="heroDesc">
+        한국 가격과 현재 PI 시세를 함께 표시하는 테스트용 쇼핑 화면입니다.
+        현재는 도메인 인증 및 정식 오픈 준비 단계입니다.
+      </div>
+      <div class="pi-badge" id="stageBadge">도메인 인증 및 오픈 준비 중</div>
 
-          <div class="hero-side">
-            <div class="rate-card">
-              <h3>PI 환산 기준</h3>
-              <div class="rate-big" id="rate-big">1 PI = 215원</div>
-              <div class="rate-sub" id="rate-desc">
-                현재 적용 환산 기준입니다. 상품의 PI 표시는 참고용이며 실제 상담·결제 시 변동될 수 있습니다.
-              </div>
-              <div class="input-inline">
-                <input type="number" id="pi-rate-input" placeholder="예: 215" />
-                <button class="btn-soft" onclick="manualRateUpdate()">수동 반영</button>
-              </div>
-              <div class="rate-actions">
-                <button class="btn-soft" onclick="simulateRateFetch()">실시간 연동 테스트</button>
-                <button class="btn-soft" onclick="resetStore()">초기화</button>
-              </div>
-            </div>
-
-            <div class="mini-info">
-              <h3>구매 안내</h3>
-              <div class="small-muted">
-                · 본 페이지는 상담형 주문 구조입니다.<br>
-                · 장바구니에 담은 뒤 주문 메시지를 카카오로 전송할 수 있습니다.<br>
-                · 실제 실시간 PI 시세는 별도 API/서버 연동 시 자동 반영할 수 있습니다.
-              </div>
-            </div>
-
-            <div class="contact-card">
-              <h3>빠른 문의</h3>
-              <div class="small-muted" id="contact-text">
-                전화와 카카오톡을 통해 상품 상담 및 주문 문의가 가능합니다.
-              </div>
-              <div class="rate-actions">
-                <button class="btn" onclick="callNow()">전화 문의</button>
-                <button class="btn-outline" onclick="openKakao()">카카오 문의</button>
-              </div>
-            </div>
-          </div>
+      <div class="notice-box" id="noticeBox">
+        <div class="notice-title" id="noticeTitle">현재 서비스 준비 중입니다</div>
+        <div class="notice-text" id="noticeText">
+          현재 본 사이트는 도메인 인증 및 정식 오픈 준비 단계로 운영되고 있습니다.<br>
+          테스트 페이지이므로 전화 문의, 카카오 상담, 예약 및 결제 기능은 아직 진행하지 않습니다.<br>
+          정식 오픈 후 정상적으로 안내드리겠습니다.
         </div>
       </div>
-    </section>
 
-    <div class="nav-wrap">
-      <div class="container">
-        <div class="nav-row" id="nav-row"></div>
+      <div class="button-group">
+        <a id="kakaoBtn" href="javascript:void(0)" class="btn btn-disabled-primary">카카오 상담 준비중</a>
+        <a id="phoneBtn" href="javascript:void(0)" class="btn btn-disabled-secondary">전화 상담 준비중</a>
+      </div>
+
+      <div class="ticker">
+        <div class="ticker-label">Kraken PI Live Price</div>
+        <div class="ticker-price" id="piPriceText">불러오는 중…</div>
+        <div class="ticker-meta" id="piMetaText">Kraken 공개 시세 확인 중</div>
       </div>
     </div>
+  </section>
 
-    <section class="section" id="brand-intro">
-      <div class="container">
-        <div class="section-head">
-          <div>
-            <h2 class="title">브랜드 소개</h2>
-            <div class="section-note">프리미엄 케어 루틴에 맞춘 브랜드 셀렉션</div>
-          </div>
-        </div>
-        <div class="notice-item" id="brand-intro-text">
-          더썸테라피는 프리미엄 뷰티와 홈에스테틱 관리를 보다 쉽게 경험할 수 있도록
-          브랜드를 선별해 제안합니다. 피부 상태와 관리 목적에 따라 제품 상담이 가능하며,
-          원화 가격과 PI 환산 금액을 함께 제공해 결제 상담도 편리하게 돕습니다.
-        </div>
-      </div>
-    </section>
+  <main class="grid-wrap">
+    <div class="section-title">상품 안내</div>
+    <div class="product-grid" id="productGrid"></div>
 
-    <div id="product-sections"></div>
+    <div class="note" id="priceNote">
+      PI 환산값은 실시간 PI/USD 시세를 기준으로 계산되는 참고용 표시입니다.
+    </div>
 
-    <section class="section" id="notice">
-      <div class="container">
-        <div class="section-head">
-          <div>
-            <h2 class="title">공지사항</h2>
-            <div class="section-note">운영 공지, 배송 안내, 결제 안내</div>
-          </div>
-        </div>
-        <div class="list-grid" id="notice-list"></div>
-      </div>
-    </section>
-
-    <section class="section" id="event">
-      <div class="container">
-        <div class="section-head">
-          <div>
-            <h2 class="title">이벤트</h2>
-            <div class="section-note">할인, 신규 혜택, PI 결제 프로모션</div>
-          </div>
-        </div>
-        <div class="list-grid two" id="event-list"></div>
-      </div>
-    </section>
-
-    <section class="section" id="review">
-      <div class="container">
-        <div class="section-head">
-          <div>
-            <h2 class="title">고객 후기</h2>
-            <div class="section-note">상담 만족도와 제품 경험 후기</div>
-          </div>
-        </div>
-        <div class="list-grid two" id="review-list"></div>
-      </div>
-    </section>
-
-    <section class="section" id="contact">
-      <div class="container">
-        <div class="section-head">
-          <div>
-            <h2 class="title">문의 / 상담</h2>
-            <div class="section-note">전화, 카카오, 운영시간 안내</div>
-          </div>
-        </div>
-        <div class="contact-box">
-          <div class="notice-title">더썸테라피 상담 안내</div>
-          <div class="notice-content" id="contact-desc">
-            전화 상담 및 카카오 문의로 제품 추천, 주문 요청, PI 결제 상담이 가능합니다.
-          </div>
-          <div class="admin-actions" style="margin-top:14px;">
-            <button class="btn" onclick="callNow()">전화 문의</button>
-            <button class="btn-outline" onclick="openKakao()">카카오 문의</button>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <div class="footer-space"></div>
+    <div class="footer-box">
+      <h3>안내 사항</h3>
+      <p id="footerLine1">현재 페이지는 도메인 인증 및 디자인 점검을 위한 테스트 화면입니다.</p>
+      <p id="footerLine2">상담, 예약, 결제 기능은 정식 오픈 전까지 비활성 상태로 유지됩니다.</p>
+      <p id="footerLine3">표시되는 상품 구성 및 가격 정보는 테스트 목적에 따라 변경될 수 있습니다.</p>
+    </div>
   </main>
 
-  <button class="cart-fab" onclick="openCart()">
-    🛒
-    <span class="cart-count" id="cart-count">0</span>
-  </button>
+  <button class="admin-fab" id="adminFab">관리자</button>
 
-  <div class="floating-bar">
-    <button class="call-btn" onclick="callNow()">📞 전화 문의</button>
-    <button class="kakao-btn" onclick="openKakao()">💬 카카오 문의</button>
-  </div>
+  <div class="admin-panel" id="adminPanel">
+    <div class="admin-title">통합 관리자</div>
 
-  <div class="drawer" id="cartDrawer">
-    <div class="overlay" onclick="closeCart()"></div>
-    <div class="drawer-panel">
-      <div class="drawer-head">
-        <h3>장바구니</h3>
-        <button class="icon-btn" onclick="closeCart()">✕</button>
-      </div>
-      <div class="drawer-body" id="cart-items"></div>
-      <div class="cart-summary">
-        <div class="sum-row"><span>상품 합계</span><span id="cart-total-krw">₩0</span></div>
-        <div class="sum-row"><span>PI 환산</span><span id="cart-total-pi">π 0.00</span></div>
-        <div class="sum-row"><strong>최종 합계</strong><strong id="cart-total-krw-strong">₩0</strong></div>
-        <div class="order-actions">
-          <button class="btn" onclick="checkoutToKakao()">카카오로 주문 요청</button>
-          <button class="btn-outline" onclick="callNow()">전화로 주문 상담</button>
-          <button class="btn-soft" onclick="clearCart()">장바구니 비우기</button>
-        </div>
+    <div id="loginArea">
+      <input id="adminPassword" class="admin-input" type="password" placeholder="비밀번호 입력" />
+      <div class="admin-actions">
+        <button class="admin-btn admin-btn-main" onclick="loginAdmin()">로그인</button>
       </div>
     </div>
-  </div>
 
-  <div class="modal" id="adminModal">
-    <div class="overlay" onclick="closeAdmin()"></div>
-    <div class="modal-panel">
-      <div class="modal-head">
-        <h3>관리자 모드</h3>
-        <button class="icon-btn" onclick="closeAdmin()">✕</button>
+    <div id="editArea" style="display:none;">
+      <div class="admin-subtitle">기본 정보</div>
+      <input id="editHeroTitle" class="admin-input" type="text" placeholder="메인 제목" />
+      <textarea id="editHeroDesc" class="admin-textarea" placeholder="소개글"></textarea>
+
+      <div class="admin-subtitle">공지 설정</div>
+      <div class="toggle-row">
+        <button type="button" id="noticeOnBtn" class="toggle-chip" onclick="setNoticeToggle(true)">공지 ON</button>
+        <button type="button" id="noticeOffBtn" class="toggle-chip" onclick="setNoticeToggle(false)">공지 OFF</button>
+      </div>
+      <input id="editNoticeTitle" class="admin-input" type="text" placeholder="공지 제목" />
+      <textarea id="editNoticeText" class="admin-textarea" placeholder="공지 내용"></textarea>
+
+      <div class="admin-subtitle">상담 버튼 / 링크</div>
+      <input id="editKakaoText" class="admin-input" type="text" placeholder="카카오 버튼 문구" />
+      <input id="editKakaoLink" class="admin-input" type="text" placeholder="카카오 링크" />
+      <input id="editPhoneText" class="admin-input" type="text" placeholder="전화 버튼 문구" />
+      <input id="editPhoneNumber" class="admin-input" type="text" placeholder="전화번호 (예: 01012345678)" />
+
+      <div class="admin-subtitle">상품 8개 관리</div>
+      <div id="productEditors"></div>
+
+      <div class="admin-actions">
+        <button class="admin-btn admin-btn-main" onclick="saveAdminData()">저장</button>
+        <button class="admin-btn admin-btn-soft" onclick="loadAdminInputs()">불러오기</button>
+        <button class="admin-btn admin-btn-danger" onclick="resetAdminData()">초기화</button>
+        <button class="admin-btn admin-btn-soft" onclick="logoutAdmin()">로그아웃</button>
       </div>
 
-      <div id="admin-login-box" class="admin-login">
-        <div class="small-muted">기본 비밀번호는 코드 상단 설정값으로 바꿀 수 있습니다. 현재 데모용 비밀번호가 적용되어 있습니다.</div>
-        <input type="password" id="admin-password" placeholder="관리자 비밀번호 입력" />
-        <button class="btn" onclick="adminLogin()">관리자 로그인</button>
-      </div>
-
-      <div id="admin-content" style="display:none;">
-        <div class="admin-actions" style="margin-top:14px;">
-          <button class="btn-soft" onclick="closeAdmin()">닫기</button>
-          <button class="btn-danger" onclick="adminLogout()">로그아웃</button>
-        </div>
-
-        <div class="admin-grid">
-          <div class="admin-card">
-            <h4>기본 설정</h4>
-            <div class="admin-field">
-              <label>전화번호</label>
-              <input id="admin-phone" />
-            </div>
-            <div class="admin-field">
-              <label>카카오 오픈채팅 링크</label>
-              <input id="admin-kakao" />
-            </div>
-            <div class="admin-field">
-              <label>PI 환산 기준 (1 PI = ? 원)</label>
-              <input id="admin-rate" type="number" />
-            </div>
-            <div class="admin-field">
-              <label>브랜드 소개</label>
-              <textarea id="admin-brand-intro"></textarea>
-            </div>
-            <div class="admin-field">
-              <label>문의 안내 문구</label>
-              <textarea id="admin-contact-desc"></textarea>
-            </div>
-            <div class="admin-actions">
-              <button class="btn" onclick="saveBasicSettings()">기본 설정 저장</button>
-            </div>
-          </div>
-
-          <div class="admin-card">
-            <h4>상품 추가</h4>
-            <div class="admin-field">
-              <label>브랜드</label>
-              <select id="new-product-brand"></select>
-            </div>
-            <div class="admin-field">
-              <label>상품명</label>
-              <input id="new-product-name" />
-            </div>
-            <div class="admin-field">
-              <label>설명</label>
-              <textarea id="new-product-desc"></textarea>
-            </div>
-            <div class="admin-field">
-              <label>가격(원)</label>
-              <input id="new-product-price" type="number" />
-            </div>
-            <div class="admin-field">
-              <label>이미지 URL</label>
-              <input id="new-product-image" />
-            </div>
-            <div class="admin-actions">
-              <button class="btn" onclick="addProduct()">상품 추가</button>
-            </div>
-          </div>
-
-          <div class="admin-card">
-            <h4>공지사항 관리</h4>
-            <div class="admin-field">
-              <label>제목</label>
-              <input id="new-notice-title" />
-            </div>
-            <div class="admin-field">
-              <label>날짜</label>
-              <input id="new-notice-date" placeholder="예: 2026-03-28" />
-            </div>
-            <div class="admin-field">
-              <label>내용</label>
-              <textarea id="new-notice-content"></textarea>
-            </div>
-            <div class="admin-actions">
-              <button class="btn" onclick="addNotice()">공지 추가</button>
-            </div>
-            <div class="admin-simple-list" id="admin-notice-list"></div>
-          </div>
-
-          <div class="admin-card">
-            <h4>이벤트 관리</h4>
-            <div class="admin-field">
-              <label>제목</label>
-              <input id="new-event-title" />
-            </div>
-            <div class="admin-field">
-              <label>기간</label>
-              <input id="new-event-date" placeholder="예: 2026-03-01 ~ 2026-03-31" />
-            </div>
-            <div class="admin-field">
-              <label>내용</label>
-              <textarea id="new-event-content"></textarea>
-            </div>
-            <div class="admin-actions">
-              <button class="btn" onclick="addEvent()">이벤트 추가</button>
-            </div>
-            <div class="admin-simple-list" id="admin-event-list"></div>
-          </div>
-
-          <div class="admin-card">
-            <h4>후기 관리</h4>
-            <div class="admin-field">
-              <label>작성자</label>
-              <input id="new-review-title" />
-            </div>
-            <div class="admin-field">
-              <label>별점 (1~5)</label>
-              <input id="new-review-stars" type="number" min="1" max="5" />
-            </div>
-            <div class="admin-field">
-              <label>후기 내용</label>
-              <textarea id="new-review-content"></textarea>
-            </div>
-            <div class="admin-actions">
-              <button class="btn" onclick="addReview()">후기 추가</button>
-            </div>
-            <div class="admin-simple-list" id="admin-review-list"></div>
-          </div>
-
-          <div class="admin-card">
-            <h4>상품 목록 관리</h4>
-            <div class="small-muted">현재 등록된 상품을 확인하고 삭제할 수 있습니다.</div>
-            <div class="admin-product-list" id="admin-product-list"></div>
-          </div>
-        </div>
+      <div class="admin-help">
+        이미지 주소는 인터넷 이미지 주소나 GitHub Pages 내 이미지 주소를 넣으면 됩니다.<br>
+        예: https://...jpg 또는 /images/product1.jpg
       </div>
     </div>
   </div>
 
   <script>
-    const STORAGE_KEY = "thumbtherapy_store_v1";
-    const ADMIN_PASSWORD = "thumb2026";
-    const placeholderImage = "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=900&q=80";
+    const ADMIN_PASSWORD = "1234";
+    const USD_KRW = 1508.4;
+    const STORAGE_ADMIN_KEY = "advanced_admin_logged_in";
+    const STORAGE_CONTENT_KEY = "advanced_admin_content";
 
-    const defaultState = {
-      piRate: 215,
-      phone: "010-1234-5678",
-      kakaoUrl: "https://open.kakao.com/o/sqB6lDni",
-      brandIntro: "더썸테라피는 프리미엄 뷰티와 홈에스테틱 관리를 보다 쉽게 경험할 수 있도록 브랜드를 선별해 제안합니다. 피부 상태와 관리 목적에 따라 제품 상담이 가능하며, 원화 가격과 PI 환산 금액을 함께 제공해 결제 상담도 편리하게 돕습니다.",
-      contactDesc: "전화 상담 및 카카오 문의로 제품 추천, 주문 요청, PI 결제 상담이 가능합니다.",
-      brands: [
-        {
-          id: "nora",
-          title: "노라보데",
-          note: "민감 피부와 집중 보습을 위한 셀렉션",
-          items: [
-            { id: uid(), name: "노라보데 수딩 앰플", price: 128000, desc: "민감 피부 진정과 수분 밸런스 케어", image: placeholderImage },
-            { id: uid(), name: "노라보데 리페어 크림", price: 145000, desc: "건조하고 예민한 피부 장벽 집중 케어", image: placeholderImage },
-            { id: uid(), name: "노라보데 에센스 토너", price: 98000, desc: "첫 단계 수분 충전과 피부결 정돈", image: placeholderImage },
-            { id: uid(), name: "노라보데 밸런싱 세럼", price: 156000, desc: "유수분 밸런스와 피부 컨디션 정리", image: placeholderImage }
-          ]
-        },
-        {
-          id: "alchemia",
-          title: "알케미아",
-          note: "탄력과 윤기를 위한 프리미엄 홈케어",
-          items: [
-            { id: uid(), name: "알케미아 골드 세럼", price: 162000, desc: "탄력과 광채를 동시에 케어하는 세럼", image: placeholderImage },
-            { id: uid(), name: "알케미아 리프팅 크림", price: 178000, desc: "피부 탄력과 밀도를 위한 고보습 크림", image: placeholderImage },
-            { id: uid(), name: "알케미아 브라이트 마스크", price: 112000, desc: "칙칙한 피부 톤을 화사하게 정리", image: placeholderImage }
-          ]
-        },
-        {
-          id: "guinot",
-          title: "기노",
-          note: "에스테틱 전문 관리 중심 브랜드",
-          items: [
-            { id: uid(), name: "기노 하이드라 세럼", price: 171000, desc: "깊은 수분 공급과 피부 컨디션 회복", image: placeholderImage },
-            { id: uid(), name: "기노 아이 컨투어 젤", price: 119000, desc: "눈가 집중 케어와 탄력 관리", image: placeholderImage },
-            { id: uid(), name: "기노 뉴트리 크림", price: 184000, desc: "건조 피부 집중 영양 공급", image: placeholderImage }
-          ]
-        },
-        {
-          id: "thala",
-          title: "탈라",
-          note: "프랑스 감성의 바디·스킨 케어",
-          items: [
-            { id: uid(), name: "탈라 마린 세럼", price: 149000, desc: "촉촉하고 매끈한 피부결 관리", image: placeholderImage },
-            { id: uid(), name: "탈라 리치 크림", price: 165000, desc: "영양과 윤기를 더하는 데일리 크림", image: placeholderImage },
-            { id: uid(), name: "탈라 클레이 마스크", price: 108000, desc: "모공과 피지 정돈에 적합한 팩", image: placeholderImage }
-          ]
-        },
-        {
-          id: "sothys",
-          title: "쏘티스",
-          note: "프리미엄 홈에스테틱 루틴 제안",
-          items: [
-            { id: uid(), name: "쏘티스 하이드레이팅 세럼", price: 176000, desc: "수분 부족 피부를 위한 집중 세럼", image: placeholderImage },
-            { id: uid(), name: "쏘티스 유스 크림", price: 198000, desc: "탄력과 윤기를 위한 프리미엄 크림", image: placeholderImage },
-            { id: uid(), name: "쏘티스 밸런스 토너", price: 94000, desc: "매일 사용하는 산뜻한 토너", image: placeholderImage }
-          ]
-        }
-      ],
-      notices: [
-        { id: uid(), title: "PI 결제 상담 안내", date: "2026-03-28", content: "PI 결제는 상담 후 진행되며, 적용 환산 기준은 변동될 수 있습니다." },
-        { id: uid(), title: "배송 안내", date: "2026-03-28", content: "일반 배송은 평균 2~3일 소요되며 재고 상황에 따라 달라질 수 있습니다." }
-      ],
-      events: [
-        { id: uid(), title: "신규 고객 10% 할인", date: "2026-03-01 ~ 2026-03-31", content: "첫 상담 및 첫 주문 고객 대상 특별 할인 이벤트를 진행합니다." },
-        { id: uid(), title: "PI 결제 이벤트", date: "상시 진행", content: "PI 결제 상담 고객에게 추가 혜택을 안내해드립니다." }
-      ],
-      reviews: [
-        { id: uid(), title: "김OO 고객님", stars: 5, content: "상담이 친절하고 제품 추천이 잘 맞아서 만족합니다." },
-        { id: uid(), title: "박OO 고객님", stars: 5, content: "피부 타입에 맞는 제품을 추천받아 재구매 예정입니다." }
-      ],
-      cart: []
+    const defaultContent = {
+      heroTitle: "프리미엄 뷰티 코팅 스토어",
+      heroDesc: "한국 가격과 현재 PI 시세를 함께 표시하는 테스트용 쇼핑 화면입니다. 현재는 도메인 인증 및 정식 오픈 준비 단계입니다.",
+      noticeEnabled: true,
+      noticeTitle: "현재 서비스 준비 중입니다",
+      noticeText: "현재 본 사이트는 도메인 인증 및 정식 오픈 준비 단계로 운영되고 있습니다.\n테스트 페이지이므로 전화 문의, 카카오 상담, 예약 및 결제 기능은 아직 진행하지 않습니다.\n정식 오픈 후 정상적으로 안내드리겠습니다.",
+      kakaoText: "카카오 상담 준비중",
+      kakaoLink: "https://open.kakao.com/o/sqB6lDni",
+      phoneText: "전화 상담 준비중",
+      phoneNumber: "01012345678",
+      products: [
+        { name: "노라보떼 윤광 세럼", priceKRW: 180000, rating: 4.9, image: "" },
+        { name: "노라보떼 벨벳 쿠션", priceKRW: 198000, rating: 4.8, image: "" },
+        { name: "노라보떼 옥시젯 케어", priceKRW: 160000, rating: 4.8, image: "" },
+        { name: "노라보떼 인텐트 코팅", priceKRW: 250000, rating: 4.9, image: "" },
+        { name: "글로우 리커버 앰플", priceKRW: 129000, rating: 4.7, image: "" },
+        { name: "시그니처 립 글로우", priceKRW: 89000, rating: 4.9, image: "" },
+        { name: "프리미엄 톤업 크림", priceKRW: 76000, rating: 4.8, image: "" },
+        { name: "벨벳 베이스 픽서", priceKRW: 99000, rating: 4.7, image: "" }
+      ]
     };
 
-    let state = loadState();
-    let adminAuthenticated = false;
+    let currentPiPriceUSD = 0.18;
+    let currentNoticeEnabled = true;
 
-    function uid() {
-      return "id_" + Math.random().toString(36).slice(2, 10);
+    function won(v) {
+      return "₩" + new Intl.NumberFormat("ko-KR").format(Math.round(v));
     }
 
-    function loadState() {
-      const raw = localStorage.getItem(STORAGE_KEY);
-      if (!raw) return JSON.parse(JSON.stringify(defaultState));
+    function pi(v) {
+      return "π " + Number(v).toFixed(2);
+    }
+
+    function usd(v) {
+      return "$" + Number(v).toFixed(4);
+    }
+
+    function getContent() {
+      const saved = localStorage.getItem(STORAGE_CONTENT_KEY);
+      if (!saved) return JSON.parse(JSON.stringify(defaultContent));
       try {
-        const parsed = JSON.parse(raw);
-        return { ...JSON.parse(JSON.stringify(defaultState)), ...parsed };
+        return JSON.parse(saved);
       } catch {
-        return JSON.parse(JSON.stringify(defaultState));
+        return JSON.parse(JSON.stringify(defaultContent));
       }
     }
 
-    function saveState() {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    function setContent(data) {
+      localStorage.setItem(STORAGE_CONTENT_KEY, JSON.stringify(data));
     }
 
-    function formatKRW(value) {
-      return `₩${Number(value || 0).toLocaleString()}`;
+    function updateNoticeToggleUI() {
+      const onBtn = document.getElementById("noticeOnBtn");
+      const offBtn = document.getElementById("noticeOffBtn");
+      onBtn.classList.toggle("active", currentNoticeEnabled === true);
+      offBtn.classList.toggle("active", currentNoticeEnabled === false);
     }
 
-    function calcPi(price) {
-      return (Number(price) / Number(state.piRate || 1)).toFixed(2);
+    function setNoticeToggle(value) {
+      currentNoticeEnabled = value;
+      updateNoticeToggleUI();
     }
 
-    function goToSection(id) {
-      const el = document.getElementById(id);
-      if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+    function applyContent() {
+      const data = getContent();
+
+      document.getElementById("heroTitle").textContent = data.heroTitle;
+      document.getElementById("heroDesc").textContent = data.heroDesc;
+      document.getElementById("noticeTitle").textContent = data.noticeTitle;
+      document.getElementById("noticeText").innerHTML = data.noticeText.replace(/\n/g, "<br>");
+      document.getElementById("noticeBox").style.display = data.noticeEnabled ? "block" : "none";
+      document.getElementById("kakaoBtn").textContent = data.kakaoText;
+      document.getElementById("phoneBtn").textContent = data.phoneText;
+
+      const kakaoReady = data.kakaoText.includes("준비중") === false && data.kakaoLink.trim() !== "";
+      const phoneReady = data.phoneText.includes("준비중") === false && data.phoneNumber.trim() !== "";
+
+      if (kakaoReady) {
+        document.getElementById("kakaoBtn").className = "btn btn-main";
+        document.getElementById("kakaoBtn").href = data.kakaoLink;
+        document.getElementById("kakaoBtn").target = "_blank";
+      } else {
+        document.getElementById("kakaoBtn").className = "btn btn-disabled-primary";
+        document.getElementById("kakaoBtn").href = "javascript:void(0)";
+        document.getElementById("kakaoBtn").removeAttribute("target");
+      }
+
+      if (phoneReady) {
+        document.getElementById("phoneBtn").className = "btn btn-line";
+        document.getElementById("phoneBtn").href = `tel:${data.phoneNumber}`;
+      } else {
+        document.getElementById("phoneBtn").className = "btn btn-disabled-secondary";
+        document.getElementById("phoneBtn").href = "javascript:void(0)";
+      }
+
+      renderProducts(data.products, currentPiPriceUSD);
     }
 
-    function callNow() {
-      window.location.href = `tel:${state.phone}`;
+    function createProductEditors() {
+      const wrap = document.getElementById("productEditors");
+      wrap.innerHTML = "";
+
+      for (let i = 0; i < 8; i++) {
+        const div = document.createElement("div");
+        div.className = "product-editor";
+        div.innerHTML = `
+          <div class="admin-subtitle" style="margin-top:0;">상품 ${i + 1}</div>
+          <input id="productName${i}" class="admin-input" type="text" placeholder="상품명" />
+          <input id="productPrice${i}" class="admin-input" type="number" placeholder="가격" />
+          <input id="productRating${i}" class="admin-input" type="number" step="0.1" min="0" max="5" placeholder="평점 (예: 4.9)" />
+          <input id="productImage${i}" class="admin-input" type="text" placeholder="이미지 주소 (비워두면 기본 배경)" />
+        `;
+        wrap.appendChild(div);
+      }
     }
 
-    function openKakao() {
-      window.open(state.kakaoUrl, "_blank");
+    function renderProducts(products, piUsdPrice) {
+      const grid = document.getElementById("productGrid");
+      grid.innerHTML = "";
+
+      products.forEach((item) => {
+        const priceUsd = item.priceKRW / USD_KRW;
+        const pricePi = priceUsd / piUsdPrice;
+
+        const imagePart = item.image && item.image.trim() !== ""
+          ? `<img src="${item.image}" alt="${item.name}" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"><div class="thumb-glow" style="display:none;"></div>`
+          : `<div class="thumb-glow"></div>`;
+
+        const card = document.createElement("article");
+        card.className = "card";
+        card.innerHTML = `
+          <div class="card-thumb">
+            ${imagePart}
+          </div>
+          <div class="card-body">
+            <div class="product-name">${item.name}</div>
+            <div class="rating">⭐ ${Number(item.rating).toFixed(1)}</div>
+            <div class="price-krw">${won(item.priceKRW)}</div>
+            <div class="price-pi">${pi(pricePi)}</div>
+            <button class="buy-btn-disabled">결제 준비중</button>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+
+      document.getElementById("priceNote").textContent =
+        `Kraken 실시간 PI/USD 시세와 기준 환율(1 USD ≈ ${USD_KRW.toLocaleString("ko-KR")} KRW)로 계산한 참고용 표시입니다.`;
     }
 
-    function renderTop() {
-      document.getElementById("pi-rate-banner").textContent =
-        `현재 PI 환산 기준: 1 PI = ${Number(state.piRate).toLocaleString()}원 · 환산 금액은 참고용이며 실제 결제 시 변동될 수 있습니다.`;
-      document.getElementById("rate-big").textContent = `1 PI = ${Number(state.piRate).toLocaleString()}원`;
-      document.getElementById("rate-desc").textContent =
-        "현재 적용 환산 기준입니다. 상품의 PI 표시는 참고용이며 실제 상담·결제 시 변동될 수 있습니다.";
-      document.getElementById("brand-intro-text").textContent = state.brandIntro;
-      document.getElementById("contact-desc").textContent = state.contactDesc;
-      document.getElementById("contact-text").textContent = state.contactDesc;
-      document.getElementById("pi-rate-input").value = state.piRate;
+    function loadAdminInputs() {
+      const data = getContent();
+
+      document.getElementById("editHeroTitle").value = data.heroTitle;
+      document.getElementById("editHeroDesc").value = data.heroDesc;
+      currentNoticeEnabled = !!data.noticeEnabled;
+      updateNoticeToggleUI();
+      document.getElementById("editNoticeTitle").value = data.noticeTitle;
+      document.getElementById("editNoticeText").value = data.noticeText;
+      document.getElementById("editKakaoText").value = data.kakaoText;
+      document.getElementById("editKakaoLink").value = data.kakaoLink;
+      document.getElementById("editPhoneText").value = data.phoneText;
+      document.getElementById("editPhoneNumber").value = data.phoneNumber;
+
+      for (let i = 0; i < 8; i++) {
+        const p = data.products[i] || { name: "", priceKRW: "", rating: "", image: "" };
+        document.getElementById(`productName${i}`).value = p.name || "";
+        document.getElementById(`productPrice${i}`).value = p.priceKRW || "";
+        document.getElementById(`productRating${i}`).value = p.rating || "";
+        document.getElementById(`productImage${i}`).value = p.image || "";
+      }
     }
 
-    function renderNav() {
-      const baseMenus = [
-        { label: "브랜드 소개", id: "brand-intro" },
-        ...state.brands.map(b => ({ label: b.title, id: b.id })),
-        { label: "공지", id: "notice" },
-        { label: "이벤트", id: "event" },
-        { label: "후기", id: "review" },
-        { label: "문의", id: "contact" }
-      ];
+    function saveAdminData() {
+      const products = [];
 
-      document.getElementById("nav-row").innerHTML = baseMenus.map((m, i) => `
-        <button class="nav-chip ${i === 0 ? "active" : ""}" data-id="${m.id}">${m.label}</button>
-      `).join("");
+      for (let i = 0; i < 8; i++) {
+        const name = document.getElementById(`productName${i}`).value.trim();
+        const price = Number(document.getElementById(`productPrice${i}`).value);
+        const rating = Number(document.getElementById(`productRating${i}`).value);
+        const image = document.getElementById(`productImage${i}`).value.trim();
 
-      document.querySelectorAll(".nav-chip").forEach(btn => {
-        btn.addEventListener("click", () => {
-          document.querySelectorAll(".nav-chip").forEach(b => b.classList.remove("active"));
-          btn.classList.add("active");
-          goToSection(btn.dataset.id);
+        products.push({
+          name: name || defaultContent.products[i].name,
+          priceKRW: price || defaultContent.products[i].priceKRW,
+          rating: rating || defaultContent.products[i].rating,
+          image: image
         });
-      });
+      }
+
+      const newData = {
+        heroTitle: document.getElementById("editHeroTitle").value.trim() || defaultContent.heroTitle,
+        heroDesc: document.getElementById("editHeroDesc").value.trim() || defaultContent.heroDesc,
+        noticeEnabled: currentNoticeEnabled,
+        noticeTitle: document.getElementById("editNoticeTitle").value.trim() || defaultContent.noticeTitle,
+        noticeText: document.getElementById("editNoticeText").value.trim() || defaultContent.noticeText,
+        kakaoText: document.getElementById("editKakaoText").value.trim() || defaultContent.kakaoText,
+        kakaoLink: document.getElementById("editKakaoLink").value.trim() || defaultContent.kakaoLink,
+        phoneText: document.getElementById("editPhoneText").value.trim() || defaultContent.phoneText,
+        phoneNumber: document.getElementById("editPhoneNumber").value.trim() || defaultContent.phoneNumber,
+        products: products
+      };
+
+      setContent(newData);
+      applyContent();
+      alert("저장되었습니다.");
     }
 
-    function renderProducts() {
-      const root = document.getElementById("product-sections");
-      root.innerHTML = state.brands.map(brand => `
-        <section class="section" id="${brand.id}">
-          <div class="container">
-            <div class="section-head">
-              <div>
-                <h2 class="title">${brand.title}</h2>
-                <div class="section-note">${brand.note}</div>
-              </div>
-            </div>
-            <div class="grid">
-              ${brand.items.map(item => `
-                <article class="card">
-                  <div class="thumb">
-                    <img src="${item.image || placeholderImage}" alt="${escapeHtml(item.name)}" loading="lazy" onerror="this.src='${placeholderImage}'">
-                  </div>
-                  <div class="card-body">
-                    <div class="product-brand">${brand.title}</div>
-                    <div class="product-name">${escapeHtml(item.name)}</div>
-                    <div class="product-desc">${escapeHtml(item.desc || "")}</div>
-                    <div class="price">${formatKRW(item.price)}</div>
-                    <div class="pi">π ${calcPi(item.price)}</div>
-                    <div class="card-actions">
-                      <button class="mini-btn secondary" onclick="openKakao()">문의하기</button>
-                      <button class="mini-btn primary" onclick="addToCart('${brand.id}', '${item.id}')">담기</button>
-                    </div>
-                  </div>
-                </article>
-              `).join("")}
-            </div>
-          </div>
-        </section>
-      `).join("");
+    function resetAdminData() {
+      localStorage.removeItem(STORAGE_CONTENT_KEY);
+      currentNoticeEnabled = true;
+      applyContent();
+      loadAdminInputs();
+      alert("초기값으로 되돌렸습니다.");
     }
 
-    function renderNotices() {
-      const root = document.getElementById("notice-list");
-      root.innerHTML = state.notices.map(item => `
-        <article class="notice-item">
-          <div class="notice-title">${escapeHtml(item.title)}</div>
-          <div class="notice-meta">${escapeHtml(item.date || "")}</div>
-          <div class="notice-content">${escapeHtml(item.content || "")}</div>
-        </article>
-      `).join("");
-    }
-
-    function renderEvents() {
-      const root = document.getElementById("event-list");
-      root.innerHTML = state.events.map(item => `
-        <article class="event-item">
-          <div class="event-title">${escapeHtml(item.title)}</div>
-          <div class="event-meta">${escapeHtml(item.date || "")}</div>
-          <div class="event-content">${escapeHtml(item.content || "")}</div>
-        </article>
-      `).join("");
-    }
-
-    function renderReviews() {
-      const root = document.getElementById("review-list");
-      root.innerHTML = state.reviews.map(item => `
-        <article class="review-item">
-          <div class="stars">${"★".repeat(Number(item.stars || 5))}${"☆".repeat(5 - Number(item.stars || 5))}</div>
-          <div class="review-title">${escapeHtml(item.title)}</div>
-          <div class="review-content">${escapeHtml(item.content || "")}</div>
-        </article>
-      `).join("");
-    }
-
-    function findProduct(brandId, productId) {
-      const brand = state.brands.find(b => b.id === brandId);
-      if (!brand) return null;
-      const item = brand.items.find(i => i.id === productId);
-      if (!item) return null;
-      return { brand, item };
-    }
-
-    function addToCart(brandId, productId) {
-      const found = findProduct(brandId, productId);
-      if (!found) return;
-      const existing = state.cart.find(c => c.brandId === brandId && c.productId === productId);
-      if (existing) {
-        existing.qty += 1;
+    function loginAdmin() {
+      const pw = document.getElementById("adminPassword").value;
+      if (pw === ADMIN_PASSWORD) {
+        localStorage.setItem(STORAGE_ADMIN_KEY, "true");
+        document.getElementById("loginArea").style.display = "none";
+        document.getElementById("editArea").style.display = "block";
+        loadAdminInputs();
       } else {
-        state.cart.push({ brandId, productId, qty: 1 });
+        alert("비밀번호가 맞지 않습니다.");
       }
-      saveState();
-      renderCart();
-      openCart();
     }
 
-    function renderCart() {
-      const count = state.cart.reduce((sum, cur) => sum + cur.qty, 0);
-      document.getElementById("cart-count").textContent = count;
-
-      const root = document.getElementById("cart-items");
-      if (!state.cart.length) {
-        root.innerHTML = `<div class="small-muted">장바구니가 비어 있습니다. 상품을 담아보세요.</div>`;
-      } else {
-        root.innerHTML = state.cart.map(row => {
-          const found = findProduct(row.brandId, row.productId);
-          if (!found) return "";
-          const total = found.item.price * row.qty;
-          return `
-            <div class="cart-item">
-              <div class="cart-item-top">
-                <div>
-                  <div class="cart-item-brand">${found.brand.title}</div>
-                  <div class="cart-item-name">${escapeHtml(found.item.name)}</div>
-                </div>
-                <div class="remove-link" onclick="removeFromCart('${row.brandId}', '${row.productId}')">삭제</div>
-              </div>
-              <div>${formatKRW(found.item.price)} / π ${calcPi(found.item.price)}</div>
-              <div class="qty-row">
-                <button class="qty-btn" onclick="changeQty('${row.brandId}','${row.productId}',-1)">-</button>
-                <strong>${row.qty}</strong>
-                <button class="qty-btn" onclick="changeQty('${row.brandId}','${row.productId}',1)">+</button>
-              </div>
-              <div><strong>${formatKRW(total)}</strong> · π ${(Number(calcPi(found.item.price)) * row.qty).toFixed(2)}</div>
-            </div>
-          `;
-        }).join("");
-      }
-
-      const totals = getCartTotals();
-      document.getElementById("cart-total-krw").textContent = formatKRW(totals.krw);
-      document.getElementById("cart-total-pi").textContent = `π ${totals.pi.toFixed(2)}`;
-      document.getElementById("cart-total-krw-strong").textContent = formatKRW(totals.krw);
+    function logoutAdmin() {
+      localStorage.removeItem(STORAGE_ADMIN_KEY);
+      document.getElementById("loginArea").style.display = "block";
+      document.getElementById("editArea").style.display = "none";
+      document.getElementById("adminPassword").value = "";
     }
 
-    function getCartTotals() {
-      let krw = 0;
-      let pi = 0;
-      state.cart.forEach(row => {
-        const found = findProduct(row.brandId, row.productId);
-        if (!found) return;
-        krw += found.item.price * row.qty;
-        pi += Number(calcPi(found.item.price)) * row.qty;
+    function restoreAdmin() {
+      const loggedIn = localStorage.getItem(STORAGE_ADMIN_KEY) === "true";
+      document.getElementById("loginArea").style.display = loggedIn ? "none" : "block";
+      document.getElementById("editArea").style.display = loggedIn ? "block" : "none";
+      if (loggedIn) loadAdminInputs();
+    }
+
+    async function findKrakenPiPair() {
+      const res = await fetch("https://api.kraken.com/0/public/AssetPairs");
+      const data = await res.json();
+      const entries = Object.entries(data.result || {});
+      const match = entries.find(([k, info]) => {
+        const alt = (info.altname || "").toUpperCase();
+        const ws = (info.wsname || "").toUpperCase();
+        return alt === "PIUSD" || ws === "PI/USD" || k.toUpperCase().includes("PIUSD");
       });
-      return { krw, pi };
+      if (!match) throw new Error("PI/USD pair not found");
+      return match[0];
     }
 
-    function changeQty(brandId, productId, delta) {
-      const item = state.cart.find(c => c.brandId === brandId && c.productId === productId);
-      if (!item) return;
-      item.qty += delta;
-      if (item.qty <= 0) {
-        state.cart = state.cart.filter(c => !(c.brandId === brandId && c.productId === productId));
-      }
-      saveState();
-      renderCart();
+    async function fetchPiPrice() {
+      const pairKey = await findKrakenPiPair();
+      const res = await fetch(`https://api.kraken.com/0/public/Ticker?pair=${encodeURIComponent(pairKey)}`);
+      const data = await res.json();
+      const ticker = data.result[pairKey];
+      return { pairKey, priceUSD: Number(ticker.c[0]) };
     }
 
-    function removeFromCart(brandId, productId) {
-      state.cart = state.cart.filter(c => !(c.brandId === brandId && c.productId === productId));
-      saveState();
-      renderCart();
-    }
+    function setupAdminPanel() {
+      const fab = document.getElementById("adminFab");
+      const panel = document.getElementById("adminPanel");
 
-    function clearCart() {
-      if (!confirm("장바구니를 비우시겠습니까?")) return;
-      state.cart = [];
-      saveState();
-      renderCart();
-    }
-
-    function checkoutToKakao() {
-      if (!state.cart.length) {
-        alert("장바구니가 비어 있습니다.");
-        return;
-      }
-      const lines = [];
-      lines.push("[더썸테라피 주문 문의]");
-      lines.push("");
-      state.cart.forEach(row => {
-        const found = findProduct(row.brandId, row.productId);
-        if (!found) return;
-        lines.push(`- ${found.brand.title} / ${found.item.name} / 수량 ${row.qty} / ${formatKRW(found.item.price * row.qty)} / π ${(Number(calcPi(found.item.price)) * row.qty).toFixed(2)}`);
+      fab.addEventListener("click", () => {
+        panel.classList.toggle("show");
       });
-      const totals = getCartTotals();
-      lines.push("");
-      lines.push(`총액: ${formatKRW(totals.krw)}`);
-      lines.push(`PI 환산: π ${totals.pi.toFixed(2)}`);
-      lines.push(`기준 환산: 1 PI = ${Number(state.piRate).toLocaleString()}원`);
-      const message = encodeURIComponent(lines.join("\n"));
-      window.open(`${state.kakaoUrl}?text=${message}`, "_blank");
+
+      document.addEventListener("click", (e) => {
+        if (!panel.contains(e.target) && !fab.contains(e.target)) {
+          panel.classList.remove("show");
+        }
+      });
     }
 
-    function openCart() {
-      document.getElementById("cartDrawer").classList.add("open");
-    }
-    function closeCart() {
-      document.getElementById("cartDrawer").classList.remove("open");
-    }
+    async function init() {
+      createProductEditors();
+      setupAdminPanel();
+      restoreAdmin();
 
-    function openAdmin() {
-      document.getElementById("adminModal").classList.add("open");
-      renderAdmin();
-    }
-    function closeAdmin() {
-      document.getElementById("adminModal").classList.remove("open");
-    }
-    function adminLogin() {
-      const input = document.getElementById("admin-password").value;
-      if (input !== ADMIN_PASSWORD) {
-        alert("비밀번호가 올바르지 않습니다.");
-        return;
+      try {
+        const { pairKey, priceUSD } = await fetchPiPrice();
+        currentPiPriceUSD = priceUSD;
+        document.getElementById("piPriceText").textContent = `1 PI = ${usd(priceUSD)}`;
+        document.getElementById("piMetaText").textContent = `Kraken 기준 · ${pairKey}`;
+      } catch (e) {
+        currentPiPriceUSD = 0.18;
+        document.getElementById("piPriceText").textContent = "시세 연결 실패";
+        document.getElementById("piMetaText").textContent = "기본 참고값으로 표시 중";
       }
-      adminAuthenticated = true;
-      renderAdmin();
-    }
-    function adminLogout() {
-      adminAuthenticated = false;
-      document.getElementById("admin-password").value = "";
-      renderAdmin();
+
+      applyContent();
     }
 
-    function renderAdmin() {
-      document.getElementById("admin-login-box").style.display = adminAuthenticated ? "none" : "grid";
-      document.getElementById("admin-content").style.display = adminAuthenticated ? "block" : "none";
-      if (!adminAuthenticated) return;
-
-      document.getElementById("admin-phone").value = state.phone;
-      document.getElementById("admin-kakao").value = state.kakaoUrl;
-      document.getElementById("admin-rate").value = state.piRate;
-      document.getElementById("admin-brand-intro").value = state.brandIntro;
-      document.getElementById("admin-contact-desc").value = state.contactDesc;
-
-      document.getElementById("new-product-brand").innerHTML = state.brands.map(b => `<option value="${b.id}">${b.title}</option>`).join("");
-
-      document.getElementById("admin-notice-list").innerHTML = state.notices.map(n => `
-        <div class="admin-item">
-          <strong>${escapeHtml(n.title)}</strong>
-          <div class="small-muted">${escapeHtml(n.date || "")}</div>
-          <div>${escapeHtml(n.content || "")}</div>
-          <div class="admin-actions">
-            <button class="btn-danger" onclick="removeNotice('${n.id}')">삭제</button>
-          </div>
-        </div>
-      `).join("");
-
-      document.getElementById("admin-event-list").innerHTML = state.events.map(n => `
-        <div class="admin-item">
-          <strong>${escapeHtml(n.title)}</strong>
-          <div class="small-muted">${escapeHtml(n.date || "")}</div>
-          <div>${escapeHtml(n.content || "")}</div>
-          <div class="admin-actions">
-            <button class="btn-danger" onclick="removeEvent('${n.id}')">삭제</button>
-          </div>
-        </div>
-      `).join("");
-
-      document.getElementById("admin-review-list").innerHTML = state.reviews.map(n => `
-        <div class="admin-item">
-          <strong>${escapeHtml(n.title)}</strong>
-          <div class="small-muted">별점 ${n.stars}</div>
-          <div>${escapeHtml(n.content || "")}</div>
-          <div class="admin-actions">
-            <button class="btn-danger" onclick="removeReview('${n.id}')">삭제</button>
-          </div>
-        </div>
-      `).join("");
-
-      const allProducts = state.brands.flatMap(brand => brand.items.map(item => ({ brand, item })));
-      document.getElementById("admin-product-list").innerHTML = allProducts.map(({ brand, item }) => `
-        <div class="admin-item">
-          <strong>${escapeHtml(item.name)}</strong>
-          <div class="small-muted">${brand.title} · ${formatKRW(item.price)} · π ${calcPi(item.price)}</div>
-          <div>${escapeHtml(item.desc || "")}</div>
-          <div class="admin-actions">
-            <button class="btn-danger" onclick="removeProduct('${brand.id}', '${item.id}')">삭제</button>
-          </div>
-        </div>
-      `).join("");
-    }
-
-    function saveBasicSettings() {
-      state.phone = document.getElementById("admin-phone").value.trim() || state.phone;
-      state.kakaoUrl = document.getElementById("admin-kakao").value.trim() || state.kakaoUrl;
-      state.piRate = Number(document.getElementById("admin-rate").value) || state.piRate;
-      state.brandIntro = document.getElementById("admin-brand-intro").value.trim() || state.brandIntro;
-      state.contactDesc = document.getElementById("admin-contact-desc").value.trim() || state.contactDesc;
-      saveState();
-      renderAll();
-      alert("기본 설정이 저장되었습니다.");
-    }
-
-    function addProduct() {
-      const brandId = document.getElementById("new-product-brand").value;
-      const name = document.getElementById("new-product-name").value.trim();
-      const desc = document.getElementById("new-product-desc").value.trim();
-      const price = Number(document.getElementById("new-product-price").value);
-      const image = document.getElementById("new-product-image").value.trim() || placeholderImage;
-      if (!brandId || !name || !price) {
-        alert("브랜드, 상품명, 가격은 필수입니다.");
-        return;
-      }
-      const brand = state.brands.find(b => b.id === brandId);
-      if (!brand) return;
-      brand.items.push({ id: uid(), name, desc, price, image });
-      saveState();
-      renderAll();
-      renderAdmin();
-      document.getElementById("new-product-name").value = "";
-      document.getElementById("new-product-desc").value = "";
-      document.getElementById("new-product-price").value = "";
-      document.getElementById("new-product-image").value = "";
-      alert("상품이 추가되었습니다.");
-    }
-
-    function removeProduct(brandId, productId) {
-      if (!confirm("상품을 삭제하시겠습니까?")) return;
-      const brand = state.brands.find(b => b.id === brandId);
-      if (!brand) return;
-      brand.items = brand.items.filter(i => i.id !== productId);
-      state.cart = state.cart.filter(c => !(c.brandId === brandId && c.productId === productId));
-      saveState();
-      renderAll();
-      renderAdmin();
-    }
-
-    function addNotice() {
-      const title = document.getElementById("new-notice-title").value.trim();
-      const date = document.getElementById("new-notice-date").value.trim();
-      const content = document.getElementById("new-notice-content").value.trim();
-      if (!title || !content) return alert("공지 제목과 내용을 입력하세요.");
-      state.notices.unshift({ id: uid(), title, date, content });
-      saveState();
-      renderAll();
-      renderAdmin();
-      document.getElementById("new-notice-title").value = "";
-      document.getElementById("new-notice-date").value = "";
-      document.getElementById("new-notice-content").value = "";
-    }
-
-    function removeNotice(id) {
-      state.notices = state.notices.filter(i => i.id !== id);
-      saveState();
-      renderAll();
-      renderAdmin();
-    }
-
-    function addEvent() {
-      const title = document.getElementById("new-event-title").value.trim();
-      const date = document.getElementById("new-event-date").value.trim();
-      const content = document.getElementById("new-event-content").value.trim();
-      if (!title || !content) return alert("이벤트 제목과 내용을 입력하세요.");
-      state.events.unshift({ id: uid(), title, date, content });
-      saveState();
-      renderAll();
-      renderAdmin();
-      document.getElementById("new-event-title").value = "";
-      document.getElementById("new-event-date").value = "";
-      document.getElementById("new-event-content").value = "";
-    }
-
-    function removeEvent(id) {
-      state.events = state.events.filter(i => i.id !== id);
-      saveState();
-      renderAll();
-      renderAdmin();
-    }
-
-    function addReview() {
-      const title = document.getElementById("new-review-title").value.trim();
-      const stars = Number(document.getElementById("new-review-stars").value) || 5;
-      const content = document.getElementById("new-review-content").value.trim();
-      if (!title || !content) return alert("후기 작성자와 내용을 입력하세요.");
-      state.reviews.unshift({ id: uid(), title, stars: Math.max(1, Math.min(5, stars)), content });
-      saveState();
-      renderAll();
-      renderAdmin();
-      document.getElementById("new-review-title").value = "";
-      document.getElementById("new-review-stars").value = "";
-      document.getElementById("new-review-content").value = "";
-    }
-
-    function removeReview(id) {
-      state.reviews = state.reviews.filter(i => i.id !== id);
-      saveState();
-      renderAll();
-      renderAdmin();
-    }
-
-    function manualRateUpdate() {
-      const input = Number(document.getElementById("pi-rate-input").value);
-      if (!input || input <= 0) return alert("올바른 PI 환산 기준을 입력하세요.");
-      state.piRate = input;
-      saveState();
-      renderAll();
-      alert("PI 환산 기준이 반영되었습니다.");
-    }
-
-    function simulateRateFetch() {
-      const simulated = 190 + Math.floor(Math.random() * 70);
-      state.piRate = simulated;
-      saveState();
-      renderAll();
-      alert(`테스트용 PI 환산 기준이 ${simulated}원으로 반영되었습니다.`);
-    }
-
-    function resetStore() {
-      if (!confirm("전체 데이터를 초기 상태로 되돌릴까요?")) return;
-      localStorage.removeItem(STORAGE_KEY);
-      state = JSON.parse(JSON.stringify(defaultState));
-      saveState();
-      renderAll();
-      alert("초기화가 완료되었습니다.");
-    }
-
-    function escapeHtml(str) {
-      return String(str)
-        .replaceAll("&", "&amp;")
-        .replaceAll("<", "&lt;")
-        .replaceAll(">", "&gt;")
-        .replaceAll('"', "&quot;")
-        .replaceAll("'", "&#39;");
-    }
-
-    function renderAll() {
-      renderTop();
-      renderNav();
-      renderProducts();
-      renderNotices();
-      renderEvents();
-      renderReviews();
-      renderCart();
-    }
-
-    renderAll();
+    init();
   </script>
 </body>
 </html>
