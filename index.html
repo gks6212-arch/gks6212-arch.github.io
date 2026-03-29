@@ -14,11 +14,10 @@
 
     :root {
       --bg: #f6f1eb;
-      --card: #fcf8f3;
-      --white: #ffffff;
-      --line: #e5d9cc;
-      --text: #473a32;
-      --sub: #84776d;
+      --card: #ffffff;
+      --line: #eadfd3;
+      --text: #4b3f38;
+      --sub: #7d7067;
       --main: #9a7a46;
       --main-dark: #7f6236;
       --soft: #fff7ed;
@@ -47,7 +46,7 @@
     }
 
     .appbar-inner {
-      max-width: 900px;
+      max-width: 1200px;
       margin: 0 auto;
       padding: 16px;
       display: flex;
@@ -123,9 +122,9 @@
     }
 
     .hero {
-      max-width: 900px;
+      max-width: 1200px;
       margin: 0 auto;
-      padding: 18px 16px 16px;
+      padding: 18px 16px 12px;
     }
 
     .hero-card {
@@ -148,7 +147,7 @@
     .hero-desc {
       font-size: 17px;
       color: #7b6f64;
-      max-width: 700px;
+      max-width: 760px;
       word-break: keep-all;
       line-height: 1.7;
     }
@@ -192,6 +191,7 @@
       flex-direction: column;
       gap: 14px;
       margin-top: 22px;
+      max-width: 640px;
     }
 
     .btn {
@@ -203,7 +203,6 @@
       border-radius: 24px;
       font-size: 18px;
       font-weight: 900;
-      user-select: none;
       border: none;
     }
 
@@ -257,14 +256,160 @@
       line-height: 1.6;
     }
 
-    .footer-wrap {
-      max-width: 900px;
+    .menu-wrap {
+      max-width: 1200px;
       margin: 0 auto;
-      padding: 0 16px 70px;
+      padding: 10px 16px 0;
+      position: sticky;
+      top: 99px;
+      z-index: 90;
+      background: linear-gradient(to bottom, rgba(246,241,235,0.98), rgba(246,241,235,0.92));
+      backdrop-filter: blur(4px);
+    }
+
+    .menu {
+      display: flex;
+      overflow-x: auto;
+      gap: 10px;
+      padding-bottom: 10px;
+      scrollbar-width: none;
+    }
+
+    .menu::-webkit-scrollbar {
+      display: none;
+    }
+
+    .menu button {
+      white-space: nowrap;
+      border: none;
+      cursor: pointer;
+      background: #fff;
+      color: #6d5a49;
+      border: 1px solid #dfd3c7;
+      padding: 10px 16px;
+      border-radius: 999px;
+      font-size: 14px;
+      font-weight: 900;
+      box-shadow: 0 4px 10px rgba(90,72,53,0.05);
+    }
+
+    .content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 10px 16px 70px;
+    }
+
+    .brand-section {
+      margin-top: 20px;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      padding: 22px 16px 18px;
+      box-shadow: var(--shadow);
+    }
+
+    .brand-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+
+    .brand-title-kor {
+      font-size: 24px;
+      font-weight: 900;
+      color: #4a3e35;
+    }
+
+    .brand-subtext {
+      font-size: 13px;
+      color: #8b8076;
+      margin-top: 6px;
+    }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .card {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 10px 22px rgba(94,76,58,0.08);
+    }
+
+    .card-thumb {
+      height: 180px;
+      background: linear-gradient(135deg, #eee8e2, #d9d0c8);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .thumb-glow {
+      position: absolute;
+      inset: 18px;
+      border-radius: 22px;
+      background:
+        radial-gradient(circle at 30% 30%, rgba(255,255,255,0.95), transparent 32%),
+        radial-gradient(circle at 70% 35%, rgba(255,255,255,0.55), transparent 24%),
+        linear-gradient(135deg, #f4ede6, #d8cec6);
+    }
+
+    .card-body {
+      padding: 14px 14px 16px;
+    }
+
+    .product-name {
+      font-size: 15px;
+      font-weight: 900;
+      color: #5a493f;
+      margin-bottom: 8px;
+      word-break: keep-all;
+      min-height: 42px;
+    }
+
+    .rating {
+      color: #6b5748;
+      font-size: 13px;
+      margin-bottom: 6px;
+      font-weight: 700;
+    }
+
+    .price-krw {
+      color: #9a8a7a;
+      font-size: 15px;
+      margin-bottom: 4px;
+    }
+
+    .price-pi {
+      color: var(--main);
+      font-size: 18px;
+      font-weight: 900;
+      margin-bottom: 10px;
+    }
+
+    .buy-btn-disabled {
+      display: block;
+      width: 100%;
+      text-align: center;
+      background: #d6cfc9;
+      color: #ffffff;
+      padding: 12px 10px;
+      border-radius: 14px;
+      font-size: 13px;
+      font-weight: 900;
+      border: none;
+      cursor: not-allowed;
+      pointer-events: none;
     }
 
     .footer-box {
-      margin-top: 20px;
+      margin-top: 24px;
       background: #fff;
       border: 1px solid var(--line);
       border-radius: 24px;
@@ -286,6 +431,22 @@
       line-height: 1.7;
     }
 
+    @media (max-width: 1180px) {
+      .product-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 980px) {
+      .product-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .menu-wrap {
+        top: 99px;
+      }
+    }
+
     @media (max-width: 700px) {
       .brand-title {
         font-size: 26px;
@@ -298,6 +459,24 @@
       .hero-desc,
       .notice-text {
         font-size: 16px;
+      }
+
+      .product-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+      }
+
+      .card-thumb {
+        height: 150px;
+      }
+
+      .product-name {
+        font-size: 14px;
+        min-height: 38px;
+      }
+
+      .menu-wrap {
+        top: 99px;
       }
     }
   </style>
@@ -323,7 +502,7 @@
 
   <section class="hero">
     <div class="hero-card">
-      <div class="hero-title">프리미엄 뷰티 코팅 스토어</div>
+      <div class="hero-title">프리미엄 뷰티 스토어</div>
       <div class="hero-desc">
         한국 가격과 현재 PI 시세를 함께 표시하는 테스트용 쇼핑 화면입니다.
         현재는 도메인 인증 및 정식 오픈 준비 단계입니다.
@@ -356,18 +535,187 @@
     </div>
   </section>
 
-  <section class="footer-wrap">
+  <div class="menu-wrap">
+    <div class="menu">
+      <button onclick="goSection('norabode')">노라보데</button>
+      <button onclick="goSection('alchemy')">알케미아</button>
+      <button onclick="goSection('guinot')">기노</button>
+      <button onclick="goSection('thala')">탈라</button>
+      <button onclick="goSection('sothys')">쏘티스</button>
+    </div>
+  </div>
+
+  <main class="content">
+    <section class="brand-section" id="norabode">
+      <div class="brand-head">
+        <div>
+          <div class="brand-title-kor">노라보데</div>
+          <div class="brand-subtext">프리미엄 스킨케어 라인</div>
+        </div>
+        <div class="brand-subtext">상품 10개</div>
+      </div>
+      <div class="product-grid" id="grid-norabode"></div>
+    </section>
+
+    <section class="brand-section" id="alchemy">
+      <div class="brand-head">
+        <div>
+          <div class="brand-title-kor">알케미아</div>
+          <div class="brand-subtext">자연 유래 케어 라인</div>
+        </div>
+        <div class="brand-subtext">상품 10개</div>
+      </div>
+      <div class="product-grid" id="grid-alchemy"></div>
+    </section>
+
+    <section class="brand-section" id="guinot">
+      <div class="brand-head">
+        <div>
+          <div class="brand-title-kor">기노</div>
+          <div class="brand-subtext">전문 에스테틱 케어 라인</div>
+        </div>
+        <div class="brand-subtext">상품 10개</div>
+      </div>
+      <div class="product-grid" id="grid-guinot"></div>
+    </section>
+
+    <section class="brand-section" id="thala">
+      <div class="brand-head">
+        <div>
+          <div class="brand-title-kor">탈라</div>
+          <div class="brand-subtext">해양 성분 기반 케어 라인</div>
+        </div>
+        <div class="brand-subtext">상품 10개</div>
+      </div>
+      <div class="product-grid" id="grid-thala"></div>
+    </section>
+
+    <section class="brand-section" id="sothys">
+      <div class="brand-head">
+        <div>
+          <div class="brand-title-kor">쏘티스</div>
+          <div class="brand-subtext">럭셔리 뷰티 케어 라인</div>
+        </div>
+        <div class="brand-subtext">상품 10개</div>
+      </div>
+      <div class="product-grid" id="grid-sothys"></div>
+    </section>
+
     <div class="footer-box">
       <h3>안내 사항</h3>
       <p>현재 페이지는 도메인 인증 및 디자인 점검을 위한 테스트 화면입니다.</p>
       <p>상담, 예약, 결제 기능은 정식 오픈 전까지 비활성 상태로 유지됩니다.</p>
       <p>정식 오픈 후 실제 상품과 서비스가 순차적으로 반영될 예정입니다.</p>
     </div>
-  </section>
+  </main>
 
   <script>
+    const USD_KRW = 1508.4;
+
+    const productData = {
+      norabode: [
+        ["노라보데 앰플 세럼", 120000, 4.8],
+        ["노라보데 수분 에센스", 130000, 4.9],
+        ["노라보데 리페어 크림", 140000, 4.8],
+        ["노라보데 밸런싱 토너", 150000, 4.7],
+        ["노라보데 광채 부스터", 160000, 4.9],
+        ["노라보데 딥 클렌저", 170000, 4.8],
+        ["노라보데 아이 세럼", 180000, 4.9],
+        ["노라보데 영양 마스크", 190000, 4.7],
+        ["노라보데 리프팅 에멀전", 200000, 4.8],
+        ["노라보데 시그니처 크림", 210000, 4.9]
+      ],
+      alchemy: [
+        ["알케미아 허벌 세럼", 130000, 4.8],
+        ["알케미아 내추럴 토너", 140000, 4.7],
+        ["알케미아 에센셜 오일 케어", 150000, 4.9],
+        ["알케미아 수딩 크림", 160000, 4.8],
+        ["알케미아 브라이트 에센스", 170000, 4.7],
+        ["알케미아 리치 밤", 180000, 4.8],
+        ["알케미아 허니 마스크", 190000, 4.9],
+        ["알케미아 리커버 세럼", 200000, 4.8],
+        ["알케미아 밸런스 플루이드", 210000, 4.7],
+        ["알케미아 프리미엄 크림", 220000, 4.9]
+      ],
+      guinot: [
+        ["기노 하이드라 세럼", 140000, 4.9],
+        ["기노 뉴트리 크림", 150000, 4.8],
+        ["기노 퍼밍 젤", 160000, 4.8],
+        ["기노 에센셜 로션", 170000, 4.7],
+        ["기노 비타민 앰플", 180000, 4.9],
+        ["기노 수딩 마스크", 190000, 4.8],
+        ["기노 밸런싱 세럼", 200000, 4.7],
+        ["기노 브라이트닝 크림", 210000, 4.8],
+        ["기노 아이 컨투어", 220000, 4.9],
+        ["기노 리커버 밤", 230000, 4.8]
+      ],
+      thala: [
+        ["탈라 마린 세럼", 150000, 4.8],
+        ["탈라 오션 크림", 160000, 4.9],
+        ["탈라 미네랄 토너", 170000, 4.7],
+        ["탈라 리프레시 젤", 180000, 4.8],
+        ["탈라 딥 하이드라 마스크", 190000, 4.9],
+        ["탈라 뉴트리 에센스", 200000, 4.8],
+        ["탈라 밸런싱 플루이드", 210000, 4.7],
+        ["탈라 스킨 리커버", 220000, 4.8],
+        ["탈라 아이 케어", 230000, 4.9],
+        ["탈라 프레스티지 크림", 240000, 4.8]
+      ],
+      sothys: [
+        ["쏘티스 하이드라 세럼", 160000, 4.9],
+        ["쏘티스 시그니처 크림", 170000, 4.8],
+        ["쏘티스 에너지 로션", 180000, 4.7],
+        ["쏘티스 리페어 밤", 190000, 4.8],
+        ["쏘티스 브라이트 에센스", 200000, 4.9],
+        ["쏘티스 리프팅 세럼", 210000, 4.8],
+        ["쏘티스 밸런스 토너", 220000, 4.7],
+        ["쏘티스 마스크 크림", 230000, 4.8],
+        ["쏘티스 아이 세럼", 240000, 4.9],
+        ["쏘티스 럭셔리 크림", 250000, 4.8]
+      ]
+    };
+
+    function goSection(id) {
+      document.getElementById(id).scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+
+    function won(v) {
+      return "₩" + new Intl.NumberFormat("ko-KR").format(Math.round(v));
+    }
+
+    function pi(v) {
+      return "π " + Number(v).toFixed(2);
+    }
+
     function usd(v) {
       return "$" + Number(v).toFixed(4);
+    }
+
+    function renderBrand(gridId, items, piUsdPrice) {
+      const grid = document.getElementById(gridId);
+      grid.innerHTML = "";
+
+      items.forEach(item => {
+        const [name, priceKRW, rating] = item;
+        const priceUsd = priceKRW / USD_KRW;
+        const pricePi = priceUsd / piUsdPrice;
+
+        const card = document.createElement("article");
+        card.className = "card";
+        card.innerHTML = `
+          <div class="card-thumb">
+            <div class="thumb-glow"></div>
+          </div>
+          <div class="card-body">
+            <div class="product-name">${name}</div>
+            <div class="rating">⭐ ${rating}</div>
+            <div class="price-krw">${won(priceKRW)}</div>
+            <div class="price-pi">${pi(pricePi)}</div>
+            <button class="buy-btn-disabled">결제 준비중</button>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
     }
 
     async function findKrakenPiPair() {
@@ -392,14 +740,23 @@
     }
 
     async function init() {
+      let piUsdPrice = 0.18;
+
       try {
         const { pairKey, priceUSD } = await fetchPiPrice();
+        piUsdPrice = priceUSD;
         document.getElementById("piPriceText").textContent = `1 PI = ${usd(priceUSD)}`;
         document.getElementById("piMetaText").textContent = `Kraken 기준 · ${pairKey}`;
       } catch (e) {
         document.getElementById("piPriceText").textContent = "시세 연결 실패";
         document.getElementById("piMetaText").textContent = "기본 참고값으로 표시 중";
       }
+
+      renderBrand("grid-norabode", productData.norabode, piUsdPrice);
+      renderBrand("grid-alchemy", productData.alchemy, piUsdPrice);
+      renderBrand("grid-guinot", productData.guinot, piUsdPrice);
+      renderBrand("grid-thala", productData.thala, piUsdPrice);
+      renderBrand("grid-sothys", productData.sothys, piUsdPrice);
     }
 
     init();
