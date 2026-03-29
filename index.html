@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>The Thumb Therapy | Advanced Admin Shop</title>
+  <title>The Thumb Therapy | Pi Beauty Shop</title>
   <style>
     * {
       box-sizing: border-box;
@@ -23,8 +23,8 @@
       --soft: #fff8f0;
       --soft-border: #e7cda7;
       --disabled: #cfc8c2;
-      --danger: #a14e44;
-      --ok: #2a7a4c;
+      --danger: #8f4e2e;
+      --ok: #1f7a45;
     }
 
     body {
@@ -43,7 +43,7 @@
     }
 
     .appbar-inner {
-      max-width: 1180px;
+      max-width: 980px;
       margin: 0 auto;
       padding: 14px 16px;
       display: flex;
@@ -108,8 +108,17 @@
       word-break: keep-all;
     }
 
+    .app-icons {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 18px;
+      color: #7d6855;
+      flex: 0 0 auto;
+    }
+
     .hero {
-      max-width: 1180px;
+      max-width: 980px;
       margin: 0 auto;
       padding: 18px 16px 12px;
     }
@@ -133,7 +142,7 @@
     .hero-desc {
       font-size: 14px;
       color: #7b6f64;
-      max-width: 700px;
+      max-width: 560px;
       word-break: keep-all;
     }
 
@@ -247,8 +256,19 @@
       margin-top: 4px;
     }
 
+    .status {
+      display: inline-block;
+      margin-top: 8px;
+      font-size: 12px;
+      font-weight: 800;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(138,106,63,0.10);
+      color: var(--main);
+    }
+
     .grid-wrap {
-      max-width: 1180px;
+      max-width: 980px;
       margin: 0 auto;
       padding: 14px 16px 70px;
     }
@@ -262,7 +282,7 @@
 
     .product-grid {
       display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
+      grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 16px;
     }
 
@@ -275,17 +295,9 @@
     }
 
     .card-thumb {
-      height: 190px;
+      height: 180px;
       background: linear-gradient(135deg, #eee8e2, #d9d0c8);
       position: relative;
-      overflow: hidden;
-    }
-
-    .card-thumb img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
     }
 
     .thumb-glow {
@@ -308,7 +320,6 @@
       color: #5a493f;
       margin-bottom: 10px;
       word-break: keep-all;
-      min-height: 42px;
     }
 
     .rating {
@@ -329,6 +340,20 @@
       font-size: 18px;
       font-weight: 900;
       margin-bottom: 12px;
+    }
+
+    .buy-btn {
+      display: block;
+      width: 100%;
+      text-align: center;
+      background: linear-gradient(135deg, #8a6a3f, #a98758);
+      color: #ffffff;
+      padding: 13px 12px;
+      border-radius: 16px;
+      font-size: 14px;
+      font-weight: 900;
+      border: none;
+      cursor: pointer;
     }
 
     .buy-btn-disabled {
@@ -376,6 +401,7 @@
       word-break: keep-all;
     }
 
+    /* 관리자 모드 */
     .admin-fab {
       position: fixed;
       right: 16px;
@@ -398,9 +424,7 @@
       right: 16px;
       bottom: 86px;
       z-index: 210;
-      width: min(95vw, 430px);
-      max-height: 80vh;
-      overflow: auto;
+      width: min(92vw, 360px);
       background: #fff;
       border: 1px solid var(--line);
       border-radius: 22px;
@@ -420,33 +444,24 @@
       margin-bottom: 12px;
     }
 
-    .admin-subtitle {
-      font-size: 13px;
-      font-weight: 900;
-      color: #6d5c4b;
-      margin: 14px 0 8px;
+    .admin-row {
+      display: grid;
+      gap: 10px;
+      margin-bottom: 12px;
     }
 
-    .admin-input,
-    .admin-textarea,
-    .admin-select {
+    .admin-input {
       width: 100%;
       border: 1px solid #ddd3c8;
       border-radius: 14px;
       padding: 12px;
       font-size: 14px;
       outline: none;
-      margin-bottom: 8px;
-      background: #fff;
-    }
-
-    .admin-textarea {
-      min-height: 90px;
-      resize: vertical;
     }
 
     .admin-actions {
       display: grid;
+      grid-template-columns: repeat(3, 1fr);
       gap: 8px;
       margin-top: 10px;
     }
@@ -454,7 +469,7 @@
     .admin-btn {
       border: none;
       border-radius: 12px;
-      padding: 11px 10px;
+      padding: 10px 8px;
       font-size: 13px;
       font-weight: 900;
       cursor: pointer;
@@ -475,49 +490,23 @@
       color: var(--danger);
     }
 
-    .admin-help {
-      font-size: 12px;
-      color: #7a7169;
-      line-height: 1.6;
-      margin-top: 8px;
-    }
-
-    .product-editor {
-      border: 1px solid #eee4da;
-      border-radius: 16px;
-      padding: 12px;
-      background: #fcfaf8;
-      margin-bottom: 10px;
-    }
-
-    .toggle-row {
-      display: flex;
-      gap: 8px;
-      margin-bottom: 8px;
-    }
-
-    .toggle-chip {
-      flex: 1;
-      text-align: center;
-      padding: 10px 8px;
-      border-radius: 12px;
+    .admin-info {
       font-size: 13px;
-      font-weight: 900;
-      border: 1px solid #ddd3c8;
-      background: #fff;
-      cursor: pointer;
+      line-height: 1.6;
+      color: #7b6d61;
+      margin-top: 10px;
+      word-break: keep-all;
     }
 
-    .toggle-chip.active {
-      background: #8a6a3f;
-      color: #fff;
-      border-color: #8a6a3f;
-    }
-
-    @media (max-width: 980px) {
-      .product-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
+    .admin-mode-badge {
+      display: inline-block;
+      margin-top: 8px;
+      font-size: 12px;
+      font-weight: 800;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(31,122,69,0.10);
+      color: var(--ok);
     }
 
     @media (max-width: 640px) {
@@ -540,7 +529,14 @@
 
       .product-name {
         font-size: 15px;
-        min-height: 38px;
+      }
+
+      .button-group {
+        max-width: 100%;
+      }
+
+      .admin-actions {
+        grid-template-columns: 1fr;
       }
     }
   </style>
@@ -555,12 +551,18 @@
           <div class="brand-sub" id="brandSub">Preparation Stage · Domain Verification</div>
         </div>
       </div>
+      <div class="app-icons">
+        <span>⌕</span>
+        <span>♡</span>
+        <span>🛒</span>
+        <span>☰</span>
+      </div>
     </div>
   </header>
 
   <section class="hero">
     <div class="hero-card">
-      <div class="hero-title" id="heroTitle">프리미엄 뷰티 코팅 스토어</div>
+      <div class="hero-title">프리미엄 뷰티 코팅 스토어</div>
       <div class="hero-desc" id="heroDesc">
         한국 가격과 현재 PI 시세를 함께 표시하는 테스트용 쇼핑 화면입니다.
         현재는 도메인 인증 및 정식 오픈 준비 단계입니다.
@@ -585,6 +587,7 @@
         <div class="ticker-label">Kraken PI Live Price</div>
         <div class="ticker-price" id="piPriceText">불러오는 중…</div>
         <div class="ticker-meta" id="piMetaText">Kraken 공개 시세 확인 중</div>
+        <div class="status" id="piStatus">시세 로딩 중</div>
       </div>
     </div>
   </section>
@@ -597,7 +600,7 @@
       PI 환산값은 실시간 PI/USD 시세를 기준으로 계산되는 참고용 표시입니다.
     </div>
 
-    <div class="footer-box">
+    <div class="footer-box" id="footerBox">
       <h3>안내 사항</h3>
       <p id="footerLine1">현재 페이지는 도메인 인증 및 디자인 점검을 위한 테스트 화면입니다.</p>
       <p id="footerLine2">상담, 예약, 결제 기능은 정식 오픈 전까지 비활성 상태로 유지됩니다.</p>
@@ -608,81 +611,53 @@
   <button class="admin-fab" id="adminFab">관리자</button>
 
   <div class="admin-panel" id="adminPanel">
-    <div class="admin-title">통합 관리자</div>
+    <div class="admin-title">관리자 모드</div>
 
-    <div id="loginArea">
+    <div id="loginArea" class="admin-row">
       <input id="adminPassword" class="admin-input" type="password" placeholder="비밀번호 입력" />
-      <div class="admin-actions">
-        <button class="admin-btn admin-btn-main" onclick="loginAdmin()">로그인</button>
-      </div>
+      <button class="admin-btn admin-btn-main" onclick="loginAdmin()">로그인</button>
     </div>
 
-    <div id="editArea" style="display:none;">
-      <div class="admin-subtitle">기본 정보</div>
-      <input id="editHeroTitle" class="admin-input" type="text" placeholder="메인 제목" />
-      <textarea id="editHeroDesc" class="admin-textarea" placeholder="소개글"></textarea>
-
-      <div class="admin-subtitle">공지 설정</div>
-      <div class="toggle-row">
-        <button type="button" id="noticeOnBtn" class="toggle-chip" onclick="setNoticeToggle(true)">공지 ON</button>
-        <button type="button" id="noticeOffBtn" class="toggle-chip" onclick="setNoticeToggle(false)">공지 OFF</button>
-      </div>
-      <input id="editNoticeTitle" class="admin-input" type="text" placeholder="공지 제목" />
-      <textarea id="editNoticeText" class="admin-textarea" placeholder="공지 내용"></textarea>
-
-      <div class="admin-subtitle">상담 버튼 / 링크</div>
-      <input id="editKakaoText" class="admin-input" type="text" placeholder="카카오 버튼 문구" />
-      <input id="editKakaoLink" class="admin-input" type="text" placeholder="카카오 링크" />
-      <input id="editPhoneText" class="admin-input" type="text" placeholder="전화 버튼 문구" />
-      <input id="editPhoneNumber" class="admin-input" type="text" placeholder="전화번호 (예: 01012345678)" />
-
-      <div class="admin-subtitle">상품 8개 관리</div>
-      <div id="productEditors"></div>
+    <div id="controlArea" style="display:none;">
+      <div class="admin-mode-badge" id="adminModeBadge">현재 모드: 1단계 준비중</div>
 
       <div class="admin-actions">
-        <button class="admin-btn admin-btn-main" onclick="saveAdminData()">저장</button>
-        <button class="admin-btn admin-btn-soft" onclick="loadAdminInputs()">불러오기</button>
-        <button class="admin-btn admin-btn-danger" onclick="resetAdminData()">초기화</button>
-        <button class="admin-btn admin-btn-soft" onclick="logoutAdmin()">로그아웃</button>
+        <button class="admin-btn admin-btn-soft" onclick="setStage(1)">1단계</button>
+        <button class="admin-btn admin-btn-soft" onclick="setStage(2)">2단계</button>
+        <button class="admin-btn admin-btn-soft" onclick="setStage(3)">3단계</button>
       </div>
 
-      <div class="admin-help">
-        이미지 주소는 인터넷 이미지 주소나 GitHub Pages 내 이미지 주소를 넣으면 됩니다.<br>
-        예: https://...jpg 또는 /images/product1.jpg
+      <div class="admin-actions" style="margin-top:8px;">
+        <button class="admin-btn admin-btn-main" onclick="showNotice()">공지 보이기</button>
+        <button class="admin-btn admin-btn-soft" onclick="hideNotice()">공지 숨기기</button>
+        <button class="admin-btn admin-btn-danger" onclick="logoutAdmin()">로그아웃</button>
+      </div>
+
+      <div class="admin-info">
+        1단계: 공지 표시 / 상담 비활성 / 결제 비활성<br>
+        2단계: 공지 축소 / 상담 활성 / 결제 비활성<br>
+        3단계: 공지 숨김 / 상담 활성 / 결제 버튼 활성화 UI
       </div>
     </div>
   </div>
 
   <script>
-    const ADMIN_PASSWORD = "1234";
     const USD_KRW = 1508.4;
-    const STORAGE_ADMIN_KEY = "advanced_admin_logged_in";
-    const STORAGE_CONTENT_KEY = "advanced_admin_content";
+    const ADMIN_PASSWORD = "1234";
+    const STORAGE_STAGE_KEY = "thumbtherapy_stage";
+    const STORAGE_NOTICE_KEY = "thumbtherapy_notice";
+    const STORAGE_ADMIN_KEY = "thumbtherapy_admin";
 
-    const defaultContent = {
-      heroTitle: "프리미엄 뷰티 코팅 스토어",
-      heroDesc: "한국 가격과 현재 PI 시세를 함께 표시하는 테스트용 쇼핑 화면입니다. 현재는 도메인 인증 및 정식 오픈 준비 단계입니다.",
-      noticeEnabled: true,
-      noticeTitle: "현재 서비스 준비 중입니다",
-      noticeText: "현재 본 사이트는 도메인 인증 및 정식 오픈 준비 단계로 운영되고 있습니다.\n테스트 페이지이므로 전화 문의, 카카오 상담, 예약 및 결제 기능은 아직 진행하지 않습니다.\n정식 오픈 후 정상적으로 안내드리겠습니다.",
-      kakaoText: "카카오 상담 준비중",
-      kakaoLink: "https://open.kakao.com/o/sqB6lDni",
-      phoneText: "전화 상담 준비중",
-      phoneNumber: "01012345678",
-      products: [
-        { name: "노라보떼 윤광 세럼", priceKRW: 180000, rating: 4.9, image: "" },
-        { name: "노라보떼 벨벳 쿠션", priceKRW: 198000, rating: 4.8, image: "" },
-        { name: "노라보떼 옥시젯 케어", priceKRW: 160000, rating: 4.8, image: "" },
-        { name: "노라보떼 인텐트 코팅", priceKRW: 250000, rating: 4.9, image: "" },
-        { name: "글로우 리커버 앰플", priceKRW: 129000, rating: 4.7, image: "" },
-        { name: "시그니처 립 글로우", priceKRW: 89000, rating: 4.9, image: "" },
-        { name: "프리미엄 톤업 크림", priceKRW: 76000, rating: 4.8, image: "" },
-        { name: "벨벳 베이스 픽서", priceKRW: 99000, rating: 4.7, image: "" }
-      ]
-    };
+    const products = [
+      { name: "노라보떼 윤광 세럼", rating: 4.9, priceKRW: 180000 },
+      { name: "노라보떼 벨벳 쿠션", rating: 4.8, priceKRW: 198000 },
+      { name: "노라보떼 옥시젯 케어", rating: 4.8, priceKRW: 160000 },
+      { name: "노라보떼 인텐트 코팅", rating: 4.9, priceKRW: 250000 },
+      { name: "글로우 리커버 앰플", rating: 4.7, priceKRW: 129000 },
+      { name: "시그니처 립 글로우", rating: 4.9, priceKRW: 89000 }
+    ];
 
     let currentPiPriceUSD = 0.18;
-    let currentNoticeEnabled = true;
 
     function won(v) {
       return "₩" + new Intl.NumberFormat("ko-KR").format(Math.round(v));
@@ -696,86 +671,119 @@
       return "$" + Number(v).toFixed(4);
     }
 
-    function getContent() {
-      const saved = localStorage.getItem(STORAGE_CONTENT_KEY);
-      if (!saved) return JSON.parse(JSON.stringify(defaultContent));
-      try {
-        return JSON.parse(saved);
-      } catch {
-        return JSON.parse(JSON.stringify(defaultContent));
-      }
+    function getSavedStage() {
+      return Number(localStorage.getItem(STORAGE_STAGE_KEY) || "1");
     }
 
-    function setContent(data) {
-      localStorage.setItem(STORAGE_CONTENT_KEY, JSON.stringify(data));
+    function getSavedNotice() {
+      const value = localStorage.getItem(STORAGE_NOTICE_KEY);
+      return value === null ? true : value === "true";
     }
 
-    function updateNoticeToggleUI() {
-      const onBtn = document.getElementById("noticeOnBtn");
-      const offBtn = document.getElementById("noticeOffBtn");
-      onBtn.classList.toggle("active", currentNoticeEnabled === true);
-      offBtn.classList.toggle("active", currentNoticeEnabled === false);
+    function saveStage(value) {
+      localStorage.setItem(STORAGE_STAGE_KEY, String(value));
     }
 
-    function setNoticeToggle(value) {
-      currentNoticeEnabled = value;
-      updateNoticeToggleUI();
+    function saveNotice(value) {
+      localStorage.setItem(STORAGE_NOTICE_KEY, String(value));
     }
 
-    function applyContent() {
-      const data = getContent();
+    function updateAdminBadge(stage) {
+      const names = {
+        1: "현재 모드: 1단계 준비중",
+        2: "현재 모드: 2단계 오픈직전",
+        3: "현재 모드: 3단계 운영모드"
+      };
+      document.getElementById("adminModeBadge").textContent = names[stage];
+    }
 
-      document.getElementById("heroTitle").textContent = data.heroTitle;
-      document.getElementById("heroDesc").textContent = data.heroDesc;
-      document.getElementById("noticeTitle").textContent = data.noticeTitle;
-      document.getElementById("noticeText").innerHTML = data.noticeText.replace(/\n/g, "<br>");
-      document.getElementById("noticeBox").style.display = data.noticeEnabled ? "block" : "none";
-      document.getElementById("kakaoBtn").textContent = data.kakaoText;
-      document.getElementById("phoneBtn").textContent = data.phoneText;
+    function applyStage(stage) {
+      const brandSub = document.getElementById("brandSub");
+      const heroDesc = document.getElementById("heroDesc");
+      const stageBadge = document.getElementById("stageBadge");
+      const noticeTitle = document.getElementById("noticeTitle");
+      const noticeText = document.getElementById("noticeText");
+      const kakaoBtn = document.getElementById("kakaoBtn");
+      const phoneBtn = document.getElementById("phoneBtn");
+      const footerLine1 = document.getElementById("footerLine1");
+      const footerLine2 = document.getElementById("footerLine2");
+      const footerLine3 = document.getElementById("footerLine3");
 
-      const kakaoReady = data.kakaoText.includes("준비중") === false && data.kakaoLink.trim() !== "";
-      const phoneReady = data.phoneText.includes("준비중") === false && data.phoneNumber.trim() !== "";
-
-      if (kakaoReady) {
-        document.getElementById("kakaoBtn").className = "btn btn-main";
-        document.getElementById("kakaoBtn").href = data.kakaoLink;
-        document.getElementById("kakaoBtn").target = "_blank";
-      } else {
-        document.getElementById("kakaoBtn").className = "btn btn-disabled-primary";
-        document.getElementById("kakaoBtn").href = "javascript:void(0)";
-        document.getElementById("kakaoBtn").removeAttribute("target");
-      }
-
-      if (phoneReady) {
-        document.getElementById("phoneBtn").className = "btn btn-line";
-        document.getElementById("phoneBtn").href = `tel:${data.phoneNumber}`;
-      } else {
-        document.getElementById("phoneBtn").className = "btn btn-disabled-secondary";
-        document.getElementById("phoneBtn").href = "javascript:void(0)";
+      if (stage === 1) {
+        brandSub.textContent = "Preparation Stage · Domain Verification";
+        heroDesc.textContent = "한국 가격과 현재 PI 시세를 함께 표시하는 테스트용 쇼핑 화면입니다. 현재는 도메인 인증 및 정식 오픈 준비 단계입니다.";
+        stageBadge.textContent = "도메인 인증 및 오픈 준비 중";
+        noticeTitle.textContent = "현재 서비스 준비 중입니다";
+        noticeText.innerHTML =
+          "현재 본 사이트는 도메인 인증 및 정식 오픈 준비 단계로 운영되고 있습니다.<br>테스트 페이지이므로 전화 문의, 카카오 상담, 예약 및 결제 기능은 아직 진행하지 않습니다.<br>정식 오픈 후 정상적으로 안내드리겠습니다.";
+        kakaoBtn.className = "btn btn-disabled-primary";
+        kakaoBtn.textContent = "카카오 상담 준비중";
+        kakaoBtn.href = "javascript:void(0)";
+        phoneBtn.className = "btn btn-disabled-secondary";
+        phoneBtn.textContent = "전화 상담 준비중";
+        phoneBtn.href = "javascript:void(0)";
+        footerLine1.textContent = "현재 페이지는 도메인 인증 및 디자인 점검을 위한 테스트 화면입니다.";
+        footerLine2.textContent = "상담, 예약, 결제 기능은 정식 오픈 전까지 비활성 상태로 유지됩니다.";
+        footerLine3.textContent = "표시되는 상품 구성 및 가격 정보는 테스트 목적에 따라 변경될 수 있습니다.";
       }
 
-      renderProducts(data.products, currentPiPriceUSD);
-    }
-
-    function createProductEditors() {
-      const wrap = document.getElementById("productEditors");
-      wrap.innerHTML = "";
-
-      for (let i = 0; i < 8; i++) {
-        const div = document.createElement("div");
-        div.className = "product-editor";
-        div.innerHTML = `
-          <div class="admin-subtitle" style="margin-top:0;">상품 ${i + 1}</div>
-          <input id="productName${i}" class="admin-input" type="text" placeholder="상품명" />
-          <input id="productPrice${i}" class="admin-input" type="number" placeholder="가격" />
-          <input id="productRating${i}" class="admin-input" type="number" step="0.1" min="0" max="5" placeholder="평점 (예: 4.9)" />
-          <input id="productImage${i}" class="admin-input" type="text" placeholder="이미지 주소 (비워두면 기본 배경)" />
-        `;
-        wrap.appendChild(div);
+      if (stage === 2) {
+        brandSub.textContent = "Opening Soon · Pre-Launch Stage";
+        heroDesc.textContent = "오픈 직전 안내 단계입니다. 상담은 가능하지만 결제 기능은 아직 준비 중입니다.";
+        stageBadge.textContent = "오픈 직전 · 상담 가능";
+        noticeTitle.textContent = "정식 오픈 직전 안내";
+        noticeText.innerHTML =
+          "현재 본 사이트는 정식 오픈 직전 단계입니다.<br>전화 및 카카오 상담은 가능하지만 결제 기능은 아직 준비 중입니다.<br>최종 점검 완료 후 정상 오픈됩니다.";
+        kakaoBtn.className = "btn btn-main";
+        kakaoBtn.textContent = "카카오 상담";
+        kakaoBtn.href = "https://open.kakao.com/o/sqB6lDni";
+        phoneBtn.className = "btn btn-line";
+        phoneBtn.textContent = "전화 상담";
+        phoneBtn.href = "tel:01012345678";
+        footerLine1.textContent = "현재 페이지는 오픈 직전 단계입니다.";
+        footerLine2.textContent = "상담 기능은 활성화되며 결제 기능은 아직 준비 중입니다.";
+        footerLine3.textContent = "표시되는 PI 환산값은 참고용입니다.";
       }
+
+      if (stage === 3) {
+        brandSub.textContent = "Live Mode · Beauty Shop";
+        heroDesc.textContent = "한국 가격과 현재 PI 시세를 함께 확인할 수 있는 운영 모드 화면입니다.";
+        stageBadge.textContent = "운영중 · 상담 가능";
+        noticeTitle.textContent = "정상 운영 중";
+        noticeText.innerHTML =
+          "현재 본 사이트는 운영 모드입니다.<br>상담 기능이 활성화되어 있으며 상품 안내를 확인하실 수 있습니다.<br>실제 Pi 결제는 서버 연동 후 최종 활성화하는 것이 안전합니다.";
+        kakaoBtn.className = "btn btn-main";
+        kakaoBtn.textContent = "카카오 상담";
+        kakaoBtn.href = "https://open.kakao.com/o/sqB6lDni";
+        phoneBtn.className = "btn btn-line";
+        phoneBtn.textContent = "전화 상담";
+        phoneBtn.href = "tel:01012345678";
+        footerLine1.textContent = "현재 페이지는 운영 모드입니다.";
+        footerLine2.textContent = "상담 기능이 활성화되어 있습니다.";
+        footerLine3.textContent = "실결제는 Pi SDK와 백엔드 검증 연결 후 최종 활성화하는 것을 권장합니다.";
+      }
+
+      updateAdminBadge(stage);
+      renderProducts(currentPiPriceUSD, stage);
     }
 
-    function renderProducts(products, piUsdPrice) {
+    function showNotice() {
+      document.getElementById("noticeBox").style.display = "block";
+      saveNotice(true);
+    }
+
+    function hideNotice() {
+      document.getElementById("noticeBox").style.display = "none";
+      saveNotice(false);
+    }
+
+    function setStage(stage) {
+      saveStage(stage);
+      applyStage(stage);
+    }
+
+    function renderProducts(piUsdPrice, stage = getSavedStage()) {
+      currentPiPriceUSD = piUsdPrice;
       const grid = document.getElementById("productGrid");
       grid.innerHTML = "";
 
@@ -783,22 +791,23 @@
         const priceUsd = item.priceKRW / USD_KRW;
         const pricePi = priceUsd / piUsdPrice;
 
-        const imagePart = item.image && item.image.trim() !== ""
-          ? `<img src="${item.image}" alt="${item.name}" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"><div class="thumb-glow" style="display:none;"></div>`
-          : `<div class="thumb-glow"></div>`;
+        const isPaymentLive = stage === 3;
+        const buttonHtml = isPaymentLive
+          ? `<button class="buy-btn" onclick="paymentGuide('${item.name}', '${Number(pricePi).toFixed(2)}')">PI로 결제</button>`
+          : `<button class="buy-btn-disabled">결제 준비중</button>`;
 
         const card = document.createElement("article");
         card.className = "card";
         card.innerHTML = `
           <div class="card-thumb">
-            ${imagePart}
+            <div class="thumb-glow"></div>
           </div>
           <div class="card-body">
             <div class="product-name">${item.name}</div>
-            <div class="rating">⭐ ${Number(item.rating).toFixed(1)}</div>
+            <div class="rating">⭐ ${item.rating}</div>
             <div class="price-krw">${won(item.priceKRW)}</div>
             <div class="price-pi">${pi(pricePi)}</div>
-            <button class="buy-btn-disabled">결제 준비중</button>
+            ${buttonHtml}
           </div>
         `;
         grid.appendChild(card);
@@ -808,96 +817,8 @@
         `Kraken 실시간 PI/USD 시세와 기준 환율(1 USD ≈ ${USD_KRW.toLocaleString("ko-KR")} KRW)로 계산한 참고용 표시입니다.`;
     }
 
-    function loadAdminInputs() {
-      const data = getContent();
-
-      document.getElementById("editHeroTitle").value = data.heroTitle;
-      document.getElementById("editHeroDesc").value = data.heroDesc;
-      currentNoticeEnabled = !!data.noticeEnabled;
-      updateNoticeToggleUI();
-      document.getElementById("editNoticeTitle").value = data.noticeTitle;
-      document.getElementById("editNoticeText").value = data.noticeText;
-      document.getElementById("editKakaoText").value = data.kakaoText;
-      document.getElementById("editKakaoLink").value = data.kakaoLink;
-      document.getElementById("editPhoneText").value = data.phoneText;
-      document.getElementById("editPhoneNumber").value = data.phoneNumber;
-
-      for (let i = 0; i < 8; i++) {
-        const p = data.products[i] || { name: "", priceKRW: "", rating: "", image: "" };
-        document.getElementById(`productName${i}`).value = p.name || "";
-        document.getElementById(`productPrice${i}`).value = p.priceKRW || "";
-        document.getElementById(`productRating${i}`).value = p.rating || "";
-        document.getElementById(`productImage${i}`).value = p.image || "";
-      }
-    }
-
-    function saveAdminData() {
-      const products = [];
-
-      for (let i = 0; i < 8; i++) {
-        const name = document.getElementById(`productName${i}`).value.trim();
-        const price = Number(document.getElementById(`productPrice${i}`).value);
-        const rating = Number(document.getElementById(`productRating${i}`).value);
-        const image = document.getElementById(`productImage${i}`).value.trim();
-
-        products.push({
-          name: name || defaultContent.products[i].name,
-          priceKRW: price || defaultContent.products[i].priceKRW,
-          rating: rating || defaultContent.products[i].rating,
-          image: image
-        });
-      }
-
-      const newData = {
-        heroTitle: document.getElementById("editHeroTitle").value.trim() || defaultContent.heroTitle,
-        heroDesc: document.getElementById("editHeroDesc").value.trim() || defaultContent.heroDesc,
-        noticeEnabled: currentNoticeEnabled,
-        noticeTitle: document.getElementById("editNoticeTitle").value.trim() || defaultContent.noticeTitle,
-        noticeText: document.getElementById("editNoticeText").value.trim() || defaultContent.noticeText,
-        kakaoText: document.getElementById("editKakaoText").value.trim() || defaultContent.kakaoText,
-        kakaoLink: document.getElementById("editKakaoLink").value.trim() || defaultContent.kakaoLink,
-        phoneText: document.getElementById("editPhoneText").value.trim() || defaultContent.phoneText,
-        phoneNumber: document.getElementById("editPhoneNumber").value.trim() || defaultContent.phoneNumber,
-        products: products
-      };
-
-      setContent(newData);
-      applyContent();
-      alert("저장되었습니다.");
-    }
-
-    function resetAdminData() {
-      localStorage.removeItem(STORAGE_CONTENT_KEY);
-      currentNoticeEnabled = true;
-      applyContent();
-      loadAdminInputs();
-      alert("초기값으로 되돌렸습니다.");
-    }
-
-    function loginAdmin() {
-      const pw = document.getElementById("adminPassword").value;
-      if (pw === ADMIN_PASSWORD) {
-        localStorage.setItem(STORAGE_ADMIN_KEY, "true");
-        document.getElementById("loginArea").style.display = "none";
-        document.getElementById("editArea").style.display = "block";
-        loadAdminInputs();
-      } else {
-        alert("비밀번호가 맞지 않습니다.");
-      }
-    }
-
-    function logoutAdmin() {
-      localStorage.removeItem(STORAGE_ADMIN_KEY);
-      document.getElementById("loginArea").style.display = "block";
-      document.getElementById("editArea").style.display = "none";
-      document.getElementById("adminPassword").value = "";
-    }
-
-    function restoreAdmin() {
-      const loggedIn = localStorage.getItem(STORAGE_ADMIN_KEY) === "true";
-      document.getElementById("loginArea").style.display = loggedIn ? "none" : "block";
-      document.getElementById("editArea").style.display = loggedIn ? "block" : "none";
-      if (loggedIn) loadAdminInputs();
+    function paymentGuide(name, amount) {
+      alert(`${name}\n예상 결제 금액: π ${amount}\n\n현재는 운영 UI 단계입니다.\n실제 100% Pi 결제 완료 처리는 Pi SDK + 백엔드 검증 연결 후 활성화하는 것이 안전합니다.`);
     }
 
     async function findKrakenPiPair() {
@@ -921,6 +842,30 @@
       return { pairKey, priceUSD: Number(ticker.c[0]) };
     }
 
+    function loginAdmin() {
+      const input = document.getElementById("adminPassword").value;
+      if (input === ADMIN_PASSWORD) {
+        localStorage.setItem(STORAGE_ADMIN_KEY, "true");
+        document.getElementById("loginArea").style.display = "none";
+        document.getElementById("controlArea").style.display = "block";
+      } else {
+        alert("비밀번호가 맞지 않습니다.");
+      }
+    }
+
+    function logoutAdmin() {
+      localStorage.removeItem(STORAGE_ADMIN_KEY);
+      document.getElementById("loginArea").style.display = "grid";
+      document.getElementById("controlArea").style.display = "none";
+      document.getElementById("adminPassword").value = "";
+    }
+
+    function restoreAdmin() {
+      const isAdmin = localStorage.getItem(STORAGE_ADMIN_KEY) === "true";
+      document.getElementById("loginArea").style.display = isAdmin ? "none" : "grid";
+      document.getElementById("controlArea").style.display = isAdmin ? "block" : "none";
+    }
+
     function setupAdminPanel() {
       const fab = document.getElementById("adminFab");
       const panel = document.getElementById("adminPanel");
@@ -937,22 +882,32 @@
     }
 
     async function init() {
-      createProductEditors();
       setupAdminPanel();
       restoreAdmin();
 
+      const savedStage = getSavedStage();
+      const noticeVisible = getSavedNotice();
+
       try {
         const { pairKey, priceUSD } = await fetchPiPrice();
-        currentPiPriceUSD = priceUSD;
         document.getElementById("piPriceText").textContent = `1 PI = ${usd(priceUSD)}`;
         document.getElementById("piMetaText").textContent = `Kraken 기준 · ${pairKey}`;
+        document.getElementById("piStatus").textContent = "실시간 시세 연결 완료";
+        currentPiPriceUSD = priceUSD;
       } catch (e) {
-        currentPiPriceUSD = 0.18;
         document.getElementById("piPriceText").textContent = "시세 연결 실패";
         document.getElementById("piMetaText").textContent = "기본 참고값으로 표시 중";
+        document.getElementById("piStatus").textContent = "수동 확인 필요";
+        currentPiPriceUSD = 0.18;
       }
 
-      applyContent();
+      applyStage(savedStage);
+
+      if (noticeVisible) {
+        showNotice();
+      } else {
+        hideNotice();
+      }
     }
 
     init();
