@@ -33,11 +33,9 @@
       background: linear-gradient(180deg, #faf7f3 0%, #f6f2ec 100%);
       color: var(--text);
     }
-
     a { color: inherit; text-decoration: none; }
     img { display: block; width: 100%; }
     button, input, textarea, select { font: inherit; }
-
     .container {
       width: min(100% - 24px, var(--max));
       margin: 0 auto;
@@ -62,7 +60,6 @@
       backdrop-filter: blur(14px);
       border-bottom: 1px solid var(--line);
     }
-
     .header-inner {
       height: 100%;
       display: flex;
@@ -70,14 +67,12 @@
       justify-content: space-between;
       gap: 14px;
     }
-
     .brand-wrap {
       display: flex;
       align-items: center;
       gap: 12px;
       min-width: 0;
     }
-
     .logo-mark {
       width: 46px;
       height: 46px;
@@ -91,13 +86,11 @@
       box-shadow: 0 8px 20px rgba(122,60,255,.25);
       flex-shrink: 0;
     }
-
     .brand-title {
       font-size: 22px;
       font-weight: 800;
       line-height: 1.15;
     }
-
     .brand-subtitle {
       font-size: 12px;
       color: var(--muted);
@@ -119,26 +112,21 @@
       font-weight: 800;
       transition: .2s ease;
     }
-
     .btn {
       background: var(--primary);
       color: #fff;
       box-shadow: var(--shadow);
     }
-
     .btn:hover { background: var(--primary-dark); }
-
     .btn-outline {
       background: #fff;
       color: var(--primary);
       border: 2px solid var(--primary);
     }
-
     .btn-soft {
       background: var(--surface-2);
       color: var(--text);
     }
-
     .btn-danger {
       background: #fff0ee;
       color: var(--danger);
@@ -148,7 +136,6 @@
     .hero {
       padding: 24px 0 18px;
     }
-
     .hero-card {
       background: linear-gradient(135deg, #fff 0%, #fcf8ff 40%, #fffaf4 100%);
       border: 1px solid var(--line);
@@ -158,16 +145,13 @@
       display: grid;
       gap: 0;
     }
-
     .hero-main, .hero-side {
       padding: 24px;
     }
-
     .hero-main {
       display: grid;
       gap: 14px;
     }
-
     .hero-badge {
       display: inline-flex;
       width: fit-content;
@@ -178,7 +162,6 @@
       font-size: 13px;
       font-weight: 800;
     }
-
     .hero h1 {
       margin: 0;
       font-size: clamp(30px, 5vw, 46px);
@@ -186,21 +169,18 @@
       font-weight: 900;
       letter-spacing: -0.02em;
     }
-
     .hero p {
       margin: 0;
       color: #5b544c;
       line-height: 1.75;
       font-size: 15px;
     }
-
     .hero-actions {
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
       margin-top: 4px;
     }
-
     .hero-side {
       border-top: 1px solid var(--line);
       background: rgba(255,255,255,.65);
@@ -208,7 +188,6 @@
       gap: 14px;
       align-content: start;
     }
-
     .rate-card, .mini-info, .contact-card {
       background: #fff;
       border: 1px solid var(--line);
@@ -216,39 +195,33 @@
       box-shadow: var(--shadow);
       padding: 18px;
     }
-
     .rate-card h3, .mini-info h3, .contact-card h3 {
       margin: 0 0 8px;
       font-size: 19px;
     }
-
     .rate-big {
       font-size: 34px;
       font-weight: 900;
       color: var(--gold);
       margin: 6px 0;
     }
-
     .rate-sub {
       color: var(--muted);
       font-size: 13px;
       line-height: 1.6;
     }
-
     .rate-actions {
       display: flex;
       gap: 8px;
       flex-wrap: wrap;
       margin-top: 12px;
     }
-
     .input-inline {
       display: flex;
       gap: 8px;
       flex-wrap: wrap;
       margin-top: 10px;
     }
-
     .input-inline input {
       flex: 1;
       min-width: 140px;
@@ -266,14 +239,12 @@
       backdrop-filter: blur(10px);
       border-bottom: 1px solid #eee4d9;
     }
-
     .nav-row {
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
       padding: 10px 0;
     }
-
     .nav-chip {
       border: none;
       background: #ece5dd;
@@ -284,7 +255,6 @@
       cursor: pointer;
       white-space: nowrap;
     }
-
     .nav-chip.active,
     .nav-chip:hover {
       background: #dbc8fb;
@@ -294,7 +264,6 @@
     .section {
       padding: 28px 0;
     }
-
     .section-head {
       display: flex;
       align-items: end;
@@ -302,7 +271,6 @@
       gap: 12px;
       margin-bottom: 16px;
     }
-
     .title {
       margin: 0;
       font-size: 30px;
@@ -310,7 +278,6 @@
       font-weight: 900;
       letter-spacing: -0.02em;
     }
-
     .section-note {
       color: var(--muted);
       font-size: 14px;
@@ -322,7 +289,6 @@
       gap: 14px;
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
-
     .card {
       background: #fff;
       border: 1px solid var(--line);
@@ -332,61 +298,51 @@
       display: flex;
       flex-direction: column;
     }
-
     .thumb {
       aspect-ratio: 1/1;
       background: #eae2d9;
     }
-
     .thumb img {
       height: 100%;
       object-fit: cover;
     }
-
     .card-body {
       padding: 16px;
       display: grid;
       gap: 8px;
       flex: 1;
     }
-
     .product-brand {
       font-size: 12px;
       color: var(--muted);
       font-weight: 800;
     }
-
     .product-name {
       font-size: 17px;
       font-weight: 900;
       line-height: 1.35;
       min-height: 46px;
     }
-
     .product-desc {
       font-size: 13px;
       color: #665e56;
       line-height: 1.6;
       min-height: 40px;
     }
-
     .price {
       color: #867c74;
       font-size: 15px;
     }
-
     .pi {
       color: var(--primary);
       font-weight: 900;
       font-size: 17px;
     }
-
     .card-actions {
       display: flex;
       gap: 8px;
       margin-top: 6px;
     }
-
     .mini-btn {
       flex: 1;
       border-radius: 12px;
@@ -395,12 +351,10 @@
       font-weight: 800;
       cursor: pointer;
     }
-
     .mini-btn.primary {
       background: var(--primary);
       color: #fff;
     }
-
     .mini-btn.secondary {
       background: #f3ede6;
       color: var(--text);
@@ -410,7 +364,6 @@
       display: grid;
       gap: 12px;
     }
-
     .notice-item, .review-item, .event-item, .contact-box {
       background: #fff;
       border: 1px solid var(--line);
@@ -418,25 +371,21 @@
       box-shadow: var(--shadow);
       padding: 18px;
     }
-
     .notice-title, .event-title, .review-title {
       font-size: 18px;
       font-weight: 900;
       margin-bottom: 8px;
     }
-
     .notice-meta, .event-meta {
       color: var(--muted);
       font-size: 13px;
       margin-bottom: 8px;
     }
-
     .notice-content, .event-content, .review-content {
       color: #5e5650;
       line-height: 1.75;
       font-size: 14px;
     }
-
     .stars {
       color: #f6a600;
       font-size: 16px;
@@ -460,7 +409,6 @@
       cursor: pointer;
       box-shadow: 0 16px 28px rgba(122,60,255,.3);
     }
-
     .cart-count {
       position: absolute;
       right: -2px;
@@ -493,7 +441,6 @@
       padding: 10px;
       backdrop-filter: blur(10px);
     }
-
     .floating-bar button {
       flex: 1;
       border: none;
@@ -502,12 +449,10 @@
       font-weight: 900;
       cursor: pointer;
     }
-
     .floating-bar .call-btn {
       background: var(--primary);
       color: #fff;
     }
-
     .floating-bar .kakao-btn {
       background: #f4ede7;
       color: var(--text);
@@ -520,19 +465,16 @@
       z-index: 100;
       display: none;
     }
-
     .drawer.open,
     .modal.open {
       display: block;
     }
-
     .overlay {
       position: absolute;
       inset: 0;
       background: rgba(20, 16, 12, 0.5);
       backdrop-filter: blur(2px);
     }
-
     .drawer-panel {
       position: absolute;
       right: 0;
@@ -544,7 +486,6 @@
       display: flex;
       flex-direction: column;
     }
-
     .modal-panel {
       position: absolute;
       left: 50%;
@@ -567,13 +508,11 @@
       padding: 18px 18px 12px;
       border-bottom: 1px solid var(--line);
     }
-
     .drawer-head h3, .modal-head h3 {
       margin: 0;
       font-size: 22px;
       font-weight: 900;
     }
-
     .icon-btn {
       border: none;
       background: #f2ece4;
@@ -601,31 +540,26 @@
       gap: 8px;
       background: #fffdfb;
     }
-
     .cart-item-top {
       display: flex;
       justify-content: space-between;
       gap: 12px;
       align-items: start;
     }
-
     .cart-item-name {
       font-weight: 900;
       line-height: 1.4;
     }
-
     .cart-item-brand {
       color: var(--muted);
       font-size: 13px;
       margin-bottom: 4px;
     }
-
     .qty-row {
       display: flex;
       align-items: center;
       gap: 8px;
     }
-
     .qty-btn {
       width: 34px;
       height: 34px;
@@ -635,14 +569,12 @@
       cursor: pointer;
       font-weight: 900;
     }
-
     .remove-link {
       color: var(--danger);
       font-size: 13px;
       font-weight: 700;
       cursor: pointer;
     }
-
     .cart-summary {
       border-top: 1px solid var(--line);
       margin-top: auto;
@@ -651,18 +583,15 @@
       gap: 10px;
       background: #fff;
     }
-
     .sum-row {
       display: flex;
       justify-content: space-between;
       gap: 10px;
       font-size: 15px;
     }
-
     .sum-row strong {
       font-size: 18px;
     }
-
     .order-actions {
       display: grid;
       gap: 10px;
@@ -675,7 +604,6 @@
       max-width: 400px;
       margin: 20px auto;
     }
-
     .admin-login input,
     .admin-field input,
     .admin-field textarea,
@@ -686,19 +614,16 @@
       padding: 12px 14px;
       background: #fff;
     }
-
     .admin-field textarea {
       min-height: 100px;
       resize: vertical;
     }
-
     .admin-grid {
       display: grid;
       gap: 18px;
       grid-template-columns: 1fr;
       margin-top: 10px;
     }
-
     .admin-card {
       border: 1px solid var(--line);
       border-radius: 18px;
@@ -706,38 +631,32 @@
       background: #fffefc;
       box-shadow: var(--shadow);
     }
-
     .admin-card h4 {
       margin: 0 0 12px;
       font-size: 18px;
     }
-
     .admin-field {
       display: grid;
       gap: 8px;
       margin-bottom: 12px;
     }
-
     .admin-field label {
       font-size: 13px;
       color: var(--muted);
       font-weight: 700;
     }
-
     .admin-actions {
       display: flex;
       gap: 8px;
       flex-wrap: wrap;
       margin-top: 8px;
     }
-
     .admin-product-list,
     .admin-simple-list {
       display: grid;
       gap: 10px;
       margin-top: 12px;
     }
-
     .admin-item {
       border: 1px solid var(--line);
       border-radius: 14px;
@@ -746,7 +665,6 @@
       display: grid;
       gap: 8px;
     }
-
     .small-muted {
       font-size: 12px;
       color: var(--muted);
@@ -757,81 +675,22 @@
       height: 92px;
     }
 
-    .detail-layout {
-      display: grid;
-      gap: 18px;
-    }
-
-    .detail-image {
-      border-radius: 20px;
-      overflow: hidden;
-      background: #eee5db;
-    }
-
-    .detail-image img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .detail-info {
-      display: grid;
-      gap: 10px;
-    }
-
-    .detail-brand {
-      color: var(--muted);
-      font-size: 13px;
-      font-weight: 800;
-    }
-
-    .detail-title {
-      font-size: 28px;
-      font-weight: 900;
-      line-height: 1.3;
-    }
-
-    .detail-desc {
-      color: #615951;
-      line-height: 1.8;
-    }
-
-    .detail-price {
-      font-size: 18px;
-      color: #6f675f;
-    }
-
-    .detail-pi {
-      font-size: 22px;
-      font-weight: 900;
-      color: var(--primary);
-    }
-
     @media (min-width: 768px) {
       .hero-card {
         grid-template-columns: 1.25fr 0.95fr;
       }
-
       .hero-side {
         border-top: none;
         border-left: 1px solid var(--line);
       }
-
       .grid {
         grid-template-columns: repeat(3, minmax(0, 1fr));
       }
-
       .list-grid.two {
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
-
       .admin-grid {
         grid-template-columns: 1fr 1fr;
-      }
-
-      .detail-layout {
-        grid-template-columns: 1fr 1fr;
-        align-items: start;
       }
     }
 
@@ -845,19 +704,15 @@
       .header-actions {
         display: none;
       }
-
       .title {
         font-size: 24px;
       }
-
       .brand-title {
         font-size: 19px;
       }
-
       .hero-main, .hero-side {
         padding: 18px;
       }
-
       .cart-fab {
         right: 12px;
         bottom: 92px;
@@ -944,29 +799,6 @@
               </div>
             </div>
           </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="shop-tools" style="padding-top:10px;">
-      <div class="container">
-        <div class="notice-item" style="display:grid; gap:12px;">
-          <div style="display:flex; gap:10px; flex-wrap:wrap;">
-            <input
-              id="search-input"
-              type="text"
-              placeholder="상품명 또는 설명 검색"
-              style="flex:1; min-width:220px; border:1px solid #e8ddd1; border-radius:14px; padding:12px 14px;"
-            />
-            <select
-              id="brand-filter"
-              style="min-width:180px; border:1px solid #e8ddd1; border-radius:14px; padding:12px 14px;"
-            >
-              <option value="all">전체 브랜드</option>
-            </select>
-            <button class="btn-soft" onclick="resetFilters()">필터 초기화</button>
-          </div>
-          <div class="small-muted">상품명, 설명, 브랜드 기준으로 빠르게 찾을 수 있습니다.</div>
         </div>
       </div>
     </section>
@@ -1072,40 +904,17 @@
         <h3>장바구니</h3>
         <button class="icon-btn" onclick="closeCart()">✕</button>
       </div>
-
       <div class="drawer-body" id="cart-items"></div>
-
       <div class="cart-summary">
-        <div class="notice-item" style="box-shadow:none; border-radius:16px; margin-bottom:8px;">
-          <div class="notice-title" style="font-size:16px;">주문자 정보</div>
-          <div style="display:grid; gap:10px;">
-            <input id="order-name" placeholder="이름" style="border:1px solid #e8ddd1; border-radius:12px; padding:12px;">
-            <input id="order-phone" placeholder="연락처" style="border:1px solid #e8ddd1; border-radius:12px; padding:12px;">
-            <textarea id="order-memo" placeholder="문의 내용 / 배송 요청사항" style="border:1px solid #e8ddd1; border-radius:12px; padding:12px; min-height:90px;"></textarea>
-          </div>
-        </div>
-
         <div class="sum-row"><span>상품 합계</span><span id="cart-total-krw">₩0</span></div>
         <div class="sum-row"><span>PI 환산</span><span id="cart-total-pi">π 0.00</span></div>
         <div class="sum-row"><strong>최종 합계</strong><strong id="cart-total-krw-strong">₩0</strong></div>
-
         <div class="order-actions">
           <button class="btn" onclick="checkoutToKakao()">카카오로 주문 요청</button>
           <button class="btn-outline" onclick="callNow()">전화로 주문 상담</button>
           <button class="btn-soft" onclick="clearCart()">장바구니 비우기</button>
         </div>
       </div>
-    </div>
-  </div>
-
-  <div class="modal" id="productModal">
-    <div class="overlay" onclick="closeProductModal()"></div>
-    <div class="modal-panel" style="max-width:760px;">
-      <div class="modal-head">
-        <h3>상품 상세보기</h3>
-        <button class="icon-btn" onclick="closeProductModal()">✕</button>
-      </div>
-      <div id="product-modal-body" style="padding:10px 6px 6px;"></div>
     </div>
   </div>
 
@@ -1249,29 +1058,15 @@
             <div class="small-muted">현재 등록된 상품을 확인하고 삭제할 수 있습니다.</div>
             <div class="admin-product-list" id="admin-product-list"></div>
           </div>
-
-          <div class="admin-card">
-            <h4>백업 / 복원</h4>
-            <div class="small-muted">현재 상품, 공지, 이벤트, 후기, 기본 설정을 JSON 파일로 백업하거나 복원할 수 있습니다.</div>
-            <div class="admin-actions" style="margin-top:12px;">
-              <button class="btn" onclick="exportStoreData()">JSON 백업</button>
-              <button class="btn-outline" onclick="document.getElementById('import-json-file').click()">JSON 불러오기</button>
-              <input type="file" id="import-json-file" accept=".json" style="display:none;" onchange="importStoreData(event)">
-            </div>
-          </div>
         </div>
       </div>
     </div>
   </div>
 
   <script>
-    const STORAGE_KEY = "thumbtherapy_store_v2";
+    const STORAGE_KEY = "thumbtherapy_store_v1";
     const ADMIN_PASSWORD = "thumb2026";
     const placeholderImage = "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=900&q=80";
-
-    function uid() {
-      return "id_" + Math.random().toString(36).slice(2, 10);
-    }
 
     const defaultState = {
       piRate: 215,
@@ -1347,6 +1142,13 @@
       cart: []
     };
 
+    let state = loadState();
+    let adminAuthenticated = false;
+
+    function uid() {
+      return "id_" + Math.random().toString(36).slice(2, 10);
+    }
+
     function loadState() {
       const raw = localStorage.getItem(STORAGE_KEY);
       if (!raw) return JSON.parse(JSON.stringify(defaultState));
@@ -1357,11 +1159,6 @@
         return JSON.parse(JSON.stringify(defaultState));
       }
     }
-
-    let state = loadState();
-    let adminAuthenticated = false;
-    let currentKeyword = "";
-    let currentBrandFilter = "all";
 
     function saveState() {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
@@ -1386,15 +1183,6 @@
 
     function openKakao() {
       window.open(state.kakaoUrl, "_blank");
-    }
-
-    function escapeHtml(str) {
-      return String(str)
-        .replaceAll("&", "&amp;")
-        .replaceAll("<", "&lt;")
-        .replaceAll(">", "&gt;")
-        .replaceAll('"', "&quot;")
-        .replaceAll("'", "&#39;");
     }
 
     function renderTop() {
@@ -1432,79 +1220,9 @@
       });
     }
 
-    function renderBrandFilterOptions() {
-      const select = document.getElementById("brand-filter");
-      if (!select) return;
-      select.innerHTML = `
-        <option value="all">전체 브랜드</option>
-        ${state.brands.map(b => `<option value="${b.id}">${b.title}</option>`).join("")}
-      `;
-      select.value = currentBrandFilter;
-    }
-
-    function bindSearchEvents() {
-      const searchInput = document.getElementById("search-input");
-      const brandFilter = document.getElementById("brand-filter");
-
-      if (searchInput) {
-        searchInput.value = currentKeyword;
-        searchInput.oninput = (e) => {
-          currentKeyword = e.target.value.trim().toLowerCase();
-          renderProducts();
-        };
-      }
-
-      if (brandFilter) {
-        brandFilter.onchange = (e) => {
-          currentBrandFilter = e.target.value;
-          renderProducts();
-        };
-      }
-    }
-
-    function resetFilters() {
-      currentKeyword = "";
-      currentBrandFilter = "all";
-      const searchInput = document.getElementById("search-input");
-      const brandFilter = document.getElementById("brand-filter");
-      if (searchInput) searchInput.value = "";
-      if (brandFilter) brandFilter.value = "all";
-      renderProducts();
-    }
-
     function renderProducts() {
       const root = document.getElementById("product-sections");
-
-      const filteredBrands = state.brands
-        .filter(brand => currentBrandFilter === "all" || brand.id === currentBrandFilter)
-        .map(brand => {
-          const filteredItems = brand.items.filter(item => {
-            const keyword = currentKeyword;
-            if (!keyword) return true;
-            return (
-              item.name.toLowerCase().includes(keyword) ||
-              (item.desc || "").toLowerCase().includes(keyword) ||
-              brand.title.toLowerCase().includes(keyword)
-            );
-          });
-          return { ...brand, items: filteredItems };
-        })
-        .filter(brand => brand.items.length > 0);
-
-      if (!filteredBrands.length) {
-        root.innerHTML = `
-          <section class="section">
-            <div class="container">
-              <div class="notice-item">
-                검색 결과가 없습니다. 다른 검색어로 다시 시도해 주세요.
-              </div>
-            </div>
-          </section>
-        `;
-        return;
-      }
-
-      root.innerHTML = filteredBrands.map(brand => `
+      root.innerHTML = state.brands.map(brand => `
         <section class="section" id="${brand.id}">
           <div class="container">
             <div class="section-head">
@@ -1526,7 +1244,7 @@
                     <div class="price">${formatKRW(item.price)}</div>
                     <div class="pi">π ${calcPi(item.price)}</div>
                     <div class="card-actions">
-                      <button class="mini-btn secondary" onclick="openProductModal('${brand.id}','${item.id}')">상세보기</button>
+                      <button class="mini-btn secondary" onclick="openKakao()">문의하기</button>
                       <button class="mini-btn primary" onclick="addToCart('${brand.id}', '${item.id}')">담기</button>
                     </div>
                   </div>
@@ -1673,39 +1391,19 @@
         alert("장바구니가 비어 있습니다.");
         return;
       }
-
-      const name = (document.getElementById("order-name")?.value || "").trim();
-      const phone = (document.getElementById("order-phone")?.value || "").trim();
-      const memo = (document.getElementById("order-memo")?.value || "").trim();
-
       const lines = [];
       lines.push("[더썸테라피 주문 문의]");
       lines.push("");
-
-      if (name) lines.push(`주문자명: ${name}`);
-      if (phone) lines.push(`연락처: ${phone}`);
-      if (memo) lines.push(`요청사항: ${memo}`);
-      if (name || phone || memo) lines.push("");
-
       state.cart.forEach(row => {
         const found = findProduct(row.brandId, row.productId);
         if (!found) return;
-        const totalPrice = found.item.price * row.qty;
-        const totalPi = (Number(calcPi(found.item.price)) * row.qty).toFixed(2);
-
-        lines.push(`- 브랜드: ${found.brand.title}`);
-        lines.push(`  상품명: ${found.item.name}`);
-        lines.push(`  수량: ${row.qty}`);
-        lines.push(`  금액: ${formatKRW(totalPrice)}`);
-        lines.push(`  PI 환산: π ${totalPi}`);
-        lines.push("");
+        lines.push(`- ${found.brand.title} / ${found.item.name} / 수량 ${row.qty} / ${formatKRW(found.item.price * row.qty)} / π ${(Number(calcPi(found.item.price)) * row.qty).toFixed(2)}`);
       });
-
       const totals = getCartTotals();
+      lines.push("");
       lines.push(`총액: ${formatKRW(totals.krw)}`);
-      lines.push(`총 PI 환산: π ${totals.pi.toFixed(2)}`);
-      lines.push(`적용 기준: 1 PI = ${Number(state.piRate).toLocaleString()}원`);
-
+      lines.push(`PI 환산: π ${totals.pi.toFixed(2)}`);
+      lines.push(`기준 환산: 1 PI = ${Number(state.piRate).toLocaleString()}원`);
       const message = encodeURIComponent(lines.join("\n"));
       window.open(`${state.kakaoUrl}?text=${message}`, "_blank");
     }
@@ -1713,52 +1411,17 @@
     function openCart() {
       document.getElementById("cartDrawer").classList.add("open");
     }
-
     function closeCart() {
       document.getElementById("cartDrawer").classList.remove("open");
-    }
-
-    function openProductModal(brandId, productId) {
-      const found = findProduct(brandId, productId);
-      if (!found) return;
-
-      const { brand, item } = found;
-      const root = document.getElementById("product-modal-body");
-      root.innerHTML = `
-        <div class="detail-layout">
-          <div class="detail-image">
-            <img src="${item.image || placeholderImage}" alt="${escapeHtml(item.name)}" onerror="this.src='${placeholderImage}'">
-          </div>
-          <div class="detail-info">
-            <div class="detail-brand">${brand.title}</div>
-            <div class="detail-title">${escapeHtml(item.name)}</div>
-            <div class="detail-desc">${escapeHtml(item.desc || "")}</div>
-            <div class="detail-price">${formatKRW(item.price)}</div>
-            <div class="detail-pi">π ${calcPi(item.price)}</div>
-            <div class="small-muted">현재 환산 기준: 1 PI = ${Number(state.piRate).toLocaleString()}원</div>
-            <div class="admin-actions" style="margin-top:8px;">
-              <button class="btn" onclick="addToCart('${brand.id}','${item.id}')">장바구니 담기</button>
-              <button class="btn-outline" onclick="openKakao()">카카오 문의</button>
-            </div>
-          </div>
-        </div>
-      `;
-      document.getElementById("productModal").classList.add("open");
-    }
-
-    function closeProductModal() {
-      document.getElementById("productModal").classList.remove("open");
     }
 
     function openAdmin() {
       document.getElementById("adminModal").classList.add("open");
       renderAdmin();
     }
-
     function closeAdmin() {
       document.getElementById("adminModal").classList.remove("open");
     }
-
     function adminLogin() {
       const input = document.getElementById("admin-password").value;
       if (input !== ADMIN_PASSWORD) {
@@ -1768,7 +1431,6 @@
       adminAuthenticated = true;
       renderAdmin();
     }
-
     function adminLogout() {
       adminAuthenticated = false;
       document.getElementById("admin-password").value = "";
@@ -1851,25 +1513,20 @@
       const desc = document.getElementById("new-product-desc").value.trim();
       const price = Number(document.getElementById("new-product-price").value);
       const image = document.getElementById("new-product-image").value.trim() || placeholderImage;
-
       if (!brandId || !name || !price) {
         alert("브랜드, 상품명, 가격은 필수입니다.");
         return;
       }
-
       const brand = state.brands.find(b => b.id === brandId);
       if (!brand) return;
-
       brand.items.push({ id: uid(), name, desc, price, image });
       saveState();
       renderAll();
       renderAdmin();
-
       document.getElementById("new-product-name").value = "";
       document.getElementById("new-product-desc").value = "";
       document.getElementById("new-product-price").value = "";
       document.getElementById("new-product-image").value = "";
-
       alert("상품이 추가되었습니다.");
     }
 
@@ -1889,12 +1546,10 @@
       const date = document.getElementById("new-notice-date").value.trim();
       const content = document.getElementById("new-notice-content").value.trim();
       if (!title || !content) return alert("공지 제목과 내용을 입력하세요.");
-
       state.notices.unshift({ id: uid(), title, date, content });
       saveState();
       renderAll();
       renderAdmin();
-
       document.getElementById("new-notice-title").value = "";
       document.getElementById("new-notice-date").value = "";
       document.getElementById("new-notice-content").value = "";
@@ -1912,12 +1567,10 @@
       const date = document.getElementById("new-event-date").value.trim();
       const content = document.getElementById("new-event-content").value.trim();
       if (!title || !content) return alert("이벤트 제목과 내용을 입력하세요.");
-
       state.events.unshift({ id: uid(), title, date, content });
       saveState();
       renderAll();
       renderAdmin();
-
       document.getElementById("new-event-title").value = "";
       document.getElementById("new-event-date").value = "";
       document.getElementById("new-event-content").value = "";
@@ -1935,12 +1588,10 @@
       const stars = Number(document.getElementById("new-review-stars").value) || 5;
       const content = document.getElementById("new-review-content").value.trim();
       if (!title || !content) return alert("후기 작성자와 내용을 입력하세요.");
-
       state.reviews.unshift({ id: uid(), title, stars: Math.max(1, Math.min(5, stars)), content });
       saveState();
       renderAll();
       renderAdmin();
-
       document.getElementById("new-review-title").value = "";
       document.getElementById("new-review-stars").value = "";
       document.getElementById("new-review-content").value = "";
@@ -1979,41 +1630,18 @@
       alert("초기화가 완료되었습니다.");
     }
 
-    function exportStoreData() {
-      const blob = new Blob([JSON.stringify(state, null, 2)], { type: "application/json" });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement("a");
-      a.href = url;
-      a.download = "thumbtherapy-backup.json";
-      a.click();
-      URL.revokeObjectURL(url);
-    }
-
-    function importStoreData(event) {
-      const file = event.target.files?.[0];
-      if (!file) return;
-
-      const reader = new FileReader();
-      reader.onload = function(e) {
-        try {
-          const imported = JSON.parse(e.target.result);
-          state = { ...state, ...imported };
-          saveState();
-          renderAll();
-          renderAdmin();
-          alert("JSON 복원이 완료되었습니다.");
-        } catch (err) {
-          alert("JSON 파일 형식이 올바르지 않습니다.");
-        }
-      };
-      reader.readAsText(file);
+    function escapeHtml(str) {
+      return String(str)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#39;");
     }
 
     function renderAll() {
       renderTop();
       renderNav();
-      renderBrandFilterOptions();
-      bindSearchEvents();
       renderProducts();
       renderNotices();
       renderEvents();
