@@ -1,179 +1,765 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>The Thumb Therapy</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Thumb Therapy | Premium Beauty Store</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+    }
 
-<style>
-body{
-  margin:0;
-  font-family:Arial;
-  background:#f6f1eb;
-  color:#333;
-}
-.header{
-  padding:20px;
-  display:flex;
-  align-items:center;
-}
-.logo{
-  width:60px;height:60px;
-  background:#b89a6b;
-  border-radius:15px;
-  margin-right:10px;
-}
-.notice{
-  background:#fff3cd;
-  padding:15px;
-  margin:10px;
-  border-radius:10px;
-}
-.brand-tabs{
-  display:flex;
-  overflow:auto;
-  gap:10px;
-  padding:10px;
-}
-.brand-tabs button{
-  padding:10px 15px;
-  border:none;
-  border-radius:20px;
-  background:#eee;
-}
-.products{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:10px;
-  padding:10px;
-}
-.card{
-  background:white;
-  border-radius:15px;
-  padding:10px;
-}
-.admin-btn{
-  position:fixed;
-  right:15px;
-  bottom:15px;
-  background:#8a6a3f;
-  color:white;
-  border:none;
-  border-radius:50%;
-  width:60px;height:60px;
-}
-.hidden{display:none;}
-</style>
+    :root {
+      --bg: #f6f1eb;
+      --card: #ffffff;
+      --line: #eadfd3;
+      --text: #4b3f38;
+      --sub: #7d7067;
+      --main: #9a7a46;
+      --main-dark: #7f6236;
+      --soft: #fff7ed;
+      --soft-line: #dcc49c;
+      --disabled: #cfc8c2;
+      --shadow: 0 16px 34px rgba(90,72,53,0.08);
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    .appbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255,255,255,0.96);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .appbar-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .brand-wrap {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      min-width: 0;
+    }
+
+    .logo {
+      width: 66px;
+      height: 66px;
+      border-radius: 22px;
+      background: linear-gradient(135deg, #9c7a49, #bc9a65);
+      position: relative;
+      box-shadow: 0 12px 24px rgba(138,106,63,0.24);
+      overflow: hidden;
+      flex: 0 0 66px;
+    }
+
+    .logo::before {
+      content: "";
+      position: absolute;
+      left: 15px;
+      top: 30px;
+      width: 24px;
+      height: 15px;
+      background: #fff;
+      border-radius: 12px;
+      transform: rotate(-8deg);
+    }
+
+    .logo::after {
+      content: "";
+      position: absolute;
+      left: 31px;
+      top: 11px;
+      width: 12px;
+      height: 24px;
+      background: #fff;
+      border-radius: 10px;
+      transform: rotate(24deg);
+    }
+
+    .brand-title {
+      font-size: 28px;
+      font-weight: 900;
+      color: #2d2520;
+      line-height: 1.15;
+      word-break: keep-all;
+    }
+
+    .brand-sub {
+      font-size: 12px;
+      color: #8f8073;
+      margin-top: 6px;
+      word-break: keep-all;
+    }
+
+    .top-icons {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      font-size: 18px;
+      color: #8b7968;
+      flex: 0 0 auto;
+    }
+
+    .hero {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 18px 16px 12px;
+    }
+
+    .hero-card {
+      background: #f9f5f0;
+      border: 1px solid var(--line);
+      border-radius: 34px;
+      padding: 28px 20px 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .hero-title {
+      font-size: 34px;
+      font-weight: 900;
+      color: #44372f;
+      line-height: 1.25;
+      margin-bottom: 12px;
+      word-break: keep-all;
+    }
+
+    .hero-desc {
+      font-size: 17px;
+      color: #7b6f64;
+      max-width: 760px;
+      word-break: keep-all;
+      line-height: 1.7;
+    }
+
+    .badge {
+      display: inline-block;
+      margin-top: 18px;
+      padding: 12px 18px;
+      border-radius: 999px;
+      background: #eee7db;
+      color: #9a7a46;
+      font-size: 16px;
+      font-weight: 900;
+    }
+
+    .notice-box {
+      margin-top: 22px;
+      background: #fffaf3;
+      border: 2px solid #dcc49c;
+      color: #7a5a2f;
+      padding: 24px 18px;
+      border-radius: 26px;
+    }
+
+    .notice-title {
+      font-size: 20px;
+      font-weight: 900;
+      margin-bottom: 14px;
+      color: #6f532e;
+    }
+
+    .notice-text {
+      font-size: 17px;
+      line-height: 1.9;
+      word-break: keep-all;
+      color: #8a6d44;
+    }
+
+    .button-group {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-top: 22px;
+      max-width: 640px;
+    }
+
+    .btn {
+      display: block;
+      width: 100%;
+      text-align: center;
+      text-decoration: none;
+      padding: 22px 16px;
+      border-radius: 24px;
+      font-size: 18px;
+      font-weight: 900;
+      border: none;
+    }
+
+    .btn-disabled-primary {
+      background: #c9c1bb;
+      color: #fff;
+      pointer-events: none;
+      cursor: not-allowed;
+    }
+
+    .btn-disabled-secondary {
+      background: #f8f6f4;
+      color: #a09790;
+      border: 2px solid #ddd6d0;
+      pointer-events: none;
+      cursor: not-allowed;
+    }
+
+    .ticker {
+      margin-top: 20px;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      padding: 18px;
+    }
+
+    .ticker-label {
+      font-size: 12px;
+      color: #9a8a7a;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.7px;
+    }
+
+    .ticker-price {
+      font-size: 24px;
+      font-weight: 900;
+      color: var(--main);
+    }
+
+    .ticker-meta {
+      font-size: 13px;
+      color: #7e7368;
+      margin-top: 4px;
+    }
+
+    .ticker-note {
+      margin-top: 8px;
+      font-size: 12px;
+      color: #8b8076;
+      line-height: 1.6;
+    }
+
+    .menu-wrap {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 10px 16px 0;
+      position: sticky;
+      top: 99px;
+      z-index: 90;
+      background: linear-gradient(to bottom, rgba(246,241,235,0.98), rgba(246,241,235,0.92));
+      backdrop-filter: blur(4px);
+    }
+
+    .menu {
+      display: flex;
+      overflow-x: auto;
+      gap: 10px;
+      padding-bottom: 10px;
+      scrollbar-width: none;
+    }
+
+    .menu::-webkit-scrollbar {
+      display: none;
+    }
+
+    .menu button {
+      white-space: nowrap;
+      border: none;
+      cursor: pointer;
+      background: #fff;
+      color: #6d5a49;
+      border: 1px solid #dfd3c7;
+      padding: 10px 16px;
+      border-radius: 999px;
+      font-size: 14px;
+      font-weight: 900;
+      box-shadow: 0 4px 10px rgba(90,72,53,0.05);
+    }
+
+    .content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 10px 16px 70px;
+    }
+
+    .brand-section {
+      margin-top: 20px;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      padding: 22px 16px 18px;
+      box-shadow: var(--shadow);
+    }
+
+    .brand-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+
+    .brand-title-kor {
+      font-size: 24px;
+      font-weight: 900;
+      color: #4a3e35;
+    }
+
+    .brand-subtext {
+      font-size: 13px;
+      color: #8b8076;
+      margin-top: 6px;
+    }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .card {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 10px 22px rgba(94,76,58,0.08);
+    }
+
+    .card-thumb {
+      height: 180px;
+      background: linear-gradient(135deg, #eee8e2, #d9d0c8);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .thumb-glow {
+      position: absolute;
+      inset: 18px;
+      border-radius: 22px;
+      background:
+        radial-gradient(circle at 30% 30%, rgba(255,255,255,0.95), transparent 32%),
+        radial-gradient(circle at 70% 35%, rgba(255,255,255,0.55), transparent 24%),
+        linear-gradient(135deg, #f4ede6, #d8cec6);
+    }
+
+    .card-body {
+      padding: 14px 14px 16px;
+    }
+
+    .product-name {
+      font-size: 15px;
+      font-weight: 900;
+      color: #5a493f;
+      margin-bottom: 8px;
+      word-break: keep-all;
+      min-height: 42px;
+    }
+
+    .rating {
+      color: #6b5748;
+      font-size: 13px;
+      margin-bottom: 6px;
+      font-weight: 700;
+    }
+
+    .price-krw {
+      color: #9a8a7a;
+      font-size: 15px;
+      margin-bottom: 4px;
+    }
+
+    .price-pi {
+      color: var(--main);
+      font-size: 18px;
+      font-weight: 900;
+      margin-bottom: 10px;
+    }
+
+    .buy-btn-disabled {
+      display: block;
+      width: 100%;
+      text-align: center;
+      background: #d6cfc9;
+      color: #ffffff;
+      padding: 12px 10px;
+      border-radius: 14px;
+      font-size: 13px;
+      font-weight: 900;
+      border: none;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+
+    .footer-box {
+      margin-top: 24px;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      padding: 18px;
+    }
+
+    .footer-box h3 {
+      font-size: 18px;
+      color: #5b4a3e;
+      margin-bottom: 10px;
+      font-weight: 900;
+    }
+
+    .footer-box p {
+      font-size: 14px;
+      color: #796f66;
+      margin-bottom: 8px;
+      word-break: keep-all;
+      line-height: 1.7;
+    }
+
+    @media (max-width: 1180px) {
+      .product-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 980px) {
+      .product-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .menu-wrap {
+        top: 99px;
+      }
+    }
+
+    @media (max-width: 700px) {
+      .brand-title {
+        font-size: 26px;
+      }
+
+      .hero-title {
+        font-size: 30px;
+      }
+
+      .hero-desc,
+      .notice-text {
+        font-size: 16px;
+      }
+
+      .product-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+      }
+
+      .card-thumb {
+        height: 150px;
+      }
+
+      .product-name {
+        font-size: 14px;
+        min-height: 38px;
+      }
+
+      .menu-wrap {
+        top: 99px;
+      }
+    }
+  </style>
 </head>
-
 <body>
+  <header class="appbar">
+    <div class="appbar-inner">
+      <div class="brand-wrap">
+        <div class="logo"></div>
+        <div>
+          <div class="brand-title">The Thumb<br>Therapy</div>
+          <div class="brand-sub">Preparation Stage · Domain Verification</div>
+        </div>
+      </div>
+      <div class="top-icons">
+        <span>⌕</span>
+        <span>♡</span>
+        <span>🛒</span>
+        <span>☰</span>
+      </div>
+    </div>
+  </header>
 
-<div class="header">
-  <div class="logo"></div>
-  <div>
-    <h2>The Thumb Therapy</h2>
-    <small>Preparation Stage · Domain Verification</small>
+  <section class="hero">
+    <div class="hero-card">
+      <div class="hero-title">프리미엄 뷰티 스토어</div>
+      <div class="hero-desc">
+        한국 가격과 현재 PI 시세를 함께 표시하는 테스트용 쇼핑 화면입니다.
+        현재는 도메인 인증 및 정식 오픈 준비 단계입니다.
+      </div>
+
+      <div class="badge">도메인 인증 및 오픈 준비 중</div>
+
+      <div class="notice-box">
+        <div class="notice-title">현재 서비스 준비 중입니다</div>
+        <div class="notice-text">
+          현재 본 사이트는 도메인 인증 및 정식 오픈 준비 단계로 운영되고 있습니다.<br>
+          테스트 페이지이므로 전화 문의, 카카오 상담, 예약 및 결제 기능은 아직 진행하지 않습니다.<br>
+          정식 오픈 후 정상적으로 안내드리겠습니다.
+        </div>
+      </div>
+
+      <div class="button-group">
+        <a href="javascript:void(0)" class="btn btn-disabled-primary">카카오 상담 준비중</a>
+        <a href="javascript:void(0)" class="btn btn-disabled-secondary">전화 상담 준비중</a>
+      </div>
+
+      <div class="ticker">
+        <div class="ticker-label">Kraken PI Live Price</div>
+        <div class="ticker-price" id="piPriceText">불러오는 중…</div>
+        <div class="ticker-meta" id="piMetaText">Kraken 공개 시세 확인 중</div>
+        <div class="ticker-note">
+          실시간 PI/USD 시세를 참고용으로 표시합니다.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="menu-wrap">
+    <div class="menu">
+      <button onclick="goSection('norabode')">노라보데</button>
+      <button onclick="goSection('alchemy')">알케미아</button>
+      <button onclick="goSection('guinot')">기노</button>
+      <button onclick="goSection('thalac')">탈라</button>
+      <button onclick="goSection('sothys')">쏘티스</button>
+    </div>
   </div>
-</div>
 
-<div class="notice">
-⚠ 현재 도메인 인증 및 오픈 준비중입니다.<br>
-전화/카톡 상담 및 결제 기능은 비활성 상태입니다.
-</div>
+  <main class="content">
+    <section class="brand-section" id="norabode">
+      <div class="brand-head">
+        <div>
+          <div class="brand-title-kor">노라보데</div>
+          <div class="brand-subtext">프리미엄 스킨케어 라인</div>
+        </div>
+        <div class="brand-subtext">상품 10개</div>
+      </div>
+      <div class="product-grid" id="grid-norabode"></div>
+    </section>
 
-<div class="brand-tabs" id="tabs"></div>
+    <section class="brand-section" id="alchemy">
+      <div class="brand-head">
+        <div>
+          <div class="brand-title-kor">알케미아</div>
+          <div class="brand-subtext">프리미엄 리추얼 & 페이스 케어 라인</div>
+        </div>
+        <div class="brand-subtext">상품 10개</div>
+      </div>
+      <div class="product-grid" id="grid-alchemy"></div>
+    </section>
 
-<div class="products" id="products"></div>
+    <section class="brand-section" id="guinot">
+      <div class="brand-head">
+        <div>
+          <div class="brand-title-kor">기노</div>
+          <div class="brand-subtext">전문 에스테틱 케어 라인</div>
+        </div>
+        <div class="brand-subtext">상품 10개</div>
+      </div>
+      <div class="product-grid" id="grid-guinot"></div>
+    </section>
 
-<button class="admin-btn" onclick="adminLogin()">관리자</button>
+    <section class="brand-section" id="thalac">
+      <div class="brand-head">
+        <div>
+          <div class="brand-title-kor">탈라</div>
+          <div class="brand-subtext">해양 성분 기반 케어 라인</div>
+        </div>
+        <div class="brand-subtext">상품 10개</div>
+      </div>
+      <div class="product-grid" id="grid-thalac"></div>
+    </section>
 
-<script>
-let PI_PRICE = 0.6; // 임시 시세
+    <section class="brand-section" id="sothys">
+      <div class="brand-head">
+        <div>
+          <div class="brand-title-kor">쏘티스</div>
+          <div class="brand-subtext">럭셔리 뷰티 케어 라인</div>
+        </div>
+        <div class="brand-subtext">상품 10개</div>
+      </div>
+      <div class="product-grid" id="grid-sothys"></div>
+    </section>
 
-async function getPrice(){
-  try{
-    let res = await fetch("https://api.coingecko.com/api/v3/simple/price?ids=pi-network&vs_currencies=usd");
-    let data = await res.json();
-    PI_PRICE = data["pi-network"].usd;
-  }catch(e){}
-}
-getPrice();
+    <div class="footer-box">
+      <h3>안내 사항</h3>
+      <p>현재 페이지는 도메인 인증 및 디자인 점검을 위한 테스트 화면입니다.</p>
+      <p>상담, 예약, 결제 기능은 정식 오픈 전까지 비활성 상태로 유지됩니다.</p>
+      <p>정식 오픈 후 실제 상품과 서비스가 순차적으로 반영될 예정입니다.</p>
+    </div>
+  </main>
 
-let data = JSON.parse(localStorage.getItem("shop")||"{}");
+  <script>
+    const USD_KRW = 1508.4;
 
-if(Object.keys(data).length===0){
-  data={
-    "노라보데":[
-      {name:"앰플 세럼",price:180000},
-      {name:"수분 에센스",price:150000}
-    ],
-    "알케미아":[
-      {name:"리페어 크림",price:200000}
-    ],
-    "기노":[
-      {name:"아쿠아 크림",price:170000}
-    ],
-    "탈라":[
-      {name:"마린 세럼",price:190000}
-    ],
-    "쏘티스":[
-      {name:"에센셜 크림",price:210000}
-    ]
-  }
-}
+    const productData = {
+      norabode: [
+        ["인텍트 퍼펙트 스킨 볼륨 크림", 120000, 4.8],
+        ["에이지 컨트롤 크림", 130000, 4.9],
+        ["옥시젯퍼펙션 인터셀 부스터", 140000, 4.8],
+        ["옥시젯퍼펙션 울트라 펌", 150000, 4.7],
+        ["옥시젯퍼펙션 브라이트 스킨", 160000, 4.9],
+        ["옥시젯 원 세럼", 170000, 4.8],
+        ["옥시젯 투 세럼", 180000, 4.9],
+        ["앱솔루트 이펙트 퓨리파잉 컨트롤 앰플", 190000, 4.7],
+        ["앱솔루트 이펙트 브라이트닝 코렉터 앰플", 200000, 4.8],
+        ["인텍트 퍼펙트 아이 존 컨센트레이트", 210000, 4.9]
+      ],
+      alchemy: [
+        ["Eternal Youth Facial Sérum", 130000, 4.8],
+        ["Eternal Youth Absolut Pro Aging Facial Cream", 140000, 4.7],
+        ["Eternal Youth Eye and Lip Contour", 150000, 4.9],
+        ["Eternal Youth Facial Pack", 160000, 4.8],
+        ["Queen of Egypt Golden Glow", 170000, 4.7],
+        ["Queen of Egypt Glow Experience", 180000, 4.8],
+        ["Queen of Egypt Pack", 190000, 4.9],
+        ["Queen of Egypt Eau de Toilette", 200000, 4.8],
+        ["Queen of Egypt Essential Oil Blend", 210000, 4.7],
+        ["Queen of Egypt Shower Gel", 220000, 4.9]
+      ],
+      guinot: [
+        ["크렘 롱그 비", 140000, 4.9],
+        ["크렘 이드라존 크림", 150000, 4.8],
+        ["세럼 크렘 이드라존 이으", 160000, 4.8],
+        ["크렘 나이트 로직", 170000, 4.7],
+        ["마스끄 퓨르 에뀔리브르", 180000, 4.9],
+        ["Hydra Summum Cream", 190000, 4.8],
+        ["Hydra Summum Serum", 200000, 4.7],
+        ["안티-컨센트레이트", 210000, 4.8],
+        ["매지컬 타임 오 드 퍼퓸", 220000, 4.9],
+        ["아이 케어 라인 세럼", 230000, 4.8]
+      ],
+      thalac: [
+        ["로씨옹 마린느", 150000, 4.8],
+        ["액티브 캄", 160000, 4.9],
+        ["마스크 프레쉐르 이드랑띠프", 170000, 4.7],
+        ["데마끼앙 뒤 이유", 180000, 4.8],
+        ["로씨옹 비타민", 190000, 4.9],
+        ["젤 네뜨앙뜨 퓨리피앙", 200000, 4.8],
+        ["세럼 비 셀룰레르", 210000, 4.7],
+        ["하이드라 프로디지", 220000, 4.8],
+        ["쏘인 꽁뜨르 이유", 230000, 4.9],
+        ["세럼 이드라땅", 240000, 4.8]
+      ],
+      sothys: [
+        ["글로우 디펜스 세럼", 160000, 4.9],
+        ["글로우 디펜스 크림", 170000, 4.8],
+        ["일루미네이팅 마스크", 180000, 4.7],
+        ["일루미네이팅 에센스", 190000, 4.8],
+        ["일루미네이팅 페이셜 클렌저", 200000, 4.9],
+        ["데스까 크림", 210000, 4.8],
+        ["Restructuring Youth Cream", 220000, 4.7],
+        ["Soothing Velvet Cream", 230000, 4.8],
+        ["Face Glow Defense Serum", 240000, 4.9],
+        ["Face Glow Defense Cream", 250000, 4.8]
+      ]
+    };
 
-function save(){
-  localStorage.setItem("shop",JSON.stringify(data));
-}
+    function goSection(id) {
+      document.getElementById(id).scrollIntoView({ behavior: "smooth", block: "start" });
+    }
 
-function renderTabs(){
-  let html="";
-  Object.keys(data).forEach(b=>{
-    html+=`<button onclick="show('${b}')">${b}</button>`;
-  })
-  document.getElementById("tabs").innerHTML=html;
-}
-renderTabs();
+    function won(v) {
+      return "₩" + new Intl.NumberFormat("ko-KR").format(Math.round(v));
+    }
 
-function show(brand){
-  let html="";
-  data[brand].forEach((p,i)=>{
-    let pi=(p.price/(PI_PRICE*1300)).toFixed(2);
-    html+=`
-    <div class="card">
-      <h4>${brand} ${p.name}</h4>
-      <div>₩${p.price.toLocaleString()}</div>
-      <div>π ${pi}</div>
-      <button onclick="buy('${brand}',${i})">Pi 결제</button>
-    </div>`;
-  })
-  document.getElementById("products").innerHTML=html;
-}
-show("노라보데");
+    function pi(v) {
+      return "π " + Number(v).toFixed(2);
+    }
 
-function buy(b,i){
-  alert("Pi 결제 기능은 오픈 후 활성화됩니다");
-}
+    function usd(v) {
+      return "$" + Number(v).toFixed(4);
+    }
 
-function adminLogin(){
-  let pw=prompt("비밀번호 입력");
-  if(pw==="1234"){
-    adminMode();
-  }
-}
+    function renderBrand(gridId, items, piUsdPrice) {
+      const grid = document.getElementById(gridId);
+      grid.innerHTML = "";
 
-function adminMode(){
-  let brand=prompt("브랜드 입력");
-  let name=prompt("상품명");
-  let price=parseInt(prompt("가격"));
+      items.forEach(item => {
+        const [name, priceKRW, rating] = item;
+        const priceUsd = priceKRW / USD_KRW;
+        const pricePi = priceUsd / piUsdPrice;
 
-  if(!data[brand]) data[brand]=[];
-  data[brand].push({name,price});
-  save();
-  renderTabs();
-  show(brand);
-}
-</script>
+        const card = document.createElement("article");
+        card.className = "card";
+        card.innerHTML = `
+          <div class="card-thumb">
+            <div class="thumb-glow"></div>
+          </div>
+          <div class="card-body">
+            <div class="product-name">${name}</div>
+            <div class="rating">⭐ ${rating}</div>
+            <div class="price-krw">${won(priceKRW)}</div>
+            <div class="price-pi">${pi(pricePi)}</div>
+            <button class="buy-btn-disabled">결제 준비중</button>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+    }
 
+    async function findKrakenPiPair() {
+      const res = await fetch("https://api.kraken.com/0/public/AssetPairs");
+      const data = await res.json();
+      const entries = Object.entries(data.result || {});
+      const match = entries.find(([k, info]) => {
+        const alt = (info.altname || "").toUpperCase();
+        const ws = (info.wsname || "").toUpperCase();
+        return alt === "PIUSD" || ws === "PI/USD" || k.toUpperCase().includes("PIUSD");
+      });
+      if (!match) throw new Error("PI/USD pair not found");
+      return match[0];
+    }
+
+    async function fetchPiPrice() {
+      const pairKey = await findKrakenPiPair();
+      const res = await fetch(`https://api.kraken.com/0/public/Ticker?pair=${encodeURIComponent(pairKey)}`);
+      const data = await res.json();
+      const ticker = data.result[pairKey];
+      return { pairKey, priceUSD: Number(ticker.c[0]) };
+    }
+
+    async function init() {
+      let piUsdPrice = 0.18;
+
+      try {
+        const { pairKey, priceUSD } = await fetchPiPrice();
+        piUsdPrice = priceUSD;
+        document.getElementById("piPriceText").textContent = `1 PI = ${usd(priceUSD)}`;
+        document.getElementById("piMetaText").textContent = `Kraken 기준 · ${pairKey}`;
+      } catch (e) {
+        document.getElementById("piPriceText").textContent = "시세 연결 실패";
+        document.getElementById("piMetaText").textContent = "기본 참고값으로 표시 중";
+      }
+
+      renderBrand("grid-norabode", productData.norabode, piUsdPrice);
+      renderBrand("grid-alchemy", productData.alchemy, piUsdPrice);
+      renderBrand("grid-guinot", productData.guinot, piUsdPrice);
+      renderBrand("grid-thalac", productData.thalac, piUsdPrice);
+      renderBrand("grid-sothys", productData.sothys, piUsdPrice);
+    }
+
+    init();
+  </script>
 </body>
 </html>
