@@ -102,6 +102,8 @@
       min-width:180px; text-align:center; text-decoration:none;
       padding:18px 16px; border-radius:20px; font-size:16px; font-weight:900;
       border:none; cursor:pointer;
+      white-space:nowrap;
+      word-break:keep-all;
     }
     .btn-main{ background: linear-gradient(135deg, #8a6a3f, #a98758); color:#fff; }
     .btn-line{ background:#fff; color:var(--main); border:2px solid #dccfbf; }
@@ -177,14 +179,14 @@
     .price-krw{ color:#9a8a7a; font-size:15px; margin-bottom:4px; }
     .price-pi{ color:var(--main); font-size:18px; font-weight:900; margin-bottom:10px; }
 
-    /* 핵심 수정 부분 */
     .buy-row{
       display:flex;
       gap:10px;
       align-items:center;
-      width:100%;
+      flex-direction:row;
     }
-    .buy-btn, .pay-btn{
+    .buy-btn,
+    .pay-btn{
       flex:1 1 0;
       display:flex;
       align-items:center;
@@ -201,9 +203,19 @@
       line-height:1.2;
       text-align:center;
     }
-    .buy-btn{ background:#d6cfc9; color:#ffffff; cursor:not-allowed; }
-    .pay-btn{ background:#8a6a3f; color:#fff; }
-    .pay-btn[disabled]{ background:#c9c1bb; cursor:not-allowed; }
+    .buy-btn{
+      background:#d6cfc9;
+      color:#ffffff;
+      cursor:not-allowed;
+    }
+    .pay-btn{
+      background:#8a6a3f;
+      color:#fff;
+    }
+    .pay-btn[disabled]{
+      background:#c9c1bb;
+      cursor:not-allowed;
+    }
 
     .footer-box{
       margin-top:24px; background:#fff; border:1px solid var(--line);
@@ -293,4 +305,830 @@
     .modal .cancel{ background:#f4eee8; color:#6c5847; }
 
     @media (max-width:1180px){
-      .product
+      .product-grid{ grid-template-columns:repeat(4, minmax(0,1fr)); }
+    }
+    @media (max-width:980px){
+      .product-grid{ grid-template-columns:repeat(3, minmax(0,1fr)); }
+    }
+    @media (max-width:700px){
+      .brand-title{ font-size:26px; }
+      .hero-title{ font-size:30px; }
+      .hero-desc,.notice-text{ font-size:16px; }
+      .product-grid{ grid-template-columns:repeat(2, minmax(0,1fr)); gap:12px; }
+      .card-thumb{ height:150px; }
+      .product-name{ font-size:14px; min-height:38px; }
+      .status-grid{ grid-template-columns:1fr; }
+      .file-row{ flex-direction:column; align-items:stretch; }
+
+      .buy-row{
+        flex-direction:row;
+      }
+      .buy-btn,
+      .pay-btn{
+        font-size:15px;
+        min-height:48px;
+        padding:10px 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="appbar">
+    <div class="appbar-inner">
+      <div class="brand-wrap">
+        <div class="logo"></div>
+        <div>
+          <div class="brand-title">The Thumb<br>Therapy</div>
+          <div class="brand-sub" id="brandSub">Preparation Stage · Domain Verification</div>
+        </div>
+      </div>
+      <div class="top-icons">
+        <span>⌕</span>
+        <span>♡</span>
+        <span>🛒</span>
+        <span>☰</span>
+      </div>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="hero-card">
+      <div class="hero-title" id="heroTitle">프리미엄 뷰티 스토어</div>
+      <div class="hero-desc" id="heroDesc">
+        한국 가격과 현재 PI 시세를 함께 표시하는 테스트용 쇼핑 화면입니다.
+        현재는 도메인 인증 및 정식 오픈 준비 단계입니다.
+      </div>
+
+      <div class="badge" id="stageBadge">도메인 인증 및 오픈 준비 중</div>
+
+      <div class="notice-box" id="noticeBox">
+        <div class="notice-title" id="noticeTitle">현재 서비스 준비 중입니다</div>
+        <div class="notice-text" id="noticeText">
+          현재 본 사이트는 도메인 인증 및 정식 오픈 준비 단계로 운영되고 있습니다.<br>
+          테스트 페이지이므로 전화 문의, 카카오 상담, 예약 및 결제 기능은 아직 진행하지 않습니다.<br>
+          정식 오픈 후 정상적으로 안내드리겠습니다.
+        </div>
+      </div>
+
+      <div class="status-grid">
+        <div class="status-card">
+          <div class="status-label">도메인 파일</div>
+          <div class="status-value" id="validationStatus">점검 중…</div>
+        </div>
+        <div class="status-card">
+          <div class="status-label">Pi SDK</div>
+          <div class="status-value" id="sdkStatus">점검 중…</div>
+        </div>
+        <div class="status-card">
+          <div class="status-label">결제 상태</div>
+          <div class="status-value" id="paymentStatus">준비중</div>
+        </div>
+      </div>
+
+      <div class="button-group">
+        <a href="javascript:void(0)" id="kakaoBtn" class="btn btn-disabled-primary">카카오 상담 준비중</a>
+        <a href="javascript:void(0)" id="phoneBtn" class="btn btn-disabled-secondary">전화 상담 준비중</a>
+        <button type="button" class="btn btn-soft" id="btnCheckDomain">도메인 파일 확인</button>
+        <button type="button" class="btn btn-soft" id="btnPiLogin">Pi 로그인 확인</button>
+      </div>
+
+      <div class="ticker">
+        <div class="ticker-label">Kraken PI Live Price</div>
+        <div class="ticker-price" id="piPriceText">불러오는 중…</div>
+        <div class="ticker-meta" id="piMetaText">Kraken 공개 시세 확인 중</div>
+        <div class="ticker-note" id="priceNote">
+          실시간 PI/USD 시세를 참고용으로 표시합니다.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="menu-wrap">
+    <div class="menu" id="brandMenu"></div>
+  </div>
+
+  <main class="content">
+    <div id="brandSections"></div>
+
+    <div class="footer-box">
+      <h3>안내 사항</h3>
+      <p id="footerLine1">현재 페이지는 도메인 인증 및 디자인 점검을 위한 테스트 화면입니다.</p>
+      <p id="footerLine2">상담, 예약, 결제 기능은 정식 오픈 전까지 비활성 상태로 유지됩니다.</p>
+      <p id="footerLine3">정식 오픈 후 실제 상품과 서비스가 순차적으로 반영될 예정입니다.</p>
+    </div>
+  </main>
+
+  <button class="admin-fab" id="adminFab">관리자</button>
+
+  <div class="admin-panel" id="adminPanel">
+    <div class="admin-title">통합 관리자</div>
+
+    <div id="loginArea">
+      <input id="adminPassword" class="admin-input" type="password" placeholder="비밀번호 입력" />
+      <div class="admin-actions">
+        <button class="admin-btn admin-btn-main" onclick="loginAdmin()">로그인</button>
+      </div>
+    </div>
+
+    <div id="editArea" class="hidden">
+      <div class="admin-subtitle">기본 정보</div>
+      <input id="editHeroTitle" class="admin-input" type="text" placeholder="메인 제목" />
+      <textarea id="editHeroDesc" class="admin-textarea" placeholder="소개글"></textarea>
+
+      <div class="admin-subtitle">공지 설정</div>
+      <div class="toggle-row">
+        <button type="button" id="noticeOnBtn" class="toggle-chip" onclick="setNoticeToggle(true)">공지 ON</button>
+        <button type="button" id="noticeOffBtn" class="toggle-chip" onclick="setNoticeToggle(false)">공지 OFF</button>
+      </div>
+      <input id="editNoticeTitle" class="admin-input" type="text" placeholder="공지 제목" />
+      <textarea id="editNoticeText" class="admin-textarea" placeholder="공지 내용"></textarea>
+
+      <div class="admin-subtitle">상담 버튼 / 링크</div>
+      <input id="editKakaoText" class="admin-input" type="text" placeholder="카카오 버튼 문구" />
+      <input id="editKakaoLink" class="admin-input" type="text" placeholder="카카오 링크" />
+      <input id="editPhoneText" class="admin-input" type="text" placeholder="전화 버튼 문구" />
+      <input id="editPhoneNumber" class="admin-input" type="text" placeholder="전화번호 (예: 01012345678)" />
+
+      <div class="admin-subtitle">하단 안내 문구</div>
+      <input id="editFooter1" class="admin-input" type="text" placeholder="하단 문구 1" />
+      <input id="editFooter2" class="admin-input" type="text" placeholder="하단 문구 2" />
+      <input id="editFooter3" class="admin-input" type="text" placeholder="하단 문구 3" />
+
+      <div class="admin-subtitle">브랜드/상품 전체 관리</div>
+      <div id="productEditors"></div>
+
+      <div class="admin-actions">
+        <button class="admin-btn admin-btn-main" onclick="saveAdminData()">저장</button>
+        <button class="admin-btn admin-btn-soft" onclick="loadAdminInputs()">불러오기</button>
+        <button class="admin-btn admin-btn-soft" onclick="exportFixedConfig()">고정본 JSON 복사</button>
+        <button class="admin-btn admin-btn-danger" onclick="resetAdminData()">초기화</button>
+        <button class="admin-btn admin-btn-soft" onclick="logoutAdmin()">로그아웃</button>
+      </div>
+
+      <div class="admin-help">
+        이미지 URL 입력도 가능하고, 파일첨부도 가능합니다. 파일첨부 이미지는 같은 브라우저에서 유지됩니다.
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-backdrop" id="paymentModal">
+    <div class="modal">
+      <h3 id="modalTitle">Pi 결제</h3>
+      <p id="modalText">결제를 진행합니다.</p>
+      <div class="row">
+        <button class="cancel" onclick="closeModal()">닫기</button>
+        <button class="ok" id="modalActionBtn">확인</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const ADMIN_PASSWORD = "1234";
+    const USD_KRW = 1508.4;
+    const STORAGE_ADMIN_KEY = "tts_admin_logged_in";
+    const STORAGE_CONTENT_KEY = "tts_admin_content";
+    const VALIDATION_PATH = "/validation-key.txt";
+
+    let currentPiPriceUSD = 0.18;
+    let currentNoticeEnabled = true;
+    let currentPiAuth = null;
+    let currentSelectedPayment = null;
+
+    const BRAND_KEYS = [
+      { key: "norabode", label: "노라보데" },
+      { key: "alchemy", label: "알케미아" },
+      { key: "guinot", label: "기노" },
+      { key: "thalac", label: "탈라" },
+      { key: "sothys", label: "쏘티스" }
+    ];
+
+    const defaultContent = {
+      heroTitle: "프리미엄 뷰티 스토어",
+      heroDesc: "한국 가격과 현재 PI 시세를 함께 표시하는 테스트용 쇼핑 화면입니다. 현재는 도메인 인증 및 정식 오픈 준비 단계입니다.",
+      noticeEnabled: true,
+      noticeTitle: "현재 서비스 준비 중입니다",
+      noticeText: "현재 본 사이트는 도메인 인증 및 정식 오픈 준비 단계로 운영되고 있습니다.\n테스트 페이지이므로 전화 문의, 카카오 상담, 예약 및 결제 기능은 아직 진행하지 않습니다.\n정식 오픈 후 정상적으로 안내드리겠습니다.",
+      kakaoText: "카카오 상담 준비중",
+      kakaoLink: "https://open.kakao.com/o/sqB6lDni",
+      phoneText: "전화 상담 준비중",
+      phoneNumber: "01012345678",
+      footer1: "현재 페이지는 도메인 인증 및 디자인 점검을 위한 테스트 화면입니다.",
+      footer2: "상담, 예약, 결제 기능은 정식 오픈 전까지 비활성 상태로 유지됩니다.",
+      footer3: "정식 오픈 후 실제 상품과 서비스가 순차적으로 반영될 예정입니다.",
+      brands: {
+        norabode: {
+          label: "노라보데",
+          desc: "프리미엄 스킨케어 라인",
+          products: [
+            { name:"인텍트 퍼펙트 스킨 볼륨 크림", priceKRW:120000, rating:4.8, image:"", visible:true },
+            { name:"에이지 컨트롤 크림", priceKRW:130000, rating:4.9, image:"", visible:true },
+            { name:"옥시젯퍼펙션 인터셀 부스터", priceKRW:140000, rating:4.8, image:"", visible:true },
+            { name:"옥시젯퍼펙션 울트라 펌", priceKRW:150000, rating:4.7, image:"", visible:true },
+            { name:"옥시젯퍼펙션 브라이트 스킨", priceKRW:160000, rating:4.9, image:"", visible:true },
+            { name:"옥시젯 원 세럼", priceKRW:170000, rating:4.8, image:"", visible:true },
+            { name:"옥시젯 투 세럼", priceKRW:180000, rating:4.9, image:"", visible:true },
+            { name:"앱솔루트 이펙트 퓨리파잉 컨트롤 앰플", priceKRW:190000, rating:4.7, image:"", visible:true },
+            { name:"앱솔루트 이펙트 브라이트닝 코렉터 앰플", priceKRW:200000, rating:4.8, image:"", visible:true },
+            { name:"인텍트 퍼펙트 아이 존 컨센트레이트", priceKRW:210000, rating:4.9, image:"", visible:true }
+          ]
+        },
+        alchemy: {
+          label: "알케미아",
+          desc: "프리미엄 리추얼 & 페이스 케어 라인",
+          products: [
+            { name:"Eternal Youth Facial Sérum", priceKRW:130000, rating:4.8, image:"", visible:true },
+            { name:"Eternal Youth Absolut Pro Aging Facial Cream", priceKRW:140000, rating:4.7, image:"", visible:true },
+            { name:"Eternal Youth Eye and Lip Contour", priceKRW:150000, rating:4.9, image:"", visible:true },
+            { name:"Eternal Youth Facial Pack", priceKRW:160000, rating:4.8, image:"", visible:true },
+            { name:"Queen of Egypt Golden Glow", priceKRW:170000, rating:4.7, image:"", visible:true },
+            { name:"Queen of Egypt Glow Experience", priceKRW:180000, rating:4.8, image:"", visible:true },
+            { name:"Queen of Egypt Pack", priceKRW:190000, rating:4.9, image:"", visible:true },
+            { name:"Queen of Egypt Eau de Toilette", priceKRW:200000, rating:4.8, image:"", visible:true },
+            { name:"Queen of Egypt Essential Oil Blend", priceKRW:210000, rating:4.7, image:"", visible:true },
+            { name:"Queen of Egypt Shower Gel", priceKRW:220000, rating:4.9, image:"", visible:true }
+          ]
+        },
+        guinot: {
+          label: "기노",
+          desc: "전문 에스테틱 케어 라인",
+          products: [
+            { name:"크렘 롱그 비", priceKRW:140000, rating:4.9, image:"", visible:true },
+            { name:"크렘 이드라존 크림", priceKRW:150000, rating:4.8, image:"", visible:true },
+            { name:"세럼 크렘 이드라존 이으", priceKRW:160000, rating:4.8, image:"", visible:true },
+            { name:"크렘 나이트 로직", priceKRW:170000, rating:4.7, image:"", visible:true },
+            { name:"마스끄 퓨르 에뀔리브르", priceKRW:180000, rating:4.9, image:"", visible:true },
+            { name:"Hydra Summum Cream", priceKRW:190000, rating:4.8, image:"", visible:true },
+            { name:"Hydra Summum Serum", priceKRW:200000, rating:4.7, image:"", visible:true },
+            { name:"안티-컨센트레이트", priceKRW:210000, rating:4.8, image:"", visible:true },
+            { name:"매지컬 타임 오 드 퍼퓸", priceKRW:220000, rating:4.9, image:"", visible:true },
+            { name:"아이 케어 라인 세럼", priceKRW:230000, rating:4.8, image:"", visible:true }
+          ]
+        },
+        thalac: {
+          label: "탈라",
+          desc: "해양 성분 기반 케어 라인",
+          products: [
+            { name:"로씨옹 마린느", priceKRW:150000, rating:4.8, image:"", visible:true },
+            { name:"액티브 캄", priceKRW:160000, rating:4.9, image:"", visible:true },
+            { name:"마스크 프레쉐르 이드랑띠프", priceKRW:170000, rating:4.7, image:"", visible:true },
+            { name:"데마끼앙 뒤 이유", priceKRW:180000, rating:4.8, image:"", visible:true },
+            { name:"로씨옹 비타민", priceKRW:190000, rating:4.9, image:"", visible:true },
+            { name:"젤 네뜨앙뜨 퓨리피앙", priceKRW:200000, rating:4.8, image:"", visible:true },
+            { name:"세럼 비 셀룰레르", priceKRW:210000, rating:4.7, image:"", visible:true },
+            { name:"하이드라 프로디지", priceKRW:220000, rating:4.8, image:"", visible:true },
+            { name:"쏘인 꽁뜨르 이유", priceKRW:230000, rating:4.9, image:"", visible:true },
+            { name:"세럼 이드라땅", priceKRW:240000, rating:4.8, image:"", visible:true }
+          ]
+        },
+        sothys: {
+          label: "쏘티스",
+          desc: "럭셔리 뷰티 케어 라인",
+          products: [
+            { name:"글로우 디펜스 세럼", priceKRW:160000, rating:4.9, image:"", visible:true },
+            { name:"글로우 디펜스 크림", priceKRW:170000, rating:4.8, image:"", visible:true },
+            { name:"일루미네이팅 마스크", priceKRW:180000, rating:4.7, image:"", visible:true },
+            { name:"일루미네이팅 에센스", priceKRW:190000, rating:4.8, image:"", visible:true },
+            { name:"일루미네이팅 페이셜 클렌저", priceKRW:200000, rating:4.9, image:"", visible:true },
+            { name:"데스까 크림", priceKRW:210000, rating:4.8, image:"", visible:true },
+            { name:"Restructuring Youth Cream", priceKRW:220000, rating:4.7, image:"", visible:true },
+            { name:"Soothing Velvet Cream", priceKRW:230000, rating:4.8, image:"", visible:true },
+            { name:"Face Glow Defense Serum", priceKRW:240000, rating:4.9, image:"", visible:true },
+            { name:"Face Glow Defense Cream", priceKRW:250000, rating:4.8, image:"", visible:true }
+          ]
+        }
+      }
+    };
+
+    function deepClone(obj){ return JSON.parse(JSON.stringify(obj)); }
+    function won(v){ return "₩" + new Intl.NumberFormat("ko-KR").format(Math.round(v)); }
+    function pi(v){ return "π " + Number(v).toFixed(2); }
+    function usd(v){ return "$" + Number(v).toFixed(4); }
+
+    function getContent(){
+      const saved = localStorage.getItem(STORAGE_CONTENT_KEY);
+      if (!saved) return deepClone(defaultContent);
+      try { return JSON.parse(saved); } catch { return deepClone(defaultContent); }
+    }
+    function setContent(data){ localStorage.setItem(STORAGE_CONTENT_KEY, JSON.stringify(data)); }
+
+    function setNoticeToggle(value){
+      currentNoticeEnabled = value;
+      document.getElementById("noticeOnBtn").classList.toggle("active", value === true);
+      document.getElementById("noticeOffBtn").classList.toggle("active", value === false);
+    }
+
+    function goSection(id){
+      const el = document.getElementById(`section-${id}`);
+      if (el) el.scrollIntoView({ behavior:"smooth", block:"start" });
+    }
+
+    function renderBrandMenu(data){
+      const menu = document.getElementById("brandMenu");
+      menu.innerHTML = "";
+      BRAND_KEYS.forEach(({ key }) => {
+        const btn = document.createElement("button");
+        btn.textContent = data.brands[key].label;
+        btn.onclick = () => goSection(key);
+        menu.appendChild(btn);
+      });
+    }
+
+    function onPayNow(brandKey, index){
+      const data = getContent();
+      const product = data.brands[brandKey].products[index];
+      currentSelectedPayment = { brandKey, index, product };
+      openModal(
+        "Pi 결제 준비",
+        `${product.name}\n결제 시도 전 Pi 로그인과 앱 결제 자격을 확인합니다.`,
+        async () => {
+          closeModal();
+          await startPiPayment();
+        }
+      );
+    }
+
+    function renderBrandSections(data){
+      const wrap = document.getElementById("brandSections");
+      wrap.innerHTML = "";
+
+      BRAND_KEYS.forEach(({ key }) => {
+        const brand = data.brands[key];
+        const visibleProducts = brand.products.filter(p => p.visible !== false);
+
+        const section = document.createElement("section");
+        section.className = "brand-section";
+        section.id = `section-${key}`;
+
+        let cards = "";
+        brand.products.forEach((item, i) => {
+          if (item.visible === false) return;
+
+          const priceUsd = item.priceKRW / USD_KRW;
+          const pricePi = priceUsd / currentPiPriceUSD;
+
+          const imagePart = item.image && item.image.trim() !== ""
+            ? `<img src="${item.image}" alt="${item.name}" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"><div class="thumb-glow" style="display:none;"></div>`
+            : `<div class="thumb-glow"></div>`;
+
+          cards += `
+            <article class="card">
+              <div class="card-thumb">${imagePart}</div>
+              <div class="card-body">
+                <div class="product-name">${item.name}</div>
+                <div class="rating">⭐ ${Number(item.rating).toFixed(1)}</div>
+                <div class="price-krw">${won(item.priceKRW)}</div>
+                <div class="price-pi">${pi(pricePi)}</div>
+                <div class="buy-row">
+                  <button class="buy-btn" disabled>장바구니</button>
+                  <button class="pay-btn" onclick="onPayNow('${key}', ${i})">Pi 결제</button>
+                </div>
+              </div>
+            </article>
+          `;
+        });
+
+        section.innerHTML = `
+          <div class="brand-head">
+            <div>
+              <div class="brand-title-kor">${brand.label}</div>
+              <div class="brand-subtext">${brand.desc || ""}</div>
+            </div>
+            <div class="brand-subtext">상품 ${visibleProducts.length}개</div>
+          </div>
+          <div class="product-grid">${cards}</div>
+        `;
+
+        wrap.appendChild(section);
+      });
+    }
+
+    function applyContent(){
+      const data = getContent();
+
+      document.getElementById("heroTitle").textContent = data.heroTitle;
+      document.getElementById("heroDesc").textContent = data.heroDesc;
+      document.getElementById("noticeTitle").textContent = data.noticeTitle;
+      document.getElementById("noticeText").innerHTML = data.noticeText.replace(/\n/g, "<br>");
+      document.getElementById("noticeBox").style.display = data.noticeEnabled ? "block" : "none";
+
+      const kakaoBtn = document.getElementById("kakaoBtn");
+      const phoneBtn = document.getElementById("phoneBtn");
+
+      kakaoBtn.textContent = data.kakaoText;
+      phoneBtn.textContent = data.phoneText;
+
+      const kakaoReady = !data.kakaoText.includes("준비중") && data.kakaoLink.trim() !== "";
+      const phoneReady = !data.phoneText.includes("준비중") && data.phoneNumber.trim() !== "";
+
+      if (kakaoReady) {
+        kakaoBtn.className = "btn btn-main";
+        kakaoBtn.href = data.kakaoLink;
+        kakaoBtn.target = "_blank";
+      } else {
+        kakaoBtn.className = "btn btn-disabled-primary";
+        kakaoBtn.href = "javascript:void(0)";
+        kakaoBtn.removeAttribute("target");
+      }
+
+      if (phoneReady) {
+        phoneBtn.className = "btn btn-line";
+        phoneBtn.href = `tel:${data.phoneNumber}`;
+      } else {
+        phoneBtn.className = "btn btn-disabled-secondary";
+        phoneBtn.href = "javascript:void(0)";
+      }
+
+      document.getElementById("footerLine1").textContent = data.footer1;
+      document.getElementById("footerLine2").textContent = data.footer2;
+      document.getElementById("footerLine3").textContent = data.footer3;
+
+      renderBrandMenu(data);
+      renderBrandSections(data);
+      document.getElementById("priceNote").textContent =
+        `Kraken 실시간 PI/USD 시세와 기준 환율(1 USD ≈ ${USD_KRW.toLocaleString("ko-KR")} KRW)로 계산한 참고용 표시입니다.`;
+    }
+
+    function getPreviewHtml(value){
+      if (value && value.trim() !== "") {
+        return `<img src="${value}" alt="preview" />`;
+      }
+      return `미리보기 없음`;
+    }
+
+    function createProductEditors(){
+      const wrap = document.getElementById("productEditors");
+      wrap.innerHTML = "";
+
+      BRAND_KEYS.forEach(({ key, label }) => {
+        const block = document.createElement("div");
+        block.className = "product-editor";
+
+        let html = `
+          <div class="admin-subtitle" style="margin-top:0;">${label} 브랜드 설정</div>
+          <input id="brandLabel-${key}" class="admin-input" type="text" placeholder="브랜드명" />
+          <input id="brandDesc-${key}" class="admin-input" type="text" placeholder="브랜드 설명" />
+        `;
+
+        for (let i = 0; i < 10; i++) {
+          html += `
+            <div class="admin-subtitle">${label} 상품 ${i + 1}</div>
+            <input id="${key}-name-${i}" class="admin-input" type="text" placeholder="상품명" />
+            <input id="${key}-price-${i}" class="admin-input" type="number" placeholder="가격" />
+            <input id="${key}-rating-${i}" class="admin-input" type="number" step="0.1" min="0" max="5" placeholder="평점" />
+            <input id="${key}-image-${i}" class="admin-input" type="text" placeholder="이미지 URL 입력" />
+            <div class="preview-box" id="${key}-preview-${i}">미리보기 없음</div>
+            <div class="file-row">
+              <input id="${key}-file-${i}" type="file" accept="image/*" />
+              <button type="button" class="clear-image-btn" onclick="clearProductImage('${key}', ${i})">이미지 지우기</button>
+            </div>
+            <label class="small-check">
+              <input id="${key}-visible-${i}" type="checkbox" />
+              상품 보이기
+            </label>
+          `;
+        }
+
+        block.innerHTML = html;
+        wrap.appendChild(block);
+      });
+
+      BRAND_KEYS.forEach(({ key }) => {
+        for (let i = 0; i < 10; i++) {
+          const fileInput = document.getElementById(`${key}-file-${i}`);
+          const urlInput = document.getElementById(`${key}-image-${i}`);
+
+          fileInput.addEventListener("change", (event) => handleFileUpload(event, key, i));
+          urlInput.addEventListener("input", () => updatePreview(key, i, urlInput.value));
+        }
+      });
+    }
+
+    function updatePreview(key, index, value){
+      const preview = document.getElementById(`${key}-preview-${index}`);
+      preview.innerHTML = getPreviewHtml(value);
+    }
+
+    function handleFileUpload(event, key, index){
+      const file = event.target.files && event.target.files[0];
+      if (!file) return;
+
+      if (!file.type.startsWith("image/")) {
+        alert("이미지 파일만 선택해 주세요.");
+        event.target.value = "";
+        return;
+      }
+
+      const reader = new FileReader();
+      reader.onload = function(e){
+        const result = e.target.result;
+        document.getElementById(`${key}-image-${index}`).value = result;
+        updatePreview(key, index, result);
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function clearProductImage(key, index){
+      document.getElementById(`${key}-image-${index}`).value = "";
+      document.getElementById(`${key}-file-${index}`).value = "";
+      updatePreview(key, index, "");
+    }
+
+    function loadAdminInputs(){
+      const data = getContent();
+
+      document.getElementById("editHeroTitle").value = data.heroTitle;
+      document.getElementById("editHeroDesc").value = data.heroDesc;
+      setNoticeToggle(!!data.noticeEnabled);
+      document.getElementById("editNoticeTitle").value = data.noticeTitle;
+      document.getElementById("editNoticeText").value = data.noticeText;
+      document.getElementById("editKakaoText").value = data.kakaoText;
+      document.getElementById("editKakaoLink").value = data.kakaoLink;
+      document.getElementById("editPhoneText").value = data.phoneText;
+      document.getElementById("editPhoneNumber").value = data.phoneNumber;
+      document.getElementById("editFooter1").value = data.footer1;
+      document.getElementById("editFooter2").value = data.footer2;
+      document.getElementById("editFooter3").value = data.footer3;
+
+      BRAND_KEYS.forEach(({ key }) => {
+        document.getElementById(`brandLabel-${key}`).value = data.brands[key].label || "";
+        document.getElementById(`brandDesc-${key}`).value = data.brands[key].desc || "";
+
+        data.brands[key].products.forEach((p, i) => {
+          document.getElementById(`${key}-name-${i}`).value = p.name || "";
+          document.getElementById(`${key}-price-${i}`).value = p.priceKRW || "";
+          document.getElementById(`${key}-rating-${i}`).value = p.rating || "";
+          document.getElementById(`${key}-image-${i}`).value = p.image || "";
+          document.getElementById(`${key}-visible-${i}`).checked = p.visible !== false;
+          updatePreview(key, i, p.image || "");
+          document.getElementById(`${key}-file-${i}`).value = "";
+        });
+      });
+    }
+
+    function saveAdminData(){
+      const old = getContent();
+
+      const newData = {
+        heroTitle: document.getElementById("editHeroTitle").value.trim() || old.heroTitle,
+        heroDesc: document.getElementById("editHeroDesc").value.trim() || old.heroDesc,
+        noticeEnabled: currentNoticeEnabled,
+        noticeTitle: document.getElementById("editNoticeTitle").value.trim() || old.noticeTitle,
+        noticeText: document.getElementById("editNoticeText").value.trim() || old.noticeText,
+        kakaoText: document.getElementById("editKakaoText").value.trim() || old.kakaoText,
+        kakaoLink: document.getElementById("editKakaoLink").value.trim() || old.kakaoLink,
+        phoneText: document.getElementById("editPhoneText").value.trim() || old.phoneText,
+        phoneNumber: document.getElementById("editPhoneNumber").value.trim() || old.phoneNumber,
+        footer1: document.getElementById("editFooter1").value.trim() || old.footer1,
+        footer2: document.getElementById("editFooter2").value.trim() || old.footer2,
+        footer3: document.getElementById("editFooter3").value.trim() || old.footer3,
+        brands: {}
+      };
+
+      BRAND_KEYS.forEach(({ key }) => {
+        newData.brands[key] = {
+          label: document.getElementById(`brandLabel-${key}`).value.trim() || old.brands[key].label,
+          desc: document.getElementById(`brandDesc-${key}`).value.trim() || old.brands[key].desc,
+          products: []
+        };
+
+        for (let i = 0; i < 10; i++) {
+          const oldProduct = old.brands[key].products[i];
+          newData.brands[key].products.push({
+            name: document.getElementById(`${key}-name-${i}`).value.trim() || oldProduct.name,
+            priceKRW: Number(document.getElementById(`${key}-price-${i}`).value) || oldProduct.priceKRW,
+            rating: Number(document.getElementById(`${key}-rating-${i}`).value) || oldProduct.rating,
+            image: document.getElementById(`${key}-image-${i}`).value.trim() || "",
+            visible: document.getElementById(`${key}-visible-${i}`).checked
+          });
+        }
+      });
+
+      setContent(newData);
+      applyContent();
+      alert("저장되었습니다.");
+    }
+
+    function resetAdminData(){
+      localStorage.removeItem(STORAGE_CONTENT_KEY);
+      setNoticeToggle(true);
+      applyContent();
+      loadAdminInputs();
+      alert("초기값으로 되돌렸습니다.");
+    }
+
+    function exportFixedConfig(){
+      const data = getContent();
+      navigator.clipboard.writeText(JSON.stringify(data, null, 2))
+        .then(() => alert("고정본 JSON이 복사되었습니다."))
+        .catch(() => alert("복사에 실패했습니다."));
+    }
+
+    function loginAdmin(){
+      const pw = document.getElementById("adminPassword").value;
+      if (pw === ADMIN_PASSWORD) {
+        localStorage.setItem(STORAGE_ADMIN_KEY, "true");
+        document.getElementById("loginArea").classList.add("hidden");
+        document.getElementById("editArea").classList.remove("hidden");
+        loadAdminInputs();
+      } else {
+        alert("비밀번호가 맞지 않습니다.");
+      }
+    }
+
+    function logoutAdmin(){
+      localStorage.removeItem(STORAGE_ADMIN_KEY);
+      document.getElementById("loginArea").classList.remove("hidden");
+      document.getElementById("editArea").classList.add("hidden");
+      document.getElementById("adminPassword").value = "";
+    }
+
+    function restoreAdmin(){
+      const loggedIn = localStorage.getItem(STORAGE_ADMIN_KEY) === "true";
+      if (loggedIn) {
+        document.getElementById("loginArea").classList.add("hidden");
+        document.getElementById("editArea").classList.remove("hidden");
+        loadAdminInputs();
+      } else {
+        document.getElementById("loginArea").classList.remove("hidden");
+        document.getElementById("editArea").classList.add("hidden");
+      }
+    }
+
+    async function findKrakenPiPair(){
+      const res = await fetch("https://api.kraken.com/0/public/AssetPairs");
+      const data = await res.json();
+      const entries = Object.entries(data.result || {});
+      const match = entries.find(([k, info]) => {
+        const alt = (info.altname || "").toUpperCase();
+        const ws = (info.wsname || "").toUpperCase();
+        return alt === "PIUSD" || ws === "PI/USD" || k.toUpperCase().includes("PIUSD");
+      });
+      if (!match) throw new Error("PI/USD pair not found");
+      return match[0];
+    }
+
+    async function fetchPiPrice(){
+      const pairKey = await findKrakenPiPair();
+      const res = await fetch(`https://api.kraken.com/0/public/Ticker?pair=${encodeURIComponent(pairKey)}`);
+      const data = await res.json();
+      const ticker = data.result[pairKey];
+      return { pairKey, priceUSD: Number(ticker.c[0]) };
+    }
+
+    async function checkValidationFile(){
+      try {
+        const res = await fetch(`${VALIDATION_PATH}?t=${Date.now()}`, { cache: "no-store" });
+        const text = (await res.text()).trim();
+        if (res.ok && text.length > 8 && !text.includes("<html")) {
+          document.getElementById("validationStatus").textContent = "정상 확인";
+          document.getElementById("validationStatus").className = "status-value status-good";
+        } else {
+          document.getElementById("validationStatus").textContent = "파일 점검 필요";
+          document.getElementById("validationStatus").className = "status-value status-bad";
+        }
+      } catch (e) {
+        document.getElementById("validationStatus").textContent = "확인 실패";
+        document.getElementById("validationStatus").className = "status-value status-bad";
+      }
+    }
+
+    function initPiSdk(){
+      try {
+        if (window.Pi) {
+          Pi.init({ version: "2.0" });
+          document.getElementById("sdkStatus").textContent = "SDK 감지됨";
+          document.getElementById("sdkStatus").className = "status-value status-good";
+        } else {
+          document.getElementById("sdkStatus").textContent = "Pi Browser 아님";
+          document.getElementById("sdkStatus").className = "status-value status-bad";
+        }
+      } catch (e) {
+        document.getElementById("sdkStatus").textContent = "SDK 초기화 실패";
+        document.getElementById("sdkStatus").className = "status-value status-bad";
+      }
+    }
+
+    async function checkPiLogin(){
+      if (!window.Pi) {
+        openModal("Pi Browser 필요", "Pi 로그인 확인은 Pi Browser 안에서만 가능합니다.");
+        return;
+      }
+
+      try {
+        const scopes = ["payments", "username"];
+        const auth = await Pi.authenticate(scopes, function onIncompletePaymentFound(payment) {
+          console.log("Incomplete payment found:", payment);
+        });
+        currentPiAuth = auth;
+        document.getElementById("paymentStatus").textContent = `로그인됨: ${auth.user?.username || "확인됨"}`;
+        document.getElementById("paymentStatus").className = "status-value status-good";
+        openModal("Pi 로그인 성공", `사용자: ${auth.user?.username || "확인됨"}\n결제 권한이 활성화되었습니다.`);
+      } catch (e) {
+        document.getElementById("paymentStatus").textContent = "로그인 실패/취소";
+        document.getElementById("paymentStatus").className = "status-value status-bad";
+        openModal("Pi 로그인 실패", "Pi 로그인이 취소되었거나 실패했습니다.");
+      }
+    }
+
+    async function startPiPayment(){
+      if (!currentSelectedPayment) return;
+      if (!window.Pi) {
+        openModal("Pi Browser 필요", "실제 Pi 결제는 Pi Browser에서만 시도할 수 있습니다.");
+        return;
+      }
+      if (!currentPiAuth) {
+        openModal("로그인 필요", "먼저 'Pi 로그인 확인' 버튼으로 로그인해 주세요.");
+        return;
+      }
+
+      const product = currentSelectedPayment.product;
+      const amountPi = Number(((product.priceKRW / USD_KRW) / currentPiPriceUSD).toFixed(4));
+
+      try {
+        await Pi.createPayment(
+          {
+            amount: amountPi,
+            memo: product.name,
+            metadata: {
+              brand: currentSelectedPayment.brandKey,
+              name: product.name,
+              priceKRW: product.priceKRW
+            }
+          },
+          {
+            onReadyForServerApproval: function(paymentId) {
+              console.log("서버 승인 필요 paymentId:", paymentId);
+              openModal("서버 승인 필요", `paymentId: ${paymentId}\n이제 서버 승인 단계가 필요합니다.`);
+            },
+            onReadyForServerCompletion: function(paymentId, txid) {
+              console.log("서버 완료 필요:", paymentId, txid);
+              openModal("서버 완료 필요", `paymentId: ${paymentId}\ntxid: ${txid}\n이제 서버 완료 처리 단계가 필요합니다.`);
+            },
+            onCancel: function(paymentId) {
+              console.log("결제 취소:", paymentId);
+              openModal("결제 취소", "사용자가 결제를 취소했습니다.");
+            },
+            onError: function(error, payment) {
+              console.error("결제 오류:", error, payment);
+              openModal("결제 오류", "결제 중 오류가 발생했습니다. 콘솔과 서버 연동을 확인하세요.");
+            }
+          }
+        );
+      } catch (e) {
+        openModal("결제 실패", "Pi 결제 호출에 실패했습니다. Pi Browser와 앱 상태를 확인하세요.");
+      }
+    }
+
+    function openModal(title, text, action){
+      document.getElementById("modalTitle").textContent = title;
+      document.getElementById("modalText").innerHTML = String(text).replace(/\n/g, "<br>");
+      const btn = document.getElementById("modalActionBtn");
+      btn.onclick = typeof action === "function" ? action : closeModal;
+      btn.textContent = typeof action === "function" ? "계속" : "확인";
+      document.getElementById("paymentModal").style.display = "flex";
+    }
+
+    function closeModal(){
+      document.getElementById("paymentModal").style.display = "none";
+    }
+
+    function setupAdminPanel(){
+      const fab = document.getElementById("adminFab");
+      const panel = document.getElementById("adminPanel");
+
+      fab.addEventListener("click", () => panel.classList.toggle("show"));
+      document.addEventListener("click", (e) => {
+        if (!panel.contains(e.target) && !fab.contains(e.target)) {
+          panel.classList.remove("show");
+        }
+      });
+    }
+
+    async function init(){
+      createProductEditors();
+      restoreAdmin();
+      setupAdminPanel();
+      initPiSdk();
+      await checkValidationFile();
+
+      document.getElementById("btnCheckDomain").addEventListener("click", checkValidationFile);
+      document.getElementById("btnPiLogin").addEventListener("click", checkPiLogin);
+
+      try {
+        const { pairKey, priceUSD } = await fetchPiPrice();
+        currentPiPriceUSD = priceUSD;
+        document.getElementById("piPriceText").textContent = `1 PI = ${usd(priceUSD)}`;
+        document.getElementById("piMetaText").textContent = `Kraken 기준 · ${pairKey}`;
+      } catch (e) {
+        currentPiPriceUSD = 0.18;
+        document.getElementById("piPriceText").textContent = "시세 연결 실패";
+        document.getElementById("piMetaText").textContent = "기본 참고값으로 표시 중";
+      }
+
+      applyContent();
+    }
+
+    init();
+  </script>
+</body>
+</html>
