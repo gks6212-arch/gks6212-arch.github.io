@@ -393,11 +393,11 @@
       </div>
 
       <div class="ticker">
-        <div class="ticker-label">Kraken PI Live Price</div>
-        <div class="ticker-price" id="piPriceText">불러오는 중…</div>
-        <div class="ticker-meta" id="piMetaText">Kraken 공개 시세 확인 중</div>
+        <div class="ticker-label">PI Live Price</div>
+        <div class="ticker-price" id="piPriceText">1 PI = $0.1800</div>
+        <div class="ticker-meta" id="piMetaText">테스트 모드 · 고정 시세</div>
         <div class="ticker-note" id="priceNote">
-          실시간 PI/USD 시세를 참고용으로 표시합니다.
+          외부 API 없이 고정 시세로 표시합니다.
         </div>
       </div>
     </div>
@@ -602,7 +602,6 @@
     function deepClone(obj){ return JSON.parse(JSON.stringify(obj)); }
     function won(v){ return "₩" + new Intl.NumberFormat("ko-KR").format(Math.round(v)); }
     function pi(v){ return "π " + Number(v).toFixed(2); }
-    function usd(v){ return "$" + Number(v).toFixed(4); }
 
     function getContent(){
       const saved = localStorage.getItem(STORAGE_CONTENT_KEY);
@@ -745,7 +744,7 @@
       renderBrandMenu(data);
       renderBrandSections(data);
       document.getElementById("priceNote").textContent =
-        `Kraken 실시간 PI/USD 시세와 기준 환율(1 USD ≈ ${USD_KRW.toLocaleString("ko-KR")} KRW)로 계산한 참고용 표시입니다.`;
+        `고정 PI/USD 시세(1 PI = $${currentPiPriceUSD.toFixed(4)})와 기준 환율(1 USD ≈ ${USD_KRW.toLocaleString("ko-KR")} KRW)로 계산한 참고용 표시입니다.`;
     }
 
     function getPreviewHtml(value){
@@ -954,27 +953,6 @@
       }
     }
 
-    async function findKrakenPiPair(){
-      const res = await fetch("https://api.kraken.com/0/public/AssetPairs");
-      const data = await res.json();
-      const entries = Object.entries(data.result || {});
-      const match = entries.find(([k, info]) => {
-        const alt = (info.altname || "").toUpperCase();
-        const ws = (info.wsname || "").toUpperCase();
-        return alt === "PIUSD" || ws === "PI/USD" || k.toUpperCase().includes("PIUSD");
-      });
-      if (!match) throw new Error("PI/USD pair not found");
-      return match[0];
-    }
-
-    async function fetchPiPrice(){
-      const pairKey = await findKrakenPiPair();
-      const res = await fetch(`https://api.kraken.com/0/public/Ticker?pair=${encodeURIComponent(pairKey)}`);
-      const data = await res.json();
-      const ticker = data.result[pairKey];
-      return { pairKey, priceUSD: Number(ticker.c[0]) };
-    }
-
     async function checkValidationFile(){
       try {
         const res = await fetch(`${VALIDATION_PATH}?t=${Date.now()}`, { cache: "no-store" });
@@ -1070,7 +1048,7 @@
             },
             onError: function(error, payment) {
               console.error("결제 오류:", error, payment);
-              openModal("결제 오류", "결제 중 오류가 발생했습니다. 콘솔과 서버 연동을 확인하세요.");
+              openModal("결제 오류", "결제 중 오류가 발생했습니다. Pi Browser와 서버 연동 상태를 확인하세요.");
             }
           }
         );
@@ -1114,16 +1092,9 @@
       document.getElementById("btnCheckDomain").addEventListener("click", checkValidationFile);
       document.getElementById("btnPiLogin").addEventListener("click", checkPiLogin);
 
-      try {
-        const { pairKey, priceUSD } = await fetchPiPrice();
-        currentPiPriceUSD = priceUSD;
-        document.getElementById("piPriceText").textContent = `1 PI = ${usd(priceUSD)}`;
-        document.getElementById("piMetaText").textContent = `Kraken 기준 · ${pairKey}`;
-      } catch (e) {
-        currentPiPriceUSD = 0.18;
-        document.getElementById("piPriceText").textContent = "시세 연결 실패";
-        document.getElementById("piMetaText").textContent = "기본 참고값으로 표시 중";
-      }
+      currentPiPriceUSD = 0.18;
+      document.getElementById("piPriceText").textContent = "1 PI = $0.1800";
+      document.getElementById("piMetaText").textContent = "테스트 모드 · 고정 시세";
 
       applyContent();
     }
