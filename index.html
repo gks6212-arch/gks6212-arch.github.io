@@ -1600,13 +1600,37 @@
             metadata: { product: "thumbtherapy" }
           },
           {
-            onReadyForServerApproval: function(paymentId) {
-              console.log("승인 대기:", paymentId);
-            },
-            onReadyForServerCompletion: function(paymentId, txid) {
-              alert("결제 완료!");
-              console.log("완료:", paymentId, txid);
-            },
+onReadyForServerApproval: async function(paymentId) {
+  console.log("승인 요청:", paymentId);
+
+  const res = await fetch("https://thumbtherapy-server.onrender.com/approve", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ paymentId })
+  });
+
+  const data = await res.json();
+  console.log("approve 응답:", data);
+},
+
+onReadyForServerCompletion: async function(paymentId, txid) {
+  console.log("완료 요청:", paymentId, txid);
+
+  const res = await fetch("https://thumbtherapy-server.onrender.com/complete", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ paymentId, txid })
+  });
+
+  const data = await res.json();
+  console.log("complete 응답:", data);
+
+  alert("결제 완료!");
+},
             onCancel: function(paymentId) {
               alert("결제 취소");
               console.log("취소:", paymentId);
