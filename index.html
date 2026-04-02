@@ -1557,9 +1557,6 @@
       initPiSdk();
       await checkValidationFile();
 
-      document.getElementById("btnCheckDomain").addEventListener("click", checkValidationFile);
-      document.getElementById("btnPiLogin").addEventListener("click", checkPiLogin);
-
       currentPiPriceUSD = 0.18;
       document.getElementById("piPriceText").textContent = "1 PI = $0.1800";
       document.getElementById("piMetaText").textContent = "테스트 모드 · 고정 시세";
@@ -1570,10 +1567,32 @@
     init();
   </script>
   <script>
-   Pi.init({ version: "2.0" }); 
+    Pi.init({ version: "2.0" });
+  let piUser = null;
+
+  async function ensurePiAuth() {
+    try {
+      if (piUser) return piUser;
+
+     const scopes = ["username", "payments"]; 
+      piUser = await Pi.authenticate(scopes, function onIncompletePaymentFound(payment) {
+        console.log("미완료 결제 발견:", payment);
+      });
+
+      console.log("Pi 로그인 성공:", piUser);
+      return piUser;
+    } catch (err) {
+      console.error("Pi 로그인 실패:", err);
+      alert("Pi 로그인 확인이 필요합니다.");
+      throw err;
+    }
+  }
+
   document.querySelectorAll(".pi-pay-btn").forEach(btn => {
     btn.addEventListener("click", async function () {
       try {
+        await ensurePiAuth();
+
         await Pi.createPayment(
           {
             amount: 0.01,
@@ -1586,22 +1605,23 @@
             },
             onReadyForServerCompletion: function(paymentId, txid) {
               alert("결제 완료!");
+              console.log("완료:", paymentId, txid);
             },
             onCancel: function(paymentId) {
               alert("결제 취소");
+              console.log("취소:", paymentId);
             },
             onError: function(error) {
-              console.error(error);
+              console.error("결제 오류:", error);
               alert("결제 오류");
             }
           }
         );
       } catch (e) {
-        console.error(e);
-        alert("실행 오류");
+        console.error("실행 오류:", e);
       }
     });
   });
-</script> 
+</script>
 </body>
 </html>
