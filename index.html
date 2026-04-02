@@ -1570,9 +1570,38 @@
     init();
   </script>
   <script>
-  Pi.init({
-    version: "2.0"
+   Pi.init({ version: "2.0" }); 
+  document.querySelectorAll(".pi-pay-btn").forEach(btn => {
+    btn.addEventListener("click", async function () {
+      try {
+        await Pi.createPayment(
+          {
+            amount: 0.01,
+            memo: "상품 결제",
+            metadata: { product: "thumbtherapy" }
+          },
+          {
+            onReadyForServerApproval: function(paymentId) {
+              console.log("승인 대기:", paymentId);
+            },
+            onReadyForServerCompletion: function(paymentId, txid) {
+              alert("결제 완료!");
+            },
+            onCancel: function(paymentId) {
+              alert("결제 취소");
+            },
+            onError: function(error) {
+              console.error(error);
+              alert("결제 오류");
+            }
+          }
+        );
+      } catch (e) {
+        console.error(e);
+        alert("실행 오류");
+      }
+    });
   });
-</script>
+</script> 
 </body>
 </html>
