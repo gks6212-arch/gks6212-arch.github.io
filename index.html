@@ -1533,6 +1533,7 @@ onReadyForServerCompletion: async function(paymentId, txid) {
 
     } catch (err) {
         console.error("complete 에러:", err);
+    }
     },
             onCancel: function(paymentId) {
               console.log("결제 취소:", paymentId);
