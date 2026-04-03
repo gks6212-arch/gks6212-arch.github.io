@@ -584,10 +584,11 @@ let piAuth = null;
 
 async function initPi() {
   try {
-    if (!window.Pi) {
-      console.log("Pi SDK 없음");
-      return;
-    }
+  if (!window.Pi) {
+  console.log("Pi SDK 없음");
+  showMessage("Pi SDK 없음 - Pi Browser 환경이 아닙니다.", "error");
+  return;
+}
 
     Pi.init({ version: "2.0", sandbox: false });
 
@@ -602,10 +603,10 @@ async function initPi() {
     console.log("Pi 인증 성공:", piAuth);
     showMessage("Pi 인증 완료", "ok");
 
-  } catch (e) {
-    console.error("Pi 인증 실패", e);
-    showMessage("Pi 인증 실패", "error");
-  }
+} catch (e) {
+  console.error("Pi 인증 실패", e);
+showMessage("Pi 인증 실패: " + (e?.message || JSON.stringify(e) || e), "error");
+}
 }
 
     async function postJSON(url, data) {
