@@ -580,15 +580,33 @@
       showMessage("기본 상품 목록으로 복원했습니다.", "ok");
     }
 
-    async function initPi() {
-      try {
-        if (window.Pi) {
-          Pi.init({ version: "2.0", sandbox: false });
-        }
-      } catch (e) {
-        console.error("Pi SDK 초기화 실패", e);
-      }
+let piAuth = null;
+
+async function initPi() {
+  try {
+    if (!window.Pi) {
+      console.log("Pi SDK 없음");
+      return;
     }
+
+    Pi.init({ version: "2.0", sandbox: false });
+
+    const scopes = ['payments'];
+
+    function onIncompletePaymentFound(payment) {
+      console.log("미완료 결제:", payment);
+    }
+
+    piAuth = await Pi.authenticate(scopes, onIncompletePaymentFound);
+
+    console.log("Pi 인증 성공:", piAuth);
+    showMessage("Pi 인증 완료", "ok");
+
+  } catch (e) {
+    console.error("Pi 인증 실패", e);
+    showMessage("Pi 인증 실패", "error");
+  }
+}
 
     async function postJSON(url, data) {
       const res = await fetch(url, {
