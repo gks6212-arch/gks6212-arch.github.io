@@ -769,7 +769,10 @@ async function initPi() {
         showMessage("Pi Browser에서 열어야 Pi 결제가 가능합니다.", "error");
         return;
       }
-
+if (!piAuth) {
+  showMessage("Pi 인증 안됨", "error");
+  return;
+}
       const piAmount = krwToPi(krwAmount);
       if (!piAmount || Number.isNaN(piAmount) || piAmount <= 0) {
         showMessage("실시간 PI 시세를 아직 불러오지 못했습니다.", "error");
