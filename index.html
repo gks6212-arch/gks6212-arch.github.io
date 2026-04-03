@@ -8,7 +8,6 @@
 
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: "Apple SD Gothic Neo","Malgun Gothic",sans-serif; }
-
     :root{
       --bg:#f6f1eb;
       --card:#ffffff;
@@ -33,1643 +32,805 @@
       backdrop-filter: blur(8px);
       border-bottom: 1px solid var(--line);
     }
-
     .appbar-inner{
-      max-width: 1280px;
-      margin: 0 auto;
-      padding: 16px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:12px;
+      max-width: 1280px; margin: 0 auto; padding: 16px;
+      display:flex; align-items:center; justify-content:space-between; gap:12px;
     }
-
-    .brand-wrap{
-      display:flex;
-      align-items:center;
-      gap:14px;
-      min-width:0;
-      flex:1;
-    }
-
+    .brand-wrap{ display:flex; align-items:center; gap:14px; min-width:0; flex:1; }
     .logo{
-      width:66px;
-      height:66px;
-      border-radius:22px;
+      width:66px; height:66px; border-radius:22px;
       background: linear-gradient(135deg, #9c7a49, #bc9a65);
-      position:relative;
-      box-shadow: 0 12px 24px rgba(138,106,63,0.24);
-      overflow:hidden;
-      flex:0 0 66px;
+      position:relative; box-shadow: 0 12px 24px rgba(138,106,63,0.24);
+      overflow:hidden; flex:0 0 66px;
     }
-
     .logo::before{
-      content:"";
-      position:absolute;
-      left:15px;
-      top:30px;
-      width:24px;
-      height:15px;
-      background:#fff;
-      border-radius:12px;
-      transform: rotate(-8deg);
+      content:""; position:absolute; left:15px; top:30px;
+      width:24px; height:15px; background:#fff; border-radius:12px; transform: rotate(-8deg);
     }
-
     .logo::after{
-      content:"";
-      position:absolute;
-      left:31px;
-      top:11px;
-      width:12px;
-      height:24px;
-      background:#fff;
-      border-radius:10px;
-      transform: rotate(24deg);
+      content:""; position:absolute; left:31px; top:11px;
+      width:12px; height:24px; background:#fff; border-radius:10px; transform: rotate(24deg);
     }
 
-    .brand-title{
-      font-size:28px;
-      font-weight:900;
-      color:#2d2520;
-      line-height:1.1;
-      word-break:keep-all;
+    .brand-title{ font-size:28px; font-weight:900; color:#2d2520; line-height:1.1; word-break:keep-all; }
+    .brand-sub{ font-size:12px; color:#8f8073; margin-top:6px; word-break:keep-all; }
+
+    .top-icons{ display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
+    .icon-btn{
+      border:none; background:#fff7ed; color:var(--main-dark);
+      border:1px solid var(--line); padding:10px 14px; border-radius:999px;
+      font-weight:700; cursor:pointer;
     }
 
-    .brand-sub{
-      font-size:12px;
-      color:#8f8073;
-      margin-top:6px;
-      word-break:keep-all;
-    }
-
-    .top-icons{
-      display:flex;
-      align-items:center;
-      gap:16px;
-      font-size:18px;
-      color:#8b7968;
-      flex:0 0 auto;
-    }
-
-    .hero{
-      max-width:1280px;
-      margin:0 auto;
-      padding:18px 16px 12px;
-    }
-
+    .hero{ max-width:1280px; margin:0 auto; padding:18px 16px 12px; }
     .hero-card{
-      background:#f9f5f0;
-      border:1px solid var(--line);
-      border-radius:34px;
-      padding:28px 20px 24px;
-      box-shadow:var(--shadow);
+      background:#f9f5f0; border:1px solid var(--line);
+      border-radius:34px; padding:28px 20px 24px; box-shadow:var(--shadow);
     }
-
     .hero-title{
-      font-size:34px;
-      font-weight:900;
-      color:#44372f;
-      line-height:1.25;
-      margin-bottom:12px;
-      word-break:keep-all;
+      font-size:34px; font-weight:900; color:#44372f; line-height:1.25;
+      margin-bottom:12px; word-break:keep-all;
     }
-
     .hero-desc{
-      font-size:17px;
-      color:#7b6f64;
-      max-width:760px;
-      word-break:keep-all;
-      line-height:1.7;
+      font-size:17px; color:#7b6f64; max-width:760px; word-break:keep-all; line-height:1.7;
     }
-
     .badge{
-      display:inline-block;
-      margin-top:18px;
-      padding:12px 18px;
-      border-radius:999px;
-      background:#eee7db;
-      color:#9a7a46;
-      font-size:16px;
-      font-weight:900;
+      display:inline-block; margin-top:18px; padding:12px 18px; border-radius:999px;
+      background:#eee7db; color:#9a7a46; font-size:16px; font-weight:900;
     }
 
     .notice-box{
-      margin-top:22px;
-      background:#fffaf3;
-      border:2px solid #dcc49c;
-      color:#7a5a2f;
-      padding:24px 18px;
-      border-radius:26px;
+      margin-top:22px; background:#fffaf3; border:2px solid #dcc49c; color:#7a5a2f;
+      padding:24px 18px; border-radius:26px;
     }
-
-    .notice-title{
-      font-size:20px;
-      font-weight:900;
-      margin-bottom:14px;
-      color:#6f532e;
-    }
-
-    .notice-text{
-      font-size:17px;
-      line-height:1.9;
-      word-break:keep-all;
-      color:#8a6d44;
-    }
+    .notice-title{ font-size:20px; font-weight:900; margin-bottom:14px; color:#6f532e; }
+    .notice-text{ font-size:17px; line-height:1.9; word-break:keep-all; color:#8a6d44; }
 
     .status-grid{
-      display:grid;
-      grid-template-columns:repeat(3,minmax(0,1fr));
-      gap:12px;
-      margin-top:18px;
+      display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:12px; margin-top:18px;
     }
-
     .status-card{
-      background:#fff;
-      border:1px solid var(--line);
-      border-radius:20px;
-      padding:16px;
+      background:#fff; border:1px solid var(--line); border-radius:20px; padding:16px;
     }
+    .status-label{ font-size:12px; color:#8b8076; margin-bottom:6px; }
+    .status-value{ font-size:17px; font-weight:900; color:#4a3d34; }
 
-    .status-label{
-      font-size:12px;
-      color:#8b8076;
-      margin-bottom:6px;
+    .container{
+      max-width:1280px; margin:0 auto; padding:10px 16px 80px;
+      display:grid; grid-template-columns:1fr 340px; gap:18px;
     }
-
-    .status-value{
-      font-size:16px;
-      font-weight:900;
-      color:#4a3e35;
-      word-break:break-all;
+    .main-area{ min-width:0; }
+    .section-card{
+      background:var(--card); border:1px solid var(--line); border-radius:28px;
+      padding:20px; box-shadow:var(--shadow); margin-bottom:18px;
     }
+    .section-title{ font-size:24px; font-weight:900; margin-bottom:14px; color:#3f332c; }
 
-    .status-good{ color:var(--ok); }
-    .status-bad{ color:var(--danger); }
-
-    .button-group{
-      display:flex;
-      flex-wrap:wrap;
-      gap:14px;
-      margin-top:22px;
-      max-width:900px;
+    .tabs{ display:flex; gap:10px; overflow:auto; padding-bottom:4px; }
+    .tab-btn{
+      white-space:nowrap; border:none; background:#f3ece4; color:#6b5c50;
+      padding:12px 16px; border-radius:999px; font-weight:800; cursor:pointer;
     }
+    .tab-btn.active{ background:var(--main); color:#fff; }
 
+    .products{ display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px; margin-top:18px; }
+    .product-card{
+      background:#fff; border:1px solid var(--line); border-radius:24px; overflow:hidden;
+      display:flex; flex-direction:column;
+    }
+    .product-thumb{
+      height:220px; background:linear-gradient(135deg,#f7efe5,#e8d9c7);
+      display:flex; align-items:center; justify-content:center;
+      font-size:22px; font-weight:900; color:#8b6b43;
+    }
+    .product-body{ padding:16px; display:flex; flex-direction:column; gap:10px; flex:1; }
+    .product-brand{ font-size:12px; color:#9b8a79; font-weight:700; }
+    .product-name{ font-size:18px; font-weight:900; color:#40342c; line-height:1.4; min-height:50px; }
+    .product-desc{ font-size:14px; color:#7b6e62; min-height:44px; }
+
+    .price-box{ display:flex; flex-direction:column; gap:4px; margin-top:auto; }
+    .krw{ font-size:18px; font-weight:900; color:#2f2823; }
+    .usd{ font-size:14px; color:#8c7455; font-weight:700; }
+    .pi{ font-size:15px; color:#7a5d39; font-weight:900; }
+
+    .btn-row{ display:flex; gap:8px; margin-top:10px; flex-wrap:wrap; }
     .btn{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      min-width:180px;
-      text-align:center;
-      text-decoration:none;
-      padding:18px 16px;
-      border-radius:20px;
-      font-size:16px;
-      font-weight:900;
-      border:none;
-      cursor:pointer;
-      white-space:nowrap;
-      word-break:keep-all;
+      border:none; cursor:pointer; padding:12px 14px; border-radius:14px;
+      font-weight:900; flex:1;
+    }
+    .btn-main{ background:var(--main); color:#fff; }
+    .btn-soft{ background:#f6efe5; color:#6d5947; border:1px solid var(--line); }
+
+    .sidebar{ position:sticky; top:95px; align-self:start; }
+    .cart-list{ display:flex; flex-direction:column; gap:10px; margin-top:12px; max-height:360px; overflow:auto; }
+    .cart-item{ border:1px solid var(--line); border-radius:16px; padding:12px; background:#fffaf6; }
+    .cart-item-name{ font-weight:800; color:#463931; }
+    .cart-item-meta{ font-size:13px; color:#7b6f64; margin-top:4px; }
+
+    .cart-total{
+      margin-top:16px; padding-top:14px; border-top:1px dashed var(--line);
+      display:flex; flex-direction:column; gap:6px; font-weight:900;
     }
 
-    .btn-main{ background: linear-gradient(135deg, #8a6a3f, #a98758); color:#fff; }
-    .btn-line{ background:#fff; color:var(--main); border:2px solid #dccfbf; }
-    .btn-soft{ background:#f1ebe4; color:#6d5a49; }
-    .btn-disabled-primary{ background:#c9c1bb; color:#fff; pointer-events:none; cursor:not-allowed; }
-    .btn-disabled-secondary{ background:#f8f6f4; color:#a09790; border:2px solid #ddd6d0; pointer-events:none; cursor:not-allowed; }
+    .message{
+      margin-top:14px; padding:14px; border-radius:16px; font-size:14px;
+      font-weight:800; display:none;
+    }
+    .message.show{ display:block; }
+    .message.ok{ background:#ebfff3; color:var(--ok); border:1px solid #c5ecd3; }
+    .message.error{ background:#fff1ef; color:var(--danger); border:1px solid #efc9c3; }
 
-    .ticker{
-      margin-top:20px;
-      background:#fff;
-      border:1px solid var(--line);
-      border-radius:24px;
-      padding:18px;
+    .admin-panel{ display:grid; gap:10px; margin-top:16px; }
+    .admin-panel input, .admin-panel textarea, .admin-panel select{
+      width:100%; padding:12px 14px; border-radius:14px;
+      border:1px solid var(--line); background:#fff; font-size:14px;
     }
 
-    .ticker-label{
-      font-size:12px;
-      color:#9a8a7a;
-      margin-bottom:8px;
-      text-transform:uppercase;
-      letter-spacing:0.7px;
+    .footer{
+      max-width:1280px; margin:0 auto; padding:0 16px 40px;
+      color:#8b7c71; font-size:13px;
     }
 
-    .ticker-price{
-      font-size:24px;
-      font-weight:900;
-      color:var(--main);
+    @media (max-width: 1024px){
+      .container{ grid-template-columns:1fr; }
+      .sidebar{ position:relative; top:auto; }
+      .products{ grid-template-columns:repeat(2,minmax(0,1fr)); }
+      .status-grid{ grid-template-columns:repeat(2,minmax(0,1fr)); }
     }
-
-    .ticker-meta{
-      font-size:13px;
-      color:#7e7368;
-      margin-top:4px;
-    }
-
-    .ticker-note{
-      margin-top:8px;
-      font-size:12px;
-      color:#8b8076;
-      line-height:1.6;
-    }
-
-    .menu-wrap{
-      max-width:1280px;
-      margin:0 auto;
-      padding:10px 16px 0;
-      position:sticky;
-      top:99px;
-      z-index:90;
-      background: linear-gradient(to bottom, rgba(246,241,235,0.98), rgba(246,241,235,0.92));
-      backdrop-filter: blur(4px);
-    }
-
-    .menu{
-      display:flex;
-      overflow-x:auto;
-      gap:10px;
-      padding-bottom:10px;
-      scrollbar-width:none;
-    }
-
-    .menu::-webkit-scrollbar{ display:none; }
-
-    .menu button{
-      white-space:nowrap;
-      border:none;
-      cursor:pointer;
-      background:#fff;
-      color:#6d5a49;
-      border:1px solid #dfd3c7;
-      padding:10px 16px;
-      border-radius:999px;
-      font-size:14px;
-      font-weight:900;
-      box-shadow:0 4px 10px rgba(90,72,53,0.05);
-    }
-
-    .content{
-      max-width:1280px;
-      margin:0 auto;
-      padding:10px 16px 80px;
-    }
-
-    .brand-section{
-      margin-top:20px;
-      background:#fff;
-      border:1px solid var(--line);
-      border-radius:28px;
-      padding:22px 16px 18px;
-      box-shadow:var(--shadow);
-    }
-
-    .brand-head{
-      display:flex;
-      align-items:end;
-      justify-content:space-between;
-      gap:12px;
-      margin-bottom:16px;
-      flex-wrap:wrap;
-    }
-
-    .brand-title-kor{
-      font-size:24px;
-      font-weight:900;
-      color:#4a3e35;
-    }
-
-    .brand-subtext{
-      font-size:13px;
-      color:#8b8076;
-      margin-top:6px;
-    }
-
-    .product-grid{
-      display:grid;
-      grid-template-columns:repeat(5, minmax(0,1fr));
-      gap:16px;
-    }
-
-    .card{
-      background:#fff;
-      border:1px solid var(--line);
-      border-radius:24px;
-      overflow:hidden;
-      box-shadow:0 10px 22px rgba(94,76,58,0.08);
-      display:flex;
-      flex-direction:column;
-      min-width:0;
-    }
-
-    .card-thumb{
-      height:180px;
-      background:linear-gradient(135deg,#eee8e2,#d9d0c8);
-      position:relative;
-      overflow:hidden;
-      flex-shrink:0;
-    }
-
-    .card-thumb img{
-      width:100%;
-      height:100%;
-      object-fit:cover;
-      display:block;
-    }
-
-    .thumb-glow{
-      position:absolute;
-      inset:18px;
-      border-radius:22px;
-      background:
-        radial-gradient(circle at 30% 30%, rgba(255,255,255,0.95), transparent 32%),
-        radial-gradient(circle at 70% 35%, rgba(255,255,255,0.55), transparent 24%),
-        linear-gradient(135deg, #f4ede6, #d8cec6);
-    }
-
-    .card-body{
-      padding:14px 14px 16px;
-      display:flex;
-      flex-direction:column;
-      gap:6px;
-      flex:1;
-      min-width:0;
-    }
-
-    .product-name{
-      font-size:15px;
-      font-weight:900;
-      color:#5a493f;
-      word-break:keep-all;
-      line-height:1.35;
-      min-height:60px;
-    }
-
-    .rating{
-      color:#6b5748;
-      font-size:13px;
-      font-weight:700;
-    }
-
-    .price-krw{
-      color:#9a8a7a;
-      font-size:15px;
-    }
-
-    .price-pi{
-      color:var(--main);
-      font-size:18px;
-      font-weight:900;
-      margin-bottom:6px;
-    }
-
-    /* 모바일 최적화: 버튼 세로 배열 */
-    .buy-row{
-      display:flex;
-      flex-direction:column;
-      gap:10px;
-      margin-top:auto;
-      width:100%;
-    }
-
-    .buy-btn,
-    .pay-btn{
-      width:100%;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      min-height:50px;
-      padding:12px 14px;
-      border-radius:14px;
-      font-size:16px;
-      font-weight:900;
-      border:none;
-      cursor:pointer;
-      white-space:nowrap;
-      word-break:keep-all;
-      line-height:1.2;
-      text-align:center;
-    }
-
-    .buy-btn{
-      background:#d6cfc9;
-      color:#ffffff;
-      cursor:not-allowed;
-    }
-
-    .pay-btn{
-      background:#8a6a3f;
-      color:#fff;
-    }
-
-    .pay-btn[disabled]{
-      background:#c9c1bb;
-      cursor:not-allowed;
-    }
-
-    .footer-box{
-      margin-top:24px;
-      background:#fff;
-      border:1px solid var(--line);
-      border-radius:24px;
-      padding:18px;
-    }
-
-    .footer-box h3{
-      font-size:18px;
-      color:#5b4a3e;
-      margin-bottom:10px;
-      font-weight:900;
-    }
-
-    .footer-box p{
-      font-size:14px;
-      color:#796f66;
-      margin-bottom:8px;
-      word-break:keep-all;
-      line-height:1.7;
-    }
-
-    .admin-fab{
-      position:fixed;
-      right:16px;
-      bottom:18px;
-      z-index:220;
-      width:58px;
-      height:58px;
-      border-radius:50%;
-      border:none;
-      background:linear-gradient(135deg,#4e3c2d,#8a6a3f);
-      color:#fff;
-      font-size:13px;
-      font-weight:900;
-      box-shadow:0 14px 24px rgba(78,60,45,0.25);
-      cursor:pointer;
-    }
-
-    .admin-panel{
-      position:fixed;
-      right:16px;
-      bottom:86px;
-      z-index:230;
-      width:min(96vw, 500px);
-      max-height:82vh;
-      overflow:auto;
-      background:#fff;
-      border:1px solid var(--line);
-      border-radius:22px;
-      box-shadow:0 18px 36px rgba(44,34,25,0.18);
-      padding:16px;
-      display:none;
-    }
-
-    .admin-panel.show{ display:block; }
-
-    .admin-title{
-      font-size:16px;
-      font-weight:900;
-      color:#3e322a;
-      margin-bottom:12px;
-    }
-
-    .admin-subtitle{
-      font-size:13px;
-      font-weight:900;
-      color:#6d5c4b;
-      margin:14px 0 8px;
-    }
-
-    .admin-input,.admin-textarea{
-      width:100%;
-      border:1px solid #ddd3c8;
-      border-radius:14px;
-      padding:12px;
-      font-size:14px;
-      outline:none;
-      margin-bottom:8px;
-      background:#fff;
-    }
-
-    .admin-textarea{
-      min-height:90px;
-      resize:vertical;
-    }
-
-    .admin-actions{
-      display:grid;
-      gap:8px;
-      margin-top:10px;
-    }
-
-    .admin-btn{
-      border:none;
-      border-radius:12px;
-      padding:11px 10px;
-      font-size:13px;
-      font-weight:900;
-      cursor:pointer;
-    }
-
-    .admin-btn-main{ background:#8a6a3f; color:#fff; }
-    .admin-btn-soft{ background:#f4eee8; color:#6c5847; }
-    .admin-btn-danger{ background:#f7ebe5; color:var(--danger); }
-
-    .toggle-row{
-      display:flex;
-      gap:8px;
-      margin-bottom:8px;
-    }
-
-    .toggle-chip{
-      flex:1;
-      text-align:center;
-      padding:10px 8px;
-      border-radius:12px;
-      font-size:13px;
-      font-weight:900;
-      border:1px solid #ddd3c8;
-      background:#fff;
-      cursor:pointer;
-    }
-
-    .toggle-chip.active{
-      background:#8a6a3f;
-      color:#fff;
-      border-color:#8a6a3f;
-    }
-
-    .product-editor{
-      border:1px solid #eee4da;
-      border-radius:16px;
-      padding:12px;
-      background:#fcfaf8;
-      margin-bottom:10px;
-    }
-
-    .small-check{
-      display:flex;
-      align-items:center;
-      gap:8px;
-      font-size:13px;
-      color:#6d5c4b;
-      margin:6px 0 8px;
-    }
-
-    .admin-help{
-      font-size:12px;
-      color:#7a7169;
-      line-height:1.6;
-      margin-top:8px;
-    }
-
-    .preview-box{
-      width:100%;
-      height:110px;
-      border:1px solid #ddd3c8;
-      border-radius:12px;
-      background:#f7f4ef;
-      overflow:hidden;
-      margin-bottom:8px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      color:#8b8076;
-      font-size:12px;
-    }
-
-    .preview-box img{
-      width:100%;
-      height:100%;
-      object-fit:cover;
-      display:block;
-    }
-
-    .file-row{
-      display:flex;
-      gap:8px;
-      align-items:center;
-      margin-bottom:8px;
-    }
-
-    .file-row input[type="file"]{
-      width:100%;
-      font-size:12px;
-    }
-
-    .clear-image-btn{
-      border:none;
-      border-radius:10px;
-      padding:10px 12px;
-      background:#f1ebe4;
-      color:#6c5847;
-      cursor:pointer;
-      white-space:nowrap;
-      font-size:12px;
-      font-weight:900;
-    }
-
-    .modal-backdrop{
-      position:fixed;
-      inset:0;
-      background:rgba(0,0,0,0.45);
-      z-index:300;
-      display:none;
-      align-items:center;
-      justify-content:center;
-      padding:16px;
-    }
-
-    .modal{
-      width:min(92vw, 460px);
-      background:#fff;
-      border-radius:24px;
-      padding:20px;
-      box-shadow:0 20px 40px rgba(0,0,0,0.18);
-    }
-
-    .modal h3{
-      font-size:18px;
-      margin-bottom:10px;
-      color:#3e322a;
-    }
-
-    .modal p{
-      font-size:14px;
-      color:#6d5c4b;
-      line-height:1.7;
-      margin-bottom:10px;
-    }
-
-    .modal .row{
-      display:flex;
-      gap:8px;
-      margin-top:12px;
-    }
-
-    .modal .row button{
-      flex:1;
-      border:none;
-      border-radius:12px;
-      padding:12px;
-      font-weight:900;
-      cursor:pointer;
-    }
-
-    .modal .ok{ background:#8a6a3f; color:#fff; }
-    .modal .cancel{ background:#f4eee8; color:#6c5847; }
-
-    @media (max-width:1180px){
-      .product-grid{ grid-template-columns:repeat(4, minmax(0,1fr)); }
-    }
-
-    @media (max-width:980px){
-      .product-grid{ grid-template-columns:repeat(3, minmax(0,1fr)); }
-    }
-
-    @media (max-width:700px){
-      .appbar-inner{
-        align-items:flex-start;
-      }
-
-      .brand-wrap{
-        align-items:flex-start;
-      }
-
-      .brand-title{
-        font-size:24px;
-      }
-
-      .brand-sub{
-        font-size:11px;
-      }
-
-      .top-icons{
-        gap:12px;
-        font-size:16px;
-        padding-top:10px;
-      }
-
-      .hero-title{
-        font-size:28px;
-      }
-
-      .hero-desc,.notice-text{
-        font-size:16px;
-      }
-
-      .product-grid{
-        grid-template-columns:repeat(2, minmax(0,1fr));
-        gap:12px;
-      }
-
-      .card-thumb{
-        height:140px;
-      }
-
-      .product-name{
-        font-size:13px;
-        min-height:52px;
-      }
-
-      .price-krw{
-        font-size:14px;
-      }
-
-      .price-pi{
-        font-size:16px;
-      }
-
-      .buy-btn,
-      .pay-btn{
-        min-height:46px;
-        font-size:15px;
-        padding:10px 12px;
-      }
-
-      .status-grid{
-        grid-template-columns:1fr;
-      }
-
-      .file-row{
-        flex-direction:column;
-        align-items:stretch;
-      }
+    @media (max-width: 640px){
+      .brand-title{ font-size:22px; }
+      .hero-title{ font-size:28px; }
+      .hero-desc{ font-size:15px; }
+      .products{ grid-template-columns:1fr; }
+      .product-thumb{ height:180px; }
+      .appbar-inner{ align-items:flex-start; flex-direction:column; }
+      .top-icons{ width:100%; }
+      .icon-btn{ flex:1; }
+      .status-grid{ grid-template-columns:1fr; }
     }
   </style>
 </head>
 <body>
+
   <header class="appbar">
     <div class="appbar-inner">
       <div class="brand-wrap">
         <div class="logo"></div>
         <div>
-          <div class="brand-title">The Thumb<br>Therapy</div>
-          <div class="brand-sub" id="brandSub">Preparation Stage · Domain Verification</div>
+          <div class="brand-title">The Thumb Therapy</div>
+          <div class="brand-sub">Premium Beauty Store · Korean Skincare & Therapy Beauty</div>
         </div>
       </div>
       <div class="top-icons">
-        <span>⌕</span>
-        <span>♡</span>
-        <span>🛒</span>
-        <span>☰</span>
+        <button class="icon-btn" onclick="toggleAdmin()">관리자 모드</button>
+        <button class="icon-btn" onclick="scrollToSection('productsSection')">쇼핑몰</button>
+        <button class="icon-btn" onclick="scrollToSection('cartSection')">장바구니</button>
       </div>
     </div>
   </header>
 
   <section class="hero">
     <div class="hero-card">
-      <div class="hero-title" id="heroTitle">프리미엄 뷰티 스토어</div>
-      <div class="hero-desc" id="heroDesc">
-        한국 가격과 현재 PI 시세를 함께 표시하는 테스트용 쇼핑 화면입니다.
-        현재는 도메인 인증 및 정식 오픈 준비 단계입니다.
-      </div>
+      <h1 class="hero-title">피부 본연의 아름다움을 위한<br>더썸테라피 뷰티 스토어</h1>
+      <p class="hero-desc">
+        프리미엄 스킨케어와 테라피 기반 뷰티 제품을 한 곳에서 만나보세요.
+        한국 가격은 원화 기준으로 유지하고, PI 환산 금액은 크라켄 실시간 시세를 반영합니다.
+      </p>
 
-      <div class="badge" id="stageBadge">도메인 인증 및 오픈 준비 중</div>
+      <div class="badge">Preparation Stage · Domain Verification</div>
 
-      <div class="notice-box" id="noticeBox">
-        <div class="notice-title" id="noticeTitle">현재 서비스 준비 중입니다</div>
-        <div class="notice-text" id="noticeText">
-          현재 본 사이트는 도메인 인증 및 정식 오픈 준비 단계로 운영되고 있습니다.<br>
-          테스트 페이지이므로 전화 문의, 카카오 상담, 예약 및 결제 기능은 아직 진행하지 않습니다.<br>
-          정식 오픈 후 정상적으로 안내드리겠습니다.
+      <div class="notice-box">
+        <div class="notice-title">도메인 인증 및 오픈 준비 중</div>
+        <div class="notice-text">
+          현재 본 사이트는 Pi Browser 및 일반 브라우저에서 테스트 가능한 상태로 구성되어 있으며,
+          도메인 인증과 앱 심사 완료 후 정식 오픈될 예정입니다.
         </div>
-      </div>
 
-      <div class="status-grid">
-        <div class="status-card">
-          <div class="status-label">도메인 파일</div>
-          <div class="status-value" id="validationStatus">점검 중…</div>
-        </div>
-        <div class="status-card">
-          <div class="status-label">Pi SDK</div>
-          <div class="status-value" id="sdkStatus">점검 중…</div>
-        </div>
-        <div class="status-card">
-          <div class="status-label">결제 상태</div>
-          <div class="status-value" id="paymentStatus">준비중</div>
-        </div>
-      </div>
-
-      <div class="button-group">
-        <a href="javascript:void(0)" id="kakaoBtn" class="btn btn-disabled-primary">카카오 상담 준비중</a>
-        <a href="javascript:void(0)" id="phoneBtn" class="btn btn-disabled-secondary">전화 상담 준비중</a>
-        <button type="button" class="btn btn-soft" id="btnCheckDomain">도메인 파일 확인</button>
-        <button type="button" class="btn btn-soft" id="btnPiLogin">Pi 로그인 확인</button>
-      </div>
-
-      <div class="ticker">
-        <div class="ticker-label">PI Live Price</div>
-        <div class="ticker-price" id="piPriceText">1 PI = $0.1800</div>
-        <div class="ticker-meta" id="piMetaText">테스트 모드 · 고정 시세</div>
-        <div class="ticker-note" id="priceNote">
-          외부 API 없이 고정 시세로 표시합니다.
+        <div class="status-grid">
+          <div class="status-card">
+            <div class="status-label">PI/USD</div>
+            <div class="status-value" id="piUsdStatus">불러오는 중...</div>
+          </div>
+          <div class="status-card">
+            <div class="status-label">USD/KRW</div>
+            <div class="status-value" id="usdKrwStatus">불러오는 중...</div>
+          </div>
+          <div class="status-card">
+            <div class="status-label">1 PI = KRW</div>
+            <div class="status-value" id="piKrwStatus">계산 중...</div>
+          </div>
+          <div class="status-card">
+            <div class="status-label">시세 상태</div>
+            <div class="status-value" id="feedStatus">초기화 중...</div>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <div class="menu-wrap">
-    <div class="menu" id="brandMenu"></div>
-  </div>
+  <main class="container">
+    <section class="main-area">
+      <div class="section-card" id="productsSection">
+        <div class="section-title">브랜드 선택</div>
+        <div class="tabs" id="brandTabs"></div>
+      </div>
 
-  <main class="content">
-    <div id="brandSections"></div>
+      <div class="section-card">
+        <div class="section-title">상품 목록</div>
+        <div class="products" id="productGrid"></div>
+      </div>
 
-    <div class="footer-box">
-      <h3>안내 사항</h3>
-      <p id="footerLine1">현재 페이지는 도메인 인증 및 디자인 점검을 위한 테스트 화면입니다.</p>
-      <p id="footerLine2">상담, 예약, 결제 기능은 정식 오픈 전까지 비활성 상태로 유지됩니다.</p>
-      <p id="footerLine3">정식 오픈 후 실제 상품과 서비스가 순차적으로 반영될 예정입니다.</p>
-    </div>
+      <div class="section-card hidden" id="adminSection">
+        <div class="section-title">관리자 상품 추가</div>
+        <div class="admin-panel">
+          <select id="adminBrand">
+            <option value="노라보데">노라보데</option>
+            <option value="알케미아">알케미아</option>
+            <option value="기노">기노</option>
+            <option value="탈라">탈라</option>
+            <option value="쏘티스">쏘티스</option>
+          </select>
+          <input id="adminName" placeholder="상품명" />
+          <textarea id="adminDesc" rows="3" placeholder="상품 설명"></textarea>
+          <input id="adminPrice" type="number" placeholder="원화 가격 (예: 89000)" />
+          <button class="btn btn-main" onclick="addProduct()">상품 추가</button>
+          <button class="btn btn-soft" onclick="resetProducts()">기본 상품 복원</button>
+        </div>
+      </div>
+    </section>
+
+    <aside class="sidebar" id="cartSection">
+      <div class="section-card">
+        <div class="section-title">장바구니</div>
+        <div class="cart-list" id="cartList">
+          <div style="color:#8d7f72;">아직 담긴 상품이 없습니다.</div>
+        </div>
+
+        <div class="cart-total">
+          <div>총 원화 금액: <span id="totalKRW">₩0</span></div>
+          <div>총 달러 환산: <span id="totalUSD">$0.00</span></div>
+          <div>예상 PI 금액: <span id="totalPI">0 PI</span></div>
+        </div>
+
+        <div class="btn-row" style="margin-top:16px;">
+          <button class="btn btn-soft" onclick="clearCart()">장바구니 비우기</button>
+          <button class="btn btn-main" onclick="payCart()">Pi 결제하기</button>
+        </div>
+
+        <div id="messageBox" class="message"></div>
+      </div>
+    </aside>
   </main>
 
-  <button class="admin-fab" id="adminFab">관리자</button>
-
-  <div class="admin-panel" id="adminPanel">
-    <div class="admin-title">통합 관리자</div>
-
-    <div id="loginArea">
-      <input id="adminPassword" class="admin-input" type="password" placeholder="비밀번호 입력" />
-      <div class="admin-actions">
-        <button class="admin-btn admin-btn-main" onclick="loginAdmin()">로그인</button>
-      </div>
-    </div>
-
-    <div id="editArea" class="hidden">
-      <div class="admin-subtitle">기본 정보</div>
-      <input id="editHeroTitle" class="admin-input" type="text" placeholder="메인 제목" />
-      <textarea id="editHeroDesc" class="admin-textarea" placeholder="소개글"></textarea>
-
-      <div class="admin-subtitle">공지 설정</div>
-      <div class="toggle-row">
-        <button type="button" id="noticeOnBtn" class="toggle-chip" onclick="setNoticeToggle(true)">공지 ON</button>
-        <button type="button" id="noticeOffBtn" class="toggle-chip" onclick="setNoticeToggle(false)">공지 OFF</button>
-      </div>
-      <input id="editNoticeTitle" class="admin-input" type="text" placeholder="공지 제목" />
-      <textarea id="editNoticeText" class="admin-textarea" placeholder="공지 내용"></textarea>
-
-      <div class="admin-subtitle">상담 버튼 / 링크</div>
-      <input id="editKakaoText" class="admin-input" type="text" placeholder="카카오 버튼 문구" />
-      <input id="editKakaoLink" class="admin-input" type="text" placeholder="카카오 링크" />
-      <input id="editPhoneText" class="admin-input" type="text" placeholder="전화 버튼 문구" />
-      <input id="editPhoneNumber" class="admin-input" type="text" placeholder="전화번호 (예: 01012345678)" />
-
-      <div class="admin-subtitle">하단 안내 문구</div>
-      <input id="editFooter1" class="admin-input" type="text" placeholder="하단 문구 1" />
-      <input id="editFooter2" class="admin-input" type="text" placeholder="하단 문구 2" />
-      <input id="editFooter3" class="admin-input" type="text" placeholder="하단 문구 3" />
-
-      <div class="admin-subtitle">브랜드/상품 전체 관리</div>
-      <div id="productEditors"></div>
-
-      <div class="admin-actions">
-        <button class="admin-btn admin-btn-main" onclick="saveAdminData()">저장</button>
-        <button class="admin-btn admin-btn-soft" onclick="loadAdminInputs()">불러오기</button>
-        <button class="admin-btn admin-btn-soft" onclick="exportFixedConfig()">고정본 JSON 복사</button>
-        <button class="admin-btn admin-btn-danger" onclick="resetAdminData()">초기화</button>
-        <button class="admin-btn admin-btn-soft" onclick="logoutAdmin()">로그아웃</button>
-      </div>
-
-      <div class="admin-help">
-        이미지 URL 입력도 가능하고, 파일첨부도 가능합니다. 파일첨부 이미지는 같은 브라우저에서 유지됩니다.
-      </div>
-    </div>
-  </div>
-
-  <div class="modal-backdrop" id="paymentModal">
-    <div class="modal">
-      <h3 id="modalTitle">Pi 결제</h3>
-      <p id="modalText">결제를 진행합니다.</p>
-      <div class="row">
-        <button class="cancel" onclick="closeModal()">닫기</button>
-        <button class="ok" id="modalActionBtn">확인</button>
-      </div>
-    </div>
-  </div>
+  <footer class="footer">
+    © 2026 The Thumb Therapy. All rights reserved.<br>
+    본 페이지는 샘플 쇼핑몰 및 Pi 결제 연동 테스트용으로 구성되었습니다.
+  </footer>
 
   <script>
-    const ADMIN_PASSWORD = "1234";
-    const USD_KRW = 1508.4;
-    const STORAGE_ADMIN_KEY = "tts_admin_logged_in";
-    const STORAGE_CONTENT_KEY = "tts_admin_content";
-    const VALIDATION_PATH = "/validation-key.txt";
+    const APPROVE_URL = "https://thumbtherapy-server.onrender.com/approve";
+    const COMPLETE_URL = "https://thumbtherapy-server.onrender.com/complete";
 
-    let currentPiPriceUSD = 0.18;
-    let currentNoticeEnabled = true;
-    let currentPiAuth = null;
-    let currentSelectedPayment = null;
-
-    const BRAND_KEYS = [
-      { key: "norabode", label: "노라보데" },
-      { key: "alchemy", label: "알케미아" },
-      { key: "guinot", label: "기노" },
-      { key: "thalac", label: "탈라" },
-      { key: "sothys", label: "쏘티스" }
-    ];
-
-    const defaultContent = {
-      heroTitle: "프리미엄 뷰티 스토어",
-      heroDesc: "한국 가격과 현재 PI 시세를 함께 표시하는 테스트용 쇼핑 화면입니다. 현재는 도메인 인증 및 정식 오픈 준비 단계입니다.",
-      noticeEnabled: true,
-      noticeTitle: "현재 서비스 준비 중입니다",
-      noticeText: "현재 본 사이트는 도메인 인증 및 정식 오픈 준비 단계로 운영되고 있습니다.\n테스트 페이지이므로 전화 문의, 카카오 상담, 예약 및 결제 기능은 아직 진행하지 않습니다.\n정식 오픈 후 정상적으로 안내드리겠습니다.",
-      kakaoText: "카카오 상담 준비중",
-      kakaoLink: "https://open.kakao.com/o/sqB6lDni",
-      phoneText: "전화 상담 준비중",
-      phoneNumber: "01012345678",
-      footer1: "현재 페이지는 도메인 인증 및 디자인 점검을 위한 테스트 화면입니다.",
-      footer2: "상담, 예약, 결제 기능은 정식 오픈 전까지 비활성 상태로 유지됩니다.",
-      footer3: "정식 오픈 후 실제 상품과 서비스가 순차적으로 반영될 예정입니다.",
-      brands: {
-        norabode: {
-          label: "노라보데",
-          desc: "프리미엄 스킨케어 라인",
-          products: [
-            { name:"인텍트 퍼펙트 스킨 볼륨 크림", priceKRW:120000, rating:4.8, image:"", visible:true },
-            { name:"에이지 컨트롤 크림", priceKRW:130000, rating:4.9, image:"", visible:true },
-            { name:"옥시젯퍼펙션 인터셀 부스터", priceKRW:140000, rating:4.8, image:"", visible:true },
-            { name:"옥시젯퍼펙션 울트라 펌", priceKRW:150000, rating:4.7, image:"", visible:true },
-            { name:"옥시젯퍼펙션 브라이트 스킨", priceKRW:160000, rating:4.9, image:"", visible:true },
-            { name:"옥시젯 원 세럼", priceKRW:170000, rating:4.8, image:"", visible:true },
-            { name:"옥시젯 투 세럼", priceKRW:180000, rating:4.9, image:"", visible:true },
-            { name:"앱솔루트 이펙트 퓨리파잉 컨트롤 앰플", priceKRW:190000, rating:4.7, image:"", visible:true },
-            { name:"앱솔루트 이펙트 브라이트닝 코렉터 앰플", priceKRW:200000, rating:4.8, image:"", visible:true },
-            { name:"인텍트 퍼펙트 아이 존 컨센트레이트", priceKRW:210000, rating:4.9, image:"", visible:true }
-          ]
-        },
-        alchemy: {
-          label: "알케미아",
-          desc: "프리미엄 리추얼 & 페이스 케어 라인",
-          products: [
-            { name:"Eternal Youth Facial Sérum", priceKRW:130000, rating:4.8, image:"", visible:true },
-            { name:"Eternal Youth Absolut Pro Aging Facial Cream", priceKRW:140000, rating:4.7, image:"", visible:true },
-            { name:"Eternal Youth Eye and Lip Contour", priceKRW:150000, rating:4.9, image:"", visible:true },
-            { name:"Eternal Youth Facial Pack", priceKRW:160000, rating:4.8, image:"", visible:true },
-            { name:"Queen of Egypt Golden Glow", priceKRW:170000, rating:4.7, image:"", visible:true },
-            { name:"Queen of Egypt Glow Experience", priceKRW:180000, rating:4.8, image:"", visible:true },
-            { name:"Queen of Egypt Pack", priceKRW:190000, rating:4.9, image:"", visible:true },
-            { name:"Queen of Egypt Eau de Toilette", priceKRW:200000, rating:4.8, image:"", visible:true },
-            { name:"Queen of Egypt Essential Oil Blend", priceKRW:210000, rating:4.7, image:"", visible:true },
-            { name:"Queen of Egypt Shower Gel", priceKRW:220000, rating:4.9, image:"", visible:true }
-          ]
-        },
-        guinot: {
-          label: "기노",
-          desc: "전문 에스테틱 케어 라인",
-          products: [
-            { name:"크렘 롱그 비", priceKRW:140000, rating:4.9, image:"", visible:true },
-            { name:"크렘 이드라존 크림", priceKRW:150000, rating:4.8, image:"", visible:true },
-            { name:"세럼 크렘 이드라존 이으", priceKRW:160000, rating:4.8, image:"", visible:true },
-            { name:"크렘 나이트 로직", priceKRW:170000, rating:4.7, image:"", visible:true },
-            { name:"마스끄 퓨르 에뀔리브르", priceKRW:180000, rating:4.9, image:"", visible:true },
-            { name:"Hydra Summum Cream", priceKRW:190000, rating:4.8, image:"", visible:true },
-            { name:"Hydra Summum Serum", priceKRW:200000, rating:4.7, image:"", visible:true },
-            { name:"안티-컨센트레이트", priceKRW:210000, rating:4.8, image:"", visible:true },
-            { name:"매지컬 타임 오 드 퍼퓸", priceKRW:220000, rating:4.9, image:"", visible:true },
-            { name:"아이 케어 라인 세럼", priceKRW:230000, rating:4.8, image:"", visible:true }
-          ]
-        },
-        thalac: {
-          label: "탈라",
-          desc: "해양 성분 기반 케어 라인",
-          products: [
-            { name:"로씨옹 마린느", priceKRW:150000, rating:4.8, image:"", visible:true },
-            { name:"액티브 캄", priceKRW:160000, rating:4.9, image:"", visible:true },
-            { name:"마스크 프레쉐르 이드랑띠프", priceKRW:170000, rating:4.7, image:"", visible:true },
-            { name:"데마끼앙 뒤 이유", priceKRW:180000, rating:4.8, image:"", visible:true },
-            { name:"로씨옹 비타민", priceKRW:190000, rating:4.9, image:"", visible:true },
-            { name:"젤 네뜨앙뜨 퓨리피앙", priceKRW:200000, rating:4.8, image:"", visible:true },
-            { name:"세럼 비 셀룰레르", priceKRW:210000, rating:4.7, image:"", visible:true },
-            { name:"하이드라 프로디지", priceKRW:220000, rating:4.8, image:"", visible:true },
-            { name:"쏘인 꽁뜨르 이유", priceKRW:230000, rating:4.9, image:"", visible:true },
-            { name:"세럼 이드라땅", priceKRW:240000, rating:4.8, image:"", visible:true }
-          ]
-        },
-        sothys: {
-          label: "쏘티스",
-          desc: "럭셔리 뷰티 케어 라인",
-          products: [
-            { name:"글로우 디펜스 세럼", priceKRW:160000, rating:4.9, image:"", visible:true },
-            { name:"글로우 디펜스 크림", priceKRW:170000, rating:4.8, image:"", visible:true },
-            { name:"일루미네이팅 마스크", priceKRW:180000, rating:4.7, image:"", visible:true },
-            { name:"일루미네이팅 에센스", priceKRW:190000, rating:4.8, image:"", visible:true },
-            { name:"일루미네이팅 페이셜 클렌저", priceKRW:200000, rating:4.9, image:"", visible:true },
-            { name:"데스까 크림", priceKRW:210000, rating:4.8, image:"", visible:true },
-            { name:"Restructuring Youth Cream", priceKRW:220000, rating:4.7, image:"", visible:true },
-            { name:"Soothing Velvet Cream", priceKRW:230000, rating:4.8, image:"", visible:true },
-            { name:"Face Glow Defense Serum", priceKRW:240000, rating:4.9, image:"", visible:true },
-            { name:"Face Glow Defense Cream", priceKRW:250000, rating:4.8, image:"", visible:true }
-          ]
-        }
-      }
+    let live = {
+      piUsd: null,
+      usdKrw: null,
+      piKrw: null,
+      pairRest: null,
+      pairWs: null,
+      ws: null
     };
 
-    function deepClone(obj){ return JSON.parse(JSON.stringify(obj)); }
-    function won(v){ return "₩" + new Intl.NumberFormat("ko-KR").format(Math.round(v)); }
-    function pi(v){ return "π " + Number(v).toFixed(2); }
+    const defaultProducts = [
+      { id: 1, brand: "노라보데", name: "옥시젠 리페어 세럼", desc: "산소 테라피 기반 고보습 집중 세럼", price: 89000 },
+      { id: 2, brand: "노라보데", name: "리바이탈 크림", desc: "탄력과 윤기를 위한 데일리 크림", price: 96000 },
+      { id: 3, brand: "노라보데", name: "스킨 밸런스 토너", desc: "피부결 정돈과 수분 밸런스 케어", price: 54000 },
+      { id: 4, brand: "알케미아", name: "허벌 밸런싱 토너", desc: "자연 유래 성분 토너", price: 52000 },
+      { id: 5, brand: "알케미아", name: "퓨리파잉 앰플", desc: "민감 피부 진정 앰플", price: 68000 },
+      { id: 6, brand: "알케미아", name: "에센셜 크림", desc: "건조한 피부 집중 보습", price: 74000 },
+      { id: 7, brand: "기노", name: "하이드라 수딩 마스크", desc: "수분 장벽 강화 마스크", price: 73000 },
+      { id: 8, brand: "기노", name: "퍼밍 아이크림", desc: "눈가 탄력 집중 케어", price: 85000 },
+      { id: 9, brand: "기노", name: "유스 에멀전", desc: "생기있는 피부 컨디션 유지", price: 79000 },
+      { id: 10, brand: "탈라", name: "마린 에센스", desc: "해양 성분 영양 에센스", price: 79000 },
+      { id: 11, brand: "탈라", name: "아쿠아 젤 크림", desc: "산뜻한 수분 젤 크림", price: 61000 },
+      { id: 12, brand: "탈라", name: "리커버리 세럼", desc: "외부 자극 후 진정 케어", price: 88000 },
+      { id: 13, brand: "쏘티스", name: "프리미엄 리프팅 세럼", desc: "고급 안티에이징 솔루션", price: 118000 },
+      { id: 14, brand: "쏘티스", name: "컴포트 클렌저", desc: "부드러운 데일리 클렌징", price: 48000 },
+      { id: 15, brand: "쏘티스", name: "럭셔리 나이트 크림", desc: "밤 사이 집중 영양 공급", price: 128000 }
+    ];
 
-    function getContent(){
-      const saved = localStorage.getItem(STORAGE_CONTENT_KEY);
-      if (!saved) return deepClone(defaultContent);
-      try { return JSON.parse(saved); } catch { return deepClone(defaultContent); }
+    let products = JSON.parse(localStorage.getItem("thumb_products")) || defaultProducts;
+    let cart = JSON.parse(localStorage.getItem("thumb_cart")) || [];
+    let selectedBrand = "전체";
+    let adminMode = false;
+
+    function saveProducts() {
+      localStorage.setItem("thumb_products", JSON.stringify(products));
+    }
+    function saveCart() {
+      localStorage.setItem("thumb_cart", JSON.stringify(cart));
     }
 
-    function setContent(data){
-      localStorage.setItem(STORAGE_CONTENT_KEY, JSON.stringify(data));
+    function formatKRW(n) {
+      return "₩" + Number(n).toLocaleString("ko-KR");
     }
 
-    function setNoticeToggle(value){
-      currentNoticeEnabled = value;
-      document.getElementById("noticeOnBtn").classList.toggle("active", value === true);
-      document.getElementById("noticeOffBtn").classList.toggle("active", value === false);
+    function formatUSD(n) {
+      return "$" + Number(n).toFixed(2);
     }
 
-    function goSection(id){
-      const el = document.getElementById(`section-${id}`);
-      if (el) el.scrollIntoView({ behavior:"smooth", block:"start" });
+    function uniqueBrands() {
+      return ["전체", ...new Set(products.map(p => p.brand))];
     }
 
-    function renderBrandMenu(data){
-      const menu = document.getElementById("brandMenu");
-      menu.innerHTML = "";
-      BRAND_KEYS.forEach(({ key }) => {
+    function krwToUsd(krw) {
+      if (!live.usdKrw) return null;
+      return krw / live.usdKrw;
+    }
+
+    function krwToPi(krw) {
+      if (!live.piUsd || !live.usdKrw) return null;
+      const usd = krw / live.usdKrw;
+      return usd / live.piUsd;
+    }
+
+    function updateRateUI() {
+      document.getElementById("piUsdStatus").textContent =
+        live.piUsd ? `$${live.piUsd.toFixed(6)}` : "불러오는 중...";
+      document.getElementById("usdKrwStatus").textContent =
+        live.usdKrw ? `₩${live.usdKrw.toFixed(2)}` : "불러오는 중...";
+      document.getElementById("piKrwStatus").textContent =
+        (live.piUsd && live.usdKrw) ? `₩${(live.piUsd * live.usdKrw).toFixed(2)}` : "계산 중...";
+    }
+
+    function renderTabs() {
+      const tabs = document.getElementById("brandTabs");
+      tabs.innerHTML = "";
+      uniqueBrands().forEach(brand => {
         const btn = document.createElement("button");
-        btn.textContent = data.brands[key].label;
-        btn.onclick = () => goSection(key);
-        menu.appendChild(btn);
+        btn.className = "tab-btn" + (brand === selectedBrand ? " active" : "");
+        btn.textContent = brand;
+        btn.onclick = () => {
+          selectedBrand = brand;
+          renderTabs();
+          renderProducts();
+        };
+        tabs.appendChild(btn);
       });
     }
 
-    function onPayNow(brandKey, index){
-      const data = getContent();
-      const product = data.brands[brandKey].products[index];
-      currentSelectedPayment = { brandKey, index, product };
+    function renderProducts() {
+      const grid = document.getElementById("productGrid");
+      grid.innerHTML = "";
 
-      openModal(
-        "Pi 결제 준비",
-        `${product.name}\n결제 시도 전 Pi 로그인과 앱 결제 자격을 확인합니다.`,
-        async () => {
-          closeModal();
-          await startPiPayment();
-        }
-      );
-    }
+      const list = selectedBrand === "전체"
+        ? products
+        : products.filter(p => p.brand === selectedBrand);
 
-    function renderBrandSections(data){
-      const wrap = document.getElementById("brandSections");
-      wrap.innerHTML = "";
-
-      BRAND_KEYS.forEach(({ key }) => {
-        const brand = data.brands[key];
-        const visibleProducts = brand.products.filter(p => p.visible !== false);
-
-        const section = document.createElement("section");
-        section.className = "brand-section";
-        section.id = `section-${key}`;
-
-        let cards = "";
-        brand.products.forEach((item, i) => {
-          if (item.visible === false) return;
-
-          const priceUsd = item.priceKRW / USD_KRW;
-          const pricePi = priceUsd / currentPiPriceUSD;
-
-          const imagePart = item.image && item.image.trim() !== ""
-            ? `<img src="${item.image}" alt="${item.name}" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"><div class="thumb-glow" style="display:none;"></div>`
-            : `<div class="thumb-glow"></div>`;
-
-          cards += `
-            <article class="card">
-              <div class="card-thumb">${imagePart}</div>
-              <div class="card-body">
-                <div class="product-name">${item.name}</div>
-                <div class="rating">⭐ ${Number(item.rating).toFixed(1)}</div>
-                <div class="price-krw">${won(item.priceKRW)}</div>
-                <div class="price-pi">${pi(pricePi)}</div>
-                <div class="buy-row">
-                  <button class="buy-btn" disabled>장바구니</button>
-                  <button class="pay-btn" onclick="onPayNow('${key}', ${i})">Pi 결제</button>
-                </div>
-              </div>
-            </article>
-          `;
-        });
-
-        section.innerHTML = `
-          <div class="brand-head">
-            <div>
-              <div class="brand-title-kor">${brand.label}</div>
-              <div class="brand-subtext">${brand.desc || ""}</div>
-            </div>
-            <div class="brand-subtext">상품 ${visibleProducts.length}개</div>
-          </div>
-          <div class="product-grid">${cards}</div>
-        `;
-
-        wrap.appendChild(section);
-      });
-    }
-
-    function applyContent(){
-      const data = getContent();
-
-      document.getElementById("heroTitle").textContent = data.heroTitle;
-      document.getElementById("heroDesc").textContent = data.heroDesc;
-      document.getElementById("noticeTitle").textContent = data.noticeTitle;
-      document.getElementById("noticeText").innerHTML = data.noticeText.replace(/\n/g, "<br>");
-      document.getElementById("noticeBox").style.display = data.noticeEnabled ? "block" : "none";
-
-      const kakaoBtn = document.getElementById("kakaoBtn");
-      const phoneBtn = document.getElementById("phoneBtn");
-
-      kakaoBtn.textContent = data.kakaoText;
-      phoneBtn.textContent = data.phoneText;
-
-      const kakaoReady = !data.kakaoText.includes("준비중") && data.kakaoLink.trim() !== "";
-      const phoneReady = !data.phoneText.includes("준비중") && data.phoneNumber.trim() !== "";
-
-      if (kakaoReady) {
-        kakaoBtn.className = "btn btn-main";
-        kakaoBtn.href = data.kakaoLink;
-        kakaoBtn.target = "_blank";
-      } else {
-        kakaoBtn.className = "btn btn-disabled-primary";
-        kakaoBtn.href = "javascript:void(0)";
-        kakaoBtn.removeAttribute("target");
-      }
-
-      if (phoneReady) {
-        phoneBtn.className = "btn btn-line";
-        phoneBtn.href = `tel:${data.phoneNumber}`;
-      } else {
-        phoneBtn.className = "btn btn-disabled-secondary";
-        phoneBtn.href = "javascript:void(0)";
-      }
-
-      document.getElementById("footerLine1").textContent = data.footer1;
-      document.getElementById("footerLine2").textContent = data.footer2;
-      document.getElementById("footerLine3").textContent = data.footer3;
-
-      renderBrandMenu(data);
-      renderBrandSections(data);
-
-      document.getElementById("priceNote").textContent =
-        `고정 PI/USD 시세(1 PI = $${currentPiPriceUSD.toFixed(4)})와 기준 환율(1 USD ≈ ${USD_KRW.toLocaleString("ko-KR")} KRW)로 계산한 참고용 표시입니다.`;
-    }
-
-    function getPreviewHtml(value){
-      if (value && value.trim() !== "") {
-        return `<img src="${value}" alt="preview" />`;
-      }
-      return `미리보기 없음`;
-    }
-
-    function createProductEditors(){
-      const wrap = document.getElementById("productEditors");
-      wrap.innerHTML = "";
-
-      BRAND_KEYS.forEach(({ key, label }) => {
-        const block = document.createElement("div");
-        block.className = "product-editor";
-
-        let html = `
-          <div class="admin-subtitle" style="margin-top:0;">${label} 브랜드 설정</div>
-          <input id="brandLabel-${key}" class="admin-input" type="text" placeholder="브랜드명" />
-          <input id="brandDesc-${key}" class="admin-input" type="text" placeholder="브랜드 설명" />
-        `;
-
-        for (let i = 0; i < 10; i++) {
-          html += `
-            <div class="admin-subtitle">${label} 상품 ${i + 1}</div>
-            <input id="${key}-name-${i}" class="admin-input" type="text" placeholder="상품명" />
-            <input id="${key}-price-${i}" class="admin-input" type="number" placeholder="가격" />
-            <input id="${key}-rating-${i}" class="admin-input" type="number" step="0.1" min="0" max="5" placeholder="평점" />
-            <input id="${key}-image-${i}" class="admin-input" type="text" placeholder="이미지 URL 입력" />
-            <div class="preview-box" id="${key}-preview-${i}">미리보기 없음</div>
-            <div class="file-row">
-              <input id="${key}-file-${i}" type="file" accept="image/*" />
-              <button type="button" class="clear-image-btn" onclick="clearProductImage('${key}', ${i})">이미지 지우기</button>
-            </div>
-            <label class="small-check">
-              <input id="${key}-visible-${i}" type="checkbox" />
-              상품 보이기
-            </label>
-          `;
-        }
-
-        block.innerHTML = html;
-        wrap.appendChild(block);
-      });
-
-      BRAND_KEYS.forEach(({ key }) => {
-        for (let i = 0; i < 10; i++) {
-          const fileInput = document.getElementById(`${key}-file-${i}`);
-          const urlInput = document.getElementById(`${key}-image-${i}`);
-
-          fileInput.addEventListener("change", (event) => handleFileUpload(event, key, i));
-          urlInput.addEventListener("input", () => updatePreview(key, i, urlInput.value));
-        }
-      });
-    }
-
-    function updatePreview(key, index, value){
-      const preview = document.getElementById(`${key}-preview-${index}`);
-      preview.innerHTML = getPreviewHtml(value);
-    }
-
-    function handleFileUpload(event, key, index){
-      const file = event.target.files && event.target.files[0];
-      if (!file) return;
-
-      if (!file.type.startsWith("image/")) {
-        alert("이미지 파일만 선택해 주세요.");
-        event.target.value = "";
+      if (!list.length) {
+        grid.innerHTML = "<div style='color:#8d7f72;'>등록된 상품이 없습니다.</div>";
         return;
       }
 
-      const reader = new FileReader();
-      reader.onload = function(e){
-        const result = e.target.result;
-        document.getElementById(`${key}-image-${index}`).value = result;
-        updatePreview(key, index, result);
-      };
-      reader.readAsDataURL(file);
-    }
+      list.forEach(p => {
+        const usd = krwToUsd(p.price);
+        const pi = krwToPi(p.price);
 
-    function clearProductImage(key, index){
-      document.getElementById(`${key}-image-${index}`).value = "";
-      document.getElementById(`${key}-file-${index}`).value = "";
-      updatePreview(key, index, "");
-    }
-
-    function loadAdminInputs(){
-      const data = getContent();
-
-      document.getElementById("editHeroTitle").value = data.heroTitle;
-      document.getElementById("editHeroDesc").value = data.heroDesc;
-      setNoticeToggle(!!data.noticeEnabled);
-      document.getElementById("editNoticeTitle").value = data.noticeTitle;
-      document.getElementById("editNoticeText").value = data.noticeText;
-      document.getElementById("editKakaoText").value = data.kakaoText;
-      document.getElementById("editKakaoLink").value = data.kakaoLink;
-      document.getElementById("editPhoneText").value = data.phoneText;
-      document.getElementById("editPhoneNumber").value = data.phoneNumber;
-      document.getElementById("editFooter1").value = data.footer1;
-      document.getElementById("editFooter2").value = data.footer2;
-      document.getElementById("editFooter3").value = data.footer3;
-
-      BRAND_KEYS.forEach(({ key }) => {
-        document.getElementById(`brandLabel-${key}`).value = data.brands[key].label || "";
-        document.getElementById(`brandDesc-${key}`).value = data.brands[key].desc || "";
-
-        data.brands[key].products.forEach((p, i) => {
-          document.getElementById(`${key}-name-${i}`).value = p.name || "";
-          document.getElementById(`${key}-price-${i}`).value = p.priceKRW || "";
-          document.getElementById(`${key}-rating-${i}`).value = p.rating || "";
-          document.getElementById(`${key}-image-${i}`).value = p.image || "";
-          document.getElementById(`${key}-visible-${i}`).checked = p.visible !== false;
-          updatePreview(key, i, p.image || "");
-          document.getElementById(`${key}-file-${i}`).value = "";
-        });
+        const card = document.createElement("div");
+        card.className = "product-card";
+        card.innerHTML = `
+          <div class="product-thumb">${p.brand}</div>
+          <div class="product-body">
+            <div class="product-brand">${p.brand}</div>
+            <div class="product-name">${p.name}</div>
+            <div class="product-desc">${p.desc}</div>
+            <div class="price-box">
+              <div class="krw">${formatKRW(p.price)}</div>
+              <div class="usd">${usd ? `약 ${formatUSD(usd)}` : "USD 계산 중..."}</div>
+              <div class="pi">${pi ? `약 ${pi.toFixed(4)} PI` : "PI 계산 중..."}</div>
+            </div>
+            <div class="btn-row">
+              <button class="btn btn-soft" onclick="buyNow(${p.id})">바로결제</button>
+              <button class="btn btn-main" onclick="addToCart(${p.id})">장바구니</button>
+            </div>
+          </div>
+        `;
+        grid.appendChild(card);
       });
     }
 
-    function saveAdminData(){
-      const old = getContent();
+    function renderCart() {
+      const cartList = document.getElementById("cartList");
+      const totalKRW = document.getElementById("totalKRW");
+      const totalUSD = document.getElementById("totalUSD");
+      const totalPI = document.getElementById("totalPI");
 
-      const newData = {
-        heroTitle: document.getElementById("editHeroTitle").value.trim() || old.heroTitle,
-        heroDesc: document.getElementById("editHeroDesc").value.trim() || old.heroDesc,
-        noticeEnabled: currentNoticeEnabled,
-        noticeTitle: document.getElementById("editNoticeTitle").value.trim() || old.noticeTitle,
-        noticeText: document.getElementById("editNoticeText").value.trim() || old.noticeText,
-        kakaoText: document.getElementById("editKakaoText").value.trim() || old.kakaoText,
-        kakaoLink: document.getElementById("editKakaoLink").value.trim() || old.kakaoLink,
-        phoneText: document.getElementById("editPhoneText").value.trim() || old.phoneText,
-        phoneNumber: document.getElementById("editPhoneNumber").value.trim() || old.phoneNumber,
-        footer1: document.getElementById("editFooter1").value.trim() || old.footer1,
-        footer2: document.getElementById("editFooter2").value.trim() || old.footer2,
-        footer3: document.getElementById("editFooter3").value.trim() || old.footer3,
-        brands: {}
-      };
+      if (!cart.length) {
+        cartList.innerHTML = `<div style="color:#8d7f72;">아직 담긴 상품이 없습니다.</div>`;
+        totalKRW.textContent = "₩0";
+        totalUSD.textContent = "$0.00";
+        totalPI.textContent = "0 PI";
+        return;
+      }
 
-      BRAND_KEYS.forEach(({ key }) => {
-        newData.brands[key] = {
-          label: document.getElementById(`brandLabel-${key}`).value.trim() || old.brands[key].label,
-          desc: document.getElementById(`brandDesc-${key}`).value.trim() || old.brands[key].desc,
-          products: []
-        };
+      cartList.innerHTML = "";
+      let total = 0;
 
-        for (let i = 0; i < 10; i++) {
-          const oldProduct = old.brands[key].products[i];
-          newData.brands[key].products.push({
-            name: document.getElementById(`${key}-name-${i}`).value.trim() || oldProduct.name,
-            priceKRW: Number(document.getElementById(`${key}-price-${i}`).value) || oldProduct.priceKRW,
-            rating: Number(document.getElementById(`${key}-rating-${i}`).value) || oldProduct.rating,
-            image: document.getElementById(`${key}-image-${i}`).value.trim() || "",
-            visible: document.getElementById(`${key}-visible-${i}`).checked
-          });
-        }
+      cart.forEach(item => {
+        total += item.price * item.qty;
+        const itemUsd = krwToUsd(item.price * item.qty);
+        const itemPi = krwToPi(item.price * item.qty);
+
+        const div = document.createElement("div");
+        div.className = "cart-item";
+        div.innerHTML = `
+          <div class="cart-item-name">${item.name}</div>
+          <div class="cart-item-meta">${item.brand} · 수량 ${item.qty}개</div>
+          <div class="cart-item-meta">
+            ${formatKRW(item.price * item.qty)}
+            ${itemUsd ? ` / ${formatUSD(itemUsd)}` : ""}
+            ${itemPi ? ` / 약 ${itemPi.toFixed(4)} PI` : ""}
+          </div>
+          <div class="btn-row" style="margin-top:8px;">
+            <button class="btn btn-soft" onclick="changeQty(${item.id}, -1)">-</button>
+            <button class="btn btn-soft" onclick="changeQty(${item.id}, 1)">+</button>
+            <button class="btn btn-soft" onclick="removeCartItem(${item.id})">삭제</button>
+          </div>
+        `;
+        cartList.appendChild(div);
       });
 
-      setContent(newData);
-      applyContent();
-      alert("저장되었습니다.");
+      totalKRW.textContent = formatKRW(total);
+      totalUSD.textContent = krwToUsd(total) ? formatUSD(krwToUsd(total)) : "$0.00";
+      totalPI.textContent = krwToPi(total) ? `${krwToPi(total).toFixed(4)} PI` : "0 PI";
     }
 
-    function resetAdminData(){
-      localStorage.removeItem(STORAGE_CONTENT_KEY);
-      setNoticeToggle(true);
-      applyContent();
-      loadAdminInputs();
-      alert("초기값으로 되돌렸습니다.");
+    function addToCart(id) {
+      const product = products.find(p => p.id === id);
+      if (!product) return;
+
+      const found = cart.find(c => c.id === id);
+      if (found) found.qty += 1;
+      else cart.push({ ...product, qty: 1 });
+
+      saveCart();
+      renderCart();
+      showMessage("장바구니에 담았습니다.", "ok");
     }
 
-    function exportFixedConfig(){
-      const data = getContent();
-      navigator.clipboard.writeText(JSON.stringify(data, null, 2))
-        .then(() => alert("고정본 JSON이 복사되었습니다."))
-        .catch(() => alert("복사에 실패했습니다."));
+    function removeCartItem(id) {
+      cart = cart.filter(c => c.id !== id);
+      saveCart();
+      renderCart();
     }
 
-    function loginAdmin(){
-      const pw = document.getElementById("adminPassword").value;
-      if (pw === ADMIN_PASSWORD) {
-        localStorage.setItem(STORAGE_ADMIN_KEY, "true");
-        document.getElementById("loginArea").classList.add("hidden");
-        document.getElementById("editArea").classList.remove("hidden");
-        loadAdminInputs();
-      } else {
-        alert("비밀번호가 맞지 않습니다.");
+    function changeQty(id, diff) {
+      const item = cart.find(c => c.id === id);
+      if (!item) return;
+      item.qty += diff;
+      if (item.qty <= 0) cart = cart.filter(c => c.id !== id);
+      saveCart();
+      renderCart();
+    }
+
+    function clearCart() {
+      cart = [];
+      saveCart();
+      renderCart();
+      showMessage("장바구니를 비웠습니다.", "ok");
+    }
+
+    function buyNow(id) {
+      const product = products.find(p => p.id === id);
+      if (!product) return;
+      startPiPayment(product.price, product.name);
+    }
+
+    function payCart() {
+      if (!cart.length) {
+        showMessage("장바구니가 비어 있습니다.", "error");
+        return;
       }
+      const total = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
+      startPiPayment(total, "장바구니 결제");
     }
 
-    function logoutAdmin(){
-      localStorage.removeItem(STORAGE_ADMIN_KEY);
-      document.getElementById("loginArea").classList.remove("hidden");
-      document.getElementById("editArea").classList.add("hidden");
-      document.getElementById("adminPassword").value = "";
+    function showMessage(text, type="ok") {
+      const box = document.getElementById("messageBox");
+      box.textContent = text;
+      box.className = `message show ${type}`;
     }
 
-    function restoreAdmin(){
-      const loggedIn = localStorage.getItem(STORAGE_ADMIN_KEY) === "true";
-      if (loggedIn) {
-        document.getElementById("loginArea").classList.add("hidden");
-        document.getElementById("editArea").classList.remove("hidden");
-        loadAdminInputs();
-      } else {
-        document.getElementById("loginArea").classList.remove("hidden");
-        document.getElementById("editArea").classList.add("hidden");
+    function scrollToSection(id) {
+      document.getElementById(id).scrollIntoView({ behavior:"smooth" });
+    }
+
+    function toggleAdmin() {
+      adminMode = !adminMode;
+      document.getElementById("adminSection").classList.toggle("hidden", !adminMode);
+    }
+
+    function addProduct() {
+      const brand = document.getElementById("adminBrand").value.trim();
+      const name = document.getElementById("adminName").value.trim();
+      const desc = document.getElementById("adminDesc").value.trim();
+      const price = Number(document.getElementById("adminPrice").value);
+
+      if (!brand || !name || !desc || !price) {
+        showMessage("모든 항목을 입력해주세요.", "error");
+        return;
       }
+
+      const newProduct = { id: Date.now(), brand, name, desc, price };
+      products.unshift(newProduct);
+      saveProducts();
+      renderTabs();
+      renderProducts();
+      showMessage("상품이 추가되었습니다.", "ok");
+
+      document.getElementById("adminName").value = "";
+      document.getElementById("adminDesc").value = "";
+      document.getElementById("adminPrice").value = "";
     }
 
-    async function checkValidationFile(){
-      try {
-        const res = await fetch(`${VALIDATION_PATH}?t=${Date.now()}`, { cache: "no-store" });
-        const text = (await res.text()).trim();
-        if (res.ok && text.length > 8 && !text.includes("<html")) {
-          document.getElementById("validationStatus").textContent = "정상 확인";
-          document.getElementById("validationStatus").className = "status-value status-good";
-        } else {
-          document.getElementById("validationStatus").textContent = "파일 점검 필요";
-          document.getElementById("validationStatus").className = "status-value status-bad";
-        }
-      } catch (e) {
-        document.getElementById("validationStatus").textContent = "확인 실패";
-        document.getElementById("validationStatus").className = "status-value status-bad";
-      }
+    function resetProducts() {
+      products = [...defaultProducts];
+      saveProducts();
+      renderTabs();
+      renderProducts();
+      showMessage("기본 상품 목록으로 복원했습니다.", "ok");
     }
 
-    function initPiSdk(){
+    async function initPi() {
       try {
         if (window.Pi) {
-          Pi.init({ version: "2.0" });
-          document.getElementById("sdkStatus").textContent = "SDK 감지됨";
-          document.getElementById("sdkStatus").className = "status-value status-good";
-        } else {
-          document.getElementById("sdkStatus").textContent = "Pi Browser 아님";
-          document.getElementById("sdkStatus").className = "status-value status-bad";
+          Pi.init({ version: "2.0", sandbox: false });
         }
       } catch (e) {
-        document.getElementById("sdkStatus").textContent = "SDK 초기화 실패";
-        document.getElementById("sdkStatus").className = "status-value status-bad";
+        console.error("Pi SDK 초기화 실패", e);
       }
     }
 
-    async function checkPiLogin(){
-      if (!window.Pi) {
-        openModal("Pi Browser 필요", "Pi 로그인 확인은 Pi Browser 안에서만 가능합니다.");
-        return;
+    async function postJSON(url, data) {
+      const res = await fetch(url, {
+        method: "POST",
+        headers: { "Content-Type":"application/json" },
+        body: JSON.stringify(data)
+      });
+      if (!res.ok) {
+        throw new Error("서버 응답 오류: " + res.status);
       }
-
-      try {
-        const scopes = ["payments", "username"];
-        const auth = await Pi.authenticate(scopes, function onIncompletePaymentFound(payment) {
-          console.log("Incomplete payment found:", payment);
-        });
-        currentPiAuth = auth;
-        document.getElementById("paymentStatus").textContent = `로그인됨: ${auth.user?.username || "확인됨"}`;
-        document.getElementById("paymentStatus").className = "status-value status-good";
-        openModal("Pi 로그인 성공", `사용자: ${auth.user?.username || "확인됨"}\n결제 권한이 활성화되었습니다.`);
-      } catch (e) {
-        document.getElementById("paymentStatus").textContent = "로그인 실패/취소";
-        document.getElementById("paymentStatus").className = "status-value status-bad";
-        openModal("Pi 로그인 실패", "Pi 로그인이 취소되었거나 실패했습니다.");
-      }
+      return await res.json();
     }
 
-    async function startPiPayment(){
-      if (!currentSelectedPayment) return;
-      if (!window.Pi) {
-        openModal("Pi Browser 필요", "실제 Pi 결제는 Pi Browser에서만 시도할 수 있습니다.");
-        return;
-      }
-await ensurePiAuth();
-      const product = currentSelectedPayment.product;
-      const amountPi = Number(((product.priceKRW / USD_KRW) / currentPiPriceUSD).toFixed(4));
-
+    async function fetchUsdKrw() {
       try {
-        await Pi.createPayment(
-          {
-            amount: amountPi,
-            memo: product.name,
-            metadata: {
-              brand: currentSelectedPayment.brandKey,
-              name: product.name,
-              priceKRW: product.priceKRW
-            }
-          },
-          {
-            onReadyForServerApproval: async function(paymentId) {
-  console.log("승인 요청:", paymentId);
-
-  const res = await fetch("https://thumbtherapy-server.onrender.com/approve", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({ paymentId })
-  });
-
-  const data = await res.json();
-  console.log("approve 응답:", data);
-},
-
-onReadyForServerCompletion: async function(paymentId, txid) {
-    console.log("완료 요청:", paymentId, txid);
-
-    try {
-        const res = await fetch("https://thumbtherapy-server.onrender.com/complete", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                paymentId: paymentId,
-                txid: txid
-            })
-        });
-
+        const res = await fetch("https://api.frankfurter.dev/v1/latest?base=USD&symbols=KRW");
         const data = await res.json();
-        console.log("complete 응답:", data);
-
-    } catch (err) {
-        console.error("complete 에러:", err);
-    },
-            onCancel: function(paymentId) {
-              console.log("결제 취소:", paymentId);
-              openModal("결제 취소", "사용자가 결제를 취소했습니다.");
-            },
-            onError: function(error, payment) {
-              console.error("결제 오류:", error, payment);
-              openModal("결제 오류", "결제 중 오류가 발생했습니다. Pi Browser와 서버 연동 상태를 확인하세요.");
-            }
-          }
-        );
-      } catch (e) {
-        openModal("결제 실패", "Pi 결제 호출에 실패했습니다. Pi Browser와 앱 상태를 확인하세요.");
-      }
-    }
-
-    function openModal(title, text, action){
-      document.getElementById("modalTitle").textContent = title;
-      document.getElementById("modalText").innerHTML = String(text).replace(/\n/g, "<br>");
-      const btn = document.getElementById("modalActionBtn");
-      btn.onclick = typeof action === "function" ? action : closeModal;
-      btn.textContent = typeof action === "function" ? "계속" : "확인";
-      document.getElementById("paymentModal").style.display = "flex";
-    }
-
-    function closeModal(){
-      document.getElementById("paymentModal").style.display = "none";
-    }
-
-    function setupAdminPanel(){
-      const fab = document.getElementById("adminFab");
-      const panel = document.getElementById("adminPanel");
-
-      fab.addEventListener("click", () => panel.classList.toggle("show"));
-      document.addEventListener("click", (e) => {
-        if (!panel.contains(e.target) && !fab.contains(e.target)) {
-          panel.classList.remove("show");
+        if (data && data.rates && data.rates.KRW) {
+          live.usdKrw = Number(data.rates.KRW);
+          updateRateUI();
+          renderProducts();
+          renderCart();
         }
-      });
-    }
-
-    async function init(){
-      createProductEditors();
-      restoreAdmin();
-      setupAdminPanel();
-      initPiSdk();
-      await checkValidationFile();
-
-      currentPiPriceUSD = 0.18;
-      document.getElementById("piPriceText").textContent = "1 PI = $0.1800";
-      document.getElementById("piMetaText").textContent = "테스트 모드 · 고정 시세";
-
-      applyContent();
-    }
-
-    init();
-  </script>
-  <script>
-    Pi.init({ version: "2.0" });
-  let piUser = null;
-
-  async function ensurePiAuth() {
-    try {
-      if (piUser) return piUser;
-
-     const scopes = ["username", "payments"]; 
-      piUser = await Pi.authenticate(scopes, function onIncompletePaymentFound(payment) {
-        console.log("미완료 결제 발견:", payment);
-      });
-
-      console.log("Pi 로그인 성공:", piUser);
-      return piUser;
-    } catch (err) {
-      console.error("Pi 로그인 실패:", err);
-      alert("Pi 로그인 확인이 필요합니다.");
-      throw err;
-    }
-  }
-
-  document.querySelectorAll(".pi-pay-btn").forEach(btn => {
-    btn.addEventListener("click", async function () {
-      try {
-        await ensurePiAuth();
-
-        await Pi.createPayment(
-          {
-            amount: 0.01,
-            memo: "상품 결제",
-            metadata: { product: "thumbtherapy" }
-          },
-          {
-onReadyForServerApproval: async function(paymentId) {
-  console.log("승인 요청:", paymentId);
-
-  const res = await fetch("https://thumbtherapy-server.onrender.com/approve", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({ paymentId })
-  });
-
-  const data = await res.json();
-  console.log("approve 응답:", data);
-},
-
-onReadyForServerCompletion: async function(paymentId, txid) {
-  console.log("완료 요청:", paymentId, txid);
-
-  const res = await fetch("https://thumbtherapy-server.onrender.com/complete", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({ paymentId, txid })
-  });
-
-  const data = await res.json();
-  console.log("complete 응답:", data);
-
-  alert("결제 완료!");
-},
-            onCancel: function(paymentId) {
-              alert("결제 취소");
-              console.log("취소:", paymentId);
-            },
-            onError: function(error) {
-              console.error("결제 오류:", error);
-              alert("결제 오류");
-            }
-          }
-        );
       } catch (e) {
-        console.error("실행 오류:", e);
+        console.error("USD/KRW 환율 실패", e);
       }
-    });
-  });
-</script>
+    }
+
+    async function discoverPiPair() {
+      const res = await fetch("https://api.kraken.com/0/public/AssetPairs");
+      const data = await res.json();
+      if (data.error && data.error.length) throw new Error(data.error.join(","));
+
+      const entries = Object.entries(data.result || {});
+
+      let found = null;
+
+      for (const [restKey, info] of entries) {
+        const altname = (info.altname || "").toUpperCase();
+        const wsname = (info.wsname || "").toUpperCase();
+        const base = (info.base || "").toUpperCase();
+        const quote = (info.quote || "").toUpperCase();
+
+        const piLike =
+          altname.includes("PI") ||
+          wsname.startsWith("PI/") ||
+          base.includes("PI");
+
+        const usdLike =
+          altname.endsWith("USD") ||
+          wsname.endsWith("/USD") ||
+          quote.includes("USD");
+
+        if (piLike && usdLike) {
+          found = {
+            restPair: restKey,
+            altname: info.altname || restKey,
+            wsname: info.wsname || null
+          };
+          break;
+        }
+      }
+
+      if (!found) throw new Error("Kraken에서 PI/USD 거래쌍을 찾지 못했습니다.");
+
+      live.pairRest = found.altname;
+      live.pairWs = found.wsname || "PI/USD";
+      return found;
+    }
+
+    async function fetchPiUsdTicker() {
+      if (!live.pairRest) await discoverPiPair();
+
+      const res = await fetch(`https://api.kraken.com/0/public/Ticker?pair=${encodeURIComponent(live.pairRest)}`);
+      const data = await res.json();
+
+      if (data.error && data.error.length) throw new Error(data.error.join(","));
+
+      const result = data.result || {};
+      const firstKey = Object.keys(result)[0];
+      if (!firstKey) throw new Error("Ticker 응답이 비어 있습니다.");
+
+      const ticker = result[firstKey];
+      const lastTrade = Number(ticker.c?.[0]);
+
+      if (!lastTrade || Number.isNaN(lastTrade)) {
+        throw new Error("유효한 PI/USD 가격을 받지 못했습니다.");
+      }
+
+      live.piUsd = lastTrade;
+      live.piKrw = live.usdKrw ? live.piUsd * live.usdKrw : null;
+      updateRateUI();
+      renderProducts();
+      renderCart();
+      document.getElementById("feedStatus").textContent = "REST 갱신 완료";
+    }
+
+    function connectKrakenWs() {
+      if (!live.pairWs) return;
+
+      try {
+        if (live.ws) {
+          live.ws.close();
+          live.ws = null;
+        }
+
+        const ws = new WebSocket("wss://ws.kraken.com/");
+        live.ws = ws;
+
+        ws.onopen = function() {
+          ws.send(JSON.stringify({
+            event: "subscribe",
+            pair: [live.pairWs],
+            subscription: { name: "ticker" }
+          }));
+          document.getElementById("feedStatus").textContent = "WebSocket 연결됨";
+        };
+
+        ws.onmessage = function(evt) {
+          try {
+            const msg = JSON.parse(evt.data);
+            if (msg.event) return;
+            if (!Array.isArray(msg)) return;
+
+            const payload = msg[1];
+            if (!payload) return;
+
+            const closePrice = payload.c?.[0];
+            if (closePrice) {
+              live.piUsd = Number(closePrice);
+              live.piKrw = live.usdKrw ? live.piUsd * live.usdKrw : null;
+              updateRateUI();
+              renderProducts();
+              renderCart();
+              document.getElementById("feedStatus").textContent = "실시간 반영 중";
+            }
+          } catch (e) {
+            console.error("WS message parse error", e);
+          }
+        };
+
+        ws.onerror = function(err) {
+          console.error("Kraken WS 오류", err);
+          document.getElementById("feedStatus").textContent = "WS 오류";
+        };
+
+        ws.onclose = function() {
+          document.getElementById("feedStatus").textContent = "WS 재연결 대기";
+          setTimeout(() => {
+            if (live.pairWs) connectKrakenWs();
+          }, 5000);
+        };
+      } catch (e) {
+        console.error("Kraken WS 연결 실패", e);
+      }
+    }
+
+    function startPiPayment(krwAmount, productName) {
+      if (!window.Pi) {
+        showMessage("Pi Browser에서 열어야 Pi 결제가 가능합니다.", "error");
+        return;
+      }
+
+      const piAmount = krwToPi(krwAmount);
+      if (!piAmount || Number.isNaN(piAmount) || piAmount <= 0) {
+        showMessage("실시간 PI 시세를 아직 불러오지 못했습니다.", "error");
+        return;
+      }
+
+      try {
+        Pi.createPayment({
+          amount: Number(piAmount.toFixed(4)),
+          memo: `${productName} 결제`,
+          metadata: {
+            product: productName,
+            krw: krwAmount,
+            pi_usd: live.piUsd,
+            usd_krw: live.usdKrw
+          }
+        }, {
+          onReadyForServerApproval: async function(paymentId) {
+            try {
+              showMessage("결제 승인 요청 중...", "ok");
+              await postJSON(APPROVE_URL, { paymentId });
+              showMessage("결제 승인 완료. 최종 처리 중...", "ok");
+            } catch (err) {
+              console.error(err);
+              showMessage("approve 서버 처리 실패: " + err.message, "error");
+            }
+          },
+
+          onReadyForServerCompletion: async function(paymentId, txid) {
+            try {
+              await postJSON(COMPLETE_URL, { paymentId, txid });
+              showMessage("결제가 완료되었습니다.", "ok");
+              cart = [];
+              saveCart();
+              renderCart();
+            } catch (err) {
+              console.error(err);
+              showMessage("complete 서버 처리 실패: " + err.message, "error");
+            }
+          },
+
+          onCancel: function(paymentId) {
+            console.log("Payment cancelled", paymentId);
+            showMessage("결제가 취소되었습니다.", "error");
+          },
+
+          onError: function(error, payment) {
+            console.error("Pi payment error", error, payment);
+            showMessage("결제 오류가 발생했습니다.", "error");
+          }
+        });
+      } catch (err) {
+        console.error(err);
+        showMessage("Pi 결제창 실행 실패", "error");
+      }
+    }
+
+    async function initMarketFeeds() {
+      try {
+        document.getElementById("feedStatus").textContent = "시세 로딩 중";
+        await fetchUsdKrw();
+        await discoverPiPair();
+        await fetchPiUsdTicker();
+        connectKrakenWs();
+
+        setInterval(fetchUsdKrw, 10 * 60 * 1000);
+        setInterval(fetchPiUsdTicker, 30 * 1000);
+      } catch (e) {
+        console.error("시세 초기화 실패", e);
+        document.getElementById("feedStatus").textContent = "시세 로딩 실패";
+        showMessage("실시간 시세 초기화 실패: " + e.message, "error");
+      }
+    }
+
+    renderTabs();
+    renderProducts();
+    renderCart();
+    initPi();
+    initMarketFeeds();
+  </script>
 </body>
 </html>
