@@ -214,7 +214,7 @@
       <h1 class="hero-title">피부 본연의 아름다움을 위한<br>더썸테라피 뷰티 스토어</h1>
       <p class="hero-desc">
         프리미엄 스킨케어와 테라피 기반 뷰티 제품을 한 곳에서 만나보세요.
-        한국 가격은 원화 기준으로 유지하고, PI 환산 금액은 크라켄 실시간 시세를 반영합니다.
+        한국 가격은 원화 기준으로 유지하고, PI 환산 금액은 실시간 시세를 반영합니다.
       </p>
 
       <div class="badge">Preparation Stage · Domain Verification</div>
@@ -311,6 +311,8 @@
     const APPROVE_URL = "https://thumbtherapy-server.onrender.com/approve";
     const COMPLETE_URL = "https://thumbtherapy-server.onrender.com/complete";
 
+    let piAuth = null;
+
     let live = {
       piUsd: null,
       usdKrw: null,
@@ -346,6 +348,7 @@
     function saveProducts() {
       localStorage.setItem("thumb_products", JSON.stringify(products));
     }
+
     function saveCart() {
       localStorage.setItem("thumb_cart", JSON.stringify(cart));
     }
@@ -534,7 +537,7 @@
       startPiPayment(total, "장바구니 결제");
     }
 
-    function showMessage(text, type="ok") {
+    function showMessage(text, type = "ok") {
       const box = document.getElementById("messageBox");
       box.textContent = text;
       box.className = `message show ${type}`;
@@ -580,36 +583,20 @@
       showMessage("기본 상품 목록으로 복원했습니다.", "ok");
     }
 
-let piAuth = null;
+    async function initPi() {
+      try {
+        if (!window.Pi) {
+          showMessage("Pi SDK 없음 - Pi Browser 환경이 아닙니다.", "error");
+          return;
+        }
 
-async function initPi() {
-try {
-
-showMessage("initPi 실행됨", "ok");  // ⭐ 이 줄 추가
-
-if (!window.Pi) {
-  showMessage("Pi SDK 없음 - Pi Browser 환경이 아닙니다.", "error");
-  return;
-}
-
-    Pi.init({ version: "2.0", sandbox: true });
-
-    const scopes = ['payments'];
-
-    function onIncompletePaymentFound(payment) {
-      console.log("미완료 결제:", payment);
+        Pi.init({ version: "2.0", sandbox: true });
+        console.log("Pi SDK 초기화 완료");
+      } catch (e) {
+        console.error("Pi 초기화 실패", e);
+        showMessage("Pi 초기화 실패: " + (e?.message || JSON.stringify(e) || e), "error");
+      }
     }
-
-    piAuth = await Pi.authenticate(scopes, onIncompletePaymentFound);
-
-    console.log("Pi 인증 성공:", piAuth);
-    showMessage("Pi 인증 완료", "ok");
-
-} catch (e) {
-  console.error("Pi 인증 실패", e);
-showMessage("Pi 인증 실패: " + (e?.message || JSON.stringify(e) || e), "error");
-}
-}
 
     async function postJSON(url, data) {
       const res = await fetch(url, {
@@ -625,7 +612,7 @@ showMessage("Pi 인증 실패: " + (e?.message || JSON.stringify(e) || e), "erro
 
     async function fetchUsdKrw() {
       try {
-        const res = await fetch("https://api.frankfurter.dev/v1/latest?base=USD&symbols=KRW");
+        const res = await fetch("https://api.frankfurter.app/latest?from=USD&to=KRW");
         const data = await res.json();
         if (data && data.rates && data.rates.KRW) {
           live.usdKrw = Number(data.rates.KRW);
@@ -644,7 +631,6 @@ showMessage("Pi 인증 실패: " + (e?.message || JSON.stringify(e) || e), "erro
       if (data.error && data.error.length) throw new Error(data.error.join(","));
 
       const entries = Object.entries(data.result || {});
-
       let found = null;
 
       for (const [restKey, info] of entries) {
@@ -653,15 +639,8 @@ showMessage("Pi 인증 실패: " + (e?.message || JSON.stringify(e) || e), "erro
         const base = (info.base || "").toUpperCase();
         const quote = (info.quote || "").toUpperCase();
 
-        const piLike =
-          altname.includes("PI") ||
-          wsname.startsWith("PI/") ||
-          base.includes("PI");
-
-        const usdLike =
-          altname.endsWith("USD") ||
-          wsname.endsWith("/USD") ||
-          quote.includes("USD");
+        const piLike = altname.includes("PI") || wsname.startsWith("PI/") || base.includes("PI");
+        const usdLike = altname.endsWith("USD") || wsname.endsWith("/USD") || quote.includes("USD");
 
         if (piLike && usdLike) {
           found = {
@@ -772,22 +751,23 @@ showMessage("Pi 인증 실패: " + (e?.message || JSON.stringify(e) || e), "erro
         showMessage("Pi Browser에서 열어야 Pi 결제가 가능합니다.", "error");
         return;
       }
-if (!piAuth) {
-  try {
-    const scopes = ['payments'];
 
-    piAuth = await Pi.authenticate(scopes, function(payment) {
-      console.log("미완료 결제:", payment);
-    });
+      if (!piAuth) {
+        try {
+          const scopes = ['payments'];
 
-    showMessage("Pi 인증 완료", "ok");
-   // 🔥 인증 끝나면 바로 다시 결제 실행
-return startPiPayment(krwAmount, productName); 
-  } catch (e) {
-    showMessage("Pi 인증 실패: " + (e?.message || JSON.stringify(e) || e), "error");
-    return;
-  }
-}
+          piAuth = await Pi.authenticate(scopes, function(payment) {
+            console.log("미완료 결제:", payment);
+          });
+
+          showMessage("Pi 인증 완료", "ok");
+          return startPiPayment(krwAmount, productName);
+        } catch (e) {
+          showMessage("Pi 인증 실패: " + (e?.message || JSON.stringify(e) || e), "error");
+          return;
+        }
+      }
+
       const piAmount = krwToPi(krwAmount);
       if (!piAmount || Number.isNaN(piAmount) || piAmount <= 0) {
         showMessage("실시간 PI 시세를 아직 불러오지 못했습니다.", "error");
@@ -836,12 +816,12 @@ return startPiPayment(krwAmount, productName);
 
           onError: function(error, payment) {
             console.error("Pi payment error", error, payment);
-            showMessage("결제 오류가 발생했습니다.", "error");
+            showMessage("결제 오류가 발생했습니다: " + (error?.message || JSON.stringify(error) || error), "error");
           }
         });
       } catch (err) {
         console.error(err);
-        showMessage("Pi 결제창 실행 실패", "error");
+        showMessage("Pi 결제창 실행 실패: " + (err?.message || JSON.stringify(err) || err), "error");
       }
     }
 
@@ -858,19 +838,19 @@ return startPiPayment(krwAmount, productName);
       } catch (e) {
         console.error("시세 초기화 실패", e);
         document.getElementById("feedStatus").textContent = "시세 로딩 실패";
-        showMessage("실시간 시세 초기화 실패: " + e.message, "error");
+        showMessage("실시간 시세 초기화 실패: " + (e?.message || JSON.stringify(e) || e), "error");
       }
     }
-renderTabs();
-renderProducts();
-renderCart();
 
-window.onload = function() {
-  initPi();
-};
-   
-initMarketFeeds();
-   
+    renderTabs();
+    renderProducts();
+    renderCart();
+
+    window.onload = function() {
+      initPi();
+    };
+
+    initMarketFeeds();
   </script>
 </body>
 </html>
