@@ -154,7 +154,7 @@
 
     .message{
       margin-top:14px; padding:14px; border-radius:16px; font-size:14px;
-      font-weight:800; display:none;
+      font-weight:800; display:none; white-space:pre-wrap; word-break:break-word;
     }
     .message.show{ display:block; }
     .message.ok{ background:#ebfff3; color:var(--ok); border:1px solid #c5ecd3; }
@@ -310,6 +310,7 @@
   <script>
     const APPROVE_URL = "https://thumbtherapy-server.onrender.com/approve";
     const COMPLETE_URL = "https://thumbtherapy-server.onrender.com/complete";
+    const PI_SANDBOX = true; // 테스트 끝나면 false
 
     let piAuth = null;
 
@@ -379,10 +380,14 @@
     function updateRateUI() {
       document.getElementById("piUsdStatus").textContent =
         live.piUsd ? `$${live.piUsd.toFixed(6)}` : "불러오는 중...";
+
       document.getElementById("usdKrwStatus").textContent =
         live.usdKrw ? `₩${live.usdKrw.toFixed(2)}` : "불러오는 중...";
+
       document.getElementById("piKrwStatus").textContent =
-        (live.piUsd && live.usdKrw) ? `₩${(live.piUsd * live.usdKrw).toFixed(2)}` : "계산 중...";
+        (live.piUsd && live.usdKrw)
+          ? `₩${(live.piUsd * live.usdKrw).toFixed(2)}`
+          : "계산 중...";
     }
 
     function renderTabs() {
@@ -590,11 +595,35 @@
           return;
         }
 
-        Pi.init({ version: "2.0", sandbox: true });
+        Pi.init({ version: "2.0", sandbox: PI_SANDBOX });
         console.log("Pi SDK 초기화 완료");
       } catch (e) {
         console.error("Pi 초기화 실패", e);
         showMessage("Pi 초기화 실패: " + (e?.message || JSON.stringify(e) || e), "error");
+      }
+    }
+
+    async function ensurePiAuthenticated() {
+      if (!window.Pi) {
+        showMessage("Pi Browser에서 열어야 Pi 결제가 가능합니다.", "error");
+        return false;
+      }
+
+      if (piAuth) return true;
+
+      try {
+        const scopes = ['payments'];
+        piAuth = await Pi.authenticate(scopes, function(payment) {
+          console.log("미완료 결제:", payment);
+        });
+
+        console.log("Pi 인증 성공:", piAuth);
+        showMessage("Pi 인증 완료", "ok");
+        return true;
+      } catch (e) {
+        console.error("Pi 인증 실패", e);
+        showMessage("Pi 인증 실패: " + (e?.message || JSON.stringify(e) || e), "error");
+        return false;
       }
     }
 
@@ -604,25 +633,51 @@
         headers: { "Content-Type":"application/json" },
         body: JSON.stringify(data)
       });
+
       if (!res.ok) {
         throw new Error("서버 응답 오류: " + res.status);
       }
+
       return await res.json();
     }
 
     async function fetchUsdKrw() {
-      try {
-        const res = await fetch("https://api.frankfurter.app/latest?from=USD&to=KRW");
-        const data = await res.json();
-        if (data && data.rates && data.rates.KRW) {
-          live.usdKrw = Number(data.rates.KRW);
-          updateRateUI();
-          renderProducts();
-          renderCart();
+      const fallbackRate = 1350;
+      const urls = [
+        "https://api.frankfurter.app/latest?from=USD&to=KRW",
+        "https://open.er-api.com/v6/latest/USD"
+      ];
+
+      for (const url of urls) {
+        try {
+          const controller = new AbortController();
+          const timeoutId = setTimeout(() => controller.abort(), 5000);
+
+          const res = await fetch(url, { signal: controller.signal });
+          clearTimeout(timeoutId);
+
+          const data = await res.json();
+          const rate = data?.rates?.KRW;
+
+          if (rate && !Number.isNaN(Number(rate))) {
+            live.usdKrw = Number(rate);
+            live.piKrw = live.piUsd ? live.piUsd * live.usdKrw : null;
+            updateRateUI();
+            renderProducts();
+            renderCart();
+            return;
+          }
+        } catch (e) {
+          console.error("USD/KRW 환율 호출 실패:", url, e);
         }
-      } catch (e) {
-        console.error("USD/KRW 환율 실패", e);
       }
+
+      live.usdKrw = fallbackRate;
+      live.piKrw = live.piUsd ? live.piUsd * live.usdKrw : null;
+      updateRateUI();
+      renderProducts();
+      renderCart();
+      showMessage("실시간 환율 연결이 불안정하여 예비 환율로 계산합니다.", "error");
     }
 
     async function discoverPiPair() {
@@ -747,26 +802,8 @@
     }
 
     async function startPiPayment(krwAmount, productName) {
-      if (!window.Pi) {
-        showMessage("Pi Browser에서 열어야 Pi 결제가 가능합니다.", "error");
-        return;
-      }
-
-      if (!piAuth) {
-        try {
-          const scopes = ['payments'];
-
-          piAuth = await Pi.authenticate(scopes, function(payment) {
-            console.log("미완료 결제:", payment);
-          });
-
-          showMessage("Pi 인증 완료", "ok");
-          return startPiPayment(krwAmount, productName);
-        } catch (e) {
-          showMessage("Pi 인증 실패: " + (e?.message || JSON.stringify(e) || e), "error");
-          return;
-        }
-      }
+      const authed = await ensurePiAuthenticated();
+      if (!authed) return;
 
       const piAmount = krwToPi(krwAmount);
       if (!piAmount || Number.isNaN(piAmount) || piAmount <= 0) {
@@ -816,7 +853,7 @@
 
           onError: function(error, payment) {
             console.error("Pi payment error", error, payment);
-            showMessage("결제 오류가 발생했습니다: " + (error?.message || JSON.stringify(error) || error), "error");
+            showMessage("결제 오류: " + (error?.message || JSON.stringify(error) || error), "error");
           }
         });
       } catch (err) {
