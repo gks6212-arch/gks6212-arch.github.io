@@ -3,891 +3,357 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>The Thumb Therapy | Premium Beauty Store</title>
+  <title>The Thumb Therapy</title>
   <script src="https://sdk.minepi.com/pi-sdk.js"></script>
-
   <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: "Apple SD Gothic Neo","Malgun Gothic",sans-serif; }
-    :root{
-      --bg:#f6f1eb;
-      --card:#ffffff;
-      --line:#eadfd3;
-      --text:#4b3f38;
-      --sub:#7d7067;
-      --main:#9a7a46;
-      --main-dark:#7f6236;
-      --soft:#fff7ed;
-      --danger:#a14e44;
-      --ok:#2a7a4c;
-      --shadow:0 16px 34px rgba(90,72,53,0.08);
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f6f3ef;
+      color: #3d3128;
     }
-
-    html { scroll-behavior: smooth; }
-    body { background: var(--bg); color: var(--text); line-height: 1.6; }
-    .hidden { display:none !important; }
-
-    .appbar{
-      position: sticky; top: 0; z-index: 100;
-      background: rgba(255,255,255,0.96);
-      backdrop-filter: blur(8px);
-      border-bottom: 1px solid var(--line);
+    .header {
+      background: #ffffff;
+      padding: 18px 16px;
+      font-size: 24px;
+      font-weight: 700;
+      border-bottom: 1px solid #e5ddd3;
     }
-    .appbar-inner{
-      max-width: 1280px; margin: 0 auto; padding: 16px;
-      display:flex; align-items:center; justify-content:space-between; gap:12px;
+    .sub {
+      font-size: 14px;
+      color: #7a6a5d;
+      margin-top: 6px;
+      font-weight: 400;
     }
-    .brand-wrap{ display:flex; align-items:center; gap:14px; min-width:0; flex:1; }
-    .logo{
-      width:66px; height:66px; border-radius:22px;
-      background: linear-gradient(135deg, #9c7a49, #bc9a65);
-      position:relative; box-shadow: 0 12px 24px rgba(138,106,63,0.24);
-      overflow:hidden; flex:0 0 66px;
+    .container {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 20px 16px 40px;
     }
-    .logo::before{
-      content:""; position:absolute; left:15px; top:30px;
-      width:24px; height:15px; background:#fff; border-radius:12px; transform: rotate(-8deg);
+    .hero {
+      background: #fff;
+      border-radius: 16px;
+      padding: 20px;
+      margin-bottom: 16px;
+      border: 1px solid #eadfd4;
     }
-    .logo::after{
-      content:""; position:absolute; left:31px; top:11px;
-      width:12px; height:24px; background:#fff; border-radius:10px; transform: rotate(24deg);
+    .hero h2 {
+      margin: 0 0 8px;
+      font-size: 22px;
     }
-
-    .brand-title{ font-size:28px; font-weight:900; color:#2d2520; line-height:1.1; word-break:keep-all; }
-    .brand-sub{ font-size:12px; color:#8f8073; margin-top:6px; word-break:keep-all; }
-
-    .top-icons{ display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
-    .icon-btn{
-      border:none; background:#fff7ed; color:var(--main-dark);
-      border:1px solid var(--line); padding:10px 14px; border-radius:999px;
-      font-weight:700; cursor:pointer;
+    .hero p {
+      margin: 0;
+      color: #7a6a5d;
+      line-height: 1.5;
     }
-
-    .hero{ max-width:1280px; margin:0 auto; padding:18px 16px 12px; }
-    .hero-card{
-      background:#f9f5f0; border:1px solid var(--line);
-      border-radius:34px; padding:28px 20px 24px; box-shadow:var(--shadow);
+    .card {
+      background: #fff;
+      border-radius: 16px;
+      padding: 18px;
+      margin-bottom: 14px;
+      border: 1px solid #eadfd4;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.04);
     }
-    .hero-title{
-      font-size:34px; font-weight:900; color:#44372f; line-height:1.25;
-      margin-bottom:12px; word-break:keep-all;
+    .brand {
+      font-size: 13px;
+      color: #8a7767;
+      margin-bottom: 6px;
     }
-    .hero-desc{
-      font-size:17px; color:#7b6f64; max-width:760px; word-break:keep-all; line-height:1.7;
+    .name {
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 8px;
     }
-    .badge{
-      display:inline-block; margin-top:18px; padding:12px 18px; border-radius:999px;
-      background:#eee7db; color:#9a7a46; font-size:16px; font-weight:900;
+    .desc {
+      font-size: 14px;
+      color: #6f6257;
+      line-height: 1.5;
+      margin-bottom: 14px;
     }
-
-    .notice-box{
-      margin-top:22px; background:#fffaf3; border:2px solid #dcc49c; color:#7a5a2f;
-      padding:24px 18px; border-radius:26px;
+    .price-row {
+      margin-bottom: 14px;
+      line-height: 1.8;
     }
-    .notice-title{ font-size:20px; font-weight:900; margin-bottom:14px; color:#6f532e; }
-    .notice-text{ font-size:17px; line-height:1.9; word-break:keep-all; color:#8a6d44; }
-
-    .status-grid{
-      display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:12px; margin-top:18px;
+    .krw {
+      font-size: 18px;
+      font-weight: 700;
     }
-    .status-card{
-      background:#fff; border:1px solid var(--line); border-radius:20px; padding:16px;
+    .usd, .pi {
+      font-size: 14px;
+      color: #6f6257;
     }
-    .status-label{ font-size:12px; color:#8b8076; margin-bottom:6px; }
-    .status-value{ font-size:17px; font-weight:900; color:#4a3d34; }
-
-    .container{
-      max-width:1280px; margin:0 auto; padding:10px 16px 80px;
-      display:grid; grid-template-columns:1fr 340px; gap:18px;
+    .btn-row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
     }
-    .main-area{ min-width:0; }
-    .section-card{
-      background:var(--card); border:1px solid var(--line); border-radius:28px;
-      padding:20px; box-shadow:var(--shadow); margin-bottom:18px;
+    button {
+      border: none;
+      border-radius: 12px;
+      padding: 12px 16px;
+      cursor: pointer;
+      font-size: 15px;
+      font-weight: 700;
     }
-    .section-title{ font-size:24px; font-weight:900; margin-bottom:14px; color:#3f332c; }
-
-    .tabs{ display:flex; gap:10px; overflow:auto; padding-bottom:4px; }
-    .tab-btn{
-      white-space:nowrap; border:none; background:#f3ece4; color:#6b5c50;
-      padding:12px 16px; border-radius:999px; font-weight:800; cursor:pointer;
+    .btn-main {
+      background: #9a7a46;
+      color: #fff;
     }
-    .tab-btn.active{ background:var(--main); color:#fff; }
-
-    .products{ display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px; margin-top:18px; }
-    .product-card{
-      background:#fff; border:1px solid var(--line); border-radius:24px; overflow:hidden;
-      display:flex; flex-direction:column;
+    .btn-soft {
+      background: #ece3d8;
+      color: #53453a;
     }
-    .product-thumb{
-      height:220px; background:linear-gradient(135deg,#f7efe5,#e8d9c7);
-      display:flex; align-items:center; justify-content:center;
-      font-size:22px; font-weight:900; color:#8b6b43;
+    .status-box {
+      background: #fff;
+      border-radius: 16px;
+      padding: 16px;
+      border: 1px solid #eadfd4;
+      margin-top: 16px;
+      line-height: 1.7;
     }
-    .product-body{ padding:16px; display:flex; flex-direction:column; gap:10px; flex:1; }
-    .product-brand{ font-size:12px; color:#9b8a79; font-weight:700; }
-    .product-name{ font-size:18px; font-weight:900; color:#40342c; line-height:1.4; min-height:50px; }
-    .product-desc{ font-size:14px; color:#7b6e62; min-height:44px; }
-
-    .price-box{ display:flex; flex-direction:column; gap:4px; margin-top:auto; }
-    .krw{ font-size:18px; font-weight:900; color:#2f2823; }
-    .usd{ font-size:14px; color:#8c7455; font-weight:700; }
-    .pi{ font-size:15px; color:#7a5d39; font-weight:900; }
-
-    .btn-row{ display:flex; gap:8px; margin-top:10px; flex-wrap:wrap; }
-    .btn{
-      border:none; cursor:pointer; padding:12px 14px; border-radius:14px;
-      font-weight:900; flex:1;
+    .status-title {
+      font-weight: 700;
+      margin-bottom: 8px;
     }
-    .btn-main{ background:var(--main); color:#fff; }
-    .btn-soft{ background:#f6efe5; color:#6d5947; border:1px solid var(--line); }
-
-    .sidebar{ position:sticky; top:95px; align-self:start; }
-    .cart-list{ display:flex; flex-direction:column; gap:10px; margin-top:12px; max-height:360px; overflow:auto; }
-    .cart-item{ border:1px solid var(--line); border-radius:16px; padding:12px; background:#fffaf6; }
-    .cart-item-name{ font-weight:800; color:#463931; }
-    .cart-item-meta{ font-size:13px; color:#7b6f64; margin-top:4px; }
-
-    .cart-total{
-      margin-top:16px; padding-top:14px; border-top:1px dashed var(--line);
-      display:flex; flex-direction:column; gap:6px; font-weight:900;
+    .message {
+      margin-top: 16px;
+      padding: 14px;
+      border-radius: 12px;
+      display: none;
+      word-break: break-word;
+      line-height: 1.5;
     }
-
-    .message{
-      margin-top:14px; padding:14px; border-radius:16px; font-size:14px;
-      font-weight:800; display:none; white-space:pre-wrap; word-break:break-word;
+    .message.ok {
+      display: block;
+      background: #edf8ef;
+      color: #24663a;
+      border: 1px solid #cce8d1;
     }
-    .message.show{ display:block; }
-    .message.ok{ background:#ebfff3; color:var(--ok); border:1px solid #c5ecd3; }
-    .message.error{ background:#fff1ef; color:var(--danger); border:1px solid #efc9c3; }
-
-    .admin-panel{ display:grid; gap:10px; margin-top:16px; }
-    .admin-panel input, .admin-panel textarea, .admin-panel select{
-      width:100%; padding:12px 14px; border-radius:14px;
-      border:1px solid var(--line); background:#fff; font-size:14px;
+    .message.error {
+      display: block;
+      background: #fff1f1;
+      color: #a33c3c;
+      border: 1px solid #f1c5c5;
     }
-
-    .footer{
-      max-width:1280px; margin:0 auto; padding:0 16px 40px;
-      color:#8b7c71; font-size:13px;
-    }
-
-    @media (max-width: 1024px){
-      .container{ grid-template-columns:1fr; }
-      .sidebar{ position:relative; top:auto; }
-      .products{ grid-template-columns:repeat(2,minmax(0,1fr)); }
-      .status-grid{ grid-template-columns:repeat(2,minmax(0,1fr)); }
-    }
-    @media (max-width: 640px){
-      .brand-title{ font-size:22px; }
-      .hero-title{ font-size:28px; }
-      .hero-desc{ font-size:15px; }
-      .products{ grid-template-columns:1fr; }
-      .product-thumb{ height:180px; }
-      .appbar-inner{ align-items:flex-start; flex-direction:column; }
-      .top-icons{ width:100%; }
-      .icon-btn{ flex:1; }
-      .status-grid{ grid-template-columns:1fr; }
+    .footer {
+      text-align: center;
+      font-size: 13px;
+      color: #7d7067;
+      padding: 30px 16px 50px;
     }
   </style>
 </head>
 <body>
+  <div class="header">
+    The Thumb Therapy
+    <div class="sub">Premium Beauty Store · Pi Test Payment</div>
+  </div>
 
-  <header class="appbar">
-    <div class="appbar-inner">
-      <div class="brand-wrap">
-        <div class="logo"></div>
-        <div>
-          <div class="brand-title">The Thumb Therapy</div>
-          <div class="brand-sub">Premium Beauty Store · Korean Skincare & Therapy Beauty</div>
-        </div>
-      </div>
-      <div class="top-icons">
-        <button class="icon-btn" onclick="toggleAdmin()">관리자 모드</button>
-        <button class="icon-btn" onclick="scrollToSection('productsSection')">쇼핑몰</button>
-        <button class="icon-btn" onclick="scrollToSection('cartSection')">장바구니</button>
-      </div>
-    </div>
-  </header>
-
-  <section class="hero">
-    <div class="hero-card">
-      <h1 class="hero-title">피부 본연의 아름다움을 위한<br>더썸테라피 뷰티 스토어</h1>
-      <p class="hero-desc">
-        프리미엄 스킨케어와 테라피 기반 뷰티 제품을 한 곳에서 만나보세요.
-        한국 가격은 원화 기준으로 유지하고, PI 환산 금액은 실시간 시세를 반영합니다.
+  <div class="container">
+    <div class="hero">
+      <h2>더썸테라피 테스트 쇼핑몰</h2>
+      <p>
+        현재는 Pi 샌드박스 테스트 결제용 화면입니다.
+        서버가 정상 연결되면 Pi 지갑 결제창이 열리고 approve / complete 흐름이 진행됩니다.
       </p>
+    </div>
 
-      <div class="badge">Preparation Stage · Domain Verification</div>
-
-      <div class="notice-box">
-        <div class="notice-title">도메인 인증 및 오픈 준비 중</div>
-        <div class="notice-text">
-          현재 본 사이트는 Pi Browser 및 일반 브라우저에서 테스트 가능한 상태로 구성되어 있으며,
-          도메인 인증과 앱 심사 완료 후 정식 오픈될 예정입니다.
-        </div>
-
-        <div class="status-grid">
-          <div class="status-card">
-            <div class="status-label">PI/USD</div>
-            <div class="status-value" id="piUsdStatus">불러오는 중...</div>
-          </div>
-          <div class="status-card">
-            <div class="status-label">USD/KRW</div>
-            <div class="status-value" id="usdKrwStatus">불러오는 중...</div>
-          </div>
-          <div class="status-card">
-            <div class="status-label">1 PI = KRW</div>
-            <div class="status-value" id="piKrwStatus">계산 중...</div>
-          </div>
-          <div class="status-card">
-            <div class="status-label">시세 상태</div>
-            <div class="status-value" id="feedStatus">초기화 중...</div>
-          </div>
-        </div>
+    <div class="card">
+      <div class="brand">노라보데</div>
+      <div class="name">옥시젠 리페어 세럼</div>
+      <div class="desc">산소 테라피 기반의 집중 보습 세럼 테스트 상품입니다.</div>
+      <div class="price-row">
+        <div class="krw">₩10,000</div>
+        <div class="usd" id="usdPrice">USD 환산 불러오는 중...</div>
+        <div class="pi" id="piPrice">PI 환산 불러오는 중...</div>
+      </div>
+      <div class="btn-row">
+        <button class="btn-main" onclick="payProduct()">Pi 결제하기</button>
+        <button class="btn-soft" onclick="testServer()">서버 연결 확인</button>
       </div>
     </div>
-  </section>
 
-  <main class="container">
-    <section class="main-area">
-      <div class="section-card" id="productsSection">
-        <div class="section-title">브랜드 선택</div>
-        <div class="tabs" id="brandTabs"></div>
-      </div>
+    <div class="status-box">
+      <div class="status-title">연결 상태</div>
+      <div id="serverStatus">확인 전</div>
+      <div id="feedStatus">시세 초기화 전</div>
+    </div>
 
-      <div class="section-card">
-        <div class="section-title">상품 목록</div>
-        <div class="products" id="productGrid"></div>
-      </div>
+    <div id="messageBox" class="message"></div>
+  </div>
 
-      <div class="section-card hidden" id="adminSection">
-        <div class="section-title">관리자 상품 추가</div>
-        <div class="admin-panel">
-          <select id="adminBrand">
-            <option value="노라보데">노라보데</option>
-            <option value="알케미아">알케미아</option>
-            <option value="기노">기노</option>
-            <option value="탈라">탈라</option>
-            <option value="쏘티스">쏘티스</option>
-          </select>
-          <input id="adminName" placeholder="상품명" />
-          <textarea id="adminDesc" rows="3" placeholder="상품 설명"></textarea>
-          <input id="adminPrice" type="number" placeholder="원화 가격 (예: 89000)" />
-          <button class="btn btn-main" onclick="addProduct()">상품 추가</button>
-          <button class="btn btn-soft" onclick="resetProducts()">기본 상품 복원</button>
-        </div>
-      </div>
-    </section>
-
-    <aside class="sidebar" id="cartSection">
-      <div class="section-card">
-        <div class="section-title">장바구니</div>
-        <div class="cart-list" id="cartList">
-          <div style="color:#8d7f72;">아직 담긴 상품이 없습니다.</div>
-        </div>
-
-        <div class="cart-total">
-          <div>총 원화 금액: <span id="totalKRW">₩0</span></div>
-          <div>총 달러 환산: <span id="totalUSD">$0.00</span></div>
-          <div>예상 PI 금액: <span id="totalPI">0 PI</span></div>
-        </div>
-
-        <div class="btn-row" style="margin-top:16px;">
-          <button class="btn btn-soft" onclick="clearCart()">장바구니 비우기</button>
-          <button class="btn btn-main" onclick="payCart()">Pi 결제하기</button>
-        </div>
-
-        <div id="messageBox" class="message"></div>
-      </div>
-    </aside>
-  </main>
-
-  <footer class="footer">
-    © 2026 The Thumb Therapy. All rights reserved.<br>
+  <div class="footer">
+    © 2026 The Thumb Therapy. All rights reserved.<br />
     본 페이지는 샘플 쇼핑몰 및 Pi 결제 연동 테스트용으로 구성되었습니다.
-  </footer>
+  </div>
 
   <script>
-   const APPROVE_URL = "https://thumbtherapy-server-prod-xxxx.up.railway.app/approve";
-const COMPLETE_URL = "https://thumbtherapy-server-prod-xxxx.up.railway.app/complete";
-    const PI_SANDBOX = true; // 테스트 끝나면 false
+    // 반드시 본인 Railway 주소로 유지
+    const APPROVE_URL = "https://thumbtherapy-server-production.up.railway.app/approve";
+    const COMPLETE_URL = "https://thumbtherapy-server-production.up.railway.app/complete";
+    const SERVER_ROOT = "https://thumbtherapy-server-production.up.railway.app";
 
-    let piAuth = null;
+    // 테스트 완료 전까지 true
+    const PI_SANDBOX = true;
 
-    let live = {
-      piUsd: null,
-      usdKrw: null,
-      piKrw: null,
-      pairRest: null,
-      pairWs: null,
-      ws: null
-    };
-
-    const defaultProducts = [
-      { id: 1, brand: "노라보데", name: "옥시젠 리페어 세럼", desc: "산소 테라피 기반 고보습 집중 세럼", price: 89000 },
-      { id: 2, brand: "노라보데", name: "리바이탈 크림", desc: "탄력과 윤기를 위한 데일리 크림", price: 96000 },
-      { id: 3, brand: "노라보데", name: "스킨 밸런스 토너", desc: "피부결 정돈과 수분 밸런스 케어", price: 54000 },
-      { id: 4, brand: "알케미아", name: "허벌 밸런싱 토너", desc: "자연 유래 성분 토너", price: 52000 },
-      { id: 5, brand: "알케미아", name: "퓨리파잉 앰플", desc: "민감 피부 진정 앰플", price: 68000 },
-      { id: 6, brand: "알케미아", name: "에센셜 크림", desc: "건조한 피부 집중 보습", price: 74000 },
-      { id: 7, brand: "기노", name: "하이드라 수딩 마스크", desc: "수분 장벽 강화 마스크", price: 73000 },
-      { id: 8, brand: "기노", name: "퍼밍 아이크림", desc: "눈가 탄력 집중 케어", price: 85000 },
-      { id: 9, brand: "기노", name: "유스 에멀전", desc: "생기있는 피부 컨디션 유지", price: 79000 },
-      { id: 10, brand: "탈라", name: "마린 에센스", desc: "해양 성분 영양 에센스", price: 79000 },
-      { id: 11, brand: "탈라", name: "아쿠아 젤 크림", desc: "산뜻한 수분 젤 크림", price: 61000 },
-      { id: 12, brand: "탈라", name: "리커버리 세럼", desc: "외부 자극 후 진정 케어", price: 88000 },
-      { id: 13, brand: "쏘티스", name: "프리미엄 리프팅 세럼", desc: "고급 안티에이징 솔루션", price: 118000 },
-      { id: 14, brand: "쏘티스", name: "컴포트 클렌저", desc: "부드러운 데일리 클렌징", price: 48000 },
-      { id: 15, brand: "쏘티스", name: "럭셔리 나이트 크림", desc: "밤 사이 집중 영양 공급", price: 128000 }
-    ];
-
-    let products = JSON.parse(localStorage.getItem("thumb_products")) || defaultProducts;
-    let cart = JSON.parse(localStorage.getItem("thumb_cart")) || [];
-    let selectedBrand = "전체";
-    let adminMode = false;
-
-    function saveProducts() {
-      localStorage.setItem("thumb_products", JSON.stringify(products));
-    }
-
-    function saveCart() {
-      localStorage.setItem("thumb_cart", JSON.stringify(cart));
-    }
-
-    function formatKRW(n) {
-      return "₩" + Number(n).toLocaleString("ko-KR");
-    }
-
-    function formatUSD(n) {
-      return "$" + Number(n).toFixed(2);
-    }
-
-    function uniqueBrands() {
-      return ["전체", ...new Set(products.map(p => p.brand))];
-    }
-
-    function krwToUsd(krw) {
-      if (!live.usdKrw) return null;
-      return krw / live.usdKrw;
-    }
-
-    function krwToPi(krw) {
-      if (!live.piUsd || !live.usdKrw) return null;
-      const usd = krw / live.usdKrw;
-      return usd / live.piUsd;
-    }
-
-    function updateRateUI() {
-      document.getElementById("piUsdStatus").textContent =
-        live.piUsd ? `$${live.piUsd.toFixed(6)}` : "불러오는 중...";
-
-      document.getElementById("usdKrwStatus").textContent =
-        live.usdKrw ? `₩${live.usdKrw.toFixed(2)}` : "불러오는 중...";
-
-      document.getElementById("piKrwStatus").textContent =
-        (live.piUsd && live.usdKrw)
-          ? `₩${(live.piUsd * live.usdKrw).toFixed(2)}`
-          : "계산 중...";
-    }
-
-    function renderTabs() {
-      const tabs = document.getElementById("brandTabs");
-      tabs.innerHTML = "";
-      uniqueBrands().forEach(brand => {
-        const btn = document.createElement("button");
-        btn.className = "tab-btn" + (brand === selectedBrand ? " active" : "");
-        btn.textContent = brand;
-        btn.onclick = () => {
-          selectedBrand = brand;
-          renderTabs();
-          renderProducts();
-        };
-        tabs.appendChild(btn);
-      });
-    }
-
-    function renderProducts() {
-      const grid = document.getElementById("productGrid");
-      grid.innerHTML = "";
-
-      const list = selectedBrand === "전체"
-        ? products
-        : products.filter(p => p.brand === selectedBrand);
-
-      if (!list.length) {
-        grid.innerHTML = "<div style='color:#8d7f72;'>등록된 상품이 없습니다.</div>";
-        return;
-      }
-
-      list.forEach(p => {
-        const usd = krwToUsd(p.price);
-        const pi = krwToPi(p.price);
-
-        const card = document.createElement("div");
-        card.className = "product-card";
-        card.innerHTML = `
-          <div class="product-thumb">${p.brand}</div>
-          <div class="product-body">
-            <div class="product-brand">${p.brand}</div>
-            <div class="product-name">${p.name}</div>
-            <div class="product-desc">${p.desc}</div>
-            <div class="price-box">
-              <div class="krw">${formatKRW(p.price)}</div>
-              <div class="usd">${usd ? `약 ${formatUSD(usd)}` : "USD 계산 중..."}</div>
-              <div class="pi">${pi ? `약 ${pi.toFixed(4)} PI` : "PI 계산 중..."}</div>
-            </div>
-            <div class="btn-row">
-              <button class="btn btn-soft" onclick="buyNow(${p.id})">바로결제</button>
-              <button class="btn btn-main" onclick="addToCart(${p.id})">장바구니</button>
-            </div>
-          </div>
-        `;
-        grid.appendChild(card);
-      });
-    }
-
-    function renderCart() {
-      const cartList = document.getElementById("cartList");
-      const totalKRW = document.getElementById("totalKRW");
-      const totalUSD = document.getElementById("totalUSD");
-      const totalPI = document.getElementById("totalPI");
-
-      if (!cart.length) {
-        cartList.innerHTML = `<div style="color:#8d7f72;">아직 담긴 상품이 없습니다.</div>`;
-        totalKRW.textContent = "₩0";
-        totalUSD.textContent = "$0.00";
-        totalPI.textContent = "0 PI";
-        return;
-      }
-
-      cartList.innerHTML = "";
-      let total = 0;
-
-      cart.forEach(item => {
-        total += item.price * item.qty;
-        const itemUsd = krwToUsd(item.price * item.qty);
-        const itemPi = krwToPi(item.price * item.qty);
-
-        const div = document.createElement("div");
-        div.className = "cart-item";
-        div.innerHTML = `
-          <div class="cart-item-name">${item.name}</div>
-          <div class="cart-item-meta">${item.brand} · 수량 ${item.qty}개</div>
-          <div class="cart-item-meta">
-            ${formatKRW(item.price * item.qty)}
-            ${itemUsd ? ` / ${formatUSD(itemUsd)}` : ""}
-            ${itemPi ? ` / 약 ${itemPi.toFixed(4)} PI` : ""}
-          </div>
-          <div class="btn-row" style="margin-top:8px;">
-            <button class="btn btn-soft" onclick="changeQty(${item.id}, -1)">-</button>
-            <button class="btn btn-soft" onclick="changeQty(${item.id}, 1)">+</button>
-            <button class="btn btn-soft" onclick="removeCartItem(${item.id})">삭제</button>
-          </div>
-        `;
-        cartList.appendChild(div);
-      });
-
-      totalKRW.textContent = formatKRW(total);
-      totalUSD.textContent = krwToUsd(total) ? formatUSD(krwToUsd(total)) : "$0.00";
-      totalPI.textContent = krwToPi(total) ? `${krwToPi(total).toFixed(4)} PI` : "0 PI";
-    }
-
-    function addToCart(id) {
-      const product = products.find(p => p.id === id);
-      if (!product) return;
-
-      const found = cart.find(c => c.id === id);
-      if (found) found.qty += 1;
-      else cart.push({ ...product, qty: 1 });
-
-      saveCart();
-      renderCart();
-      showMessage("장바구니에 담았습니다.", "ok");
-    }
-
-    function removeCartItem(id) {
-      cart = cart.filter(c => c.id !== id);
-      saveCart();
-      renderCart();
-    }
-
-    function changeQty(id, diff) {
-      const item = cart.find(c => c.id === id);
-      if (!item) return;
-      item.qty += diff;
-      if (item.qty <= 0) cart = cart.filter(c => c.id !== id);
-      saveCart();
-      renderCart();
-    }
-
-    function clearCart() {
-      cart = [];
-      saveCart();
-      renderCart();
-      showMessage("장바구니를 비웠습니다.", "ok");
-    }
-
-    function buyNow(id) {
-      const product = products.find(p => p.id === id);
-      if (!product) return;
-      startPiPayment(product.price, product.name);
-    }
-
-    function payCart() {
-      if (!cart.length) {
-        showMessage("장바구니가 비어 있습니다.", "error");
-        return;
-      }
-      const total = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
-      startPiPayment(total, "장바구니 결제");
-    }
+    let currentPiUsd = 0.27;
+    let currentUsdKrw = 1350;
 
     function showMessage(text, type = "ok") {
       const box = document.getElementById("messageBox");
+      box.className = "message " + type;
       box.textContent = text;
-      box.className = `message show ${type}`;
     }
 
-    function scrollToSection(id) {
-      document.getElementById(id).scrollIntoView({ behavior:"smooth" });
+    function clearMessage() {
+      const box = document.getElementById("messageBox");
+      box.className = "message";
+      box.textContent = "";
     }
 
-    function toggleAdmin() {
-      adminMode = !adminMode;
-      document.getElementById("adminSection").classList.toggle("hidden", !adminMode);
+    function formatKrw(n) {
+      return "₩" + Number(n).toLocaleString("ko-KR");
     }
 
-    function addProduct() {
-      const brand = document.getElementById("adminBrand").value.trim();
-      const name = document.getElementById("adminName").value.trim();
-      const desc = document.getElementById("adminDesc").value.trim();
-      const price = Number(document.getElementById("adminPrice").value);
-
-      if (!brand || !name || !desc || !price) {
-        showMessage("모든 항목을 입력해주세요.", "error");
-        return;
-      }
-
-      const newProduct = { id: Date.now(), brand, name, desc, price };
-      products.unshift(newProduct);
-      saveProducts();
-      renderTabs();
-      renderProducts();
-      showMessage("상품이 추가되었습니다.", "ok");
-
-      document.getElementById("adminName").value = "";
-      document.getElementById("adminDesc").value = "";
-      document.getElementById("adminPrice").value = "";
+    function formatUsd(n) {
+      return "$" + Number(n).toFixed(2);
     }
 
-    function resetProducts() {
-      products = [...defaultProducts];
-      saveProducts();
-      renderTabs();
-      renderProducts();
-      showMessage("기본 상품 목록으로 복원했습니다.", "ok");
+    function formatPi(n) {
+      return Number(n).toFixed(4) + " PI";
     }
 
-    async function initPi() {
+    function updatePriceView() {
+      const krw = 10000;
+      const usd = krw / currentUsdKrw;
+      const pi = usd / currentPiUsd;
+
+      document.getElementById("usdPrice").textContent = "약 " + formatUsd(usd);
+      document.getElementById("piPrice").textContent = "약 " + formatPi(pi);
+      document.getElementById("feedStatus").textContent =
+        "PI/USD: " + currentPiUsd.toFixed(6) +
+        " · USD/KRW: " + currentUsdKrw.toFixed(2);
+    }
+
+    async function fetchExchangeRate() {
       try {
-        if (!window.Pi) {
-          showMessage("Pi SDK 없음 - Pi Browser 환경이 아닙니다.", "error");
-          return;
+        const res = await fetch("https://open.er-api.com/v6/latest/USD");
+        const data = await res.json();
+        if (data && data.rates && data.rates.KRW) {
+          currentUsdKrw = data.rates.KRW;
         }
-
-        Pi.init({ version: "2.0", sandbox: PI_SANDBOX });
-        console.log("Pi SDK 초기화 완료");
       } catch (e) {
-        console.error("Pi 초기화 실패", e);
-        showMessage("Pi 초기화 실패: " + (e?.message || JSON.stringify(e) || e), "error");
+        console.error("환율 조회 실패:", e);
       }
     }
 
-    async function ensurePiAuthenticated() {
-      if (!window.Pi) {
-        showMessage("Pi Browser에서 열어야 Pi 결제가 가능합니다.", "error");
-        return false;
-      }
-
-      if (piAuth) return true;
-
+    async function testServer() {
+      clearMessage();
       try {
-        const scopes = ['payments'];
-        piAuth = await Pi.authenticate(scopes, function(payment) {
-          console.log("미완료 결제:", payment);
-        });
-
-        console.log("Pi 인증 성공:", piAuth);
-        showMessage("Pi 인증 완료", "ok");
-        return true;
+        const res = await fetch(SERVER_ROOT, { method: "GET" });
+        const text = await res.text();
+        document.getElementById("serverStatus").textContent = text;
+        showMessage("서버 연결 성공: " + text, "ok");
       } catch (e) {
-        console.error("Pi 인증 실패", e);
-        showMessage("Pi 인증 실패: " + (e?.message || JSON.stringify(e) || e), "error");
-        return false;
+        document.getElementById("serverStatus").textContent = "연결 실패";
+        showMessage("서버 연결 실패: " + (e.message || e), "error");
       }
     }
 
     async function postJSON(url, data) {
       const res = await fetch(url, {
         method: "POST",
-        headers: { "Content-Type":"application/json" },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data)
       });
 
-      if (!res.ok) {
-        throw new Error("서버 응답 오류: " + res.status);
-      }
-
-      return await res.json();
-    }
-
-    async function fetchUsdKrw() {
-      const fallbackRate = 1350;
-      const urls = [
-        "https://api.frankfurter.app/latest?from=USD&to=KRW",
-        "https://open.er-api.com/v6/latest/USD"
-      ];
-
-      for (const url of urls) {
-        try {
-          const controller = new AbortController();
-          const timeoutId = setTimeout(() => controller.abort(), 5000);
-
-          const res = await fetch(url, { signal: controller.signal });
-          clearTimeout(timeoutId);
-
-          const data = await res.json();
-          const rate = data?.rates?.KRW;
-
-          if (rate && !Number.isNaN(Number(rate))) {
-            live.usdKrw = Number(rate);
-            live.piKrw = live.piUsd ? live.piUsd * live.usdKrw : null;
-            updateRateUI();
-            renderProducts();
-            renderCart();
-            return;
-          }
-        } catch (e) {
-          console.error("USD/KRW 환율 호출 실패:", url, e);
-        }
-      }
-
-      live.usdKrw = fallbackRate;
-      live.piKrw = live.piUsd ? live.piUsd * live.usdKrw : null;
-      updateRateUI();
-      renderProducts();
-      renderCart();
-      showMessage("실시간 환율 연결이 불안정하여 예비 환율로 계산합니다.", "error");
-    }
-
-    async function discoverPiPair() {
-      const res = await fetch("https://api.kraken.com/0/public/AssetPairs");
-      const data = await res.json();
-      if (data.error && data.error.length) throw new Error(data.error.join(","));
-
-      const entries = Object.entries(data.result || {});
-      let found = null;
-
-      for (const [restKey, info] of entries) {
-        const altname = (info.altname || "").toUpperCase();
-        const wsname = (info.wsname || "").toUpperCase();
-        const base = (info.base || "").toUpperCase();
-        const quote = (info.quote || "").toUpperCase();
-
-        const piLike = altname.includes("PI") || wsname.startsWith("PI/") || base.includes("PI");
-        const usdLike = altname.endsWith("USD") || wsname.endsWith("/USD") || quote.includes("USD");
-
-        if (piLike && usdLike) {
-          found = {
-            restPair: restKey,
-            altname: info.altname || restKey,
-            wsname: info.wsname || null
-          };
-          break;
-        }
-      }
-
-      if (!found) throw new Error("Kraken에서 PI/USD 거래쌍을 찾지 못했습니다.");
-
-      live.pairRest = found.altname;
-      live.pairWs = found.wsname || "PI/USD";
-      return found;
-    }
-
-    async function fetchPiUsdTicker() {
-      if (!live.pairRest) await discoverPiPair();
-
-      const res = await fetch(`https://api.kraken.com/0/public/Ticker?pair=${encodeURIComponent(live.pairRest)}`);
-      const data = await res.json();
-
-      if (data.error && data.error.length) throw new Error(data.error.join(","));
-
-      const result = data.result || {};
-      const firstKey = Object.keys(result)[0];
-      if (!firstKey) throw new Error("Ticker 응답이 비어 있습니다.");
-
-      const ticker = result[firstKey];
-      const lastTrade = Number(ticker.c?.[0]);
-
-      if (!lastTrade || Number.isNaN(lastTrade)) {
-        throw new Error("유효한 PI/USD 가격을 받지 못했습니다.");
-      }
-
-      live.piUsd = lastTrade;
-      live.piKrw = live.usdKrw ? live.piUsd * live.usdKrw : null;
-      updateRateUI();
-      renderProducts();
-      renderCart();
-      document.getElementById("feedStatus").textContent = "REST 갱신 완료";
-    }
-
-    function connectKrakenWs() {
-      if (!live.pairWs) return;
-
+      const text = await res.text();
+      let parsed;
       try {
-        if (live.ws) {
-          live.ws.close();
-          live.ws = null;
-        }
-
-        const ws = new WebSocket("wss://ws.kraken.com/");
-        live.ws = ws;
-
-        ws.onopen = function() {
-          ws.send(JSON.stringify({
-            event: "subscribe",
-            pair: [live.pairWs],
-            subscription: { name: "ticker" }
-          }));
-          document.getElementById("feedStatus").textContent = "WebSocket 연결됨";
-        };
-
-        ws.onmessage = function(evt) {
-          try {
-            const msg = JSON.parse(evt.data);
-            if (msg.event) return;
-            if (!Array.isArray(msg)) return;
-
-            const payload = msg[1];
-            if (!payload) return;
-
-            const closePrice = payload.c?.[0];
-            if (closePrice) {
-              live.piUsd = Number(closePrice);
-              live.piKrw = live.usdKrw ? live.piUsd * live.usdKrw : null;
-              updateRateUI();
-              renderProducts();
-              renderCart();
-              document.getElementById("feedStatus").textContent = "실시간 반영 중";
-            }
-          } catch (e) {
-            console.error("WS message parse error", e);
-          }
-        };
-
-        ws.onerror = function(err) {
-          console.error("Kraken WS 오류", err);
-          document.getElementById("feedStatus").textContent = "WS 오류";
-        };
-
-        ws.onclose = function() {
-          document.getElementById("feedStatus").textContent = "WS 재연결 대기";
-          setTimeout(() => {
-            if (live.pairWs) connectKrakenWs();
-          }, 5000);
-        };
-      } catch (e) {
-        console.error("Kraken WS 연결 실패", e);
+        parsed = JSON.parse(text);
+      } catch {
+        parsed = { raw: text };
       }
+
+      if (!res.ok) {
+        throw new Error(parsed.message || ("HTTP " + res.status));
+      }
+
+      return parsed;
     }
 
-    async function startPiPayment(krwAmount, productName) {
-      const authed = await ensurePiAuthenticated();
-      if (!authed) return;
+    function payProduct() {
+      clearMessage();
 
-      const piAmount = krwToPi(krwAmount);
-      if (!piAmount || Number.isNaN(piAmount) || piAmount <= 0) {
-        showMessage("실시간 PI 시세를 아직 불러오지 못했습니다.", "error");
+      if (!window.Pi) {
+        showMessage("Pi Browser 환경에서 열어야 합니다.", "error");
         return;
       }
 
-      try {
-        Pi.createPayment({
-          amount: Number(piAmount.toFixed(4)),
-          memo: `${productName} 결제`,
+      const krwAmount = 10000;
+      const usdAmount = krwAmount / currentUsdKrw;
+      const piAmount = Number((usdAmount / currentPiUsd).toFixed(4));
+
+      if (!piAmount || Number.isNaN(piAmount) || piAmount <= 0) {
+        showMessage("PI 결제 금액 계산 실패", "error");
+        return;
+      }
+
+      Pi.init({ version: "2.0", sandbox: PI_SANDBOX });
+
+      Pi.createPayment(
+        {
+          amount: piAmount,
+          memo: "The Thumb Therapy 테스트 상품 결제",
           metadata: {
-            product: productName,
-            krw: krwAmount,
-            pi_usd: live.piUsd,
-            usd_krw: live.usdKrw
+            productId: "thumbtherapy-serum-001",
+            productName: "옥시젠 리페어 세럼",
+            krwAmount
           }
-        }, {
+        },
+        {
           onReadyForServerApproval: async function(paymentId) {
             try {
               showMessage("결제 승인 요청 중...", "ok");
-              await postJSON(APPROVE_URL, { paymentId });
-              showMessage("결제 승인 완료. 최종 처리 중...", "ok");
+              const result = await postJSON(APPROVE_URL, { paymentId });
+              console.log("approve result:", result);
+              showMessage("결제 승인 완료, 다음 단계 진행 중...", "ok");
             } catch (err) {
-              console.error(err);
-              showMessage("approve 서버 처리 실패: " + err.message, "error");
+              console.error("approve error:", err);
+              showMessage("approve 서버 처리 실패: " + (err.message || err), "error");
             }
           },
 
           onReadyForServerCompletion: async function(paymentId, txid) {
             try {
-              await postJSON(COMPLETE_URL, { paymentId, txid });
+              const result = await postJSON(COMPLETE_URL, { paymentId, txid });
+              console.log("complete result:", result);
               showMessage("결제가 완료되었습니다.", "ok");
-              cart = [];
-              saveCart();
-              renderCart();
             } catch (err) {
-              console.error(err);
-              showMessage("complete 서버 처리 실패: " + err.message, "error");
+              console.error("complete error:", err);
+              showMessage("complete 서버 처리 실패: " + (err.message || err), "error");
             }
           },
 
           onCancel: function(paymentId) {
-            console.log("Payment cancelled", paymentId);
+            console.log("cancel:", paymentId);
             showMessage("결제가 취소되었습니다.", "error");
           },
 
           onError: function(error, payment) {
-            console.error("Pi payment error", error, payment);
-            showMessage("결제 오류: " + (error?.message || JSON.stringify(error) || error), "error");
+            console.error("Pi payment error:", error, payment);
+            showMessage("결제 오류: " + ((error && error.message) || JSON.stringify(error)), "error");
           }
-        });
-      } catch (err) {
-        console.error(err);
-        showMessage("Pi 결제창 실행 실패: " + (err?.message || JSON.stringify(err) || err), "error");
-      }
+        }
+      );
     }
 
-    async function initMarketFeeds() {
-      try {
-        document.getElementById("feedStatus").textContent = "시세 로딩 중";
-        await fetchUsdKrw();
-        await discoverPiPair();
-        await fetchPiUsdTicker();
-        connectKrakenWs();
-
-        setInterval(fetchUsdKrw, 10 * 60 * 1000);
-        setInterval(fetchPiUsdTicker, 30 * 1000);
-      } catch (e) {
-        console.error("시세 초기화 실패", e);
-        document.getElementById("feedStatus").textContent = "시세 로딩 실패";
-        showMessage("실시간 시세 초기화 실패: " + (e?.message || JSON.stringify(e) || e), "error");
-      }
-    }
-
-    renderTabs();
-    renderProducts();
-    renderCart();
-
-    window.onload = function() {
-      initPi();
-    };
-
-    initMarketFeeds();
+    (async function init() {
+      await fetchExchangeRate();
+      updatePriceView();
+      await testServer();
+    })();
   </script>
 </body>
 </html>
