@@ -767,14 +767,26 @@ showMessage("Pi 인증 실패: " + (e?.message || JSON.stringify(e) || e), "erro
       }
     }
 
-    function startPiPayment(krwAmount, productName) {
+    async function startPiPayment(krwAmount, productName) {
       if (!window.Pi) {
         showMessage("Pi Browser에서 열어야 Pi 결제가 가능합니다.", "error");
         return;
       }
 if (!piAuth) {
-  showMessage("Pi 인증 안됨", "error");
-  return;
+  try {
+    const scopes = ['payments'];
+
+    piAuth = await Pi.authenticate(scopes, function(payment) {
+      console.log("미완료 결제:", payment);
+    });
+
+    showMessage("Pi 인증 완료", "ok");
+   // 🔥 인증 끝나면 바로 다시 결제 실행
+return startPiPayment(krwAmount, productName); 
+  } catch (e) {
+    showMessage("Pi 인증 실패: " + (e?.message || JSON.stringify(e) || e), "error");
+    return;
+  }
 }
       const piAmount = krwToPi(krwAmount);
       if (!piAmount || Number.isNaN(piAmount) || piAmount <= 0) {
@@ -856,7 +868,7 @@ renderCart();
 window.onload = function() {
   initPi();
 };
-
+   
 initMarketFeeds();
    
   </script>
