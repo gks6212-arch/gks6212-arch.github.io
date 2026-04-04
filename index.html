@@ -3,202 +3,410 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>The Thumb Therapy</title>
+  <title>The Thumb Therapy | Premium Beauty Store</title>
   <script src="https://sdk.minepi.com/pi-sdk.js"></script>
   <style>
-    * { box-sizing: border-box; }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg: #f6f3ef;
+      --card: #ffffff;
+      --line: #e6ddd3;
+      --text: #41362e;
+      --sub: #7f7065;
+      --main: #9a7a46;
+      --main-dark: #7e6237;
+      --soft: #ece3d8;
+      --ok-bg: #eef8f0;
+      --ok-text: #2d6b3f;
+      --ok-line: #cfe6d5;
+      --err-bg: #fff1f1;
+      --err-text: #9a3d3d;
+      --err-line: #efc9c9;
+      --shadow: 0 10px 24px rgba(40, 30, 20, 0.06);
+      --radius: 18px;
+    }
+
     body {
-      margin: 0;
       font-family: Arial, sans-serif;
-      background: #f6f3ef;
-      color: #3d3128;
-    }
-    .header {
-      background: #ffffff;
-      padding: 18px 16px;
-      font-size: 24px;
-      font-weight: 700;
-      border-bottom: 1px solid #e5ddd3;
-    }
-    .sub {
-      font-size: 14px;
-      color: #7a6a5d;
-      margin-top: 6px;
-      font-weight: 400;
-    }
-    .container {
-      max-width: 760px;
-      margin: 0 auto;
-      padding: 20px 16px 40px;
-    }
-    .hero {
-      background: #fff;
-      border-radius: 16px;
-      padding: 20px;
-      margin-bottom: 16px;
-      border: 1px solid #eadfd4;
-    }
-    .hero h2 {
-      margin: 0 0 8px;
-      font-size: 22px;
-    }
-    .hero p {
-      margin: 0;
-      color: #7a6a5d;
+      background: var(--bg);
+      color: var(--text);
       line-height: 1.5;
     }
-    .card {
-      background: #fff;
-      border-radius: 16px;
-      padding: 18px;
-      margin-bottom: 14px;
-      border: 1px solid #eadfd4;
-      box-shadow: 0 4px 14px rgba(0,0,0,0.04);
+
+    .wrap {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 20px 16px 48px;
     }
-    .brand {
-      font-size: 13px;
-      color: #8a7767;
+
+    .header {
+      background: var(--card);
+      border-bottom: 1px solid var(--line);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .header-inner {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 18px 16px;
+      display: flex;
+      gap: 14px;
+      align-items: center;
+    }
+
+    .logo {
+      width: 62px;
+      height: 62px;
+      border-radius: 18px;
+      background: linear-gradient(135deg, #c9a96a, #9a7a46);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 26px;
+      font-weight: 700;
+      box-shadow: var(--shadow);
+      flex: 0 0 auto;
+    }
+
+    .brand h1 {
+      font-size: 34px;
+      line-height: 1.1;
       margin-bottom: 6px;
     }
-    .name {
-      font-size: 22px;
-      font-weight: 700;
-      margin-bottom: 8px;
+
+    .brand p {
+      color: var(--sub);
+      font-size: 16px;
     }
-    .desc {
+
+    .hero {
+      margin-top: 22px;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 26px;
+      padding: 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .hero h2 {
+      font-size: 28px;
+      margin-bottom: 10px;
+    }
+
+    .hero p {
+      color: var(--sub);
+      font-size: 16px;
+    }
+
+    .top-grid {
+      display: grid;
+      grid-template-columns: 1.25fr 0.95fr;
+      gap: 18px;
+      margin-top: 18px;
+    }
+
+    .panel {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 18px;
+      box-shadow: var(--shadow);
+    }
+
+    .panel h3 {
+      font-size: 24px;
+      margin-bottom: 12px;
+    }
+
+    .status-item {
+      padding: 12px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .status-item:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .status-label {
       font-size: 14px;
-      color: #6f6257;
-      line-height: 1.5;
-      margin-bottom: 14px;
+      color: var(--sub);
+      margin-bottom: 4px;
     }
-    .price-row {
-      margin-bottom: 14px;
-      line-height: 1.8;
-    }
-    .krw {
+
+    .status-value {
       font-size: 18px;
       font-weight: 700;
+      word-break: break-word;
     }
-    .usd, .pi {
+
+    .section-title {
+      font-size: 28px;
+      margin: 28px 0 16px;
+    }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+    }
+
+    .product-card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      padding: 20px;
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      min-height: 280px;
+    }
+
+    .product-brand {
       font-size: 14px;
-      color: #6f6257;
+      color: var(--sub);
+      margin-bottom: 8px;
     }
+
+    .product-name {
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .product-desc {
+      color: var(--sub);
+      font-size: 15px;
+      margin-bottom: 18px;
+      min-height: 68px;
+    }
+
+    .price-block {
+      margin-top: auto;
+      margin-bottom: 16px;
+    }
+
+    .krw-price {
+      font-size: 28px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .usd-price,
+    .pi-price {
+      font-size: 15px;
+      color: var(--sub);
+      margin-top: 4px;
+    }
+
     .btn-row {
       display: flex;
       gap: 10px;
       flex-wrap: wrap;
     }
+
     button {
       border: none;
-      border-radius: 12px;
-      padding: 12px 16px;
+      border-radius: 14px;
+      padding: 13px 18px;
       cursor: pointer;
-      font-size: 15px;
+      font-size: 16px;
       font-weight: 700;
+      transition: 0.15s ease;
     }
+
+    button:hover {
+      transform: translateY(-1px);
+    }
+
     .btn-main {
-      background: #9a7a46;
+      background: var(--main);
       color: #fff;
     }
+
+    .btn-main:hover {
+      background: var(--main-dark);
+    }
+
     .btn-soft {
-      background: #ece3d8;
-      color: #53453a;
+      background: var(--soft);
+      color: var(--text);
     }
-    .status-box {
-      background: #fff;
-      border-radius: 16px;
-      padding: 16px;
-      border: 1px solid #eadfd4;
-      margin-top: 16px;
-      line-height: 1.7;
-    }
-    .status-title {
-      font-weight: 700;
-      margin-bottom: 8px;
-    }
+
     .message {
-      margin-top: 16px;
-      padding: 14px;
-      border-radius: 12px;
+      margin-top: 18px;
+      padding: 14px 16px;
+      border-radius: 14px;
       display: none;
+      font-size: 15px;
       word-break: break-word;
-      line-height: 1.5;
     }
+
     .message.ok {
       display: block;
-      background: #edf8ef;
-      color: #24663a;
-      border: 1px solid #cce8d1;
+      background: var(--ok-bg);
+      border: 1px solid var(--ok-line);
+      color: var(--ok-text);
     }
+
     .message.error {
       display: block;
-      background: #fff1f1;
-      color: #a33c3c;
-      border: 1px solid #f1c5c5;
+      background: var(--err-bg);
+      border: 1px solid var(--err-line);
+      color: var(--err-text);
     }
+
     .footer {
       text-align: center;
-      font-size: 13px;
-      color: #7d7067;
-      padding: 30px 16px 50px;
+      color: var(--sub);
+      margin-top: 36px;
+      font-size: 14px;
+    }
+
+    @media (max-width: 780px) {
+      .brand h1 {
+        font-size: 24px;
+      }
+
+      .top-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .product-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .product-name {
+        font-size: 22px;
+      }
+
+      .krw-price {
+        font-size: 24px;
+      }
     }
   </style>
 </head>
 <body>
   <div class="header">
-    The Thumb Therapy
-    <div class="sub">Premium Beauty Store · Pi Test Payment</div>
+    <div class="header-inner">
+      <div class="logo">T</div>
+      <div class="brand">
+        <h1>The Thumb Therapy</h1>
+        <p>Premium Beauty Store · Korean Skincare & Therapy Beauty</p>
+      </div>
+    </div>
   </div>
 
-  <div class="container">
-    <div class="hero">
-      <h2>더썸테라피 테스트 쇼핑몰</h2>
+  <div class="wrap">
+    <section class="hero">
+      <h2>더썸테라피 Pi 결제 테스트 쇼핑몰</h2>
       <p>
-        현재는 Pi 샌드박스 테스트 결제용 화면입니다.
-        서버가 정상 연결되면 Pi 지갑 결제창이 열리고 approve / complete 흐름이 진행됩니다.
+        현재 페이지는 Pi Browser 테스트용 샘플 쇼핑몰입니다.
+        상품 정보, 환율, 예상 PI 금액, 서버 연결 상태를 한 번에 확인할 수 있게 구성했습니다.
       </p>
+    </section>
+
+    <div class="top-grid">
+      <section class="panel">
+        <h3>연결 상태</h3>
+
+        <div class="status-item">
+          <div class="status-label">서버 상태</div>
+          <div class="status-value" id="serverStatus">확인 중...</div>
+        </div>
+
+        <div class="status-item">
+          <div class="status-label">PI/USD</div>
+          <div class="status-value" id="piUsdStatus">불러오는 중...</div>
+        </div>
+
+        <div class="status-item">
+          <div class="status-label">USD/KRW</div>
+          <div class="status-value" id="usdKrwStatus">불러오는 중...</div>
+        </div>
+
+        <div class="status-item">
+          <div class="status-label">테스트 모드</div>
+          <div class="status-value" id="sandboxStatus">sandbox = true</div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <h3>사용 안내</h3>
+        <div style="color:#7f7065; font-size:15px;">
+          1. 서버 연결 확인 버튼으로 Railway 서버 응답 확인<br />
+          2. Pi Browser에서 Pi 결제하기 클릭<br />
+          3. 지갑 승인 화면 진행<br />
+          4. 테스트 완료 후 메인넷 전환
+        </div>
+        <div class="btn-row" style="margin-top:16px;">
+          <button class="btn-soft" onclick="testServer()">서버 연결 확인</button>
+        </div>
+      </section>
     </div>
 
-    <div class="card">
-      <div class="brand">노라보데</div>
-      <div class="name">옥시젠 리페어 세럼</div>
-      <div class="desc">산소 테라피 기반의 집중 보습 세럼 테스트 상품입니다.</div>
-      <div class="price-row">
-        <div class="krw">₩10,000</div>
-        <div class="usd" id="usdPrice">USD 환산 불러오는 중...</div>
-        <div class="pi" id="piPrice">PI 환산 불러오는 중...</div>
-      </div>
-      <div class="btn-row">
-        <button class="btn-main" onclick="payProduct()">Pi 결제하기</button>
-        <button class="btn-soft" onclick="testServer()">서버 연결 확인</button>
-      </div>
-    </div>
+    <h2 class="section-title">대표 상품</h2>
 
-    <div class="status-box">
-      <div class="status-title">연결 상태</div>
-      <div id="serverStatus">확인 전</div>
-      <div id="feedStatus">시세 초기화 전</div>
-    </div>
+    <section class="product-grid" id="productGrid"></section>
 
     <div id="messageBox" class="message"></div>
-  </div>
 
-  <div class="footer">
-    © 2026 The Thumb Therapy. All rights reserved.<br />
-    본 페이지는 샘플 쇼핑몰 및 Pi 결제 연동 테스트용으로 구성되었습니다.
+    <div class="footer">
+      © 2026 The Thumb Therapy. All rights reserved.<br />
+      본 페이지는 샘플 쇼핑몰 및 Pi 결제 연동 테스트용으로 구성되었습니다.
+    </div>
   </div>
 
   <script>
-    // 반드시 본인 Railway 주소로 유지
-    const APPROVE_URL = "https://thumbtherapy-server-production.up.railway.app/approve";
-    const COMPLETE_URL = "https://thumbtherapy-server-production.up.railway.app/complete";
+    // 본인 Railway 주소
     const SERVER_ROOT = "https://thumbtherapy-server-production.up.railway.app";
+    const APPROVE_URL = SERVER_ROOT + "/approve";
+    const COMPLETE_URL = SERVER_ROOT + "/complete";
 
-    // 테스트 완료 전까지 true
+    // 테스트가 끝나기 전까지 true
     const PI_SANDBOX = true;
 
     let currentPiUsd = 0.27;
-    let currentUsdKrw = 1350;
+    let currentUsdKrw = 1500;
+
+    const products = [
+      {
+        id: "thumb-001",
+        brand: "노라보데",
+        name: "옥시젠 리페어 세럼",
+        desc: "산소 테라피 기반의 집중 보습 세럼 테스트 상품입니다.",
+        krw: 10000
+      },
+      {
+        id: "thumb-002",
+        brand: "알케미아",
+        name: "밸런싱 크림",
+        desc: "피부 균형 케어를 위한 데일리 크림 테스트 상품입니다.",
+        krw: 18000
+      },
+      {
+        id: "thumb-003",
+        brand: "기노",
+        name: "하이드라 마스크",
+        desc: "수분 공급 중심의 마스크 테스트 상품입니다.",
+        krw: 22000
+      },
+      {
+        id: "thumb-004",
+        brand: "쏘티스",
+        name: "클렌징 밀크",
+        desc: "부드러운 데일리 클렌징 테스트 상품입니다.",
+        krw: 15000
+      }
+    ];
 
     function showMessage(text, type = "ok") {
       const box = document.getElementById("messageBox");
@@ -224,32 +432,70 @@
       return Number(n).toFixed(4) + " PI";
     }
 
-    function updatePriceView() {
-      const krw = 10000;
-      const usd = krw / currentUsdKrw;
-      const pi = usd / currentPiUsd;
+    function calcUsdFromKrw(krw) {
+      return krw / currentUsdKrw;
+    }
 
-      document.getElementById("usdPrice").textContent = "약 " + formatUsd(usd);
-      document.getElementById("piPrice").textContent = "약 " + formatPi(pi);
-      document.getElementById("feedStatus").textContent =
-        "PI/USD: " + currentPiUsd.toFixed(6) +
-        " · USD/KRW: " + currentUsdKrw.toFixed(2);
+    function calcPiFromKrw(krw) {
+      const usd = calcUsdFromKrw(krw);
+      return usd / currentPiUsd;
+    }
+
+    function renderProducts() {
+      const grid = document.getElementById("productGrid");
+      grid.innerHTML = "";
+
+      products.forEach((p) => {
+        const usd = calcUsdFromKrw(p.krw);
+        const pi = calcPiFromKrw(p.krw);
+
+        const card = document.createElement("div");
+        card.className = "product-card";
+
+        card.innerHTML = `
+          <div class="product-brand">${p.brand}</div>
+          <div class="product-name">${p.name}</div>
+          <div class="product-desc">${p.desc}</div>
+
+          <div class="price-block">
+            <div class="krw-price">${formatKrw(p.krw)}</div>
+            <div class="usd-price">약 ${formatUsd(usd)}</div>
+            <div class="pi-price">약 ${formatPi(pi)}</div>
+          </div>
+
+          <div class="btn-row">
+            <button class="btn-main" onclick="payProduct('${p.id}')">Pi 결제하기</button>
+            <button class="btn-soft" onclick="testServer()">서버 연결 확인</button>
+          </div>
+        `;
+
+        grid.appendChild(card);
+      });
     }
 
     async function fetchExchangeRate() {
       try {
         const res = await fetch("https://open.er-api.com/v6/latest/USD");
         const data = await res.json();
+
         if (data && data.rates && data.rates.KRW) {
-          currentUsdKrw = data.rates.KRW;
+          currentUsdKrw = Number(data.rates.KRW);
         }
       } catch (e) {
         console.error("환율 조회 실패:", e);
       }
+
+      // PI/USD는 현재 테스트용 고정값
+      currentPiUsd = 0.27;
+
+      document.getElementById("piUsdStatus").textContent = currentPiUsd.toFixed(6);
+      document.getElementById("usdKrwStatus").textContent = currentUsdKrw.toFixed(2);
+      document.getElementById("sandboxStatus").textContent = "sandbox = " + PI_SANDBOX;
     }
 
     async function testServer() {
       clearMessage();
+
       try {
         const res = await fetch(SERVER_ROOT, { method: "GET" });
         const text = await res.text();
@@ -264,12 +510,15 @@
     async function postJSON(url, data) {
       const res = await fetch(url, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json"
+        },
         body: JSON.stringify(data)
       });
 
       const text = await res.text();
-      let parsed;
+
+      let parsed = {};
       try {
         parsed = JSON.parse(text);
       } catch {
@@ -283,33 +532,44 @@
       return parsed;
     }
 
-    function payProduct() {
+    function payProduct(productId) {
       clearMessage();
 
       if (!window.Pi) {
-        showMessage("Pi Browser 환경에서 열어야 합니다.", "error");
+        showMessage("Pi Browser에서 열어야 Pi 결제가 가능합니다.", "error");
         return;
       }
 
-      const krwAmount = 10000;
-      const usdAmount = krwAmount / currentUsdKrw;
-      const piAmount = Number((usdAmount / currentPiUsd).toFixed(4));
+      const product = products.find((item) => item.id === productId);
+      if (!product) {
+        showMessage("상품 정보를 찾을 수 없습니다.", "error");
+        return;
+      }
+
+      const piAmount = Number(calcPiFromKrw(product.krw).toFixed(4));
 
       if (!piAmount || Number.isNaN(piAmount) || piAmount <= 0) {
         showMessage("PI 결제 금액 계산 실패", "error");
         return;
       }
 
-      Pi.init({ version: "2.0", sandbox: PI_SANDBOX });
+      try {
+        Pi.init({
+          version: "2.0",
+          sandbox: PI_SANDBOX
+        });
+      } catch (e) {
+        console.error("Pi.init error:", e);
+      }
 
       Pi.createPayment(
         {
           amount: piAmount,
-          memo: "The Thumb Therapy 테스트 상품 결제",
+          memo: product.name + " 결제",
           metadata: {
-            productId: "thumbtherapy-serum-001",
-            productName: "옥시젠 리페어 세럼",
-            krwAmount
+            productId: product.id,
+            productName: product.name,
+            krwAmount: product.krw
           }
         },
         {
@@ -318,7 +578,7 @@
               showMessage("결제 승인 요청 중...", "ok");
               const result = await postJSON(APPROVE_URL, { paymentId });
               console.log("approve result:", result);
-              showMessage("결제 승인 완료, 다음 단계 진행 중...", "ok");
+              showMessage("결제 승인 처리 완료", "ok");
             } catch (err) {
               console.error("approve error:", err);
               showMessage("approve 서버 처리 실패: " + (err.message || err), "error");
@@ -343,7 +603,10 @@
 
           onError: function(error, payment) {
             console.error("Pi payment error:", error, payment);
-            showMessage("결제 오류: " + ((error && error.message) || JSON.stringify(error)), "error");
+            showMessage(
+              "결제 오류: " + ((error && error.message) || JSON.stringify(error)),
+              "error"
+            );
           }
         }
       );
@@ -351,7 +614,7 @@
 
     (async function init() {
       await fetchExchangeRate();
-      updatePriceView();
+      renderProducts();
       await testServer();
     })();
   </script>
