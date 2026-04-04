@@ -1,631 +1,273 @@
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>The Thumb Therapy | Premium Beauty Store</title>
-  <script src="https://sdk.minepi.com/pi-sdk.js"></script>
-  <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+<script src="https://sdk.minepi.com/pi-sdk.js"></script>
+<script>
+  const SERVER_ROOT = "https://thumbtherapy-server-production.up.railway.app";
+  const APPROVE_URL = SERVER_ROOT + "/approve";
+  const COMPLETE_URL = SERVER_ROOT + "/complete";
 
-    :root {
-      --bg: #f6f3ef;
-      --card: #ffffff;
-      --line: #e7ddd2;
-      --text: #43372f;
-      --sub: #86776b;
-      --main: #a48046;
-      --main-dark: #8b6a37;
-      --soft: #e9dfd3;
-      --ok-bg: #edf8ef;
-      --ok-text: #2a6d3e;
-      --ok-line: #cce5d2;
-      --err-bg: #fff1f1;
-      --err-text: #9d3f3f;
-      --err-line: #efcaca;
-      --shadow: 0 12px 28px rgba(30, 20, 10, 0.06);
-      --radius: 20px;
+  // 테스트 중이면 true 유지
+  const PI_SANDBOX = true;
+
+  let currentPiUsd = 0.27;
+  let currentUsdKrw = 1500;
+  let accessToken = null;
+  let currentUser = null;
+
+  const products = [
+    {
+      id: "thumb-001",
+      brand: "노라보데",
+      name: "옥시젠 리페어 세럼",
+      desc: "산소 테라피 기반의 집중 보습 세럼 테스트 상품입니다.",
+      krw: 10000
+    },
+    {
+      id: "thumb-002",
+      brand: "알케미아",
+      name: "밸런싱 크림",
+      desc: "피부 균형 케어를 위한 데일리 크림 테스트 상품입니다.",
+      krw: 18000
+    },
+    {
+      id: "thumb-003",
+      brand: "기노",
+      name: "하이드라 마스크",
+      desc: "수분 공급 중심의 마스크 테스트 상품입니다.",
+      krw: 22000
+    },
+    {
+      id: "thumb-004",
+      brand: "쏘티스",
+      name: "클렌징 밀크",
+      desc: "부드러운 데일리 클렌징 테스트 상품입니다.",
+      krw: 15000
     }
+  ];
 
-    body {
-      font-family: Arial, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.5;
+  function showMessage(text, type = "ok") {
+    const box = document.getElementById("messageBox");
+    box.className = "message " + type;
+    box.textContent = text;
+  }
+
+  function clearMessage() {
+    const box = document.getElementById("messageBox");
+    box.className = "message";
+    box.textContent = "";
+  }
+
+  function formatKrw(n) {
+    return "₩" + Number(n).toLocaleString("ko-KR");
+  }
+
+  function formatUsd(n) {
+    return "$" + Number(n).toFixed(2);
+  }
+
+  function formatPi(n) {
+    return Number(n).toFixed(4) + " PI";
+  }
+
+  function calcUsdFromKrw(krw) {
+    return krw / currentUsdKrw;
+  }
+
+  function calcPiFromKrw(krw) {
+    return calcUsdFromKrw(krw) / currentPiUsd;
+  }
+
+  async function fetchExchangeRate() {
+    try {
+      const res = await fetch("https://open.er-api.com/v6/latest/USD");
+      const data = await res.json();
+      if (data && data.rates && data.rates.KRW) {
+        currentUsdKrw = Number(data.rates.KRW);
+      }
+    } catch (e) {
+      console.error("환율 조회 실패:", e);
     }
+  }
 
-    .header {
-      background: var(--card);
-      border-bottom: 1px solid var(--line);
-      position: sticky;
-      top: 0;
-      z-index: 20;
-    }
+  function renderProducts() {
+    const grid = document.getElementById("productGrid");
+    grid.innerHTML = "";
 
-    .header-inner {
-      max-width: 1080px;
-      margin: 0 auto;
-      padding: 18px 16px;
-      display: flex;
-      align-items: center;
-      gap: 16px;
-    }
+    for (const p of products) {
+      const usd = calcUsdFromKrw(p.krw);
+      const pi = calcPiFromKrw(p.krw);
 
-    .logo {
-      width: 74px;
-      height: 74px;
-      border-radius: 22px;
-      background: linear-gradient(135deg, #cba966, #a17b41);
-      color: #fff;
-      font-size: 34px;
-      font-weight: 700;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex: 0 0 auto;
-      box-shadow: var(--shadow);
-    }
-
-    .brand h1 {
-      font-size: 34px;
-      line-height: 1.1;
-      margin-bottom: 6px;
-    }
-
-    .brand p {
-      color: var(--sub);
-      font-size: 16px;
-    }
-
-    .wrap {
-      max-width: 1080px;
-      margin: 0 auto;
-      padding: 22px 16px 56px;
-    }
-
-    .hero {
-      background: var(--card);
-      border: 1px solid var(--line);
-      border-radius: 28px;
-      padding: 24px;
-      box-shadow: var(--shadow);
-      margin-bottom: 18px;
-    }
-
-    .hero h2 {
-      font-size: 28px;
-      margin-bottom: 10px;
-    }
-
-    .hero p {
-      color: var(--sub);
-      font-size: 16px;
-    }
-
-    .top-grid {
-      display: grid;
-      grid-template-columns: 1.1fr 0.9fr;
-      gap: 18px;
-      margin-bottom: 26px;
-    }
-
-    .panel {
-      background: var(--card);
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      padding: 20px;
-      box-shadow: var(--shadow);
-    }
-
-    .panel h3 {
-      font-size: 24px;
-      margin-bottom: 12px;
-    }
-
-    .status-row {
-      padding: 12px 0;
-      border-bottom: 1px solid var(--line);
-    }
-
-    .status-row:last-child {
-      border-bottom: none;
-      padding-bottom: 0;
-    }
-
-    .status-label {
-      color: var(--sub);
-      font-size: 14px;
-      margin-bottom: 4px;
-    }
-
-    .status-value {
-      font-size: 18px;
-      font-weight: 700;
-      word-break: break-word;
-    }
-
-    .section-title {
-      font-size: 28px;
-      margin-bottom: 16px;
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 18px;
-    }
-
-    .card {
-      background: var(--card);
-      border: 1px solid var(--line);
-      border-radius: 24px;
-      padding: 22px;
-      box-shadow: var(--shadow);
-      display: flex;
-      flex-direction: column;
-      min-height: 320px;
-    }
-
-    .card-brand {
-      font-size: 14px;
-      color: var(--sub);
-      margin-bottom: 8px;
-    }
-
-    .card-name {
-      font-size: 22px;
-      font-weight: 700;
-      margin-bottom: 10px;
-    }
-
-    .card-desc {
-      font-size: 15px;
-      color: var(--sub);
-      min-height: 66px;
-      margin-bottom: 18px;
-    }
-
-    .price-box {
-      margin-top: auto;
-      margin-bottom: 16px;
-    }
-
-    .krw {
-      font-size: 30px;
-      font-weight: 700;
-      margin-bottom: 6px;
-    }
-
-    .usd, .pi {
-      font-size: 15px;
-      color: var(--sub);
-      margin-top: 4px;
-    }
-
-    .btn-row {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-
-    button {
-      border: none;
-      border-radius: 16px;
-      padding: 14px 18px;
-      font-size: 16px;
-      font-weight: 700;
-      cursor: pointer;
-      transition: 0.15s ease;
-    }
-
-    button:hover {
-      transform: translateY(-1px);
-    }
-
-    .btn-main {
-      background: var(--main);
-      color: #fff;
-    }
-
-    .btn-main:hover {
-      background: var(--main-dark);
-    }
-
-    .btn-soft {
-      background: var(--soft);
-      color: var(--text);
-    }
-
-    .message {
-      margin-top: 18px;
-      padding: 16px;
-      border-radius: 16px;
-      display: none;
-      font-size: 15px;
-      word-break: break-word;
-    }
-
-    .message.ok {
-      display: block;
-      background: var(--ok-bg);
-      color: var(--ok-text);
-      border: 1px solid var(--ok-line);
-    }
-
-    .message.error {
-      display: block;
-      background: var(--err-bg);
-      color: var(--err-text);
-      border: 1px solid var(--err-line);
-    }
-
-    .footer {
-      text-align: center;
-      color: var(--sub);
-      font-size: 14px;
-      margin-top: 36px;
-      padding-bottom: 16px;
-    }
-
-    @media (max-width: 820px) {
-      .brand h1 { font-size: 24px; }
-      .top-grid { grid-template-columns: 1fr; }
-      .grid { grid-template-columns: 1fr; }
-      .krw { font-size: 26px; }
-    }
-  </style>
-</head>
-<body>
-  <header class="header">
-    <div class="header-inner">
-      <div class="logo">T</div>
-      <div class="brand">
-        <h1>The Thumb Therapy</h1>
-        <p>Premium Beauty Store · Korean Skincare & Therapy Beauty</p>
-      </div>
-    </div>
-  </header>
-
-  <main class="wrap">
-    <section class="hero">
-      <h2>더썸테라피 Pi 결제 테스트 쇼핑몰</h2>
-      <p>
-        현재 페이지는 Pi Browser 테스트용 샘플 쇼핑몰입니다.
-        상품 표시, 환산 금액, 서버 연결 상태, Pi 결제 호출까지 한 번에 확인할 수 있도록 구성했습니다.
-      </p>
-    </section>
-
-    <section class="top-grid">
-      <div class="panel">
-        <h3>연결 상태</h3>
-
-        <div class="status-row">
-          <div class="status-label">서버 상태</div>
-          <div class="status-value" id="serverStatus">확인 중...</div>
+      const card = document.createElement("div");
+      card.className = "card";
+      card.innerHTML = `
+        <div class="card-brand">${p.brand}</div>
+        <div class="card-name">${p.name}</div>
+        <div class="card-desc">${p.desc}</div>
+        <div class="price-box">
+          <div class="krw">${formatKrw(p.krw)}</div>
+          <div class="usd">약 ${formatUsd(usd)}</div>
+          <div class="pi">약 ${formatPi(pi)}</div>
         </div>
-
-        <div class="status-row">
-          <div class="status-label">PI/USD</div>
-          <div class="status-value" id="piUsdStatus">불러오는 중...</div>
-        </div>
-
-        <div class="status-row">
-          <div class="status-label">USD/KRW</div>
-          <div class="status-value" id="usdKrwStatus">불러오는 중...</div>
-        </div>
-
-        <div class="status-row">
-          <div class="status-label">테스트 모드</div>
-          <div class="status-value" id="sandboxStatus">sandbox = true</div>
-        </div>
-      </div>
-
-      <div class="panel">
-        <h3>사용 안내</h3>
-        <div style="color:#86776b; font-size:15px;">
-          1. Pi Browser에서 페이지 열기<br />
-          2. 서버 연결 확인 버튼으로 Railway 상태 확인<br />
-          3. Pi 결제하기 클릭<br />
-          4. 샌드박스 테스트 완료 후 메인넷 전환
-        </div>
-
-        <div class="btn-row" style="margin-top:16px;">
+        <div class="btn-row">
+          <button class="btn-main" onclick="payProduct('${p.id}')">Pi 결제하기</button>
           <button class="btn-soft" onclick="testServer()">서버 연결 확인</button>
         </div>
-      </div>
-    </section>
+      `;
+      grid.appendChild(card);
+    }
+  }
 
-    <h2 class="section-title">대표 상품</h2>
-    <section class="grid" id="productGrid"></section>
+  async function testServer() {
+    clearMessage();
+    try {
+      const res = await fetch(SERVER_ROOT, { method: "GET" });
+      const text = await res.text();
+      showMessage("서버 연결 성공: " + text, "ok");
+    } catch (e) {
+      showMessage("서버 연결 실패: " + (e.message || e), "error");
+    }
+  }
 
-    <div id="messageBox" class="message"></div>
-
-    <footer class="footer">
-      © 2026 The Thumb Therapy. All rights reserved.<br />
-      본 페이지는 샘플 쇼핑몰 및 Pi 결제 연동 테스트용으로 구성되었습니다.
-    </footer>
-  </main>
-
-  <script>
-   const SERVER_ROOT = "https://thumbtherapy-server-production.up.railway.app"; 
-    const APPROVE_URL = SERVER_ROOT + "/approve";
-    const COMPLETE_URL = SERVER_ROOT + "/complete";
-    const PI_SANDBOX = true;
-
-    let currentPiUsd = 0.27;
-    let currentUsdKrw = 1500;
-    let accessToken = null;
-    let currentUser = null;
-
-    const products = [
-      {
-        id: "thumb-001",
-        brand: "노라보데",
-        name: "옥시젠 리페어 세럼",
-        desc: "산소 테라피 기반의 집중 보습 세럼 테스트 상품입니다.",
-        krw: 10000
-      },
-      {
-        id: "thumb-002",
-        brand: "알케미아",
-        name: "밸런싱 크림",
-        desc: "피부 균형 케어를 위한 데일리 크림 테스트 상품입니다.",
-        krw: 18000
-      },
-      {
-        id: "thumb-003",
-        brand: "기노",
-        name: "하이드라 마스크",
-        desc: "수분 공급 중심의 마스크 테스트 상품입니다.",
-        krw: 22000
-      },
-      {
-        id: "thumb-004",
-        brand: "쏘티스",
-        name: "클렌징 밀크",
-        desc: "부드러운 데일리 클렌징 테스트 상품입니다.",
-        krw: 15000
-      }
-    ];
-
-    function showMessage(text, type = "ok") {
-      const box = document.getElementById("messageBox");
-      box.className = "message " + type;
-      box.textContent = text;
+  async function authenticatePi() {
+    if (!window.Pi) {
+      showMessage("Pi Browser에서 열어야 합니다.", "error");
+      return false;
     }
 
-    function clearMessage() {
-      const box = document.getElementById("messageBox");
-      box.className = "message";
-      box.textContent = "";
-    }
-
-    function formatKrw(n) {
-      return "₩" + Number(n).toLocaleString("ko-KR");
-    }
-
-    function formatUsd(n) {
-      return "$" + Number(n).toFixed(2);
-    }
-
-    function formatPi(n) {
-      return Number(n).toFixed(4) + " PI";
-    }
-
-    function calcUsdFromKrw(krw) {
-      return krw / currentUsdKrw;
-    }
-
-    function calcPiFromKrw(krw) {
-      return calcUsdFromKrw(krw) / currentPiUsd;
-    }
-
-    async function fetchExchangeRate() {
-      try {
-        const res = await fetch("https://open.er-api.com/v6/latest/USD");
-        const data = await res.json();
-        if (data && data.rates && data.rates.KRW) {
-          currentUsdKrw = Number(data.rates.KRW);
-        }
-      } catch (e) {
-        console.error("환율 조회 실패:", e);
-      }
-
-      currentPiUsd = 0.27;
-      document.getElementById("piUsdStatus").textContent = currentPiUsd.toFixed(6);
-      document.getElementById("usdKrwStatus").textContent = currentUsdKrw.toFixed(2);
-      document.getElementById("sandboxStatus").textContent = "sandbox = " + PI_SANDBOX;
-    }
-
-    function renderProducts() {
-      const grid = document.getElementById("productGrid");
-      grid.innerHTML = "";
-
-      for (const p of products) {
-        const usd = calcUsdFromKrw(p.krw);
-        const pi = calcPiFromKrw(p.krw);
-
-        const card = document.createElement("div");
-        card.className = "card";
-        card.innerHTML = `
-          <div class="card-brand">${p.brand}</div>
-          <div class="card-name">${p.name}</div>
-          <div class="card-desc">${p.desc}</div>
-
-          <div class="price-box">
-            <div class="krw">${formatKrw(p.krw)}</div>
-            <div class="usd">약 ${formatUsd(usd)}</div>
-            <div class="pi">약 ${formatPi(pi)}</div>
-          </div>
-
-          <div class="btn-row">
-            <button class="btn-main" onclick="payProduct('${p.id}')">Pi 결제하기</button>
-            <button class="btn-soft" onclick="testServer()">서버 연결 확인</button>
-          </div>
-        `;
-        grid.appendChild(card);
-      }
-    }
-
-    async function testServer() {
-      clearMessage();
-      try {
-        const res = await fetch(SERVER_ROOT, { method: "GET" });
-        const text = await res.text();
-        document.getElementById("serverStatus").textContent = text;
-        showMessage("서버 연결 성공: " + text, "ok");
-      } catch (e) {
-        document.getElementById("serverStatus").textContent = "연결 실패";
-        showMessage("서버 연결 실패: " + (e.message || e), "error");
-      }
-    }
-
-    async function authenticatePi() {
-      if (!window.Pi) {
-        showMessage("Pi Browser에서 열어야 Pi 인증이 가능합니다.", "error");
-        return false;
-      }
-
-      try {
-        Pi.init({
-          version: "2.0",
-          sandbox: PI_SANDBOX
-        });
-
-        const scopes = ["payments", "username"];
-
-        const auth = await Pi.authenticate(scopes, function onIncompletePaymentFound(payment) {
-          console.log("incomplete payment found:", payment);
-        });
-
-        accessToken = auth.accessToken;
-        currentUser = auth.user ? auth.user.username : null;
-
-        return true;
-      } catch (e) {
-        console.error("Pi.authenticate error:", e);
-        showMessage("Pi 인증 실패: " + (e.message || JSON.stringify(e)), "error");
-        return false;
-      }
-    }
-
-    async function postJSON(url, data) {
-      const res = await fetch(url, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(data)
+    try {
+      Pi.init({
+        version: "2.0",
+        sandbox: PI_SANDBOX
       });
 
-      const text = await res.text();
-      let parsed = {};
-      try {
-        parsed = JSON.parse(text);
-      } catch {
-        parsed = { raw: text };
-      }
+      const scopes = ["payments", "username"];
+      const auth = await Pi.authenticate(
+        scopes,
+        function onIncompletePaymentFound(payment) {
+          console.log("미완료 결제 발견:", payment);
+        }
+      );
 
-      if (!res.ok) {
-        throw new Error(parsed.message || ("HTTP " + res.status));
-      }
+      accessToken = auth.accessToken;
+      currentUser = auth.user ? auth.user.username : null;
 
-      return parsed;
+      console.log("Pi 인증 성공:", currentUser);
+      return true;
+    } catch (e) {
+      console.error("Pi.authenticate 오류:", e);
+      showMessage("Pi 인증 실패: " + (e.message || JSON.stringify(e)), "error");
+      return false;
+    }
+  }
+
+  async function postJSON(url, payload) {
+    const res = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(payload)
+    });
+
+    const text = await res.text();
+    let data;
+    try {
+      data = JSON.parse(text);
+    } catch {
+      data = { raw: text };
     }
 
-    async function payProduct(productId) {
-      clearMessage();
-      showMessage("결제 버튼 클릭됨: " + productId, "ok");
+    if (!res.ok) {
+      throw new Error(data.error || data.message || ("HTTP " + res.status));
+    }
 
-      if (!window.Pi) {
-        showMessage("Pi Browser에서 열어야 Pi 결제가 가능합니다.", "error");
-        return;
-      }
+    return data;
+  }
 
-      const product = products.find((item) => item.id === productId);
-      if (!product) {
-        showMessage("상품 정보를 찾을 수 없습니다: " + productId, "error");
-        return;
-      }
+  async function payProduct(productId) {
+    clearMessage();
 
-      const ok = await authenticatePi();
-      if (!ok) return;
+    const product = products.find(p => p.id === productId);
+    if (!product) {
+      showMessage("상품 정보가 없습니다.", "error");
+      return;
+    }
 
-      const piAmount = Number(calcPiFromKrw(product.krw).toFixed(4));
-      if (!piAmount || Number.isNaN(piAmount) || piAmount <= 0) {
-        showMessage("PI 결제 금액 계산 실패", "error");
-        return;
-      }
+    const ok = await authenticatePi();
+    if (!ok) return;
 
-      showMessage("Pi 결제창 여는 중...", "ok");
+    const piAmount = Number(calcPiFromKrw(product.krw).toFixed(4));
+    if (!piAmount || Number.isNaN(piAmount) || piAmount <= 0) {
+      showMessage("PI 결제 금액 계산 실패", "error");
+      return;
+    }
 
-      try {
-        Pi.createPayment(
-          {
-            amount: piAmount,
-            memo: product.name + " 결제",
-            metadata: {
-              productId: product.id,
-              productName: product.name,
-              krwAmount: product.krw,
-              user: currentUser || "guest"
+    showMessage("결제창 준비 중...", "ok");
+
+    try {
+      Pi.createPayment(
+        {
+          amount: piAmount,
+          memo: `${product.name} 결제`,
+          metadata: {
+            productId: product.id,
+            productName: product.name,
+            user: currentUser || "guest"
+          }
+        },
+        {
+          onReadyForServerApproval: async function(paymentId) {
+            try {
+              showMessage("승인 요청 중...", "ok");
+              const result = await postJSON(APPROVE_URL, {
+                paymentId,
+                accessToken
+              });
+              console.log("approve 결과:", result);
+              showMessage("승인 완료", "ok");
+            } catch (err) {
+              console.error("approve 실패:", err);
+              showMessage("승인 실패: " + (err.message || err), "error");
             }
           },
-          {
-            onReadyForServerApproval: async function(paymentId) {
-              try {
-                showMessage("결제 승인 요청 중...", "ok");
-                const result = await postJSON(APPROVE_URL, {
-                  paymentId,
-                  accessToken
-                });
-                console.log("approve result:", result);
-                showMessage("결제 승인 처리 완료", "ok");
-              } catch (err) {
-                console.error("approve error:", err);
-                showMessage("approve 서버 처리 실패: " + (err.message || err), "error");
-              }
-            },
 
-            onReadyForServerCompletion: async function(paymentId, txid) {
-              try {
-                const result = await postJSON(COMPLETE_URL, {
-                  paymentId,
-                  txid,
-                  accessToken
-                });
-                console.log("complete result:", result);
-                showMessage("결제가 완료되었습니다.", "ok");
-              } catch (err) {
-                console.error("complete error:", err);
-                showMessage("complete 서버 처리 실패: " + (err.message || err), "error");
-              }
-            },
-
-            onCancel: function(paymentId) {
-              console.log("cancel:", paymentId);
-              showMessage("결제가 취소되었습니다.", "error");
-            },
-
-            onError: function(error, payment) {
-              console.error("Pi payment error:", error, payment);
-              showMessage(
-                "결제 오류: " + ((error && error.message) || JSON.stringify(error)),
-                "error"
-              );
+          onReadyForServerCompletion: async function(paymentId, txid) {
+            try {
+              showMessage("결제 완료 처리 중...", "ok");
+              const result = await postJSON(COMPLETE_URL, {
+                paymentId,
+                txid,
+                accessToken
+              });
+              console.log("complete 결과:", result);
+              showMessage("결제가 완료되었습니다.", "ok");
+            } catch (err) {
+              console.error("complete 실패:", err);
+              showMessage("완료 처리 실패: " + (err.message || err), "error");
             }
-          }
-        );
-      } catch (e) {
-        showMessage("Pi.createPayment 실행 오류: " + (e.message || e), "error");
-      }
-    }
+          },
 
-    (async function init() {
-      await fetchExchangeRate();
-      renderProducts();
-      await testServer();
-    })();
-  </script>
-</body>
-</html>
+          onCancel: function(paymentId) {
+            console.log("결제 취소:", paymentId);
+            showMessage("결제가 취소되었습니다.", "error");
+          },
+
+          onError: function(error, payment) {
+            console.error("Pi 결제 오류:", error, payment);
+            showMessage(
+              "결제 오류: " + ((error && error.message) || JSON.stringify(error)),
+              "error"
+            );
+          }
+        }
+      );
+    } catch (e) {
+      console.error("Pi.createPayment 오류:", e);
+      showMessage("결제창 실행 실패: " + (e.message || e), "error");
+    }
+  }
+
+  (async function init() {
+    await fetchExchangeRate();
+    renderProducts();
+    await testServer();
+  })();
+</script>
